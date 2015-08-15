@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	<link rel="stylesheet" href="javascripts/bower_components/bootstrap/dist/css/bootstrap.css">
+	<script src="javascripts/bower_components/angular/angular.js"></script>
+	<script src="javascripts/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	
+	<script src="javascripts/bower_components/angular-touch/angular-touch.js"></script>
+	<script src="javascripts/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+	<script src="javascripts/eposro.js"></script>
+</head>
+<body ng-app="epapp" ng-controller="EPController">
+	{{mycart.count}}
+Categories:
+<div ng-repeat="cat in cats">{{cat}}</div><!-- Show as tabs -->
+<div ng-repeat="pdt in pdts">{{pdt}}</div><!-- infinite scroll -->
+</body>
+</html>
