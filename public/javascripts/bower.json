@@ -19,10 +19,11 @@
     "jquery": "~2.1.1",
     "jquery-ui": "~1.11.0",
     "underscore": "~1.6.0",
-    "angular-google-maps": "2.0.1",	
-
-	"angular-touch": "*",
-	"ngInfiniteScroll":"*"
+    "angular-google-maps": "2.0.1",
+    "angular-touch": "*",
+    "ngInfiniteScroll": "*"
+  },
+  "resolutions": {
+    "angular": "~1.2.26"
   }
-
 }

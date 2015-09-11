@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Document</title>
+    <link href="javascripts/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="javascripts/bower_components/bootstrap/dist/css/bootstrap.css">
 	<script src="javascripts/bower_components/angular/angular.js"></script>
 	<script src="javascripts/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -11,11 +12,42 @@
 	<script src="javascripts/bower_components/angular-touch/angular-touch.js"></script>
 	<script src="javascripts/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
 	<script src="javascripts/eposro.js"></script>
+    <script type="text/javascript">
+        function activateTab(){
+            //alert("hello!!!");
+            document.getElementsById("recommendation").setAttribute("class", "active");
+        }
+    </script>
 </head>
 <body ng-app="epapp" ng-controller="EPController">
+    
+    <ul class="nav nav-tabs" role="tablist" >
+        <li role="presentation" id="recommendation" class="active" onclick="activateTab()"><a href="#">Recommendation</a></li>
+        <li role="presentation"  ng-repeat="cat in cats"><a href="#" role="tab" data-toggle="tab" >{{cat}}</a></li>
+        <!--<li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>-->
+    </ul>
 	{{mycart.count}}
-Categories:
-<div ng-repeat="cat in cats">{{cat}}</div><!-- Show as tabs -->
-<div ng-repeat="pdt in pdts">{{pdt}}</div><!-- infinite scroll -->
+    
+<!--Categories:
+<div ng-repeat="cat in cats">{{cat}}</div>--><!-- Show as tabs -->
+
+<!--div>
+  <div infinite-scroll='loadMore()' infinite-scroll-distance='2' ng-repeat="d in data1">
+      {{d["_id"]}}<br/><hr/>
+  </div>
+</div>-->
+<div>
+  <div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+    <a href="#"><img ng-repeat='image in images' ng-src='goadairy.jpg' style="padding-left:50px;padding-top:20px;"></a>
+  </div>
+</div>
+    
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="javascripts/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
+ 
