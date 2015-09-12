@@ -24,22 +24,21 @@
     <ul class="nav nav-tabs" role="tablist" >
         <li role="presentation" id="recommendation" class="active" onclick="activateTab()"><a href="#">Recommendation</a></li>
         <li role="presentation"  ng-repeat="cat in cats"><a href="#" role="tab" data-toggle="tab" >{{cat}}</a></li>
-        <!--<li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages</a></li>-->
+        
     </ul>
 	{{mycart.count}}
     
 <!--Categories:
 <div ng-repeat="cat in cats">{{cat}}</div>--><!-- Show as tabs -->
 
-<!--div>
-  <div infinite-scroll='loadMore()' infinite-scroll-distance='2' ng-repeat="d in data1">
-      {{d["_id"]}}<br/><hr/>
-  </div>
-</div>-->
 <div>
+  <div infinite-scroll='loadMore()' infinite-scroll-distance='20' ng-repeat="d in data1">
+      {{d}}<br/><hr/>
+  </div>
+</div>
+<!--<div>
   <div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
-    <a href="#"><img ng-repeat='image in images' ng-src='goadairy.jpg' style="padding-left:50px;padding-top:20px;"></a>
+    <a href="#"><img ng-repeat='image in images' ng-src='goadairy.jpg' style="padding-left:50px;padding-top:20px;"></a>-->
   </div>
 </div>
     
