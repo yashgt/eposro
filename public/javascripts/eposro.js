@@ -13,7 +13,9 @@ function EposroController(
     }
   };*/
        
-    
+    $scope.products = [];
+	$scope.pdtsPage = 0;
+	
 	$http.get("/api/categories").success( 
 		function(response){
 			/*$scope.cats = response;
@@ -28,11 +30,21 @@ function EposroController(
             
             
         });
-         $scope.loadMore = function() {
+    $scope.loadMore = function() {
+		$http.get('/api/products?page='+$scope.pdtsPage).success(
+			function(response){
+				$scope.pdtsPage++;
+				for (var i = 0; i < response.data.length; i++) {
+					$scope.products.push(response.data[i]);
+				}
+			});
+			
+			/*
                 var last = $scope.data1.length-1;
                 for(var j=1;j<=20;j++){
                     $scope.data1.push($scope.data[last+j]);
                 }
+				*/
     }    
         
         

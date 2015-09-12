@@ -34,7 +34,28 @@ app.get('/api/categories', function(req, res) {
 	//res.json(['Dairy','Bakery','Beverages','Bath','Grains','Baby care','Eggs','Grocery']);
     res.json(data);
 });
+
+//req.params.
+//TODO define URL for /api/products.
+//Based on the parameter, provide new data
 // catch 404 and forward to error handler
+
+app.get('/api/products', function(req, res){
+	var pg = 1; //TODO
+	
+	var pdts = [];
+	for(var i=0; i<=10; i++){
+		var pdt = {
+			id : pg.toString() + i
+			, name : 'Product' + i
+			
+		};
+		pdts.push(pdt);
+	}
+	res.json(pdts);
+});
+
+
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
