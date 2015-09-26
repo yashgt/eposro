@@ -26,21 +26,28 @@
         <li role="presentation"  ng-repeat="cat in cats"><a href="#" role="tab" data-toggle="tab" >{{cat}}</a></li>
         
     </ul>
-	{{mycart.count}}
-    
+	    
 <!--Categories:
 <div ng-repeat="cat in cats">{{cat}}</div>--><!-- Show as tabs -->
+<div class="row" style="padding-top:20px" infinite-scroll='loadMore()' infinite-scroll-disabled='busy'>
+    <div class="col-md-1">
+        
+    </div>
+    <div class="col-md-10">
+        <ul class="list-group" >
+            <li class="list-group-item"  ng-repeat="p in products">
+                <h2>{{p.id}}</h2>
+                <h5>{{p.name}}</h5>
+            </li>
+            <div ng-show='busy'>Loading more products...</div>
+        </ul>
+        
+    </div>
+    <div class="col-md-1">
+    </div>
+    
+</div>
 
-<div>
-  <div infinite-scroll='loadMore()' infinite-scroll-distance='20' ng-repeat="d in data1">
-      {{d}}<br/><hr/>
-  </div>
-</div>
-<!--<div>
-  <div infinite-scroll='loadMore()' infinite-scroll-distance='2'>
-    <a href="#"><img ng-repeat='image in images' ng-src='goadairy.jpg' style="padding-left:50px;padding-top:20px;"></a>-->
-  </div>
-</div>
     
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
