@@ -9,14 +9,6 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-/* TODO remove this
-var XLSX = require('xlsx');
-var workbook =XLSX.readFile("test.xlsx");
-var current_sheet = workbook.SheetNames[0];
-var worksheet=workbook.Sheets[current_sheet];
-var data=XLSX.utils.sheet_to_json(worksheet);
-*/
-
 var app = express();
 
 // view engine setup
@@ -34,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.get('/api/categories', function(req, res) {
-	//res.json(['Dairy','Bakery','Beverages','Bath','Grains','Baby care','Eggs','Grocery']);
+	res.json(['Dairy','Bakery','Beverages','Bath','Grains','Baby care','Eggs','Grocery']);
     res.json(data);
 });
 
@@ -43,13 +35,14 @@ app.get('/api/categories', function(req, res) {
 //Based on the parameter, provide new data
 // catch 404 and forward to error handler
 
-app.get('/api/products', function(req, res){
-	var pg = 1; //TODO
-	
+app.get('/api/products/:page', function(req, res){
+    
+    page = parseInt(req.params.page);
+    
 	var pdts = [];
-	for(var i=0; i<=10; i++){
+	for(var i=0; i<=4; i++){
 		var pdt = {
-			id : pg.toString() + i
+			id : page.toString() + i
 			, name : 'Product' + i
 			
 		};
@@ -57,7 +50,6 @@ app.get('/api/products', function(req, res){
 	}
 	res.json(pdts);
 });
-
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
