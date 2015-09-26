@@ -21,7 +21,8 @@
     "underscore": "~1.6.0",
     "angular-google-maps": "2.0.1",
     "angular-touch": "*",
-    "ngInfiniteScroll": "*"
+    "ngInfiniteScroll": "*",
+    "angular-material": "master"
   },
   "resolutions": {
     "angular": "~1.2.26"

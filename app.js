@@ -1,4 +1,5 @@
 var express = require('express');
+var http = require('http');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -8,11 +9,13 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+/* TODO remove this
 var XLSX = require('xlsx');
 var workbook =XLSX.readFile("test.xlsx");
 var current_sheet = workbook.SheetNames[0];
 var worksheet=workbook.Sheets[current_sheet];
 var data=XLSX.utils.sheet_to_json(worksheet);
+*/
 
 var app = express();
 
@@ -86,7 +89,11 @@ app.use(function(err, req, res, next) {
     });
 });
 
+http.createServer(app).listen(3000, function(){
+	//logger.info('Express server listening on port ' + app.get('port'));
+  console.log('Express server listening on port ' + 3000);
+});
 
 
 
-module.exports = app;
+
