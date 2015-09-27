@@ -14,38 +14,36 @@ exports.saveProduct = function(product, cb){
 
 	if(product._id===undefined)//read id from database
 	{
-		idcollection.findOne(function(err,doc){
-			if(!err)
-			{
-				id=doc.last_entry_id+1;
-				product._id=id;
-				console.log(id);
-				pcollection.insert(product,function(err,result){
-					if(!err){
-						console.log("Hello");
-						cb(result);
-					}
-					else{console.log("You are duffer");}
-				});
-				idcollection.update(
-							{_id: new ObjectID(doc._id)},
-	 						{"$set":{last_entry_id: id}},
-	 						function (err, nupdate){if (!err) {console.log("updated");}}	
-							);
-			}
-		});
+        var query ={};
+        var sort =[];
+        var operator ={$inc:{"last_entry_id":1}};
+        var options ={new:true};
+        idcollection.findAndModify(query,sort,operator,options,
+        			function(err,doc){
+        				if(!err)
+        				{
+        					id=doc.last_entry_id;
+							product._id=id;
+							insert_product_internal(pcollection,product,cb);
+        					
+        				}
+        				else
+        				{
+        					console.log(err);
+        				}
+        			});
 	}
 	else//directly insert the product
 	{
-		collection.insert(product, function(err,result){
-		if(!err){cb(result);}
-		else{console.log(err);}
-		});
-
+		insert_product_internal(pcollection,product,cb);
 	}
 };
 
-exports.closeConnection=function()
-{
-	dbConn.close();
+function insert_product_internal(collection,product,cb){
+	collection.insert(product,function(err,result){
+		if(!err){				
+			cb(result);
+			}
+		else{console.log(err);}
+		});
 }
