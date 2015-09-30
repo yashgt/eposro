@@ -1,0 +1,7 @@
+{
+	"mainAddress": "localhost:30000"
+	,"noDump": false
+	,"verbosity": 3
+	,"docManagers.0.docManager": ["solr_doc_manager"]
+	,"docManagers.0.targetURL": "http://localhost:9393/solr/eposro"
+}
