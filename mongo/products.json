@@ -1,0 +1,54 @@
+{
+	brand:"Amul"
+	, gtin:"890xddsdsgsgshg"
+	,pname:'Taaza 0.5 ltr'
+	,desc:""
+	,avail: { include: [10,11] } 
+ , price: {
+		default_mrp: 18.50
+	    ,mrp: [ { city:10, mrp:18} ]
+	 }
+,cats: [6,61,72]
+,img: "amul_0.5_ltr.jpg"
+	,facets: { 
+		qty: {val: 0.5, unit: "ltr"}
+		, wt: {val: 0.5, unit: "kg"}
+		, fat_percentage: 5
+		, milk_type: "cow"
+	}
+	,vars: [ 
+	{vid:5645645, vname:'Patla Taaza', facets: {thickness: "thin"}}
+	,{vid:5645647, vname:'Ghana Taaza', facets: {thickness: "thick"}}
+]
+, rel_pdts: [ 
+	{id:23423, pname:'Marie Gold', image:'/root/snacks/biscuits/marie_gold.jpg'}
+]
+
+}
+{
+	brand:"Amul"
+	, gtin:"890xddsdsgsgshg"
+	,pname:'Taaza 0.5 ltr'
+	,desc:""
+	,avail: { exclude: [5,6] } 
+ , price: {
+		default_mrp: 18.50
+	    ,mrp: [ { city:10, mrp:18} ]
+	 }
+,cats: [6,61,72]
+,img: "amul_0.5_ltr.jpg"
+	,facets: { 
+		qty: {val: 0.5, unit: "ltr"}
+		, wt: {val: 0.5, unit: "kg"}
+		, fat_percentage: 5
+		, milk_type: "cow"
+	}
+	,vars: [ 
+	{vid:5645645, vname:'Patla Taaza', facets: {thickness: "thin"}}
+	,{vid:5645647, vname:'Ghana Taaza', facets: {thickness: "thick"}}
+]
+, rel_pdts: [ 
+	{id:23423, pname:'Marie Gold', image:'/root/snacks/biscuits/marie_gold.jpg'}
+]
+
+}
