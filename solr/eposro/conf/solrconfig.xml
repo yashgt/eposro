@@ -147,12 +147,12 @@
        When ManagedIndexSchemaFactory is specified with mutable = true, schema
        modification REST API calls will be allowed; otherwise, error responses will be
        sent back for these requests. 
-  -->
+  
   <schemaFactory class="ManagedIndexSchemaFactory">
     <bool name="mutable">true</bool>
     <str name="managedSchemaResourceName">managed-schema</str>
   </schemaFactory>
-
+-->
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
        Index Config - These settings control low-level behavior of indexing
        Most example settings here show the default value, but are commented
@@ -1162,6 +1162,7 @@
       <str>tvComponent</str>
     </arr>
   </requestHandler>
+  <requestHandler name="/update" class="solr.UpdateRequestHandler"/>
 
   <!-- Clustering Component. (Omitted here. See the default Solr example for a typical configuration.) -->
 
@@ -1374,6 +1375,7 @@
         <str>yyyy-MM-dd</str>
       </arr>
     </processor>
+	<!--
     <processor class="solr.AddSchemaFieldsUpdateProcessorFactory">
       <str name="defaultFieldType">strings</str>
       <lst name="typeMapping">
@@ -1394,6 +1396,7 @@
         <str name="fieldType">tdoubles</str>
       </lst>
     </processor>
+	-->
 
 
     <processor class="org.apache.solr.update.processor.LangDetectLanguageIdentifierUpdateProcessorFactory">
@@ -1403,12 +1406,7 @@
       </lst>
     </processor>
 
-    <processor class="solr.StatelessScriptUpdateProcessorFactory">
-      <str name="script">update-script.js</str>
-      <!--<lst name="params">-->
-        <!--<str name="config_param">example config parameter</str>-->
-      <!--</lst>-->
-    </processor>
+
 
     <processor class="solr.RunUpdateProcessorFactory"/>
   </updateRequestProcessorChain>
@@ -1582,5 +1580,7 @@
   <admin>
     <defaultQuery>*:*</defaultQuery>
   </admin>
+  
+  
 
 </config>

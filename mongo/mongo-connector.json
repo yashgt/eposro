@@ -1,7 +1,8 @@
 {
-	"mainAddress": "localhost:30000"
+	"mainAddress": "127.0.0.1:30000"
 	,"noDump": false
-	,"verbosity": 3
-	,"docManagers.0.docManager": ["solr_doc_manager"]
-	,"docManagers.0.targetURL": "http://localhost:9393/solr/eposro"
+	,"verbosity": 2
+	, "namespaces.include" : ["eposro.products"]
+	, "docManagers" : [{"docManager":"solr_doc_manager", "targetURL":"http://127.0.0.1:9393/solr/eposro","autoCommitInterval":0}]
+	, "fields": "brand, pname, desc, avail, price, img, facets, cats"
 }
