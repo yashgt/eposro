@@ -1,0 +1,74 @@
+2015-09-30 01:52:56,338 [CRITICAL] mongo_connector.oplog_manager:543 - Exception during collection dump
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\pysolr.py", line 411, in _extract_error
+    reason = resp.json()['error']['msg']
+  File "C:\Python34\lib\site-packages\requests\models.py", line 819, in json
+    return json.loads(self.text, **kwargs)
+  File "C:\Python34\lib\json\__init__.py", line 318, in loads
+    return _default_decoder.decode(s)
+  File "C:\Python34\lib\json\decoder.py", line 343, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "C:\Python34\lib\json\decoder.py", line 361, in raw_decode
+    raise ValueError(errmsg("Expecting value", s, err.value)) from None
+ValueError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\mongo_connector-2.2.dev0-py3.4.egg\mongo_connector\oplog_manager.py", line 495, in do_dump
+    upsert_all(dm)
+  File "C:\Python34\lib\site-packages\mongo_connector-2.2.dev0-py3.4.egg\mongo_connector\oplog_manager.py", line 479, in upsert_all
+    dm.bulk_upsert(docs_to_dump(namespace), mapped_ns, long_ts)
+  File "C:\Python34\lib\site-packages\mongo_connector-2.2.dev0-py3.4.egg\mongo_connector\util.py", line 32, in wrapped
+    return f(*args, **kwargs)
+  File "C:\Python34\lib\site-packages\mongo_connector-2.2.dev0-py3.4.egg\mongo_connector\doc_managers\solr_doc_manager.py", line 290, in bulk_upsert
+    self.solr.add(batch, **add_kwargs)
+  File "C:\Python34\lib\site-packages\pysolr.py", line 813, in add
+    return self._update(m, commit=commit, softCommit=softCommit, waitFlush=waitFlush, waitSearcher=waitSearcher)
+  File "C:\Python34\lib\site-packages\pysolr.py", line 399, in _update
+    return self._send_request('post', path, message, {'Content-type': 'text/xml; charset=utf-8'})
+  File "C:\Python34\lib\site-packages\pysolr.py", line 328, in _send_request
+    error_message = self._extract_error(resp)
+  File "C:\Python34\lib\site-packages\pysolr.py", line 417, in _extract_error
+    reason, full_html = self._scrape_response(resp.headers, resp.content)
+  File "C:\Python34\lib\site-packages\pysolr.py", line 445, in _scrape_response
+    if response.startswith('<?xml'):
+TypeError: startswith first arg must be bytes or a tuple of bytes, not str
+2015-09-30 01:52:56,368 [ERROR] mongo_connector.oplog_manager:551 - OplogThread: Failed during dump collection cannot recover! Collection(Database(MongoClient('localhost', 30000), 'local'), 'oplog.rs')
+2015-09-30 01:52:57,163 [ERROR] mongo_connector.connector:302 - MongoConnector: OplogThread <OplogThread(Thread-2, started 2076)> unexpectedly stopped! Shutting down
+2015-09-30 01:59:38,532 [ERROR] mongo_connector.util:87 - Fatal Exception
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\pysolr.py", line 411, in _extract_error
+    reason = resp.json()['error']['msg']
+  File "C:\Python34\lib\site-packages\requests\models.py", line 819, in json
+    return json.loads(self.text, **kwargs)
+  File "C:\Python34\lib\json\__init__.py", line 318, in loads
+    return _default_decoder.decode(s)
+  File "C:\Python34\lib\json\decoder.py", line 343, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "C:\Python34\lib\json\decoder.py", line 361, in raw_decode
+    raise ValueError(errmsg("Expecting value", s, err.value)) from None
+ValueError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python34\lib\site-packages\mongo_connector-2.2.dev0-py3.4.egg\mongo_connector\util.py", line 85, in wrapped
+    func(*args, **kwargs)
+  File "C:\Python34\lib\site-packages\mongo_connector-2.2.dev0-py3.4.egg\mongo_connector\oplog_manager.py", line 256, in run
+    docman.upsert(doc, ns, timestamp)
+  File "C:\Python34\lib\site-packages\mongo_connector-2.2.dev0-py3.4.egg\mongo_connector\util.py", line 32, in wrapped
+    return f(*args, **kwargs)
+  File "C:\Python34\lib\site-packages\mongo_connector-2.2.dev0-py3.4.egg\mongo_connector\doc_managers\solr_doc_manager.py", line 270, in upsert
+    commit=False)
+  File "C:\Python34\lib\site-packages\pysolr.py", line 813, in add
+    return self._update(m, commit=commit, softCommit=softCommit, waitFlush=waitFlush, waitSearcher=waitSearcher)
+  File "C:\Python34\lib\site-packages\pysolr.py", line 399, in _update
+    return self._send_request('post', path, message, {'Content-type': 'text/xml; charset=utf-8'})
+  File "C:\Python34\lib\site-packages\pysolr.py", line 328, in _send_request
+    error_message = self._extract_error(resp)
+  File "C:\Python34\lib\site-packages\pysolr.py", line 417, in _extract_error
+    reason, full_html = self._scrape_response(resp.headers, resp.content)
+  File "C:\Python34\lib\site-packages\pysolr.py", line 445, in _scrape_response
+    if response.startswith('<?xml'):
+TypeError: startswith first arg must be bytes or a tuple of bytes, not str

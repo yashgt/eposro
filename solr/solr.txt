@@ -1,0 +1,73 @@
+{
+        "vars.1.vname": "Ghana Taaza",
+        "price.mrp.0.city": "10",
+        "facets.milk_type": "cow",
+        "pname": "Taaza 0.5 ltr",
+        "facets.qty.val": "0.5",
+        "rel_pdts.0.id": "23423",
+        "_ts": 6201410799458583000,
+        "img": "amul_0.5_ltr.jpg",
+        "vars.1.facets.thickness": "thick",
+        "cats.1": "61",
+        "vars.0.vid": "5645645",
+        "avail.include.0": "10",
+        "vars.1.vid": "5645647",
+        "vars.0.facets.thickness": "thin",
+        "facets.fat_percentage": "5",
+        "cats.0": "6",
+        "vars.0.vname": "Patla Taaza",
+        "_id": "560fd644d0546d352b0f1283",
+        "facets.wt.unit": "kg",
+        "facets.wt.val": "0.5",
+        "rel_pdts.0.image": "/root/snacks/biscuits/marie_gold.jpg",
+        "ns": "eposroDB.products",
+        "brand": "Amul",
+        "avail.include.1": "11",
+        "gtin": "890xddsdsgsgshg",
+        "price.mrp.0.mrp": "18",
+        "facets.qty.unit": "ltr",
+        "price.default_mrp": "18.5",
+        "cats.2": "72",
+        "rel_pdts.0.pname": "Marie Gold",
+        "_version_": 1514016309666381800,
+        "language": ""
+      }
+	  
+http://localhost:9393/solr/eposro/select?q=*:*&fq=ns:eposroDB.products&facet=true&wt=json&facet.field=cats&facet.field=facets.qty.val
+	  
+//Changes to SOLR structure using custom Doc Manager 
+	  
+{
+        "vars.1.vname": "Ghana Taaza",
+        "price.mrp.10": "18", //Index the MRP by city ID
+        "facets.milk_type": "cow",
+        "pname": "Taaza 0.5 ltr",
+        "facets.qty.val": "0.5",
+        "rel_pdts.0.id": "23423",
+        "_ts": 6201410799458583000,
+        "img": "amul_0.5_ltr.jpg",
+        "vars.1.facets.thickness": "thick",
+        "cats.1": "61",
+        "vars.0.vid": "5645645",
+        
+        "vars.1.vid": "5645647",
+        "vars.0.facets.thickness": "thin",
+        "facets.fat_percentage": "5",
+        "cats": [6, 61,72],
+        "vars.0.vname": "Patla Taaza",
+        "_id": "560fd644d0546d352b0f1283",
+        "facets.wt.unit": "kg",
+        "facets.wt.val": "0.5",
+        "rel_pdts.0.image": "/root/snacks/biscuits/marie_gold.jpg",
+        "ns": "eposroDB.products",
+        "brand": "Amul",
+        "avail.include": [11,12],
+        "gtin": "890xddsdsgsgshg",
+        
+        "facets.qty.unit": "ltr",
+        "price.default_mrp": "18.5",
+        
+        "rel_pdts.0.pname": "Marie Gold",
+        "_version_": 1514016309666381800,
+        "language": ""
+      } 
