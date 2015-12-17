@@ -765,18 +765,37 @@
        of SearchComponents (see below) and supports distributed
        queries across multiple shards
     -->
+	
+	  <requestHandler name="magento" class="solr.SearchHandler">
+        <lst name="defaults">
+            <str name="qf">pname</str>
+            
+            <int name="ps">1</int>
+            <str name="mm">1</str>
+            <str name="defType">dismax</str>
+            <str name="echoParams">explicit</str>
+            <str name="spellcheck.onlyMorePopular">false</str>
+            <str name="spellcheck.extendedResults">false</str>
+            <str name="spellcheck.count">1</str>
+        </lst>
+        <arr name="last-components">
+            <str>spellcheck</str>
+        </arr>
+    </requestHandler>
+
   <requestHandler name="/select" class="solr.SearchHandler">
     <!-- default values for query parameters can be specified, these
          will be overridden by parameters in the request
       -->
     <lst name="defaults">
       <str name="echoParams">explicit</str>
-      <int name="rows">10</int>
-	  <str name="defType">edismax</str>
+      <int name="rows">10</int>	  
+	  <str name="defType">dismax</str>
 		<str name="qf">
-      pname^1 desc^0.8 vname_all^0.6
-		</str>
-      <!-- <str name="df">text</str> -->
+      pname^1 desc^0.8 brand^0.8 vname_all^0.6
+		</str>		
+		<str name="wt">json</str>
+      <str name="df">pname</str>
     </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
