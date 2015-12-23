@@ -1,0 +1,12 @@
+{
+	_id: 3234234234
+	,id: 3423
+	,username: "yash"
+	,password: "test123"
+	,self_favs : [
+		234, 314, 300		
+	]
+	,discovered_favs : [
+		400, 500
+	]
+}	

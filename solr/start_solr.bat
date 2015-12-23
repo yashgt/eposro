@@ -1,0 +1,1 @@
+D:\downloads\dvd\solr-5.3.0\bin\solr.cmd start -p 9393 -s E:\Projects\eposro\eposro\solr
