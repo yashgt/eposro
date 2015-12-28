@@ -1,0 +1,1 @@
+mvn archetype:generate -DgroupId=com.eposro.app -DartifactId=analysis-app -DarchetypeArtifactId=analysis -DinteractiveMode=false
