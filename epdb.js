@@ -1,11 +1,14 @@
 var MongoClient = require('mongodb').MongoClient; // Driver for connecting to MongoDB
 var ObjectID =require('mongodb').ObjectID;
 var dbConn;
-MongoClient.connect('mongodb://localhost:30000/eposroDB', function(err, db) {
+MongoClient.connect('mongodb://localhost:27017/eposro', function(err, db) {
 	if(!err){
 		dbConn = db;
 		console.log("Connected Successfully");
 	}
+    else{
+        console.log(err);        
+    }
 });  
 
 exports.saveProduct = function(product, cb){
