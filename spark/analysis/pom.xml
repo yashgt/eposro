@@ -34,17 +34,38 @@
     <groupId>org.mongodb.mongo-hadoop</groupId>
     <artifactId>mongo-hadoop-core</artifactId>
     <version>1.4.2</version>
+
 	</dependency>
 
 	<dependency>
 	<groupId>org.apache.hadoop</groupId>
 	<artifactId>hadoop-core</artifactId>
 	<version>1.2.1</version>
+
 	</dependency>
 		<dependency>
 	<groupId>org.apache.spark</groupId>
 	<artifactId>spark-core_2.10</artifactId>
 	<version>1.5.2</version>
-	</dependency>
+	<!-- 
+	<exclusions>
+		<exclusion>
+			<artifactId>javax.servlet</artifactId>
+			<groupId>org.eclipse.jetty.orbit</groupId>
+		</exclusion>
+	</exclusions>
+	 -->
+	<exclusions>
+		<exclusion>
+			<artifactId>javax.servlet</artifactId>
+			<groupId>org.eclipse.jetty.orbit</groupId>
+		</exclusion>
+	</exclusions>
+		</dependency>
+<dependency>
+	<groupId>javax.servlet</groupId>
+	<artifactId>javax.servlet-api</artifactId>
+	<version>3.0.1</version>
+</dependency> 
   </dependencies>
 </project>

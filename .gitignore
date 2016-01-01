@@ -1,2 +1,15 @@
 node_modules/*
 public/javascripts/bower_components/*
+spark/analysis/metastore_db/**
+mongo-connector.log*
+eposro.pnproj
+eposro.pnps
+epscratch.txt
+mongo/data/
+mongo/log/
+mongo/oplog.timestamp
+solr/eposro/core.properties.unloaded
+solr/eposro/data/
+solr/npm-debug.log
+spark/analysis/target/
+spark/analysis/Depends.Txt
