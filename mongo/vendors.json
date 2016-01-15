@@ -1,0 +1,11 @@
+{
+	_id: sdasdasda
+	,vnid: 1
+	,city_id: 5
+	,lat: 18.34234
+	,lon: 73.342342
+	,products : [ { pid: 123, price: 100.00 }
+	, { pid: 12312, vid: 1, price: 20.00 } 
+	, { pid: 12312, vid: 2, price: 20.00, oos: true } 
+	]
+}	
