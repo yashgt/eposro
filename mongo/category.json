@@ -1,0 +1,11 @@
+{"_id":1.0,"name":"Dairy","parent_id":0.0}
+{"_id":3.0,"name":"Snacks","parent_id":0.0}
+{"_id":10.0,"name":"Milk","parent_id":1.0}
+{"_id":11.0,"name":"Ice Cream","parent_id":1.0}
+{"_id":15.0,"name":"Cow Milk","parent_id":10.0}
+{"_id":16.0,"name":"Buffalo Milk","parent_id":10.0}
+{"_id":17.0,"name":"Flavoured Milk","parent_id":10.0}
+{"_id":20.0,"name":"Cone","parent_id":11.0}
+{"_id":21.0,"name":"Cup","parent_id":11.0}
+{"_id":22.0,"name":"Part Pack","parent_id":11.0}
+{"_id":23.0,"name":"Chocobar","parent_id":11.0}
