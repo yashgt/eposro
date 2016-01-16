@@ -1,7 +1,7 @@
 {
 user_id:1
 ,products : [ 
-	{ id: 500, name: "Taaza 0.5 ltr", mrp:18.00, actual_price:null} 
+	{ id: 500, name: "Taaza 0.5 ltr", vid: 1, mrp:18.00, actual_price:null} 
 ,	{ id: 600, name: "Amul butter", mrp:25.00, actual_price:null}	
 	]
 ,estimated_cost : 500.00

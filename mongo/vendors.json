@@ -1,0 +1,29 @@
+{
+	_id: 1
+	,id:{
+        email:"ajay@gmail.com",
+        pwd:"12311"
+    }
+    ,address:
+        {
+            house_num:"314",
+            street:"Main street",
+            city:"Margao",
+            taluka:"Salcet",
+            district:"South Goa",
+            state:"Goa",
+            pin:403432,
+            lat:16.286835,
+            lon:74.980560       
+        }
+	,products : [
+        { pid: 123, myPrice: 100.00 }
+	   ,{ pid: 12312,  myPrice: 20.00 } 
+	   ,{ pid: 12312,  myPrice: 20.00} 
+	   ]
+    ,orders_served:[1,2]
+    ,serving_radius: 200
+    ,delivery_mode: 1
+    ,min_order_home_delivery: 500
+}
+

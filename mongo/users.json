@@ -1,12 +1,160 @@
 {
-	_id: 3234234234
-	,id: 3423
-	,username: "yash"
-	,password: "test123"
-	,self_favs : [
-		234, 314, 300		
-	]
-	,discovered_favs : [
-		400, 500
-	]
-}	
+    _id: "1231231234",
+    id:{
+        email:"asp@gmail.com",
+        pwd:"12345",
+        googleId:"www.google.com/AmanK",
+        fbId:"www.facebook.com/aman.kumar"
+    },
+    addresses :[
+        {
+            house_num:"34",
+            street:"Main street",
+            city:"Margao",
+            taluka:"Salcet",
+            district:"South Goa",
+            state:"Goa",
+            pin:403432,
+            lat:15.286835,
+            lon:73.980560       
+        },
+         {
+            house_num:"121",
+            street:"South street",
+            Landmark:"Behind Post Office",
+            city:"Margao",
+            taluka:"Salcet",
+            district:"South Goa",
+            state:"Goa",
+            pin:403432,
+            lat:15.272262,
+            lon:73.975410       
+        }   
+    ],
+    vendorPrefs: {
+	preferredIDs : [3,4],
+	blacklistedIDs: []
+   },
+    orderIDs: [1,3],
+    default_delivery_preference: 1 
+}
+{
+    _id: "1231233456",
+    id:{
+        email:"kishor@gmail.com",
+        pwd:"12312",
+    },
+    addresses :[
+        {
+            house_num:"43/A",
+            street:"Main Park",
+            city:"Panjim",
+            taluka:"Tiswadi",
+            district:"North Goa",
+            state:"Goa",
+            pin:403411,
+            lat:15.286835,
+            lon:73.980560       
+        }
+    ],
+    vendorPrefs: {
+	preferredIDs : [1,2],
+	blacklistedIDs: []
+   },
+    orderIDs: [4,6],
+    default_delivery_preference: 0
+}
+{
+    _id: "1232223456",
+    id:{
+        email:"anand@gmail.com",
+        pwd:"abcde",
+    },
+    addresses :[
+        {
+            house_num:"221/A",
+            street:"Last Resort",
+            city:"Margao",
+            taluka:"Salcet",
+            district:"South Goa",
+            state:"Goa",
+            pin:403411,
+            lat:15.222835,
+            lon:73.982560       
+        }
+    ],
+    vendorPrefs: {
+	preferredIDs : [3],
+	blacklistedIDs: []
+   },
+    orderIDs: [2],
+    default_delivery_preference: 1
+}
+{
+    _id: "1235631234",
+    id:{
+        email:"kiran@gmail.com",
+        pwd:"12345",
+        googleId:"www.google.com/kirankarmali",
+        fbId:"www.facebook.com/kirankarmali"
+    },
+    addresses :[
+        {
+            house_num:"4",
+            street:"Roar street",
+            city:"Panjim",
+            taluka:"Tiswadi",
+            district:"North Goa",
+            state:"Goa",
+            pin:403222,
+            lat:15.287835,
+            lon:73.981560       
+        },
+         {
+            house_num:"11",
+            street:"South street",
+            Landmark:"Behind Post Office",
+            city:"Margao",
+            taluka:"Salcet",
+            district:"South Goa",
+            state:"Goa",
+            pin:403432,
+            lat:15.272262,
+            lon:73.975410       
+        }   
+    ],
+    vendorPrefs: {
+	preferredIDs : [4],
+	blacklistedIDs: [1]
+   },
+    orderIDs: [5,6],
+    default_delivery_preference: 1 
+}
+{
+    _id: "1235631234",
+    id:{
+        email:"kiran@gmail.com",
+        pwd:"12345",
+        googleId:"www.google.com/kirankarmali",
+        fbId:"www.facebook.com/kirankarmali"
+    },
+    addresses :[
+        {
+            house_num:"4",
+            street:"Roar street",
+            city:"Panjim",
+            taluka:"Tiswadi",
+            district:"North Goa",
+            state:"Goa",
+            pin:403222,
+            lat:15.287835,
+            lon:73.981560       
+        }
+    ],
+    vendorPrefs: {
+	preferredIDs : [4],
+	blacklistedIDs: [1]
+   },
+    orderIDs: [5,6],
+    default_delivery_preference: 1 
+}
