@@ -7,7 +7,8 @@
         {id:3,name:"Milk Cavin's ",mrp:25,qty:6}
     ],
     estimated_cost:415,
-    processing_status:"not processed"
+    processing_status:0,
+    order_mode:1 
 }
 {
     ordered_by: 2,
@@ -18,7 +19,8 @@
         {id:13,name:"manzaHappyCones",mrp:25,qty:10}
     ],
     estimated_cost:710,
-    processing_status:"not processed"
+    processing_status:0,
+    order_mode:0 
 }
 {
     ordered_by: 3,
@@ -28,5 +30,6 @@
         {id:2,name:"Milk Hatsun",mrp:23,qty:1}
     ],
     estimated_cost:53,
-    processing_status:"not processed"
+    processing_status:0,
+    order_mode:1
 }
