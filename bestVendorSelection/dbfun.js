@@ -32,48 +32,62 @@ exports.findCustomerById=function(cid,cb){
     });
 };
 
-exports.findVenWithProd=function(vids,items,cb){
-	var vendors = dbConn.collection("vendors");
-		vendors.find({_id:{$in:vids},"products.pid":{$all:items}}).toArray(function(err,res){
-		if(!err){
-			cb(null,res);
-		}
-		else{
-			console.log(err);
-		}
-		});
-	
-}
 
-exports.getPossibleVen = function(loc,mode,cb){
+exports.getPickUpVendors = function(loc,items,maxdist,cb){
+   var vendors=dbConn.collection('vendors');
+   vendors.aggregate([
+   	{$geoNear:
+   		{ near:{type:"Point",coordinates:loc}, 
+   		  distanceField:"distance", 
+   		  maxDistance:maxdist, 
+   		  spherical:true
+   		}
+   	},
+   	{$match:{"products.pid":{$all:items}}},
+   	{$sort:{distance:1}}
+   	],function(err,res){
+   		if(!err){
+   			cb(null,res);
+   		}
+   		else{
+   			console.log(err);
+   		}
+   	});
+};
+
+exports.getHomeDelVen = function(loc,items,cb){
 	var vendors = dbConn.collection('vendors');
+	vendors.aggregate([
+   	{$geoNear:
+   		{ 
+   			near:{type:"Point",coordinates:loc}, 
+   		  	distanceField:"distance", 
+   		  	maxDistance:3000,
+   		  	query:{delivery_mode:1}, 
+   		  	spherical:true
+   		}
+   	},
+   	{$project:
+   		{
+   			_id:1,
+   			name:1,
+   			products:1,
+   			delivery_mode:1,
+   			address:1,
+   			id:1,
+   			distance:1,
+   			"cmpval":{$cmp:['$distance','$serving_radius']}
+   		}
+   	},
+   	{$match:{$and:[{"products.pid":{$all:items}},{"cmpval":-1}]}},
+   	{$sort:{distance:1}},
+   	],function(err,res){
+   		if(!err){
+   			cb(null,res);
+   		}
+   		else
+   			{console.log(err);}
+   	});
 
-	vendors.ensureIndex({"address.location":"2dsphere"},function(err,res){
-		if(!err){
-			var dist;
-		if(mode==0){//search within 700 meters distance
-			dist=500;
-		}
-		else{
-			dist=1500;
-		}
-		dbConn.command(
-			{
-				geoNear:"vendors",
-				near:{type:"Point",coordinates:loc},
-				maxDistance:700,
-				minDistance:0,
-				spherical:true
-			}
-			,function(err,res){
-			if(!err){
-				cb(null,res.results);
-			}
-		});
 
-		}
-		else{
-			console.log(err);
-		}
-	});
 };
