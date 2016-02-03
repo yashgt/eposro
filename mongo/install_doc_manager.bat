@@ -1,0 +1,1 @@
+copy %EPHOME%\doc_managers\ep_doc_manger.py %PYTHON_HOME%\lib\site-packages\mongo_connector\doc_managers

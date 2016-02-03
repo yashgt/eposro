@@ -1,7 +1,7 @@
 {
-	_id: 1
+    _id: 1
     ,name:"Ajay Kumar"
-	,id:{
+    ,id:{
         email:"ajay@gmail.com",
         pwd:"12311"
     }
@@ -14,30 +14,33 @@
             district:"South Goa",
             state:"Goa",
             pin:403432,
-            coordinates :[73.980560,15.286535]       
+            location:{
+                type:"Point",
+                coordinates :[73.980560,15.286535]
+            }       
         }
-	,products : [
+    ,products : [
         { pid: 1, myPrice: 20.00 }
-	   ,{ pid: 2,  myPrice: 25.00 } 
-	   ,{ pid: 3,  myPrice: 23.00} 
+       ,{ pid: 2,  myPrice: 25.00 } 
+       ,{ pid: 3,  myPrice: 23.00} 
        ,{ pid: 4, myPrice: 20.00 }
-	   ,{ pid: 6,  myPrice: 15.00 } 
-	   ,{ pid: 7,  myPrice: 22.00}
+       ,{ pid: 6,  myPrice: 15.00 } 
+       ,{ pid: 7,  myPrice: 22.00}
        ,{ pid: 8, myPrice: 30.00 }
-	   ,{ pid: 9,  myPrice: 40.00 } 
-	   ,{ pid: 10,  myPrice: 30.00}
-	   ,{ pid: 11,  myPrice: 40.00}
-	   ,{ pid: 13,  myPrice: 25.00}
+       ,{ pid: 9,  myPrice: 40.00 } 
+       ,{ pid: 10,  myPrice: 30.00}
+       ,{ pid: 11,  myPrice: 40.00}
+       ,{ pid: 13,  myPrice: 25.00}
             
-	   ]
+       ]
     ,serving_radius: 500
     ,delivery_mode: 1
     ,min_order_home_delivery:200
 }
 {
-	_id: 2
+    _id: 2
     ,name:"Vinay Mehta"
-	,id:{
+    ,id:{
         email:"vinay@gmail.com",
         pwd:"12311"
     }
@@ -50,30 +53,33 @@
             district:"South Goa",
             state:"Goa",
             pin:403432,
-            coordinates :[73.980570,15.286200]       
+            location:{
+                type:"Point",
+                coordinates :[73.980570,15.286200]
+                }       
         }
-	,products : [
+    ,products : [
         { pid: 1, myPrice: 20.00 }
-	   ,{ pid: 2,  myPrice: 25.00 } 
-	   ,{ pid: 3,  myPrice: 23.00} 
+       ,{ pid: 2,  myPrice: 25.00 } 
+       ,{ pid: 3,  myPrice: 23.00} 
        ,{ pid: 4, myPrice: 20.00 }
-	   ,{ pid: 6,  myPrice: 15.00 } 
-	   ,{ pid: 7,  myPrice: 22.00}
+       ,{ pid: 6,  myPrice: 15.00 } 
+       ,{ pid: 7,  myPrice: 22.00}
        ,{ pid: 8, myPrice: 30.00 }
-	   ,{ pid: 9,  myPrice: 40.00 } 
-	   ,{ pid: 10,  myPrice: 30.00}
-	   ,{ pid: 11,  myPrice: 40.00}
-	   ,{ pid: 13,  myPrice: 25.00}
+       ,{ pid: 9,  myPrice: 40.00 } 
+       ,{ pid: 10,  myPrice: 30.00}
+       ,{ pid: 11,  myPrice: 40.00}
+       ,{ pid: 13,  myPrice: 25.00}
             
-	   ]
+       ]
     ,serving_radius: 500
     ,delivery_mode: 1
     ,min_order_home_delivery:200
 }
 {
-	_id: 3
+    _id: 3
     ,name:"Babu Naik"
-	,id:{
+    ,id:{
         email:"babu@gmail.com",
         pwd:"12311"
     }
@@ -86,29 +92,32 @@
             district:"North Goa Goa",
             state:"Goa",
             pin:403432,
-            coordinates :[73.975430,15.272225]       
+            location:{
+                type:"Point",
+                coordinates :[73.975430,15.272225]
+                }       
         }
-	,products : [
+    ,products : [
         { pid: 1, myPrice: 20.00 }
-	   ,{ pid: 2,  myPrice: 25.00 } 
-	   ,{ pid: 3,  myPrice: 23.00} 
+       ,{ pid: 2,  myPrice: 25.00 } 
+       ,{ pid: 3,  myPrice: 23.00} 
        ,{ pid: 4, myPrice: 20.00 }
-	   ,{ pid: 6,  myPrice: 15.00 } 
-	   ,{ pid: 7,  myPrice: 22.00}
+       ,{ pid: 6,  myPrice: 15.00 } 
+       ,{ pid: 7,  myPrice: 22.00}
        ,{ pid: 8, myPrice: 30.00 }
-	   ,{ pid: 9,  myPrice: 40.00 } 
-	   ,{ pid: 10,  myPrice: 30.00}
-	   ,{ pid: 11,  myPrice: 40.00}
-	   ,{ pid: 13,  myPrice: 25.00}
+       ,{ pid: 9,  myPrice: 40.00 } 
+       ,{ pid: 10,  myPrice: 30.00}
+       ,{ pid: 11,  myPrice: 40.00}
+       ,{ pid: 13,  myPrice: 25.00}
             
-	   ]
+       ]
     ,serving_radius: 700
     ,delivery_mode: 0
 }
 {
-	_id: 4
+    _id: 4
     ,name:"Ram Dessai"
-	,id:{
+    ,id:{
         email:"Ram@gmail.com",
         pwd:"12311"
     }
@@ -121,29 +130,32 @@
             district:"North Goa Goa",
             state:"Goa",
             pin:403432,
-            coordinates :[73.975450,15.272215]       
+            location:{
+                type:"Point",
+                coordinates :[73.975450,15.272215]
+                }       
         }
-	,products : [
+    ,products : [
         { pid: 1, myPrice: 20.00 }
-	   ,{ pid: 2,  myPrice: 25.00 } 
-	   ,{ pid: 3,  myPrice: 23.00} 
+       ,{ pid: 2,  myPrice: 25.00 } 
+       ,{ pid: 3,  myPrice: 23.00} 
        ,{ pid: 4, myPrice: 20.00 }
-	   ,{ pid: 6,  myPrice: 15.00 } 
-	   ,{ pid: 7,  myPrice: 22.00}
+       ,{ pid: 6,  myPrice: 15.00 } 
+       ,{ pid: 7,  myPrice: 22.00}
        ,{ pid: 8, myPrice: 30.00 }
-	   ,{ pid: 9,  myPrice: 40.00 } 
-	   ,{ pid: 10,  myPrice: 30.00}
-	   ,{ pid: 11,  myPrice: 40.00}
-	   ,{ pid: 13,  myPrice: 25.00}
+       ,{ pid: 9,  myPrice: 40.00 } 
+       ,{ pid: 10,  myPrice: 30.00}
+       ,{ pid: 11,  myPrice: 40.00}
+       ,{ pid: 13,  myPrice: 25.00}
             
-	   ]
+       ]
     ,serving_radius: 600
     ,delivery_mode: 0
 }
 {
-	_id: 5
+    _id: 5
     ,name:"Rajesh Shet"
-	,id:{
+    ,id:{
         email:"rajesh@gmail.com",
         pwd:"12311"
     }
@@ -156,22 +168,25 @@
             district:"South Goa",
             state:"Goa",
             pin:403432,
-            coordinates :[73.980530,15.286535]       
+            location:{
+                type:"Point",
+                coordinates :[73.980530,15.286535]
+                }       
         }
-	,products : [
+    ,products : [
         { pid: 1, myPrice: 20.00 }
-	   ,{ pid: 2,  myPrice: 25.00 } 
-	   ,{ pid: 3,  myPrice: 23.00} 
+       ,{ pid: 2,  myPrice: 25.00 } 
+       ,{ pid: 3,  myPrice: 23.00} 
        ,{ pid: 4, myPrice: 20.00 }
-	   ,{ pid: 6,  myPrice: 15.00 } 
-	   ,{ pid: 7,  myPrice: 22.00}
+       ,{ pid: 6,  myPrice: 15.00 } 
+       ,{ pid: 7,  myPrice: 22.00}
        ,{ pid: 8, myPrice: 30.00 }
-	   ,{ pid: 9,  myPrice: 40.00 } 
-	   ,{ pid: 10,  myPrice: 30.00}
-	   ,{ pid: 11,  myPrice: 40.00}
-	   ,{ pid: 13,  myPrice: 25.00}
+       ,{ pid: 9,  myPrice: 40.00 } 
+       ,{ pid: 10,  myPrice: 30.00}
+       ,{ pid: 11,  myPrice: 40.00}
+       ,{ pid: 13,  myPrice: 25.00}
             
-	   ]
+       ]
     ,serving_radius: 800
     ,delivery_mode: 0
 }
