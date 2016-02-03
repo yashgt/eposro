@@ -39,6 +39,11 @@ function EposroController(
 		,'infinite-scroll'
     ]);
 	
+	epapp.service('MyCart', function(){
+		this.addToCart = function(pdt){
+		}
+	});
+	
 	epapp.controller('EPController', [
 	'$scope'
 	, '$log'
@@ -51,8 +56,21 @@ function EposroController(
             
             restrict:'AE',
             //template:'  <div class="thumbnail">      <img src="goadairy.jpg" alt="no pic">     <div class="caption">        <h3>Info</h3><p>...</p>        <p><a href="#" class="btn btn-primary" role="button" ng-click="count = count + 1" ng-init="count=0">+</a> {{ count }} <a href="#" class="btn btn-default" role="button" ng-click="count = count - 1">-</a></p></div></div></div></div>',
-            templateUrl:'dir/temp.html',
-        replace: true
+			scope : { //These are properties exposed to the calling HTML
+				data : '='				
+				,onAdd : '&'
+				,onSub : '&'
+			}
+			,controller : [ '$scope', 'MyCart', function($scope, myCart){
+				console.log("In cont");
+				$scope.cnt = 0;
+				$scope.add = function() {
+					$scope.cnt++ ;
+					myCart.addToCart($scope.data);
+				}
+			} ]
+            ,templateUrl:'javascripts/dir/temp.html'
+			,replace: true
         };
     });
 	

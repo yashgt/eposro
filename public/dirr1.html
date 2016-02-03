@@ -213,7 +213,7 @@
                                      
             
                 
-                <div class="row" style="padding-top:20px" infinite-scroll='loadMore()' infinite-scroll-disabled='busy'>
+                <!--<div class="row" style="padding-top:20px" infinite-scroll='loadMore()' infinite-scroll-disabled='busy'>-->
         <div class="col-md-4">
 
         </div>
@@ -253,13 +253,13 @@
 
         </div>
         <div class="col-md-10">
-            <product></product>
+            <product ></product>
             <product></product>
             <product></product>
             <!--<div class="row" infinite-scroll='loadMore()' infinite-scroll-disabled='busy'>
                 <ul class="list-group" >
                     <li class="list-group-item"  ng-repeat="p in products">
-                        <product></product>
+                        <product data=p on-add='addToCart(p)' on-sub='delFromCart(p)'></product>
                        <!-- <product></product>
                         <!--<h2>{{p.id}}</h2>
                         <h5>{{p.name}}</h5
