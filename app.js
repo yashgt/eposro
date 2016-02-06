@@ -24,27 +24,80 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+//app.use('/users', users);
 app.get('/api/categories', function(req, res) {
-	res.json(['Dairy','Bakery','Beverages','Bath','Grains','Baby care','Eggs','Grocery']);
-    res.json(data);
+	res.json([
+        {
+            id:"101"
+            ,title:"Dairy"
+            ,sub_cat:["Cow Milk","Buffalo Milk","Flavoured Milk","Sweets","Icecream","Butter","Cheese"]
+        }
+        ,{
+            id:"102"
+            ,title:"Bakery"
+            ,sub_cat:["Toasts","Biscuits","Cakes","Bread"]
+        }
+        ,{
+            id:"103"
+            ,title:"Beverages"
+            ,sub_cat:["Cold-drinks","Juices","Alcohol","Hot beverages"]
+        }
+        ,{
+            id:"104"
+            ,title:"Hygiene"
+            ,sub_cat:["Soaps","Hand sanitizers","Mouth wash","Diapers","Washing powders","Shaving products"]
+        }
+        ,{
+            id:"105"
+            ,title:"Grains"
+            ,sub_cat:["Rice","Wheat","Oats","Barley","Corn","Rye"]
+        }
+        ,{
+            id:"106"
+            ,title:"Baby Care"
+            ,sub_cat:["Diapers","Powder","Baby Soap"]
+        }
+        ,{
+            id:"107"
+            ,title:"Eggs"
+            ,sub_cat:[]
+        }
+        ,{
+            id:"108"
+            ,title:"Grocery"
+            ,sub_cat:[]
+        }
+    ]);
 });
 
 //req.params.
 //TODO define URL for /api/products.
 //Based on the parameter, provide new data
 // catch 404 and forward to error handler
-
-app.get('/api/products/:page', function(req, res){
+app.get('/api/products/:cat', function(req, res){
+    var pdts = [];
+    
+    for(var i=0; i<=4; i++){
+        var pdt = {
+            id : "*" + i
+            , name: 'Product' + i
+            ,cat_id: req.params.cat
+        };
+        pdts.push(pdt);
+    }
+    //console.log("Called the first match");
+    res.json(pdts);
+});
+app.get('/api/products/:cat/:page', function(req, res){
     
     page = parseInt(req.params.page);
     
 	var pdts = [];
-	for(var i=0; i<=4; i++){
+	for(var i=0; i<=6; i++){
 		var pdt = {
 			id : page.toString() + i
-			, name : 'Product' + i
-			
+			, name : 'Product' + i   
+            , cat_id: req.params.cat
 		};
 		pdts.push(pdt);
 	}
@@ -82,7 +135,6 @@ app.use(function(err, req, res, next) {
 });
 
 http.createServer(app).listen(3000, function(){
-	//logger.info('Express server listening on port ' + app.get('port'));
   console.log('Express server listening on port ' + 3000);
 });
 
