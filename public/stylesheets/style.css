@@ -1,8 +1,86 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body { 
+    padding-top: 50px; 
+}
+.navbar-header{    
+    float:left;
+}
+.ePosro-brand{
+    font-weight:bold;
+    font-size:18pt;
+}
+#search-box{
+    width:300px;
+}
+.navbar-options{           
+    position: relative;
+    float: right;
+    padding-right: 20px;
+}
+.navbar-options li{
+    float:left;
+}
+.user-dropdown{
+    margin-top: 4.5px;
+    width: 40px;
+    height: 40px;
+}
+.profile-options{
+    color:black;
+}
+#scrollable-tabs{
+    padding: 25px; 
+    text-align: center;
 }
 
-a {
-  color: #00B7FF;
+#sub-categories-row{
+    position: relative;
+    padding: 0px;
+    margin-top: 10px;
+    height: 10px;
+    width: 100%;
+}
+#products-row{  
+    float: left;
+    padding-right: 5px;
+    padding-left: 10px;
+    margin-top: 40px;
+    margin-left: -30px;
+}
+#individual-product{
+    float: left;
+    width: 330px;
+    padding-left: 30px;
+    padding-bottom: 20px;
+}
+#breadcrumb{
+    display: inline-block;
+    width: 80%;
+    float:left;
+    margin-top: 5px;
+}
+#sub-cat-button{
+    margin-top: -10px;
+    display: inline-block;
+    width: 10%;
+    float:left;
+}
+.button-small{
+    
+  width: 5px;
+}
+.md-button.md-fab.md-mini {
+      line-height: 4rem;
+      width: 4rem;
+      height: 4rem;
+}
+@media screen and (min-width: 769px) {
+    #search-bar {
+        visibility: hidden;
+        clear: both;
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body { padding-top: 75px; }
 }
