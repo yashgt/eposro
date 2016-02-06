@@ -3,6 +3,7 @@ function EposroController(
 	,$log
 	,$http
     ,$mdSidenav
+	,myCart
 ){         
         $scope.products = [];
         $scope.pdtsPage = 1;
@@ -35,7 +36,7 @@ function EposroController(
         }
             
       $scope.loadMore = function(cat_id) {
-            //console.log("called loadMore()");
+            console.log("called loadMore() for ", cat_id );
             if ($scope.busy) return;
                 $scope.busy = true;
             $http.get('/api/products/'+cat_id+'/'+$scope.pdtsPage).success(
@@ -51,7 +52,7 @@ function EposroController(
         
         $scope.openRightMenu = function() {
             $mdSidenav('right').toggle();
-        }
+        };
         
         $scope.setBreadArray = function(cat,i){
             
@@ -66,10 +67,60 @@ function EposroController(
                 }
             }
             $scope.breadCrumbs.push(cat);
-        }       
+        } ;
+		
+		addToCart = function(pdt){
+			console.log("Adding to cart on UI");
+			//TODO add the count 
+			$scope.cartCount++;
+			$scope.cartValue += pdt.mrp ;
+		};
+		
+		myCart.onAddToCart(addToCart);
+		
+		
+		
+      
 }
 	
+ProductListItemController = function($scope, MyCart){
+				console.log("In cont for " , $scope.product);
+				$scope.productCount = MyCart.getCount($scope.product);
+				this.add = function() {
+					$scope.productCount++ ;
+					MyCart.addToCart($scope.product);
+				}
+			} ;
+			
+EPService = function($http){
+	this.getCart = function(cb){
+		$http.get('/api/cart').success(
+			function(res){
+				cb(res);
+			}
+		);
+	};
+	this.getProductsByCat = function(catID, page, filter, cb){
+	}; 
+	
+};			
 
+MyCartService = function(epsvc){
+		//TODO	Fetch the current cart from the Server
+		
+		this.addToCart = function(pdt){
+			//TODO Make a call to server to add this product to cart
+			if(this.addToCartCB)
+				this.addToCartCB(pdt);
+		};
+		this.getCount = function(pdt){
+			//TODO
+			return 0;
+		};
+		this.onAddToCart = function(cb){
+			this.addToCartCB = cb;
+		};
+	};
 
 (function() {
     var epapp = angular.module('epapp', [
@@ -90,18 +141,23 @@ function EposroController(
             
             restrict:'AE',
             templateUrl:'productdirective.html',
-            replace: true,
-            scope: {
-                product : '=pro'
+            replace: true
+			,controller: ProductListItemController
+			,controllerAs: "plic"
+            ,scope: {
+                product : '=data'
             }
         };
     });
+	epapp.service('epsvc', EPService);
+	epapp.service('MyCart', MyCartService);
 
 	epapp.controller('EPController', [
 	'$scope'
     ,'$log'
     ,'$http'
     ,'$mdSidenav'
+	, 'MyCart'
 	,  EposroController]);
 })();
  

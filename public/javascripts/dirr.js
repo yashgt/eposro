@@ -41,7 +41,11 @@ function EposroController(
 	
 	epapp.service('MyCart', function(){
 		this.addToCart = function(pdt){
-		}
+			cb(pdt);
+		};
+		this.onAddToCart = function(cb){
+			this.addToCartCB = cb;
+		};
 	});
 	
 	epapp.controller('EPController', [
@@ -51,6 +55,9 @@ function EposroController(
 	,  EposroController]);
     
    
+   
+			
+			
         epapp.directive('product',function(){
         return{
             
