@@ -1,35 +1,12 @@
 {
-    ordered_by: 1,
-    vendors_serving:[],
-    items:[
-        {id:6,name:"goaDairyFlavouredMilk",mrp:15,qty:10},
-        {id:2,name:"Milk Hatsun",mrp:23,qty:5},
-        {id:3,name:"Milk Cavin's ",mrp:25,qty:6}
-    ],
-    estimated_cost:415,
-    processing_status:0,
-    order_mode:1 
-}
-{
-    ordered_by: 2,
-    vendors_serving:[],
-    items:[
-        {id:6,name:"goaDairyFlavouredMilk",mrp:15,qty:20},
-        {id:2,name:"Milk Hatsun",mrp:23,qty:20},
-        {id:13,name:"manzaHappyCones",mrp:25,qty:10}
-    ],
-    estimated_cost:710,
-    processing_status:0,
-    order_mode:0 
-}
-{
-    ordered_by: 3,
-    vendors_serving:[],
-    items:[
-        {id:6,name:"goaDairyFlavouredMilk",mrp:15,qty:2},
-        {id:2,name:"Milk Hatsun",mrp:23,qty:1}
-    ],
-    estimated_cost:53,
-    processing_status:0,
-    order_mode:1
+user_id:1
+,products : [ 
+	{ id: 500, name: "Taaza 0.5 ltr", vid: 1, mrp:18.00, actual_price:null} 
+,	{ id: 600, name: "Amul butter", mrp:25.00, actual_price:null}	
+	]
+,estimated_cost : 500.00
+,actual_cost : null
+,vendors : [
+	{ id: 800, products : [ {id: 500, mrp: 20.00} ] }
+]
 }
