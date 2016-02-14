@@ -8,10 +8,12 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var datafun = require('./datafun');
 
 var app = express();
-
-// view engine setup
+//categories
+var categories = datafun.getCategories(0,function(categories){
+    console.log(categories);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -19,90 +21,41 @@ app.set('view engine', 'ejs');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-//app.use('/users', users);
+
 app.get('/api/categories', function(req, res) {
-	res.json([
-        {
-            id:"101"
-            ,title:"Dairy"
-            ,sub_cat:["Cow Milk","Buffalo Milk","Flavoured Milk","Sweets","Icecream","Butter","Cheese"]
-        }
-        ,{
-            id:"102"
-            ,title:"Bakery"
-            ,sub_cat:["Toasts","Biscuits","Cakes","Bread"]
-        }
-        ,{
-            id:"103"
-            ,title:"Beverages"
-            ,sub_cat:["Cold-drinks","Juices","Alcohol","Hot beverages"]
-        }
-        ,{
-            id:"104"
-            ,title:"Hygiene"
-            ,sub_cat:["Soaps","Hand sanitizers","Mouth wash","Diapers","Washing powders","Shaving products"]
-        }
-        ,{
-            id:"105"
-            ,title:"Grains"
-            ,sub_cat:["Rice","Wheat","Oats","Barley","Corn","Rye"]
-        }
-        ,{
-            id:"106"
-            ,title:"Baby Care"
-            ,sub_cat:["Diapers","Powder","Baby Soap"]
-        }
-        ,{
-            id:"107"
-            ,title:"Eggs"
-            ,sub_cat:[]
-        }
-        ,{
-            id:"108"
-            ,title:"Grocery"
-            ,sub_cat:[]
-        }
-    ]);
+    //console.log("On server fetching categories");
+    res.json(categories);
+});
+app.get('/api/subCategories',function(req, res){
+    //console.log("Inside app.get for finding sub cats of "+req.params.parent);
+    datafun.getCategories(req.query.parent,function(subCat){
+        //console.log(subcat);
+        res.json(subCat);
+    });
 });
 
-//req.params.
-//TODO define URL for /api/products.
-//Based on the parameter, provide new data
-// catch 404 and forward to error handler
-app.get('/api/products/:cat', function(req, res){
-    var pdts = [];
-    
-    for(var i=0; i<=4; i++){
+app.get('/api/products', function(req,res){
+    var cat = req.query.cat;
+    var page = req.query.page;
+    var products = [];
+    for( var j= 0; j<5; j++){
         var pdt = {
-            id : "*" + i
-            , name: 'Product' + i
+            id : req.params.cat + j
+            , name: 'Product' + j
             ,cat_id: req.params.cat
         };
-        pdts.push(pdt);
+        products.push(pdt);
     }
-    //console.log("Called the first match");
-    res.json(pdts);
-});
-app.get('/api/products/:cat/:page', function(req, res){
     
-    page = parseInt(req.params.page);
-    
-	var pdts = [];
-	for(var i=0; i<=6; i++){
-		var pdt = {
-			id : page.toString() + i
-			, name : 'Product' + i   
-            , cat_id: req.params.cat
-		};
-		pdts.push(pdt);
-	}
-	res.json(pdts);
+    console.log("Returning products of cat :"+cat);
+    res.json(products); 
 });
+
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -110,10 +63,7 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-// error handlers
 
-// development error handler
-// will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
@@ -124,8 +74,6 @@ if (app.get('env') === 'development') {
     });
 }
 
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
@@ -134,6 +82,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
+});
 http.createServer(app).listen(3000, function(){
   console.log('Express server listening on port ' + 3000);
 });

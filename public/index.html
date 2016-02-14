@@ -115,50 +115,51 @@
                
                 <div class ="row">
                     <md-content class="md-padding">
-                        <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect md-dynamic-height md-swipe-content>
+                        <md-tabs md-border-bottom md-autoselect md-dynamic-height md-swipe-content>
                             <md-tab label="Home">
-                                <!-- All recommendations will come here-->
                                 <md-tab-body>
                                     <p>Display all the recommnedations</p>
                                 </md-tab-body>
                             </md-tab>
-                            <md-tab ng-repeat="cat in categories"
-                                  ng-disabled="cat.disabled"
-                                  label="{{cat.title}}"
-                                    md-on-select="fetchCategoryProducts(cat.id);setBreadArray(cat.title,0)"
-                                    md-on-deselect="clearProducts()">
-                                
+                            <md-tab id="tab-button" ng-repeat="cat in categories"
+                                  md-on-select="fetchNextPage(cat.id,0);setBreadArray(cat.title,0);scrollTop();getSubCat(cat.id);">
+                                  
+                                <md-tab-label>
+                                    {{cat.title}}
+                                </md-tab-label>
                                 <md-tab-body>
-								
-                                    <div id="sub-categories-row">
-                                        <md-menu id="sub-cat-button">
-                                            <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
-                                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-                                            </md-button>
-                                            <md-menu-content width=6>
-                                                <md-menu-item ng-repeat="sub_cat in cat.sub_cat">
-                                                    <md-button ng-click="setBreadArray(sub_cat,1)">
-                                                        {{sub_cat}}
-                                                    </md-button>
-                                                </md-menu-item>
-                                            </md-menu-content>
-                                        </md-menu>
-                                        <ol class="breadcrumb" id="breadcrumb">
-                                            <li ng-repeat="bread in breadCrumbs"><a href="#">{{bread}}</a></li>
-                                        </ol>
-                                    </div>
-									
                                     
-                                    <div id="products-row" infinite-scroll="loadMore(cat.id)" infinite-scroll-disabled="busy">
-
-                                        <div id="individual-product" ng-repeat="p in products">
-                                            <product data="p">
-                                            </product>
-                                        </div>
+                                    <div id="sub-categories-row">
+                                            <md-menu id="sub-cat-button" ng-hide="hideMe"><!-- function that return 1 when lenght is 4-->
+                                                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+                                                    <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                                                </md-button>
+                                                <md-menu-content width=6>
+                                                    <md-menu-item ng-repeat="subCat in subCategories">
+                                                        <md-button ng-click="getSubCat(subCat.id);setBreadArray(subCat.title,1)">
+                                                            {{subCat.title}}
+                                                        </md-button>
+                                                    </md-menu-item>
+                                                </md-menu-content>
+                                            </md-menu>
+                                            <ol class="breadcrumb" id="breadcrumb">
+                                                <li ng-repeat="bread in breadCrumbs"><a href="#">{{bread}}</a></li>
+                                            </ol>
                                     </div>
-                                       
-                                    <div ng-show="busy">Loading more products....</div>
-                                    <br/>
+
+                                    
+                                    <div id="products-row" infinite-scroll="fetchNextPage(nextCategory,1)" infinite-scroll-disabled="busy">
+
+                                        <md-grid-list md-cols-gt-md="3" md-cols-md="2" md-cols-sm="1" md-gutter="5px" md-row-height="2:1">
+                                            
+                                                <md-grid-tile ng-repeat="p in productsOfCurrentCat">
+                                                    
+                                                        <product data="p" id="product-item"></product>
+                                                    
+                                                </md-grid-tile>
+                                                <div ng-show="busy">Loading more products....</div>
+                                        </md-grid-list>
+                                    </div>
                                 </md-tab-body>
                             </md-tab>
                         </md-tabs>
