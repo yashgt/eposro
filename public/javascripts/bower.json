@@ -22,7 +22,7 @@
     "angular-google-maps": "2.0.1",
     "angular-touch": "*",
     "ngInfiniteScroll": "*",
-    "angular-material": "master"
+    "angular-material": "*"
   },
   "resolutions": {
     "angular": "~1.2.26"
