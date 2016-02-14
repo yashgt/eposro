@@ -3,7 +3,7 @@ var ObjectID =require('mongodb').ObjectID;
 var dbConn;
 
 //TODO
-var nconf = require('nconf');
+//var nconf = require('nconf');
 
 MongoClient.connect('mongodb://localhost:27017/eposro', function(err, db) {
 	if(!err){
@@ -158,3 +158,19 @@ exports.writeLastPdtId = function(last_id,cb){
 		else{console.log(err);}
 	});
 };
+
+exports.getCategories =function(id,cb){
+	var category=dbConn.collection("category");
+	category.find({parent_id:parseInt(id)}).toArray(function(err,res){
+		if(!err){
+			var cats =[];
+			for(var i=0;i<res.length;i++){
+				cats.push({
+					catID:res[i]._id,
+					title:res[i].name
+				});
+			}
+			cb(cats);
+		}
+	});
+}
