@@ -1,11 +1,71 @@
 {"_id":1.0,"name":"Dairy","parent_id":0.0}
-{"_id":3.0,"name":"Snacks","parent_id":0.0}
-{"_id":10.0,"name":"Milk","parent_id":1.0}
-{"_id":11.0,"name":"Ice Cream","parent_id":1.0}
-{"_id":15.0,"name":"Cow Milk","parent_id":10.0}
-{"_id":16.0,"name":"Buffalo Milk","parent_id":10.0}
-{"_id":17.0,"name":"Flavoured Milk","parent_id":10.0}
-{"_id":20.0,"name":"Cone","parent_id":11.0}
-{"_id":21.0,"name":"Cup","parent_id":11.0}
-{"_id":22.0,"name":"Part Pack","parent_id":11.0}
-{"_id":23.0,"name":"Chocobar","parent_id":11.0}
+{"_id":2,"name":"Beverages","parent_id":0.0}
+{"_id":3,"name":"Hygine","parent_id":0}
+{"_id":4,"name":"Baby Care","parent_id":0}
+{"_id":5,"name":"Bakery","parent_id":0}
+{"_id":6,"name":"Eatables","parent_id":0}
+{"_id":7,"name":"Home Utilities","parent_id":0}
+{"_id":8,"name":"Grocery And Staples","parent_id":0}
+
+
+{"_id":31,"name":"Milk","parent_id":1}
+{"_id":32,"name":"Ice Cream","parent_id":1}
+{"_id":33,"name":"Butter","parent_id":1}
+{"_id":34,"name":"Cheese","parent_id":1}
+{"_id":35,"name":"Cream","parent_id":1}
+{"_id":36,"name":"Curd","parent_id":1}
+{"_id":37,"name":"Paneer","parent_id":1}
+{"_id":38,"name":"Yogurt","parent_id":1}
+
+
+{"_id":51,"name":"Tea","parent_id":2}
+{"_id":52,"name":"Coffee","parent_id":2}
+{"_id":53,"name":"Cold Drinks","parent_id":2}
+{"_id":54,"name":"Juice","parent_id":2}
+{"_id":55,"name":"Squashes and Powders","parent_id":2}
+
+
+{"_id":71,"name":"Soaps","parent_id":3}
+{"_id":72,"name":"Toothbrush","parent_id":3}
+{"_id":73,"name":"Tootpaste","parent_id":3}
+{"_id":74,"name":"Tongue Cleaner","parent_id":3}
+{"_id":75,"name":"Floss","parent_id":3}
+{"_id":76,"name":"Shampoo","parent_id":3}
+{"_id":77,"name":"Conditioner","parent_id":3}
+{"_id":78,"name":"Face Wash","parent_id":3}
+{"_id":79,"name":"Hand Wash","parent_id":3}
+
+
+{"_id":101,"name":"Baby Food","parent_id":4}
+{"_id":102,"name":"Diapers","parent_id":4}
+
+
+{"_id":111,"name":"Bread","parent_id":5}
+{"_id":112,"name":"Cakes","parent_id":5}
+
+
+{"_id":121,"name":"Chips","parent_id":6}
+{"_id":122,"name":"Chocolates","parent_id":6}
+{"_id":123,"name":"Jams","parent_id":6}
+
+{"_id":131,"name":"Cow Milk","parent_id":31}
+{"_id":132,"name":"Buffalo Milk","parent_id":31}
+{"_id":133,"name":"Flavoured Milk","parent_id":31}
+
+{"_id":141,"name":"Cone","parent_id":32}
+{"_id":142,"name":"Cup","parent_id":32}
+{"_id":143,"name":"Party Pack","parent_id":32}
+{"_id":144,"name":"Ice candy","parent_id":32}
+{"_id":145,"name":"Chocobar","parent_id":32}
+{"_id":146,"name":"Casata","parent_id":32}
+
+{"_id":147,"name":"Cheddar","parent_id":34}
+{"_id":148,"name":"Roquefort","parent_id":34}
+{"_id":149,"name":"Mozzarella","parent_id":34}
+
+
+
+
+
+
+
