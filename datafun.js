@@ -1,9 +1,14 @@
 var MongoClient = require('mongodb').MongoClient; // Driver for connecting to MongoDB
 var ObjectID =require('mongodb').ObjectID;
+var dbconn ; //DB object
+MongoClient.connect('mongodb://localhost:40000/eposro', function(err, db){
+	dbconn = db;
+});
 
 
+//Take this to epdb.
 exports.getCategories= function(id,cb){
-	MongoClient.connect('mongodb://localhost:27017/eposro', function(err, db) {
+	MongoClient.connect('mongodb://localhost:40000/eposro', function(err, db) {
 	if(!err){
 		console.log("Connected Successfully");
 		//console.log('id :'+id);

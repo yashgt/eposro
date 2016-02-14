@@ -2,6 +2,9 @@ var MongoClient = require('mongodb').MongoClient; // Driver for connecting to Mo
 var ObjectID =require('mongodb').ObjectID;
 var dbConn;
 
+//TODO
+var nconf = require('nconf');
+
 MongoClient.connect('mongodb://localhost:27017/eposro', function(err, db) {
 	if(!err){
 		dbConn = db;

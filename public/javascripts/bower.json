@@ -13,7 +13,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.26",
+    "angular": "~1.4.9",
     "bootstrap": "~3.0.0",
     "ngModal": "~1.2.0",
     "jquery": "~2.1.1",
@@ -22,7 +22,8 @@
     "angular-google-maps": "2.0.1",
     "angular-touch": "*",
     "ngInfiniteScroll": "*",
-    "angular-material": "*"
+    "angular-material": "*",
+    "angular-route": "~1.5.0"
   },
   "resolutions": {
     "angular": "~1.2.26"

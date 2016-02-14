@@ -14,6 +14,12 @@ function EposroController(
         $scope.nextCategory = 101;//category id of dairy tab
 
         epSvc.getCategories($scope,lastPageLoaded,products);
+		/*
+		TODO
+		epSvc.getCategories( function(cats){
+			//Set in scope
+		});
+		*/
 		    
 
       	$scope.fetchNextPage = function(catID,flag) {
@@ -164,7 +170,7 @@ myCartService = function(epSvc){
 	//TODO	Fetch the current cart from the Server
 		
 	this.addToCart = function(pdt){
-		//TODO Make a call to server to add this product to cart
+		//TODO Make a call to server to add this product to cart $epsvc.addToCart
 		if(this.addToCartCB)
 			this.addToCartCB(pdt);
 	};

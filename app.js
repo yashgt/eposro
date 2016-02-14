@@ -29,8 +29,11 @@ app.use('/', routes);
 
 app.get('/api/categories', function(req, res) {
     //console.log("On server fetching categories");
+	//TODO bring from DB
     res.json(categories);
 });
+
+//TODO remove this
 app.get('/api/subCategories',function(req, res){
     //console.log("Inside app.get for finding sub cats of "+req.params.parent);
     datafun.getCategories(req.query.parent,function(subCat){
