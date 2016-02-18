@@ -208,7 +208,6 @@ exports.addToCart = function(userId,pid,current_city,cb)
 		}
 		else{
 			//create the cart subdocument and add product
-			var cart={};
 			cart.products=[];
 			cart.estimated_cost=0;
 			users.update({_id:userId},{$set:{"cart":cart}},function(err,res){
@@ -270,6 +269,37 @@ exports.addToCart = function(userId,pid,current_city,cb)
 });
 };
 
-exports.removeFromCart=function(userId,pid,cb){
-
+exports.removeFromCart=function(userId,pid,current_city,cb){
+	//decrement count of the product from cart
+	var users =dbConn.collection("users");
+	var products=dbConn.collection("products");
+	users.findOne({_id:userId,"cart.products.pid":pid},{"cart.products.$":1},function(err,res){
+		if(!err){
+			var price = res.cart.products[0].price;
+			var count = res.cart.products[0].count;
+			if(count!=1){
+				users.update({_id:userId,"cart.products.pid":pid},{$inc:{"cart.estimated_cost":-parseInt(price),"cart.products.$.count":-1}},function(err,res){
+					if(!err){
+							cb("Product Count decremented");
+							return;
+					}
+					else{
+							console.log(err);
+							return;
+					}
+				});
+			}
+			else{
+				users.update({_id:userId},{$pull:{"cart.products":{"pid":pid}},$inc:{"cart.estimated_cost":-parseInt(price)}},function(err,res){
+					if(!err){
+							cb("product removed from cart");
+							return;
+					}
+					else{
+							console.log(err);
+					}
+				});
+			}
+		}
+	});
 };
