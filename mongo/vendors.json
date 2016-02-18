@@ -1,11 +1,194 @@
 {
-	_id: sdasdasda
-	,vnid: 1
-	,city_id: 5
-	,lat: 18.34234
-	,lon: 73.342342
-	,products : [ { pid: 123, price: 100.00 }
-	, { pid: 12312, vid: 1, price: 20.00 } 
-	, { pid: 12312, vid: 2, price: 20.00, oos: true } 
-	]
-}	
+    _id: 1
+    ,name:"Ajay Kumar"
+    ,id:{
+        email:"ajay@gmail.com",
+        pwd:"12311"
+    }
+    ,address:
+        {
+            house_num:"314",
+            street:"Main street",
+            city:"Margao",
+            taluka:"Salcet",
+            district:"South Goa",
+            state:"Goa",
+            pin:403432,
+            location:{
+                type:"Point",
+                coordinates :[73.980560,15.286535]
+            }       
+        }
+    ,products : [
+        { pid: 1, myPrice: 20.00 }
+       ,{ pid: 2,  myPrice: 25.00 } 
+       ,{ pid: 3,  myPrice: 23.00} 
+       ,{ pid: 4, myPrice: 20.00 }
+       ,{ pid: 6,  myPrice: 15.00 } 
+       ,{ pid: 7,  myPrice: 22.00}
+       ,{ pid: 8, myPrice: 30.00 }
+       ,{ pid: 9,  myPrice: 40.00 } 
+       ,{ pid: 10,  myPrice: 30.00}
+       ,{ pid: 11,  myPrice: 40.00}
+       ,{ pid: 13,  myPrice: 25.00}
+            
+       ]
+    ,serving_radius: 500
+    ,delivery_mode: 1
+    ,min_order_home_delivery:200
+}
+{
+    _id: 2
+    ,name:"Vinay Mehta"
+    ,id:{
+        email:"vinay@gmail.com",
+        pwd:"12311"
+    }
+    ,address:
+        {
+            house_num:"31/A",
+            street:"Main street",
+            city:"Margao",
+            taluka:"Salcet",
+            district:"South Goa",
+            state:"Goa",
+            pin:403432,
+            location:{
+                type:"Point",
+                coordinates :[73.980570,15.286200]
+                }       
+        }
+    ,products : [
+        { pid: 1, myPrice: 20.00 }
+       ,{ pid: 2,  myPrice: 25.00 } 
+       ,{ pid: 3,  myPrice: 23.00} 
+       ,{ pid: 4, myPrice: 20.00 }
+       ,{ pid: 6,  myPrice: 15.00 } 
+       ,{ pid: 7,  myPrice: 22.00}
+       ,{ pid: 8, myPrice: 30.00 }
+       ,{ pid: 9,  myPrice: 40.00 } 
+       ,{ pid: 10,  myPrice: 30.00}
+       ,{ pid: 11,  myPrice: 40.00}
+       ,{ pid: 13,  myPrice: 25.00}
+            
+       ]
+    ,serving_radius: 500
+    ,delivery_mode: 1
+    ,min_order_home_delivery:200
+}
+{
+    _id: 3
+    ,name:"Babu Naik"
+    ,id:{
+        email:"babu@gmail.com",
+        pwd:"12311"
+    }
+    ,address:
+        {
+            house_num:"14",
+            street:"West street",
+            city:"Panjim",
+            taluka:"Tiswadi",
+            district:"North Goa Goa",
+            state:"Goa",
+            pin:403432,
+            location:{
+                type:"Point",
+                coordinates :[73.975430,15.272225]
+                }       
+        }
+    ,products : [
+        { pid: 1, myPrice: 20.00 }
+       ,{ pid: 2,  myPrice: 25.00 } 
+       ,{ pid: 3,  myPrice: 23.00} 
+       ,{ pid: 4, myPrice: 20.00 }
+       ,{ pid: 6,  myPrice: 15.00 } 
+       ,{ pid: 7,  myPrice: 22.00}
+       ,{ pid: 8, myPrice: 30.00 }
+       ,{ pid: 9,  myPrice: 40.00 } 
+       ,{ pid: 10,  myPrice: 30.00}
+       ,{ pid: 11,  myPrice: 40.00}
+       ,{ pid: 13,  myPrice: 25.00}
+            
+       ]
+    ,serving_radius: 700
+    ,delivery_mode: 0
+}
+{
+    _id: 4
+    ,name:"Ram Dessai"
+    ,id:{
+        email:"Ram@gmail.com",
+        pwd:"12311"
+    }
+    ,address:
+        {
+            house_num:"1/B",
+            street:"West street",
+            city:"Panjim",
+            taluka:"Tiswadi",
+            district:"North Goa Goa",
+            state:"Goa",
+            pin:403432,
+            location:{
+                type:"Point",
+                coordinates :[73.975450,15.272215]
+                }       
+        }
+    ,products : [
+        { pid: 1, myPrice: 20.00 }
+       ,{ pid: 2,  myPrice: 25.00 } 
+       ,{ pid: 3,  myPrice: 23.00} 
+       ,{ pid: 4, myPrice: 20.00 }
+       ,{ pid: 6,  myPrice: 15.00 } 
+       ,{ pid: 7,  myPrice: 22.00}
+       ,{ pid: 8, myPrice: 30.00 }
+       ,{ pid: 9,  myPrice: 40.00 } 
+       ,{ pid: 10,  myPrice: 30.00}
+       ,{ pid: 11,  myPrice: 40.00}
+       ,{ pid: 13,  myPrice: 25.00}
+            
+       ]
+    ,serving_radius: 600
+    ,delivery_mode: 0
+}
+{
+    _id: 5
+    ,name:"Rajesh Shet"
+    ,id:{
+        email:"rajesh@gmail.com",
+        pwd:"12311"
+    }
+    ,address:
+        {
+            house_num:"3/A",
+            street:"South street",
+            city:"Margao",
+            taluka:"Salcet",
+            district:"South Goa",
+            state:"Goa",
+            pin:403432,
+            location:{
+                type:"Point",
+                coordinates :[73.980530,15.286535]
+                }       
+        }
+    ,products : [
+        { pid: 1, myPrice: 20.00 }
+       ,{ pid: 2,  myPrice: 25.00 } 
+       ,{ pid: 3,  myPrice: 23.00} 
+       ,{ pid: 4, myPrice: 20.00 }
+       ,{ pid: 6,  myPrice: 15.00 } 
+       ,{ pid: 7,  myPrice: 22.00}
+       ,{ pid: 8, myPrice: 30.00 }
+       ,{ pid: 9,  myPrice: 40.00 } 
+       ,{ pid: 10,  myPrice: 30.00}
+       ,{ pid: 11,  myPrice: 40.00}
+       ,{ pid: 13,  myPrice: 25.00}
+            
+       ]
+    ,serving_radius: 800
+    ,delivery_mode: 0
+}
+
+
