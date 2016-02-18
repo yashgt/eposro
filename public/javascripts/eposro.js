@@ -6,41 +6,50 @@ function EposroController(
 	,myCart
     ,epSvc
 ){  
-		var lastPageLoaded = {};
-        var products = [];
+		$scope.lastPageLoaded = [];
+        $scope.products = [];
         //$scope.subCategories = [];
         $scope.busy = false;
         $scope.breadCrumbs = [];
-        $scope.nextCategory = 101;//category id of dairy tab
+        $scope.nextCategory = 1;//category id of dairy tab
+        $scope.cartCount = 0;
 
-        epSvc.getCategories($scope,lastPageLoaded,products);
-		/*
-		TODO
-		epSvc.getCategories( function(cats){
-			//Set in scope
-		});
-		*/
-		    
+        epSvc.getCategories( function(catsResponse,pageResponse,productsResponse){
+            //console.log("In callback " + catsResponse);
+            $scope.lastPageLoaded = pageResponse;
+            $scope.products = productsResponse;
+            $scope.categories = catsResponse;
+            //console.log("Last page loaded in callback =  "+$scope.lastPageLoaded[1]);
+        });   
 
       	$scope.fetchNextPage = function(catID,flag) {
       		$scope.nextCategory = catID;
       		//if( flag == 0)
       			//return;
-            console.log("called fetchNextPage() for ", catID );
+            //console.log("called fetchNextPage() for ", catID );
+            //console.log("Last page loaded before passing = "+$scope.lastPageLoaded[catID]);
             if ($scope.busy) return;
                 $scope.busy = true;
             
-            epSvc.getProductsByCat(catID,lastPageLoaded,products,$scope);
+            //epSvc.getProductsByCat(catID,lastPageLoaded,products,$scope);
+
+            epSvc.getProductsByCat( catID, $scope.lastPageLoaded[catID], $scope.products,
+                function(productsResponse, lastPageResponse,  busyResponse){
+                    $scope.productsOfCurrentCat = productsResponse;
+                    $scope.lastPageLoaded[catID] = lastPageResponse;
+                    $scope.busy = busyResponse;
+                }
+            );
         }
 
         $scope.getSubCat=function(parent){
-            console.log("Getting sub_categories for " +parent);
+            //console.log("Getting sub_categories for " +parent);
             epSvc.getSubCat(parent,$scope);
         }
         
-       $scope.scrollTop = function(){
+        $scope.scrollTop = function(){
        		$(document).scrollTop(0);
-       }
+        }
         $scope.setBreadArray = function(cat,i){
             
             if( i == 0){
@@ -67,15 +76,18 @@ function EposroController(
 			$scope.cartCount++;
 			//$scope.cartValue += pdt.mrp ;
 		};
-		
-        /*removeFromCart = function(pdt){
-            console.log("Removing from cart on UI");
+        removeFromCart = function(pdt){
+            if( $scope.cartCount <=0 ){
+                $scope.cartCount = 0;
+                return;
+            }
+            //console.log("Removing from cart on UI");
             $scope.cartCount--;
-            $scope.cartValue -= pdt.mrp;
-        };*/
+            //$scope.cartValue -= pdt.mrp;
+        };
 
 		myCart.onAddToCart(addToCart);
-       // myCart.onRemoveFromCart(removeFromCart);   
+        myCart.onSubtractFromCart(removeFromCart);   
 }
 
 //This is the controller for product directive that handles all the logic for the directive.
@@ -89,16 +101,18 @@ ProductListItemController = function($scope, myCart){
 		myCart.addToCart($scope.product);// called this so that changes are saved to the DB
 	}
     this.subtract = function(){
-        if( $scope.productCount = 0)
+        if( $scope.productCount <= 0){
+            $scope.productCount = 0;
             return;
+        }
         $scope.productCount--;
         //TODO define the following function
-        //myCart.removeFromCart($scope.product);
+        myCart.removeFromCart($scope.product);
     }
 } ;
 			
 eposroService = function($http){
-  
+    var cart = {};
 	this.getCart = function(cb){
 		$http.get('/api/cart').success(
 			function(res){
@@ -115,36 +129,35 @@ eposroService = function($http){
             $scope.subCategories = response;
         });
     };
-    this.getCategories = function($scope,lastPageLoaded,products){
+    this.getCategories = function(cb){
        
         $http.get("/api/categories").success( 
             function(response){
-                
-                $scope.categories = response;
+                var categories = response;
+                //console.log("After success :" +categories[3].catID);
+                var lastPageLoaded = [];
+                var products = [];
                 //initialize last page loaded and products array here
                 for(var i = 0; i< response.length; i++){
-                	lastPageLoaded[response[i].id] = 0;
+                	lastPageLoaded[response[i].catID] = 0;
                 	products[i] = {
-                		catID : response[i].id,
+                		catID : response[i].catID,
                 		pdt: []
                 	};
                 }
-                
+                cb(categories,lastPageLoaded,products);
             }
         );
     };
 
     
-	this.getProductsByCat = function(catID,lastPageLoaded,products,$scope){//function(catID, page, filter, cb)
+	this.getProductsByCat = function(catID,lastPage, products, cb){//function(catID, page, filter, cb)
         //TODO
-        
-        var lastPage = lastPageLoaded[catID];
+        //console.log("Last page  = "+lastPage);
         $http.get('/api/products?catID='+catID+'&lastPage='+lastPage).success(
             function(response){
-            	
                 lastPage++;
-                lastPageLoaded[catID] = lastPage;
-                console.log("Made call for page  "+lastPage+" of category "+catID);
+                //console.log("Made call for page  "+lastPage+" of category "+catID);
                 //find the index into the products array where products of this category are found
                 for( var j=0; j<products.length; j++){
 	            	if( products[j].catID == catID){	
@@ -157,23 +170,57 @@ eposroService = function($http){
                 	//console.log("Here " + products[1].pdt);
                     (products[j].pdt).push(response[i]);
                 }
-
-                $scope.productsOfCurrentCat = products[j].pdt;
-                $scope.busy = false;
+                var productsOfCurrentCat = products[j].pdt;
+                var busy = false;
+                cb(productsOfCurrentCat,lastPage,busy);
+                //$scope.productsOfCurrentCat = products[j].pdt;
+                //$scope.busy = false;
             }
         );
 	}; 
+
+    this.addToCart = function(pdt){
+        //TODO post call to add cart
+
+        if(cart[pdt.id]!=undefined){
+            cart[pdt.id].count++;
+            return;
+        }
+        cart[pdt.id]=pdt;
+        cart[pdt.id].count = 0;
+
+
+
+    }
 	
-};			
+};
+/*
+cart={
+    "pid":{
+    pname:
+    cid:
+    count:
+    }
+}
+
+
+*/			
 
 myCartService = function(epSvc){
 	//TODO	Fetch the current cart from the Server
-		
+	
 	this.addToCart = function(pdt){
 		//TODO Make a call to server to add this product to cart $epsvc.addToCart
+        epSvc.addToCart(pdt);
+
 		if(this.addToCartCB)
 			this.addToCartCB(pdt);
 	};
+    this.removeFromCart = function(pdt){
+        //TODO Make a call to server to remove this product from cart $epsvc.addToCart
+        if( this.removeFromCartCB)
+            this.removeFromCartCB(pdt);
+    }
 	this.getCount = function(pdt){
 		//TODO get product count 
 		return 0;
@@ -181,6 +228,9 @@ myCartService = function(epSvc){
 	this.onAddToCart = function(cb){
 		this.addToCartCB = cb;
 	};
+    this.onSubtractFromCart = function(cb){
+        this.removeFromCartCB = cb;
+    }
 };
 
 (function() {

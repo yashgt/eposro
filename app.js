@@ -8,12 +8,11 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var datafun = require('./datafun');
+var epdb = require('./epdb');
 
 var app = express();
 //categories
-var categories = datafun.getCategories(0,function(categories){
-    console.log(categories);
+var categories=[];
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -29,28 +28,31 @@ app.use('/', routes);
 
 app.get('/api/categories', function(req, res) {
     //console.log("On server fetching categories");
-	//TODO bring from DB
-    res.json(categories);
+	//TODO bring from DBepdb
+	epdb.getCategories(0,function(catsResponse){
+		var categories=catsResponse;
+		res.json(categories);
+	});	
 });
 
 //TODO remove this
 app.get('/api/subCategories',function(req, res){
     //console.log("Inside app.get for finding sub cats of "+req.params.parent);
-    datafun.getCategories(req.query.parent,function(subCat){
+    epdb.getCategories(req.query.parent,function(subCat){
         //console.log(subcat);
         res.json(subCat);
     });
 });
 
 app.get('/api/products', function(req,res){
-    var cat = req.query.cat;
-    var page = req.query.page;
+    var cat = req.query.catID;
+    var page = req.query.lastPage;
     var products = [];
     for( var j= 0; j<5; j++){
         var pdt = {
-            id : req.params.cat + j
+            id : cat + j.toString()
             , name: 'Product' + j
-            ,cat_id: req.params.cat
+            ,catID: cat
         };
         products.push(pdt);
     }
@@ -85,7 +87,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-});
 http.createServer(app).listen(3000, function(){
   console.log('Express server listening on port ' + 3000);
 });

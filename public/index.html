@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-2">
                 <ul class="nav navbar-nav navbar-right" >    
-                    <li>{{cartCount}} {{cartVal}}<a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                    <li>{{cartCount}}<a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
                     <li><a href="#"><span class=" glyphicon glyphicon-log-out"></span></a></li>
                 </ul>
@@ -122,7 +122,7 @@
                                 </md-tab-body>
                             </md-tab>
                             <md-tab id="tab-button" ng-repeat="cat in categories"
-                                  md-on-select="fetchNextPage(cat.id,0);setBreadArray(cat.title,0);scrollTop();getSubCat(cat.id);">
+                                  md-on-select="fetchNextPage(cat.catID,0);setBreadArray(cat.title,0);scrollTop();getSubCat(cat.catID);">
                                   
                                 <md-tab-label>
                                     {{cat.title}}
@@ -130,8 +130,8 @@
                                 <md-tab-body>
                                     
                                     <div id="sub-categories-row">
-                                            <md-menu id="sub-cat-button" ng-hide="hideMe"><!-- function that return 1 when lenght is 4-->
-                                                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+                                            <md-menu id="sub-cat-button" ng-hide="hideMe">
+                                                <md-button class="md-icon-button" aria-label="Open sample menu">
                                                     <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                                                 </md-button>
                                                 <md-menu-content width=6>
@@ -147,7 +147,6 @@
                                             </ol>
                                     </div>
 
-                                    
                                     <div id="products-row" infinite-scroll="fetchNextPage(nextCategory,1)" infinite-scroll-disabled="busy">
 
                                         <md-grid-list md-cols-gt-md="3" md-cols-md="2" md-cols-sm="1" md-gutter="5px" md-row-height="2:1">
