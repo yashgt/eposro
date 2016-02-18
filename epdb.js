@@ -1,11 +1,13 @@
 var MongoClient = require('mongodb').MongoClient; // Driver for connecting to MongoDB
 var ObjectID =require('mongodb').ObjectID;
+var async = require("async");
+
 var dbConn;
 
 //TODO
 //var nconf = require('nconf');
 
-MongoClient.connect('mongodb://localhost:27017/eposro', function(err, db) {
+MongoClient.connect('mongodb://localhost:40000/eposro', function(err, db) {
 	if(!err){
 		dbConn = db;
 		console.log("Connected Successfully");
@@ -173,4 +175,101 @@ exports.getCategories =function(id,cb){
 			cb(cats);
 		}
 	});
-}
+};
+
+exports.addToCart = function(userId,pid,current_city,cb)
+{
+	var cart={};
+	var users = dbConn.collection("users");
+	var products = dbConn.collection("products");
+	var cities = dbConn.collection("cities");
+
+	async.waterfall([
+	//functions to be executed in order
+	function(callback){//find the user with the user id
+		var users = dbConn.collection("users");
+		users.findOne({_id:userId,cart:{$exists:true}},function(err,res){
+			if(!err){
+				callback(null,res);
+			}
+		});
+	},
+	function(user,callback){
+		if(user!=undefined){//cart field exits
+			var flag=0,price=0;
+			user.cart.products.forEach(function(product){
+				if(product.pid==pid){
+					flag=1;
+					price=product.price;
+					return;
+				}
+			});
+			callback(null,flag,price);
+		}
+		else{
+			//create the cart subdocument and add product
+			var cart={};
+			cart.products=[];
+			cart.estimated_cost=0;
+			users.update({_id:userId},{$set:{"cart":cart}},function(err,res){
+				if(!err){
+					callback(null,0,null);
+					return;
+				}
+				else{
+					console.log(err);
+				}
+			});
+		}
+	},function(flag,price){
+		if(flag==1){
+			users.update({_id:userId,"cart.products.pid":pid},{$inc:{"cart.products.$.count":1,"cart.estimated_cost":parseInt(price)}},function(err,res){
+					
+					if(!err){
+						cb("product Incremented");
+						return;
+					}
+					else{
+						console.log(err);
+						return;
+					}
+			});
+		}
+		else{
+			//create product
+			var prod ={};
+			prod.pid =pid;
+			cities.findOne({city:current_city},function(err,res){
+				if(!err){
+					var city_id=res._id;
+					products.findOne({_id:pid,"price.mrp.city":city_id},{"price.mrp.$":1,"pname":1},function(err,res){
+						if(!err){
+							prod.name=res.pname;
+							prod.price=res.price.mrp[0].mrp;//add this product to the database now
+							prod.count=1;
+							users.update({_id:userId},{$push:{"cart.products":prod},$inc:{"cart.estimated_cost":parseInt(prod.price)}},function(err,res){
+								if(!err){
+									cb("Product Added successfully");
+									return;
+								}
+								else{
+									console.log(err);
+									return;
+								}
+							});
+						}
+					});
+				}
+			});
+		}
+	}
+	],function(err,res){
+	if(!err){
+		console.log("All the functions executed properly");
+	}
+});
+};
+
+exports.removeFromCart=function(userId,pid,cb){
+
+};
