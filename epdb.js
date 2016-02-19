@@ -271,6 +271,7 @@ exports.addToCart = function(userId,pid,current_city,cb)
 
 exports.removeFromCart=function(userId,pid,current_city,cb){
 	//decrement count of the product from cart
+	console.log("In epdb.js");
 	var users =dbConn.collection("users");
 	var products=dbConn.collection("products");
 	users.findOne({_id:userId,"cart.products.pid":pid},{"cart.products.$":1},function(err,res){
