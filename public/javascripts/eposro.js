@@ -103,10 +103,10 @@ ProductListItemController = function($scope, myCart){
     this.subtract = function(){
         if( $scope.productCount <= 0){
             $scope.productCount = 0;
+			console.log("Returned bcx count = 0");
             return;
         }
         $scope.productCount--;
-        //TODO define the following function
         myCart.removeFromCart($scope.product);
     }
 } ;
@@ -181,43 +181,43 @@ eposroService = function($http){
 
     this.addToCart = function(pdt){
         //TODO post call to add cart
-
-        if(cart[pdt.id]!=undefined){
-            cart[pdt.id].count++;
-            return;
-        }
-        cart[pdt.id]=pdt;
-        cart[pdt.id].count = 0;
-
-
-
+		var data = {
+			'pdtID' : pdt
+			, 'userID': 1
+			, 'city': 'goa'
+         };
+		$http.post('/api/addToCart', data).success(function(response){
+			//console.log("Returned in cb");
+        });
     }
 	
+	this.removeFromCart = function(pdt){
+		var data = {
+			'pdtID' : pdt
+			, 'userID': 1
+			, 'city': 'goa'
+         };
+		$http.post('/api/removeFromCart', data).success(function(response){
+			console.log("Returned in cb");
+        });
+	}
+	
 };
-/*
-cart={
-    "pid":{
-    pname:
-    cid:
-    count:
-    }
-}
-
-
-*/			
+		
 
 myCartService = function(epSvc){
 	//TODO	Fetch the current cart from the Server
 	
 	this.addToCart = function(pdt){
 		//TODO Make a call to server to add this product to cart $epsvc.addToCart
-        epSvc.addToCart(pdt);
+        epSvc.addToCart(pdt.id);
 
 		if(this.addToCartCB)
 			this.addToCartCB(pdt);
 	};
     this.removeFromCart = function(pdt){
         //TODO Make a call to server to remove this product from cart $epsvc.addToCart
+		epSvc.removeFromCart(pdt.id);
         if( this.removeFromCartCB)
             this.removeFromCartCB(pdt);
     }

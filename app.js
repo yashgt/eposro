@@ -48,9 +48,9 @@ app.get('/api/products', function(req,res){
     var cat = req.query.catID;
     var page = req.query.lastPage;
     var products = [];
-    for( var j= 0; j<5; j++){
+    for( var j= 1; j<6; j++){
         var pdt = {
-            id : cat + j.toString()
+            id : j.toString()
             , name: 'Product' + j
             ,catID: cat
         };
@@ -61,7 +61,35 @@ app.get('/api/products', function(req,res){
     res.json(products); 
 });
 
+//adding and removing cart from th eDB
+app.post('/api/addToCart', function(req,res){
+    console.log("Hello World");
+	console.log(req.body);
+	var pdtID = parseInt(req.body.pdtID);
+    var userID = req.body.userID;
+    var city = req.body.city;
+    
+    //set session variable with city
+    //req.session.city = city;//somehwhat like this?
+    
+	epdb.addToCart(userID,pdtID,city,function(str){
+		console.log(str);
+		res.send(str);
+	});
+	
+	//res.send("Hello");
+});
+app.post('/api/removeFromCart', function(req,res){
+    console.log("Remove from cart in app.js");
+	var pdtID = parseInt(req.body.pdtID);
+    var userID = req.body.userID;
+    var city = req.body.city;
 
+    epdb.removeFromCart(userID, pdtID, city, function(str){
+		console.log(str);
+		res.send(str);
+    });
+});
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
