@@ -269,9 +269,8 @@ exports.addToCart = function(userId,pid,current_city,cb)
 });
 };
 
-exports.removeFromCart=function(userId,pid,current_city,cb){
+exports.removeFromCart=function(userId,pid,cb){
 	//decrement count of the product from cart
-	console.log("In epdb.js");
 	var users =dbConn.collection("users");
 	var products=dbConn.collection("products");
 	users.findOne({_id:userId,"cart.products.pid":pid},{"cart.products.$":1},function(err,res){
@@ -304,3 +303,106 @@ exports.removeFromCart=function(userId,pid,current_city,cb){
 		}
 	});
 };
+
+exports.checkOut = function(userId,cb){
+	//read the last order id used from IDs collection
+	var IDs = dbConn.collection('IDs');
+	var orders =dbConn.collection('orders');
+	var users=dbConn.collection("users");
+	async.waterfall([
+		function(callback){
+			IDs.findOne({},function(err,res){
+				if(!err){
+					callback(null,res.last_order_id);
+					return;
+				}
+				else{
+					console.log(err);
+					return;
+				}
+			});
+		},
+		function(last_order_id,callback){
+			if(last_order_id!=null){
+				users.findOne({_id:userId},function(err,res){
+				if(!err){
+					callback(null,last_order_id,res);
+					return;
+				}
+				});
+			}
+		},
+		function(last_order_id,user,callback){
+			//create order
+			if(user!=null){
+				var order={};
+				order._id=++last_order_id;
+				order.ordered_by=userId;
+				order.vendors_serving=[];
+				order.selected_vendors=[];
+				order.items=user.cart.products;
+				order.estimated_cost=user.cart.estimated_cost;
+				order.processing_status=0;
+				if(user.cart.order_mode!=undefined){
+					order.order_mode=user.cart.order_mode;
+				}
+				else{
+					order.order_mode=user.default_delivery_preference;
+				}
+				//write this to order collection
+				orders.insert(order,function(err,res){
+					if(!err){
+						//update last order_id
+						IDs.update({},{$set:{"last_order_id":last_order_id}},function(err,res){
+							if(!err){
+							//update the user collection to contain that order id
+								callback(null,order._id);
+								return;
+							}
+						});
+					}
+				});
+			}
+		},
+		function(current_order,callback){
+			if(current_order!=null){
+				users.update({_id:userId},{$push:{orderIDs:current_order},$unset:{cart:true}},function(err,res){
+				if(!err){
+					cb("Successfully added the order "+current_order);
+					return;
+				}
+				else{
+					console.log(err);
+					return;
+				}
+				});
+			}
+		}
+		],function(err,result){
+		if(!err){
+			console.log("All functions are executed");
+			return;
+		}
+	});
+};
+
+exports.fetchCart = function(userId,cb){
+	var users = dbConn.collection("users");
+	users.findOne({_id:userId},function(err,res){
+		if(!err){
+			if(res.cart!=undefined){
+				cb(res.cart);
+			    return;
+			}
+			else{
+
+				cb({});
+				return;
+			}
+		}
+		else{
+			console.log(err);
+		}
+	});
+};
+
