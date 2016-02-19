@@ -77,12 +77,20 @@ setTimeout(function(){
                 		}//end of for loop for city mrp
                 		product.vars=wait.for(epdb.getProductVars,product.pname,product.brand);
                 		product.rel_pdts= wait.for(epdb.getRelatedPdts,last_pdt_id);//currently gets random products from DB
-             
-                		var result=wait.for(epdb.saveProduct,product);
-                		//update the workbook with the added product
-                		var address_of_cell ="A"+(j+2).toString();
-                		workbook.Sheets[current_sheet][address_of_cell].v=(last_pdt_id-1)
-                		console.log("Inserted product");
+                        //check if the product is already present check if the GTIN is same
+                        var flag=wait.for(epdb.checkForProduct,product.gtin);
+                        if(flag==0){
+                            var result=wait.for(epdb.saveProduct,product);
+                            wait.for(epdb.updateProdVars,product.vars,product);
+                            //update the workbook with the added product
+                            var address_of_cell ="A"+(j+2).toString();
+                            workbook.Sheets[current_sheet][address_of_cell].v=(last_pdt_id-1)
+                            console.log("Inserted product");
+                        }
+                        else{
+                            console.log(product.pname+" already exists!!!");
+                            last_pdt_id--;
+                        }
                 	}//end of if statement for checking id
         		}//end of forloop for each product
         		var result=wait.for(epdb.writeLastPdtId,last_pdt_id);

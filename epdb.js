@@ -177,6 +177,51 @@ exports.getCategories =function(id,cb){
 	});
 };
 
+exports.checkForProduct = function(gtin,cb){
+	console.log(gtin);
+	var products = dbConn.collection("products");
+	products.find({"gtin":gtin}).toArray(function(err,res){
+		if(!err){
+			if(res.length==0){
+				cb(null,0);
+			}
+			else{
+				cb(null,1);
+			}
+		}
+		else{
+			console.log(err);
+		}
+	});
+};
+
+exports.updateProdVars =function(vars,product,cb){
+	var products=dbConn.collection("products");
+	var variant={};
+	variant.vid = product._id;
+	variant.vname = product.pname;
+	variant.facets =product.facets;
+	var count=0;
+	if(JSON.stringify(vars)!="[]"){
+		for(var i=0;i<vars.length;i++){
+		products.update({_id:vars[i].vid},{$push:{"vars":variant}},function(err,res){	
+			if(!err){
+				console.log("Variant "+i);
+				count++;
+				if(count==vars.length){
+					cb(null,1);
+				}
+			else{
+				console.log(err);
+				}
+			}
+		});
+	 	}
+	}
+	else{
+		cb(null,0);
+	}
+};
 exports.addToCart = function(userId,pid,current_city,cb)
 {
 	var cart={};
