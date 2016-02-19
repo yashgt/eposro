@@ -12,7 +12,7 @@ function EposroController(
         $scope.busy = false;
         $scope.breadCrumbs = [];
         $scope.nextCategory = 1;//category id of dairy tab
-        $scope.cartCount = 0;
+        //$scope.cartCount = 0;
 
         epSvc.getCategories( function(catsResponse,pageResponse,productsResponse){
             //console.log("In callback " + catsResponse);
@@ -85,7 +85,13 @@ function EposroController(
             $scope.cartCount--;
             //$scope.cartValue -= pdt.mrp;
         };
-
+		
+		myCart.fetchCart(1,function(cart){
+			$scope.cartCount = 0;
+			for( var i=0; i<cart.products.length; i++){
+				$scope.cartCount += cart.products[i].count; 
+			}
+		});//obtain userID & fetch to this function
 		myCart.onAddToCart(addToCart);
         myCart.onSubtractFromCart(removeFromCart);   
 }
@@ -113,11 +119,19 @@ ProductListItemController = function($scope, myCart){
 			
 eposroService = function($http){
     var cart = {};
-	this.getCart = function(cb){
-		$http.get('/api/cart').success(
-			function(res){
-				cb(res);
+	
+	this.fetchCart = function(userID,cb){
+		var data = {
+			'userID' : userID
+		};
+		$http.post('/api/cart',data).success(
+			function(cart){
+				console.log("received response as "+cart.products[0].name);
+				cb(cart);
 			}
+			/*function(res){
+				cb(res);
+			}*/
 		);
 	};
 
@@ -149,8 +163,7 @@ eposroService = function($http){
             }
         );
     };
-
-    
+   
 	this.getProductsByCat = function(catID,lastPage, products, cb){//function(catID, page, filter, cb)
         //TODO
         //console.log("Last page  = "+lastPage);
@@ -180,7 +193,7 @@ eposroService = function($http){
 	}; 
 
     this.addToCart = function(pdt){
-        //TODO post call to add cart
+        
 		var data = {
 			'pdtID' : pdt
 			, 'userID': 1
@@ -207,7 +220,11 @@ eposroService = function($http){
 
 myCartService = function(epSvc){
 	//TODO	Fetch the current cart from the Server
-	
+	this.fetchCart = function(userID,cb){
+		epSvc.fetchCart(userID, function(cart){
+			cb(cart);
+		});	
+	};
 	this.addToCart = function(pdt){
 		//TODO Make a call to server to add this product to cart $epsvc.addToCart
         epSvc.addToCart(pdt.id);

@@ -11,8 +11,7 @@ var users = require('./routes/users');
 var epdb = require('./epdb');
 
 var app = express();
-//categories
-var categories=[];
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -89,6 +88,15 @@ app.post('/api/removeFromCart', function(req,res){
 		console.log(str);
 		res.send(str);
     });
+});
+
+app.post('/api/cart',function(req,res){
+	console.log("In app.js for fetching cart");
+	var userID = req.body.userID;
+	epdb.fetchCart(userID, function(cart){
+		console.log(cart.products[0].name);
+		res.send(cart);
+	});
 });
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
