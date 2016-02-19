@@ -790,7 +790,7 @@
     <lst name="defaults">
       <str name="echoParams">explicit</str>
       <int name="rows">10</int>	  
-	  <str name="defType">dismax</str>
+	  <!--<str name="defType">dismax</str>-->
 		<str name="qf">
       pname^1 desc^0.8 brand^0.8 vname_all^0.6
 		</str>		
