@@ -8,30 +8,28 @@ function EposroController(
 ){  
 		$scope.lastPageLoaded = [];
         $scope.products = [];
-        //$scope.subCategories = [];
         $scope.busy = false;
         $scope.breadCrumbs = [];
         $scope.nextCategory = 1;//category id of dairy tab
-        //$scope.cartCount = 0;
 
         epSvc.getCategories( function(catsResponse,pageResponse,productsResponse){
-            //console.log("In callback " + catsResponse);
+            
             $scope.lastPageLoaded = pageResponse;
             $scope.products = productsResponse;
             $scope.categories = catsResponse;
-            //console.log("Last page loaded in callback =  "+$scope.lastPageLoaded[1]);
+            
         });   
 
       	$scope.fetchNextPage = function(catID,flag) {
       		$scope.nextCategory = catID;
       		//if( flag == 0)
       			//return;
-            //console.log("called fetchNextPage() for ", catID );
-            //console.log("Last page loaded before passing = "+$scope.lastPageLoaded[catID]);
+            
+            
             if ($scope.busy) return;
                 $scope.busy = true;
             
-            //epSvc.getProductsByCat(catID,lastPageLoaded,products,$scope);
+            
 
             epSvc.getProductsByCat( catID, $scope.lastPageLoaded[catID], $scope.products,
                 function(productsResponse, lastPageResponse,  busyResponse){
@@ -43,7 +41,7 @@ function EposroController(
         }
 
         $scope.getSubCat=function(parent){
-            //console.log("Getting sub_categories for " +parent);
+            
             epSvc.getSubCat(parent,$scope);
         }
         
@@ -71,7 +69,7 @@ function EposroController(
         } ;
 		
 		addToCart = function(pdt){
-			//console.log("Adding to cart on UI");
+			
 			//TODO add the count 
 			$scope.cartCount++;
 			//$scope.cartValue += pdt.mrp ;
@@ -81,16 +79,22 @@ function EposroController(
                 $scope.cartCount = 0;
                 return;
             }
-            //console.log("Removing from cart on UI");
+            
             $scope.cartCount--;
             //$scope.cartValue -= pdt.mrp;
         };
 		
 		myCart.fetchCart(1,function(cart){
 			$scope.cartCount = 0;
+			if( cart == null){
+				$scope.cartCount = 0;
+				$scope.cart = null;
+				return;
+			}
 			for( var i=0; i<cart.products.length; i++){
 				$scope.cartCount += cart.products[i].count; 
 			}
+			$scope.cart = cart;
 		});//obtain userID & fetch to this function
 		myCart.onAddToCart(addToCart);
         myCart.onSubtractFromCart(removeFromCart);   
@@ -99,7 +103,6 @@ function EposroController(
 //This is the controller for product directive that handles all the logic for the directive.
 //The service myCartService is dependency injected here.
 ProductListItemController = function($scope, myCart){
-	//console.log("In cont for " , $scope.product);
 	$scope.productCount = myCart.getCount($scope.product);
 	
     this.add = function() {
@@ -109,7 +112,7 @@ ProductListItemController = function($scope, myCart){
     this.subtract = function(){
         if( $scope.productCount <= 0){
             $scope.productCount = 0;
-			console.log("Returned bcx count = 0");
+			
             return;
         }
         $scope.productCount--;
@@ -118,7 +121,7 @@ ProductListItemController = function($scope, myCart){
 } ;
 			
 eposroService = function($http){
-    var cart = {};
+    //var cart = {};
 	
 	this.fetchCart = function(userID,cb){
 		var data = {
@@ -126,20 +129,15 @@ eposroService = function($http){
 		};
 		$http.post('/api/cart',data).success(
 			function(cart){
-				console.log("received response as "+cart.products[0].name);
+				console.log("In epsvc cart:"+cart);
 				cb(cart);
 			}
-			/*function(res){
-				cb(res);
-			}*/
 		);
 	};
 
     this.getSubCat=function(parent,$scope){
         $scope.subCategories = [];
         $http.get('/api/subCategories?parent='+parent).success(function(response){
-            //console.log('Received in the controller :' + response[0].title);
-            //console.log('Received in the controller :' + response[1].title);
             $scope.subCategories = response;
         });
     };
@@ -148,7 +146,7 @@ eposroService = function($http){
         $http.get("/api/categories").success( 
             function(response){
                 var categories = response;
-                //console.log("After success :" +categories[3].catID);
+                
                 var lastPageLoaded = [];
                 var products = [];
                 //initialize last page loaded and products array here
@@ -166,21 +164,21 @@ eposroService = function($http){
    
 	this.getProductsByCat = function(catID,lastPage, products, cb){//function(catID, page, filter, cb)
         //TODO
-        //console.log("Last page  = "+lastPage);
+        
         $http.get('/api/products?catID='+catID+'&lastPage='+lastPage).success(
             function(response){
                 lastPage++;
-                //console.log("Made call for page  "+lastPage+" of category "+catID);
+                
                 //find the index into the products array where products of this category are found
                 for( var j=0; j<products.length; j++){
 	            	if( products[j].catID == catID){	
-	            		//console.log("Found " + catID +" at index "+j);
+	            		
 	            		break;
 	            	}
                 }
                 
                 for (var i = 0; i < response.length; i++) {
-                	//console.log("Here " + products[1].pdt);
+                	
                     (products[j].pdt).push(response[i]);
                 }
                 var productsOfCurrentCat = products[j].pdt;
@@ -200,7 +198,7 @@ eposroService = function($http){
 			, 'city': 'goa'
          };
 		$http.post('/api/addToCart', data).success(function(response){
-			//console.log("Returned in cb");
+			
         });
     }
 	
@@ -219,27 +217,35 @@ eposroService = function($http){
 		
 
 myCartService = function(epSvc){
-	//TODO	Fetch the current cart from the Server
+	var cart;
 	this.fetchCart = function(userID,cb){
-		epSvc.fetchCart(userID, function(cart){
-			cb(cart);
+		epSvc.fetchCart(userID, function(cartResponse){
+			cart = cartResponse;
+			cb(cartResponse);
 		});	
 	};
 	this.addToCart = function(pdt){
-		//TODO Make a call to server to add this product to cart $epsvc.addToCart
         epSvc.addToCart(pdt.id);
 
 		if(this.addToCartCB)
 			this.addToCartCB(pdt);
 	};
     this.removeFromCart = function(pdt){
-        //TODO Make a call to server to remove this product from cart $epsvc.addToCart
 		epSvc.removeFromCart(pdt.id);
         if( this.removeFromCartCB)
             this.removeFromCartCB(pdt);
     }
 	this.getCount = function(pdt){
 		//TODO get product count 
+		//console.log("Inside getCount, where...");
+		//console.log(pdt);
+		if( cart == null){
+			return 0;
+		}
+		for(var i=0;i<cart.products.length; i++){
+			if( cart.products[i].pid == pdt.id)
+				return cart.products[i].count;
+		}
 		return 0;
 	};
 	this.onAddToCart = function(cb){

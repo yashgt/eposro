@@ -178,7 +178,7 @@ exports.getCategories =function(id,cb){
 };
 
 exports.checkForProduct = function(gtin,cb){
-	console.log(gtin);
+	
 	var products = dbConn.collection("products");
 	products.find({"gtin":gtin}).toArray(function(err,res){
 		if(!err){
@@ -366,6 +366,7 @@ exports.removeFromCart=function(userId,pid,cb){
 								});
 							}
 							else{
+								
 								cb("product removed from cart");
 								return;
 							}
@@ -470,8 +471,8 @@ exports.fetchCart = function(userId,cb){
 			    return;
 			}
 			else{
-
-				cb({});
+				console.log(res);
+				cb(null);
 				return;
 			}
 		}

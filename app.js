@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 app.get('/api/categories', function(req, res) {
-    //console.log("On server fetching categories");
+
 	//TODO bring from DBepdb
 	epdb.getCategories(0,function(catsResponse){
 		var categories=catsResponse;
@@ -36,9 +36,9 @@ app.get('/api/categories', function(req, res) {
 
 //TODO remove this
 app.get('/api/subCategories',function(req, res){
-    //console.log("Inside app.get for finding sub cats of "+req.params.parent);
+    
     epdb.getCategories(req.query.parent,function(subCat){
-        //console.log(subcat);
+        
         res.json(subCat);
     });
 });
@@ -56,14 +56,13 @@ app.get('/api/products', function(req,res){
         products.push(pdt);
     }
     
-    console.log("Returning products of cat :"+cat);
+    
     res.json(products); 
 });
 
 //adding and removing cart from th eDB
 app.post('/api/addToCart', function(req,res){
-    console.log("Hello World");
-	console.log(req.body);
+   
 	var pdtID = parseInt(req.body.pdtID);
     var userID = req.body.userID;
     var city = req.body.city;
@@ -72,29 +71,29 @@ app.post('/api/addToCart', function(req,res){
     //req.session.city = city;//somehwhat like this?
     
 	epdb.addToCart(userID,pdtID,city,function(str){
-		console.log(str);
+		
 		res.send(str);
 	});
 	
 	//res.send("Hello");
 });
 app.post('/api/removeFromCart', function(req,res){
-    console.log("Remove from cart in app.js");
+    
 	var pdtID = parseInt(req.body.pdtID);
     var userID = req.body.userID;
     var city = req.body.city;
 
-    epdb.removeFromCart(userID, pdtID, city, function(str){
-		console.log(str);
+    epdb.removeFromCart(userID, pdtID, function(str){
+		
 		res.send(str);
     });
 });
 
 app.post('/api/cart',function(req,res){
-	console.log("In app.js for fetching cart");
 	var userID = req.body.userID;
 	epdb.fetchCart(userID, function(cart){
-		console.log(cart.products[0].name);
+		
+		console.log("Sending res = "+cart);	
 		res.send(cart);
 	});
 });
