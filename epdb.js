@@ -288,19 +288,25 @@ exports.addToCart = function(userId,pid,current_city,cb)
 					var city_id=res._id;
 					products.findOne({_id:pid,"price.mrp.city":city_id},{"price.mrp.$":1,"pname":1},function(err,res){
 						if(!err){
-							prod.name=res.pname;
-							prod.price=res.price.mrp[0].mrp;//add this product to the database now
-							prod.count=1;
-							users.update({_id:userId},{$push:{"cart.products":prod},$inc:{"cart.estimated_cost":parseInt(prod.price)}},function(err,res){
+							if(res!=null){
+								prod.name=res.pname;
+								prod.price=res.price.mrp[0].mrp;//add this product to the database now
+								prod.count=1;
+								users.update({_id:userId},{$push:{"cart.products":prod},$inc:{"cart.estimated_cost":parseInt(prod.price)}},function(err,res){
 								if(!err){
 									cb("Product Added successfully");
 									return;
-								}
+									}
 								else{
 									console.log(err);
 									return;
-								}
-							});
+									}
+								});
+							}
+							else{
+								cb("No Product Exists");
+								return;
+							}
 						}
 					});
 				}
@@ -318,10 +324,21 @@ exports.removeFromCart=function(userId,pid,cb){
 	//decrement count of the product from cart
 	var users =dbConn.collection("users");
 	var products=dbConn.collection("products");
-	users.findOne({_id:userId,"cart.products.pid":pid},{"cart.products.$":1},function(err,res){
+	users.findOne({_id:userId,"cart.products.pid":pid},{"cart.products":1},function(err,res){
 		if(!err){
-			var price = res.cart.products[0].price;
-			var count = res.cart.products[0].count;
+			//search the products with given pid
+			if(res==null){
+				cb("Product does not exist in cart");
+				return;
+			}
+			var price,count,total_prod=res.cart.products.length;
+			for(var i=0;i<total_prod;i++){
+				if(res.cart.products[i].pid===pid){
+					price = res.cart.products[i].price;
+					count = res.cart.products[i].count;
+					break;
+				}
+			}
 			if(count!=1){
 				users.update({_id:userId,"cart.products.pid":pid},{$inc:{"cart.estimated_cost":-parseInt(price),"cart.products.$.count":-1}},function(err,res){
 					if(!err){
@@ -337,8 +354,21 @@ exports.removeFromCart=function(userId,pid,cb){
 			else{
 				users.update({_id:userId},{$pull:{"cart.products":{"pid":pid}},$inc:{"cart.estimated_cost":-parseInt(price)}},function(err,res){
 					if(!err){
-							cb("product removed from cart");
-							return;
+							if(total_prod==1){
+								users.update({_id:userId},{$unset:{cart:true}},function(err,res){
+									if(!err){
+										cb("cart removed from user "+ userId);
+										return;
+									}
+									else{
+										console.log(err);
+									}
+								});
+							}
+							else{
+								cb("product removed from cart");
+								return;
+							}
 					}
 					else{
 							console.log(err);
