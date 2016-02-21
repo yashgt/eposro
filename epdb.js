@@ -467,12 +467,14 @@ exports.fetchCart = function(userId,cb){
 	users.findOne({_id:userId},function(err,res){
 		if(!err){
 			if(res.cart!=undefined){
+				console.log("Sending response in epdb as :"+res);
 				cb(res.cart);
 			    return;
 			}
 			else{
-				console.log(res);
-				cb(null);
+				res = null;
+				console.log("Sending resp in epdb as : "+res);
+				cb(res);
 				return;
 			}
 		}

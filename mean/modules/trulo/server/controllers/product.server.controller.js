@@ -37,6 +37,7 @@ exports.delete = function (req, res) {
 /**
  * List of products of a given category
  */
+ //TODO
 exports.list = function (req, res) {
 
 };

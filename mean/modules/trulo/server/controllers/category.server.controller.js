@@ -40,9 +40,9 @@ exports.delete = function (req, res) {
  * List of categories
  */
 exports.list = function (req, res) {
-	//TODO obtain cityID from req.params
-	var cityID = 1;
-	trulo.getCategories(cityID, function(cats){		
+	//TODO obtain catID from req.params
+	var catID = 1;
+	trulo.getCategories(catID, function(cats){		
 		res.json(cats);
 	});
 	

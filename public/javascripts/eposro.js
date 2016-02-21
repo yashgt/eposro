@@ -128,9 +128,16 @@ eposroService = function($http){
 			'userID' : userID
 		};
 		$http.post('/api/cart',data).success(
-			function(cart){
-				console.log("In epsvc cart:"+cart);
-				cb(cart);
+			function(res){
+				console.log("In epsvc cart:"+res);
+				if( res == null){
+					console.log("Sending res null in epsvc");
+					cb(null);
+				}
+				else{
+					console.log("Sending some res in epsvc");
+					cb(res);
+				}
 			}
 		);
 	};

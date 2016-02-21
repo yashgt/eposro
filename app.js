@@ -92,7 +92,6 @@ app.post('/api/removeFromCart', function(req,res){
 app.post('/api/cart',function(req,res){
 	var userID = req.body.userID;
 	epdb.fetchCart(userID, function(cart){
-		
 		console.log("Sending res = "+cart);	
 		res.send(cart);
 	});
