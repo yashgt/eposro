@@ -10,6 +10,9 @@ angular.module('trulo').factory('Trulo', [
       someMethod: function () {
         return true;
       }
+	  ,getCategories: function(cb){
+		//TODO get from /api/categories
+	  }
     };
   }
 ]);
