@@ -35,8 +35,13 @@ exports.delete = function (req, res) {
 };
 
 /**
- * List of 
+ * List of products of a given category
  */
 exports.list = function (req, res) {
 
 };
+
+exports.search = function (req, res) {
+
+};
+
