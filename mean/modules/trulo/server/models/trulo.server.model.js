@@ -118,7 +118,7 @@ exports.getRelatedPdts = function(last_pdt_id,cb){
 	var relPdts=[];
 	pcollection.findOne({_id:rand},function(err,result){
 		if(!err){
-			if(result!=null){
+			if(result!==null){
 			var pdt={};
 			pdt.id=result._id;
 			pdt.pname=result.pname;
@@ -128,7 +128,7 @@ exports.getRelatedPdts = function(last_pdt_id,cb){
 			srand = Math.floor(Math.random()*last_pdt_id);
 			pcollection.findOne({_id:srand},function(err,result){
 			if(!err){
-				if(result!=null){
+				if(result!==null){
 					pdt={};
 					pdt.id=result._id;
 					pdt.pname=result.pname;
@@ -179,7 +179,7 @@ exports.checkForProduct = function(gtin,cb){
 	var products = dbConn.collection("products");
 	products.find({"gtin":gtin}).toArray(function(err,res){
 		if(!err){
-			if(res.length==0){
+			if(res.length===0){
 				cb(null,0);
 			}
 			else{
@@ -199,13 +199,13 @@ exports.updateProdVars =function(vars,product,cb){
 	variant.vname = product.pname;
 	variant.facets =product.facets;
 	var count=0;
-	if(JSON.stringify(vars)!="[]"){
+	if(JSON.stringify(vars)!=="[]"){
 		for(var i=0;i<vars.length;i++){
 		products.update({_id:vars[i].vid},{$push:{"vars":variant}},function(err,res){	
 			if(!err){
 				console.log("Variant "+i);
 				count++;
-				if(count==vars.length){
+				if(count===vars.length){
 					cb(null,1);
 				}
 			else{
@@ -239,10 +239,10 @@ exports.addToCart = function(userId,pid,current_city,cb)
 		});
 	},
 	function(user,callback){
-		if(user!=undefined){//cart field exits
+		if(user!==undefined){//cart field exits
 			var flag=0,price=0;
 			user.cart.products.forEach(function(product){
-				if(product.pid==pid){
+				if(product.pid===pid){
 					flag=1;
 					price=product.price;
 					return;
@@ -265,7 +265,7 @@ exports.addToCart = function(userId,pid,current_city,cb)
 			});
 		}
 	},function(flag,price){
-		if(flag==1){
+		if(flag===1){
 			users.update({_id:userId,"cart.products.pid":pid},{$inc:{"cart.products.$.count":1,"cart.estimated_cost":parseInt(price)}},function(err,res){
 					
 					if(!err){
@@ -287,7 +287,7 @@ exports.addToCart = function(userId,pid,current_city,cb)
 					var city_id=res._id;
 					products.findOne({_id:pid,"price.mrp.city":city_id},{"price.mrp.$":1,"pname":1},function(err,res){
 						if(!err){
-							if(res!=null){
+							if(res!==null){
 								prod.name=res.pname;
 								prod.price=res.price.mrp[0].mrp;//add this product to the database now
 								prod.count=1;
@@ -326,7 +326,7 @@ exports.removeFromCart=function(userId,pid,cb){
 	users.findOne({_id:userId,"cart.products.pid":pid},{"cart.products":1},function(err,res){
 		if(!err){
 			//search the products with given pid
-			if(res==null){
+			if(res===null){
 				cb("Product does not exist in cart");
 				return;
 			}
@@ -338,7 +338,7 @@ exports.removeFromCart=function(userId,pid,cb){
 					break;
 				}
 			}
-			if(count!=1){
+			if(count!==1){
 				users.update({_id:userId,"cart.products.pid":pid},{$inc:{"cart.estimated_cost":-parseInt(price),"cart.products.$.count":-1}},function(err,res){
 					if(!err){
 							cb("Product Count decremented");
@@ -353,7 +353,7 @@ exports.removeFromCart=function(userId,pid,cb){
 			else{
 				users.update({_id:userId},{$pull:{"cart.products":{"pid":pid}},$inc:{"cart.estimated_cost":-parseInt(price)}},function(err,res){
 					if(!err){
-							if(total_prod==1){
+							if(total_prod===1){
 								users.update({_id:userId},{$unset:{cart:true}},function(err,res){
 									if(!err){
 										cb("cart removed from user "+ userId);
@@ -398,7 +398,7 @@ exports.checkOut = function(userId,cb){
 			});
 		},
 		function(last_order_id,callback){
-			if(last_order_id!=null){
+			if(last_order_id!==null){
 				users.findOne({_id:userId},function(err,res){
 				if(!err){
 					callback(null,last_order_id,res);
@@ -409,7 +409,7 @@ exports.checkOut = function(userId,cb){
 		},
 		function(last_order_id,user,callback){
 			//create order
-			if(user!=null){
+			if(user!==null){
 				var order={};
 				order._id=++last_order_id;
 				order.ordered_by=userId;
@@ -418,7 +418,7 @@ exports.checkOut = function(userId,cb){
 				order.items=user.cart.products;
 				order.estimated_cost=user.cart.estimated_cost;
 				order.processing_status=0;
-				if(user.cart.order_mode!=undefined){
+				if(user.cart.order_mode!==undefined){
 					order.order_mode=user.cart.order_mode;
 				}
 				else{
@@ -440,7 +440,7 @@ exports.checkOut = function(userId,cb){
 			}
 		},
 		function(current_order,callback){
-			if(current_order!=null){
+			if(current_order!==null){
 				users.update({_id:userId},{$push:{orderIDs:current_order},$unset:{cart:true}},function(err,res){
 				if(!err){
 					cb("Successfully added the order "+current_order);
@@ -465,7 +465,7 @@ exports.fetchCart = function(userId,cb){
 	var users = dbConn.collection("users");
 	users.findOne({_id:userId},function(err,res){
 		if(!err){
-			if(res.cart!=undefined){
+			if(res.cart!==undefined){
 				cb(res.cart);
 			    return;
 			}

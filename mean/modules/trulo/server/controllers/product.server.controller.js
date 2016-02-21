@@ -46,3 +46,17 @@ exports.search = function (req, res) {
 
 };
 
+exports.getProducts =function(res,req){
+	var cat = req.query.catID;
+    var page = req.query.lastPage;
+    //TODO fetch products from solr
+    var products = [];
+    for( var j= 1; j<6; j++){
+        var pdt = {
+            id : j.toString()
+            , name: 'Product' + j
+            ,catID: cat
+        };
+        products.push(pdt);
+    }
+};
