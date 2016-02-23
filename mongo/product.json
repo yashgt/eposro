@@ -1,0 +1,31 @@
+Product in Mongo
+{
+	_id:5
+	,name:"Collared T-shirt"
+	,brand:"CK"
+	,cats:[2,15,100]
+	,desc:"Stylish T-shirt"
+	,facets:{style:"collared",pocket:"yes"}
+	,attrs:{type:"cotton"}
+	,price:500.00
+	,vars:[	{facets:{color:"blue", size:"XL"}}
+			{facets:{color:blue, size:"L"}}
+		], 
+}	
+Product in SOLR are un-rolled
+{
+	_id:5
+	,vid:1
+	,name:"Collared T-shirt"
+	,brand:"CK"
+	,cats.0:2
+	,cats.1:15
+	,cats.2:100
+	,desc:"Stylish T-shirt"
+	,facets.style:"collared"
+	,facets.pocket:"yes"
+	,attrs.type:"cotton"
+	,price:500.00
+	,facets.color:"blue"
+	,facets.size:"XL"	
+}	
