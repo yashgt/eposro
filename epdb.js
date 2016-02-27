@@ -483,4 +483,13 @@ exports.fetchCart = function(userId,cb){
 		}
 	});
 };
-
+exports.saveBrand=function(cbrand,cgln,cb){
+	var brands=dbConn.collection("brands");
+	brands.insert({brand:cbrand,gln:cgln},function(err,res){
+		if(!err){
+			console.log("Added brand");
+			cb(null,res);
+			return;
+		}
+	});
+}
