@@ -1,6 +1,7 @@
 Product in Mongo
 {
 	_id:5
+	,v: 1		//Version number of the product. Every change to the product should result in an increment
 	,name:"Collared T-shirt"
 	,brand:"CK"
 	,cats:[2,15,100]
