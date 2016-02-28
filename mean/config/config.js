@@ -29,7 +29,7 @@ var getGlobbedPaths = function (globPatterns, excludes) {
       output.push(globPatterns);
     } else {
       var files = glob.sync(globPatterns);
-	  console.log(files);
+	  
       if (excludes) {
         files = files.map(function (file) {
           if (_.isArray(excludes)) {

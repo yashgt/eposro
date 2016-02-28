@@ -7,10 +7,17 @@ Product in Mongo
 	,desc:"Stylish T-shirt"
 	,facets:{style:"collared",pocket:"yes"}
 	,attrs:{type:"cotton"}
-	,price:500.00
+	
+	//This needs change in doc manager
 	,vars:[	{facets:{color:"blue", size:"XL"}}
 			{facets:{color:blue, size:"L"}}
 		], 
+	
+	//This 	needs change in doc manager
+	,pricing: {
+		default_mrp: 500.00
+		mrp: [ { city:5, mrp:520}, {city:6, mrp: 530.00} ]
+	}	
 }	
 Product in SOLR are un-rolled
 {
@@ -25,7 +32,13 @@ Product in SOLR are un-rolled
 	,facets.style:"collared"
 	,facets.pocket:"yes"
 	,attrs.type:"cotton"
-	,price:500.00
+	
 	,facets.color:"blue"
-	,facets.size:"XL"	
+	,facets.size:"XL"
+	
+	,default_mrp:500.00
+	,city.5 : true
+	,city.5.mrp : 520.00
+	,city.6 : true
+	,city.6.mrp : 530:00	
 }	
