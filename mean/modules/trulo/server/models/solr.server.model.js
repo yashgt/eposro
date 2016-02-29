@@ -1,19 +1,11 @@
 'use strict';
 var solr = require('solr-client');
-var client = solr.createClient("127.0.0.1","9393","eposro");
+
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
 
-/**
- * Solr Schema
- */
-var SolrSchema = new Schema({
-  // Solr model fields   
-  // ...
-  doSearch = function(client, query, cb){
+var doSearch = function(client, query, cb){
 	client.search(query,function(err,obj){
 		if(err) 
 			console.log(err);
@@ -41,6 +33,4 @@ exports.getProductsByCategory = function(catID,cb){
 	doSearch(client, query, cb);					
 	
 };
-});
 
-mongoose.model('Solr', SolrSchema);
