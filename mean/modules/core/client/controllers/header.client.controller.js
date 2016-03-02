@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Mycart'
+angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Mycart',
   function ($scope, $state, Authentication, Menus, MyCart) {
     // Expose view variables
     $scope.$state = $state;

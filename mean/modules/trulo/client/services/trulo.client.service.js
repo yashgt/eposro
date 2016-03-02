@@ -8,7 +8,7 @@ angular.module('trulo').factory('Trulo', [
     // Public API
     return {
       //generalize this for getting sub-categories as well
-      ,getCategories: function(cb){
+      getCategories: function(cb){
       
         $http.get("/api/categories").success( 
             function(response){
