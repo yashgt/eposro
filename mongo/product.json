@@ -11,13 +11,15 @@ Product in Mongo
 	
 	//This needs change in doc manager
 	,vars:[	{facets:{color:"blue", size:"XL"}}
-			{facets:{color:blue, size:"L"}}
+			,{facets:{color:blue, size:"L"}}
 		], 
+	//This needs change in doc manager
+	,cities: [5,6]		//cities are identified by the vendors who choose the product. When a vendor
 	
 	//This 	needs change in doc manager
 	,pricing: {
 		default_mrp: 500.00
-		mrp: [ { city:5, mrp:520}, {city:6, mrp: 530.00} ]
+		mrp: [ { city:5, mrp:520} ]
 	}	
 }	
 Product in SOLR are un-rolled
@@ -26,20 +28,30 @@ Product in SOLR are un-rolled
 	,vid:1
 	,name:"Collared T-shirt"
 	,brand:"CK"
+	
+	//This structure is used so that we can Facet the list of products for the next category level
 	,cats.0:2
 	,cats.1:15
-	,cats.2:100
+	,cats.2:100	
+	
 	,desc:"Stylish T-shirt"
 	,facets.style:"collared"
 	,facets.pocket:"yes"
 	,attrs.type:"cotton"
 	
+	/* This will not work
+		,vars.0.facets.color:"blue"
+		,vars.0.facets.size:"XL"
+		,vars.1.facets.size:"blue"
+		,vars.1.facets.size:"L"
+		*/
+		
 	,facets.color:"blue"
 	,facets.size:"XL"
 	
+	,cities: [5,6]
 	,default_mrp: 500.00
-	,city.5 : true
+	
 	,city.5.mrp : 520.00
-	,city.6 : true
-	,city.6.mrp : 530:00	
+	
 }	
