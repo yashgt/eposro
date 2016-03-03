@@ -49,6 +49,7 @@ ESCAPE_CHARACTERS = set('+-&|!(){}[]^"~*?:\\/')
 
 decoder = json.JSONDecoder()
 
+
 class EPDocumentFlattener(DocumentFlattener):
     """Formatter that completely flattens documents and unwinds arrays:
 
@@ -89,11 +90,12 @@ class DocManager(SDM):
     multiple, slightly different versions of a doc.
     """
 
+"""
     def __init__(self, url, auto_commit_interval=DEFAULT_COMMIT_INTERVAL,
                  unique_key='_id', chunk_size=DEFAULT_MAX_BULK, **kwargs):
         super().__init__(url, auto_commit_interval, unique_key, chunk_size, **kwargs)
         self._formatter = EPDocumentFlattener()
-
+"""
 
     def _clean_doc(self, doc, namespace, timestamp):
         flat_doc = super()._clean_doc(doc, namespace, timestamp)

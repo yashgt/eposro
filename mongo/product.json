@@ -37,7 +37,7 @@ Product in SOLR are un-rolled
 	,facets.color:"blue"
 	,facets.size:"XL"
 	
-	,default_mrp:500.00
+	,default_mrp: 500.00
 	,city.5 : true
 	,city.5.mrp : 520.00
 	,city.6 : true
