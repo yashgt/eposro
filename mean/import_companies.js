@@ -1,16 +1,17 @@
 var cheerio = require('cheerio');
 var _ = require('lodash');
+var fs=require('fs');
 
 fs = require('fs')
 fs.readFile('../mongo/Product_Data/companies.html', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
+  var count=0;
   $ = cheerio.load(data);
   $("body > table > tbody > .jmr").each( function(i,elt){ //Row
-	
 	var company = {};
-		
+	company._id=count;	
 	$(this).children(".jmc").each( function(j, e){
 		switch(j){
 			case 0 : 	company.code = $(this).text(); break;
@@ -33,11 +34,7 @@ fs.readFile('../mongo/Product_Data/companies.html', 'utf8', function (err,data) 
 			default : a = 1;			
 		}
 	});
-	
-	console.log("Company %j", company);
-	//TODO
-	//Save the company using the company model
+	count++;
+	fs.appendFileSync('../mongo/companies.json','\n'+JSON.stringify(company),'utf-8');
   });
-  //console.log(data);
 });
-    
