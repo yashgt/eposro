@@ -43,7 +43,8 @@ setTimeout(function(){
         				product.pname = data[j]['Title'];
         				product.desc = data[j]['Description'];
         				product.img = data[j]['Image_URL'];
-        				product.cats = cats;
+        				product.compid=parseInt(data[j]['cid']);
+                        product.cats = cats;
         			
         				product.facets={};
         				for(var k =facet_index;k<mrp_index;k++){
@@ -69,7 +70,7 @@ setTimeout(function(){
         				product.price.default_mrp=data[j]['MRP'];
        					product.price.mrp=[];
         				temp=0;
-        				for(var k= mrp_index;k<keys.length;k++){
+        				for(var k= mrp_index;k<keys.length-1;k++){
                     		product.price.mrp[temp]={};
                     		product.price.mrp[temp].city=wait.for(epdb.findCityId,cities[temp]);
                     		product.price.mrp[temp].mrp=data[j]["MRP"+cities[temp]];
