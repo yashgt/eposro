@@ -57,46 +57,20 @@ function insert_product_internal(collection,product,cb){
 
 exports.findCategoryId =function(cat,cb){
 	var category = dbConn.collection('category');
-	category.findOne({"name":cat},function(err,result){
+	category.find({"name":cat}).toArray(function(err,result){
 		if(!err){	
 			var cids=[];
-			if(result._id!=0){
-				cids.unshift(result._id);
-				category.findOne({_id:result.parent_id},function(err,res){
-					if(!err){
-						if(res._id!=0){
-							cids.unshift(res._id);
-							category.findOne({_id:res.parent_id},function(err,fres){
-								if(!err){
-									if(fres._id!=0){
-										cids.unshift(fres._id);
-										cb(null,cids);
-										return;
-									}
-									else{
-										cb(null,cids);
-										return;
-									}
-								}
-							});
-						}
-						else{
-							cb(null,cids);
-							return;
-						}
-					}
-				});
+			for(var i=0;i<result.length;i++){
+				cids.push(result[i]._id);
 			}
-			else{
-				cb(null,cids);
-				return;
-			}
+			cb(null,cids);
 		}
 		else{
 			console.log(err);
 		}
 	});
 };
+
 exports.findCityId = function(city,cb){
 	var cities= dbConn.collection('cities');
 	cities.findOne({"city":city.toLowerCase()},function(err,result){
@@ -247,8 +221,7 @@ exports.updateProdVars =function(vars,product,cb){
 };
 
 /////functions related to cart///
-exports.addToCart = function(userId,pid,current_city,cb)
-{
+exports.addToCart = function(userId,pid,current_city,cb){
 	var cart={};
 	var users = dbConn.collection("users");
 	var products = dbConn.collection("products");

@@ -1,14 +1,33 @@
 <div class="container" ng-controller="HeaderController">
-  <div class="navbar-header">
-    <button class="navbar-toggle" type="button" ng-click="toggleCollapsibleMenu()">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a ui-sref="home" class="navbar-brand">MEAN.JS</a>
-  </div>
-  <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+    
+    <div class="navbar-header">
+        <button class="navbar-toggle" type="button" ng-click="toggleCollapsibleMenu()">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+        <a ui-sref="home" class="navbar-brand">ePosro</a>
+    </div>
+    <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for Product..."/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </form>
+    <!--This should not collapse with screen size -->
+    <ul class="nav navbar-nav navbar-right" >    
+        <li>{{cartCount}}<a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+    </ul>
+    <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
       <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
         <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
@@ -39,15 +58,16 @@
           <li ui-sref-active="active">
             <a ui-sref="settings.profile">Edit Profile</a>
           </li>
-          <li ui-sref-active="active">
-            <a ui-sref="settings.picture">Change Profile Picture</a>
-          </li>
           <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
             <a ui-sref="settings.password">Change Password</a>
           </li>
           <li ui-sref-active="active">
-            <a ui-sref="settings.accounts">Manage Social Accounts</a>
+            <a ui-sref="settings.vendors">My Vendors</a>
           </li>
+          <li ui-sref-active="active">
+            <a ui-sref="settings.reports">My Reports</a>
+          </li>
+            
           <li class="divider"></li>
           <li>
             <a href="/api/auth/signout" target="_self">Signout</a>
@@ -56,4 +76,90 @@
       </li>
     </ul>
   </nav>
+   
 </div>
+<!--
+
+<nav class="navbar navbar-default navbar-fixed-top hidden-xs" >
+        <div class="container-fluid">
+            <div class="col-md-1">
+                <div class="navbar-header">                   
+                    <a class="navbar-brand ePosro-brand" href="#">ePosro</a>
+                </div>
+            </div>
+            <div class="col-md-5">
+                
+                    <form class="navbar-form navbar-left hidden-xs" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search for product" id="search-box">
+                        </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                
+            </div>
+            <div class="col-md-4">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Vendors</a></li>
+                        <li><a href="#">Reports</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <ul class="nav navbar-nav navbar-right" >    
+                    <li>{{cartCount}}<a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+                    <li><a href="#"><span class=" glyphicon glyphicon-log-out"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<nav class="navbar navbar-default navbar-fixed-top visible-xs" >
+        <div class="row">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                
+                <button class="user-dropdown" type="button" data-toggle="collapse" data-target="#profile-options" aria-expanded="false" aria-controls="profile-options">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                </button>
+                <a class="navbar-brand ePosro-brand" href="#" >ePosro</a>
+            </div>
+            <div class="navbar-options">
+                <ul class="nav navbar-nav">
+                    <li>{{cartCount}}<a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+                    <li><a href="#"><span class=" glyphicon glyphicon-log-out"></span></a></li>
+                </ul>
+            </div>        
+        </div>
+        </div>
+        
+        <div class="row" id="search-bar">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for Product...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>   
+        <div class="collapse" id="profile-options">
+            <ul class="list-group">
+                <li class="list-group-item"><center><h4>Welcome Sohan Shirodkar</h4></center></li>
+                <li class="list-group-item"><a href="#" class="profile-options">My Profile</a></li>
+                <li class="list-group-item"><a href="#" class="profile-options">My Vendors</a></li>
+                <li class="list-group-item"><a href="#" class="profile-options">My Orders</a></li>
+                <li class="list-group-item"><a href="#" class="profile-options">My Reports</a></li>
+            </ul>
+        </div>
+    </nav>      
+-->

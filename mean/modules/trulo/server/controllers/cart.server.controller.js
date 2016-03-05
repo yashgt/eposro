@@ -5,7 +5,7 @@
  */
 var mongoose = require('mongoose'),
   _ = require('lodash');
-
+//var trulo = require('../../client/services/trulo.client.service.js');
 /**
  * Create a 
  */
@@ -49,7 +49,7 @@ exports.addToCart=function(req,res){
     //set session variable with city
     //req.session.city = city;//somehwhat like this?
     
-	epdb.addToCart(userID,pdtID,city,function(str){	
+	trulo.addToCart(userID,pdtID,city,function(str){	
 		res.send(str);
 	});
 

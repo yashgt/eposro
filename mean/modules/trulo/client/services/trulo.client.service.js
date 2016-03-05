@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('trulo').factory('Trulo', [
+angular.module('trulo').factory('Trulo', ['$http',
   function ($http) {
     // Trulo service logic
     // ...

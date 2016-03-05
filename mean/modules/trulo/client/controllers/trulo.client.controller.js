@@ -2,13 +2,18 @@
 
 angular.module('trulo').controller('TruloController', ['$scope', 'Trulo',
   function ($scope, trulo) {
-	$scope.categories = [1,2,3];
+      console.log("Inside controller");
     // Controller Logic
     // ...
-	$scope.getCategories = function(){
-		trulo.getCategories(function(cats){
+      $scope.getCategories = function(){
+          console.log("Fetching categories in controller");
+		  trulo.getCategories(function(cats){
+            console.log("Categories fetched successfully");  
 			$scope.categories = cats;
-		});
-	};
+            console.log($scope.categories[1].title);
+		  });
+	   };
+      
+      
   }
 ]);

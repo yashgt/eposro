@@ -1,4 +1,61 @@
-<section data-ng-controller="TruloController">
-  This is the Trulo view
-  <div ng-repeat="cat in categories">{{cat}}</div>
-</section>
+<!--<section data-ng-controller="TruloController" ng-init="getCategories()">
+    <md-content class="md-padding">
+        <md-tabs md-border-bottom md-autoselect md-dynamic-height md-swipe-content>
+            <md-tab label="Home">
+                <md-tab-body>
+                    <p>Display all the recommnedations</p>
+                </md-tab-body>
+            </md-tab>
+            <md-tab id="tab-button" ng-repeat="cat in categories">
+                                  
+                <md-tab-label>
+                    {{cat.title}}
+                </md-tab-label>
+                <md-tab-body>
+                </md-tab-body>
+                
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</section>-->
+<div class="container-fluid" ng-init="getCategories()">
+    <div class="row" > 
+        
+            
+        <div class="col-md-10">
+            <div class ="row">
+                <md-content class="md-padding">
+                    <md-tabs md-border-bottom md-autoselect md-dynamic-height md-swipe-content>
+                        <md-tab label="Home">
+                            <md-tab-body>
+                                <p>Display all the recommnedations</p>
+                            </md-tab-body>
+                        </md-tab>
+                        <md-tab id="tab-button" ng-repeat="cat in categories">
+                            <md-tab-label>
+                                {{cat.title}}
+                            </md-tab-label>
+                            
+                            <md-tab-body>
+                                <p>Body for {{cat.title}}</p>
+                                <div id="products-row" infinite-scroll="fetchNextPage(nextCategory,1)" infinite-scroll-disabled="busy">
+
+                                    <md-grid-list md-cols-gt-md="3" md-cols-md="2" md-cols-sm="1" md-gutter="5px" md-row-height="2:1">
+
+                                            <md-grid-tile ng-repeat="p in productsOfCurrentCat">
+
+                                                    <product data="p" id="product-item"></product>
+
+                                            </md-grid-tile>
+                                            <div ng-show="busy">Loading more products....</div>
+                                    </md-grid-list>
+                                </div>
+                            </md-tab-body>
+                        </md-tab>
+                        </md-tabs>
+                </md-content>
+            </div>
+        </div>
+    </div>
+        
+</div>
