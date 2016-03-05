@@ -103,7 +103,8 @@ module.exports = function (grunt) {
           jshintrc: true,
           node: true,
           mocha: true,
-          jasmine: true
+          jasmine: true,
+		  laxcomma: false
         }
       }
     },
