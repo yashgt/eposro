@@ -80,7 +80,12 @@ module.exports = function (grunt) {
         options: {
           nodeArgs: ['--debug'],
           ext: 'js,html',
-          watch: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
+          watch: _.union(defaultAssets.server.gruntConfig, defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config),
+		  callback: function (nodemon) {
+			nodemon.on('restart', function (event) {
+			console.log("%j",event);
+			});
+		},
         }
       }
     },
@@ -223,7 +228,15 @@ module.exports = function (grunt) {
           return !fs.existsSync('config/env/local.js');
         }
       }
+    },
+	fixmyjs: {
+    options: {
+      // Task-specific options go here.
+    },
+    your_target: {
+      // Target-specific file lists and/or options go here.
     }
+  }
   });
 
   grunt.event.on('coverage', function(lcovFileContents, done) {
@@ -240,6 +253,7 @@ module.exports = function (grunt) {
   // Load NPM tasks
   require('load-grunt-tasks')(grunt);
   grunt.loadNpmTasks('grunt-protractor-coverage');
+  grunt.loadNpmTasks('grunt-fixmyjs');
 
   // Make sure upload directory exists
   grunt.task.registerTask('mkdir:upload', 'Task that makes sure upload directory exists.', function () {
