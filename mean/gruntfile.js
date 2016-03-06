@@ -231,13 +231,12 @@ module.exports = function (grunt) {
       }
     },
 	fixmyjs: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    }
-  }
+		options: {
+		// Task-specific options go here.
+		},
+		files: defaultAssets.client.js
+		
+	}
   });
 
   grunt.event.on('coverage', function(lcovFileContents, done) {
@@ -326,7 +325,7 @@ module.exports = function (grunt) {
   grunt.registerTask('coverage', ['env:test', 'lint', 'mocha_istanbul:coverage', 'karma:unit']);
 
   // Run the project in development mode
-  grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
+  grunt.registerTask('default', ['env:dev', 'lint', 'fixmyjs', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
 
   // Run the project in debug mode
   grunt.registerTask('debug', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:debug']);
