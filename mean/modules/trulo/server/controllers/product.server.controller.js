@@ -32,6 +32,7 @@ exports.list = function (req, res) {
 exports.search = function (req, res) {
 };
 exports.getProducts = function (res, req) {
+    console.log("Inside products.server.controller to fetch products");
   var cat = req.query.catID;
   var page = req.query.lastPage;
   //TODO fetch products from solr

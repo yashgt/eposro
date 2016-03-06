@@ -35,3 +35,10 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+.navbar-icons{
+	position:inline-block;
+	float:right;
+}
+@media screen and (max-width: 768px) {
+    .browse-body { padding-top: 75px; }
+}

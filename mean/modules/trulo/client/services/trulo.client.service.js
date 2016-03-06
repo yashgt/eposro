@@ -8,6 +8,7 @@ angular.module('trulo').factory('Trulo', [
     return {
       //generalize this for getting sub-categories as well
       getCategories: function (cb) {
+          console.log("Inside service to get products");
         $http.get('/api/categories').success(function (response) {
           var categories = response;
           var lastPageLoaded = [];
@@ -24,7 +25,7 @@ angular.module('trulo').factory('Trulo', [
         });
       },
       getProductsByCat: function (catID, lastPage, products, cb) {
-        $http.get('/api/products?catID=' + catID + '&lastPage=' + lastPage).success(function (response) {
+        $http.get('/api/products?catID=' + catID + '&lastPage=0').success(function (response) {
           lastPage++;
           //find the index into the products array where products of this category are found
           for (var j = 0; j < products.length; j++) {
