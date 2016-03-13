@@ -29,7 +29,7 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
   //TODO obtain catID from req.params
-  var catID = 1;
+  var catID = req.query.catID;
   trulo.getCategories(catID, function (cats) {
     res.json(cats);
   });

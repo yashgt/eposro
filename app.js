@@ -55,8 +55,6 @@ app.get('/api/products', function(req,res){
         };
         products.push(pdt);
     }
-    
-    
     res.json(products); 
 });
 

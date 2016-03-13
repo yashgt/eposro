@@ -37,8 +37,23 @@ a:hover .header-profile-image {
 }
 .navbar-icons{
 	position:inline-block;
-	float:right;
+	float:left;
 }
-@media screen and (max-width: 768px) {
-    .browse-body { padding-top: 75px; }
+#product-item{
+    width: 80%;
+    height: 80%;
 }
+#products-row{  
+    
+    padding-right: 5px;
+    padding-left: 10px;
+    margin-top: 40px;
+    margin-left: -30px;
+}
+.content{
+	margin-top:-20px;
+}
+.browse-body{
+	padding-top: -40px;
+}
+

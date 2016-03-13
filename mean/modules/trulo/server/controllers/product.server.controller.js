@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'), _ = require('lodash');
+var trulo = require('../models/trulo.server.model');
 /**
  * Create a 
  */
@@ -31,8 +32,8 @@ exports.list = function (req, res) {
 };
 exports.search = function (req, res) {
 };
-exports.getProducts = function (res, req) {
-    console.log("Inside products.server.controller to fetch products");
+exports.getProducts = function (req, res) {
+    console.log("Inside products.server.controller to fetch products of catID="+req.query.catID);
   var cat = req.query.catID;
   var page = req.query.lastPage;
   //TODO fetch products from solr
@@ -45,4 +46,5 @@ exports.getProducts = function (res, req) {
     };
     products.push(pdt);
   }
+    res.send(products);
 };
