@@ -46,18 +46,19 @@ angular.module('trulo').factory('Trulo', [
             addToCart: function (pdt) {
                 var data = {
                     'pdtID': pdt
-                    , 'userID': 1
+                    , 'userID': 3
                     , 'city': 'goa'
                 };
-                console.log("Sending data with id="+data['pdtID']);
+                console.log("add:Sending data with id="+data['pdtID']);
                 $http.post('/api/addToCart', data).success(function (response) {});
             }
             , removeFromCart: function (pdt) {
                 var data = {
                     'pdtID': pdt
-                    , 'userID': 1
+                    , 'userID': 3
                     , 'city': 'goa'
                 };
+                console.log("Remove:Sending data with id="+data['pdtID']);
                 $http.post('/api/removeFromCart', data).success(function (response) {
                     console.log('Returned in cb');
                 });
@@ -67,8 +68,8 @@ angular.module('trulo').factory('Trulo', [
                     'userID': userID
                 };
                 $http.post('/api/cart', data).success(function (res) {
-                    console.log('In epsvc cart:' + res);
-                    if (res === null) {
+                    console.log('In epsvc cart:' + res.products[0].count);
+                    if (res == null) {
                         console.log('Sending res null in epsvc');
                         cb(null);
                     } else {

@@ -9,7 +9,8 @@ angular.module('trulo').directive('product', ['Mycart',
                 product: '=data'
             }
             ,link: function postLink(scope, element, attrs) {
-                scope.productCount = 0;
+                scope.productCount = myCart.getCount(scope.product);
+                console.log("Pro count = "+scope.productCount);
                 scope.add = function(){
                     scope.productCount++;
                     console.log("Sending product id = "+scope.product.id);
