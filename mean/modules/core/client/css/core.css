@@ -37,7 +37,7 @@ a:hover .header-profile-image {
 }
 .navbar-icons{
 	position:inline-block;
-	float:right;
+	float:left;
 }
 #product-item{
     width: 80%;
