@@ -177,7 +177,7 @@ angular.module('core').controller('HeaderController', [
   'Authentication',
   'Menus',
   'Mycart',
-  function ($scope, $state, Authentication, Menus, MyCart) {
+  function ($scope, $state, Authentication, Menus, myCart) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -191,6 +191,21 @@ angular.module('core').controller('HeaderController', [
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
+    });
+    myCart.fetchCart(3, function (cart) {
+      $scope.cartCount = 0;
+      $scope.cartValue = 0;
+      console.log('Fetching cart for user 3');
+      if (cart === null) {
+        $scope.cartCount = 0;
+        $scope.cart = null;
+        return;
+      }
+      for (var i = 0; i < cart.products.length; i++) {
+        $scope.cartCount += cart.products[i].count;
+      }
+      $scope.cartValue = cart.estimated_cost;
+      console.log('Fetched cart successfully with cartcount = ' + $scope.cartCount + ' & value=' + $scope.cartValue);
     });
   }
 ]);
@@ -588,20 +603,20 @@ angular.module('trulo').controller('TruloController', [
       }
       $scope.cartCount--;  //$scope.cartValue -= pdt.mrp;
     };
-    myCart.fetchCart(3, function (cart) {
-      $scope.cartCount = 0;
-      console.log('Fetching cart for user 3');
-      if (cart === null) {
-        $scope.cartCount = 0;
-        $scope.cart = null;
-        return;
-      }
-      for (var i = 0; i < cart.products.length; i++) {
-        $scope.cartCount += cart.products[i].count;
-      }
-      console.log('Fetched cart successfully with cartcount = ' + $scope.cartCount);
-      $scope.cart = cart;
-    });
+    /*myCart.fetchCart(3,function(cart){
+			$scope.cartCount = 0;
+            console.log("Fetching cart for user 3");
+			if( cart == null){
+				$scope.cartCount = 0;
+				$scope.cart = null;
+				return;
+			}
+			for( var i=0; i<cart.products.length; i++){
+				$scope.cartCount += cart.products[i].count; 
+			}
+            console.log("Fetched cart successfully with cartcount = "+$scope.cartCount);
+			$scope.cart = cart;
+		});*/
     myCart.onAddToCart(this.addToCart);
     myCart.onSubtractFromCart(this.removeFromCart);
   }
@@ -643,16 +658,14 @@ angular.module('trulo').factory('Mycart', [
     var val = 0;
     var cart;
     //fetch the value and count from server using the Trulo service
-    // Public API
-    //A Service is just an object which provides and receives data
     return {
       value: 20,
       count: 0,
       fetchCart: function (userId, cb) {
-        var cart;
         console.log('In mycart service,Fetching cart');
         trulo.fetchCart(userId, function (cartResponse) {
           cart = cartResponse;
+          console.log('In mycart service, cart = ' + cart.products[0].count);
           cb(cart);
         });
       },
@@ -673,8 +686,20 @@ angular.module('trulo').factory('Mycart', [
           return 0;
         }
         for (var i = 0; i < cart.products.length; i++) {
-          if (cart.products[i].pid === pdt.id)
+          if (cart.products[i].pid === pdt.id) {
             return cart.products[i].count;
+          }
+        }
+        return 0;
+      },
+      getValue: function (pdt) {
+        if (cart === null) {
+          return 0;
+        }
+        for (var i = 0; i < cart.products.length; i++) {
+          if (cart.products[i].pid === pdt.id) {
+            return cart.products[i].price;
+          }
         }
         return 0;
       },
@@ -765,7 +790,7 @@ angular.module('trulo').factory('Trulo', [
       fetchCart: function (userID, cb) {
         var data = { 'userID': userID };
         $http.post('/api/cart', data).success(function (res) {
-          console.log('In epsvc cart:' + res);
+          console.log('In epsvc cart:' + res.products[0].count);
           if (res === null) {
             console.log('Sending res null in epsvc');
             cb(null);
