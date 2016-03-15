@@ -28,7 +28,7 @@ angular.module('trulo').config(['$stateProvider', '$urlRouterProvider',
       
       .state('profile',{
           url:'/profile',
-          templateUrl:'modules/trulo/client/views/profile.html'
+          templateUrl:'modules/users/client/views/settings/edit-profile.client.view.html'
       })
       
       .state('cart',{

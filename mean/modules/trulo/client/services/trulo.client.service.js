@@ -68,12 +68,14 @@ angular.module('trulo').factory('Trulo', [
                     'userID': userID
                 };
                 $http.post('/api/cart', data).success(function (res) {
-                    console.log('In epsvc cart:' + res.products[0].count);
-                    if (res == null) {
+                    console.log("Response received in trulo service as "+res);
+                    //console.log('In epsvc cart:' + res.products[0].count);
+                    if (res == 'null') {
                         console.log('Sending res null in epsvc');
                         cb(null);
-                    } else {
-                        console.log('Sending some res in epsvc');
+                    } 
+                    else {
+                        console.log('Sending some res in epsvc as '+res);
                         cb(res);
                     }
                 });

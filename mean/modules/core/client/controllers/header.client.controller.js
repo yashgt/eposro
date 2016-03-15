@@ -18,21 +18,32 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
         $scope.$on('$stateChangeSuccess', function () {
             $scope.isCollapsed = false;
         });
-      
+        this.addToCart = function(pdt){			
+			$scope.cartCount++;
+			$scope.cartValue += pdt.mrp ;
+		};
+        this.removeFromCart = function(pdt){
+            if( $scope.cartCount <=0 ){
+                $scope.cartCount = 0;
+                return;
+            }
+            
+            $scope.cartCount--;
+            $scope.cartValue -= pdt.mrp;
+        };
         myCart.fetchCart(3,function(cart){
 			$scope.cartCount = 0;
             $scope.cartValue = 0;
-            console.log("Fetching cart for user 3");
-			if( cart == null){
-				$scope.cartCount = 0;
-				$scope.cart = null;
-				return;
-			}
-			for( var i=0; i<cart.products.length; i++){
-				$scope.cartCount += cart.products[i].count; 
-			}
-            $scope.cartValue = cart.estimated_cost;
+            if( cart != null){
+                for( var i=0; i<cart.products.length; i++){
+                    $scope.cartCount += cart.products[i].count;
+                    $scope.cartValue += parseInt(cart.products[i].price);
+                }
+            }
+            
             console.log("Fetched cart successfully with cartcount = "+$scope.cartCount+" & value="+$scope.cartValue);
 		});
+        myCart.onAddToCart(this.addToCart);
+        myCart.onSubtractFromCart(this.removeFromCart);   
   }
 ]);

@@ -192,21 +192,33 @@ angular.module('core').controller('HeaderController', [
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
     });
+    this.addToCart = function (pdt) {
+      $scope.cartCount++;
+      $scope.cartValue += pdt.mrp;
+    };
+    this.removeFromCart = function (pdt) {
+      if ($scope.cartCount <= 0) {
+        $scope.cartCount = 0;
+        return;
+      }
+      $scope.cartCount--;
+      $scope.cartValue -= pdt.mrp;
+    };
     myCart.fetchCart(3, function (cart) {
       $scope.cartCount = 0;
       $scope.cartValue = 0;
-      console.log('Fetching cart for user 3');
       if (cart === null) {
-        $scope.cartCount = 0;
-        $scope.cart = null;
-        return;
+        console.log('In header controller , cart is null');
+      } else {
+        for (var i = 0; i < cart.products.length; i++) {
+          $scope.cartCount += cart.products[i].count;
+        }
+        $scope.cartValue = cart.estimated_cost;
       }
-      for (var i = 0; i < cart.products.length; i++) {
-        $scope.cartCount += cart.products[i].count;
-      }
-      $scope.cartValue = cart.estimated_cost;
       console.log('Fetched cart successfully with cartcount = ' + $scope.cartCount + ' & value=' + $scope.cartValue);
     });
+    myCart.onAddToCart(this.addToCart);
+    myCart.onSubtractFromCart(this.removeFromCart);
   }
 ]);
 'use strict';
@@ -515,7 +527,7 @@ angular.module('trulo').config([
       templateUrl: 'modules/trulo/client/views/consumer-product.html'
     }).state('profile', {
       url: '/profile',
-      templateUrl: 'modules/trulo/client/views/profile.html'
+      templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html'
     }).state('cart', {
       url: '/cart',
       templateUrl: 'modules/trulo/client/views/cart.html'
@@ -592,33 +604,6 @@ angular.module('trulo').controller('TruloController', [
       else
         $scope.hideMe = 0;
     };
-    this.addToCart = function (pdt) {
-      //TODO add the count 
-      $scope.cartCount++;  //$scope.cartValue += pdt.mrp ;
-    };
-    this.removeFromCart = function (pdt) {
-      if ($scope.cartCount <= 0) {
-        $scope.cartCount = 0;
-        return;
-      }
-      $scope.cartCount--;  //$scope.cartValue -= pdt.mrp;
-    };
-    /*myCart.fetchCart(3,function(cart){
-			$scope.cartCount = 0;
-            console.log("Fetching cart for user 3");
-			if( cart == null){
-				$scope.cartCount = 0;
-				$scope.cart = null;
-				return;
-			}
-			for( var i=0; i<cart.products.length; i++){
-				$scope.cartCount += cart.products[i].count; 
-			}
-            console.log("Fetched cart successfully with cartcount = "+$scope.cartCount);
-			$scope.cart = cart;
-		});*/
-    myCart.onAddToCart(this.addToCart);
-    myCart.onSubtractFromCart(this.removeFromCart);
   }
 ]);
 'use strict';
@@ -665,7 +650,10 @@ angular.module('trulo').factory('Mycart', [
         console.log('In mycart service,Fetching cart');
         trulo.fetchCart(userId, function (cartResponse) {
           cart = cartResponse;
-          console.log('In mycart service, cart = ' + cart.products[0].count);
+          /*if( cart == null)
+                        console.log("In mycart service, cart = null");
+                    else
+                        console.log("In mycart service, cart = "+cart.products[0].count);    */
           cb(cart);
         });
       },
@@ -790,12 +778,13 @@ angular.module('trulo').factory('Trulo', [
       fetchCart: function (userID, cb) {
         var data = { 'userID': userID };
         $http.post('/api/cart', data).success(function (res) {
-          console.log('In epsvc cart:' + res.products[0].count);
+          console.log('Response received in trulo service as ' + res);
+          //console.log('In epsvc cart:' + res.products[0].count);
           if (res === null) {
             console.log('Sending res null in epsvc');
             cb(null);
           } else {
-            console.log('Sending some res in epsvc');
+            console.log('Sending some res in epsvc as ' + res);
             cb(res);
           }
         });

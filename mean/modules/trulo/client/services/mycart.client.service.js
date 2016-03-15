@@ -14,11 +14,9 @@ angular.module('trulo').factory('Mycart', [
             value: 20
             , count: 0
             , fetchCart: function (userId, cb) {
-                
                 console.log("In mycart service,Fetching cart");
                 trulo.fetchCart(userId, function (cartResponse) {
                     cart = cartResponse;
-                    console.log("In mycart service, cart = "+cart.products[0].count);
                     cb(cart);
                 });
             }

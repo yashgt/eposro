@@ -42,7 +42,8 @@ exports.getProducts = function (req, res) {
     var pdt = {
       id: j.toString(),
       name: 'Product' + j,
-      catID: cat
+      catID: cat,
+      mrp: 25
     };
     products.push(pdt);
   }

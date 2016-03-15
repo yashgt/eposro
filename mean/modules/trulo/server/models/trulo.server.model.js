@@ -549,7 +549,7 @@ exports.checkOut = function (userId, cb) {
         }
     });
 };
-exports.fetchCart = function (userId, cb) {
+exports.fetchCart = function (userId,cb) {
     console.log("FInding cart for user "+userId);
     var users = dbConn.collection('users');
     users.findOne({

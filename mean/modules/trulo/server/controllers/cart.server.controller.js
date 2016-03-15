@@ -51,6 +51,10 @@ exports.removeFromCart = function (req, res) {
 exports.fetchCart = function (req, res) {
   var userID = req.body.userID;
   trulo.fetchCart(userID, function (cart) {
-    res.send(cart);
+      console.log("Sending res = "+cart);
+      if( cart == null)
+          res.send('null');
+      else
+          res.send(cart);
   });
 };

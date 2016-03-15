@@ -72,37 +72,5 @@ angular.module('trulo').controller('TruloController', [
                 $scope.hideMe = 0;
 
         };
-        this.addToCart = function(pdt){
-			
-			//TODO add the count 
-			$scope.cartCount++;
-			//$scope.cartValue += pdt.mrp ;
-		};
-        this.removeFromCart = function(pdt){
-            if( $scope.cartCount <=0 ){
-                $scope.cartCount = 0;
-                return;
-            }
-            
-            $scope.cartCount--;
-            //$scope.cartValue -= pdt.mrp;
-        };
-        /*myCart.fetchCart(3,function(cart){
-			$scope.cartCount = 0;
-            console.log("Fetching cart for user 3");
-			if( cart == null){
-				$scope.cartCount = 0;
-				$scope.cart = null;
-				return;
-			}
-			for( var i=0; i<cart.products.length; i++){
-				$scope.cartCount += cart.products[i].count; 
-			}
-            console.log("Fetched cart successfully with cartcount = "+$scope.cartCount);
-			$scope.cart = cart;
-		});*/
-        
-        myCart.onAddToCart(this.addToCart);
-        myCart.onSubtractFromCart(this.removeFromCart); 
     }
 ]);

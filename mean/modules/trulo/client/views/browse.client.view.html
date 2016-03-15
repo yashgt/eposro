@@ -1,24 +1,4 @@
-<!--<section data-ng-controller="TruloController" ng-init="getCategories()">
-    <md-content class="md-padding">
-        <md-tabs md-border-bottom md-autoselect md-dynamic-height md-swipe-content>
-            <md-tab label="Home">
-                <md-tab-body>
-                    <p>Display all the recommnedations</p>
-                </md-tab-body>
-            </md-tab>
-            <md-tab id="tab-button" ng-repeat="cat in categories">
-                                  
-                <md-tab-label>
-                    {{cat.title}}
-                </md-tab-label>
-                <md-tab-body>
-                </md-tab-body>
-                
-            </md-tab>
-        </md-tabs>
-    </md-content>
-</section>-->
-<div class="container-fluid browse-body" ng-init="getCategories()">       
+<div class="container-fluid browse-body" data-ng-controller="TruloController" ng-init="getCategories()">       
             
     <md-content class="md-padding">
         <md-tabs md-border-bottom md-autoselect md-dynamic-height md-swipe-content>
