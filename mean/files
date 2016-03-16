@@ -1,4 +1,3408 @@
 'use strict';
+/**
+ * Module dependencies.
+ */
+var app = require('./config/lib/app');
+var server = app.start();
+'use strict';
+module.exports = {};
+'use strict';
+module.exports = {
+  client: {
+    lib: {
+      css: [
+        'public/lib/bootstrap/dist/css/bootstrap.css',
+        'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+        'public/lib/angular-material/angular-material.css'
+      ],
+      js: [
+        'public/lib/jquery/dist/jquery.js',
+        'public/lib/angular/angular.js',
+        'public/lib/angular-resource/angular-resource.js',
+        'public/lib/angular-aria/angular-aria.js',
+        'public/lib/angular-animate/angular-animate.js',
+        'public/lib/angular-material/angular-material.js',
+        'public/lib/angular-messages/angular-messages.js',
+        'public/lib/angular-ui-router/release/angular-ui-router.js',
+        'public/lib/angular-ui-utils/ui-utils.js',
+        'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+        'public/lib/angular-file-upload/angular-file-upload.js',
+        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+        'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js'
+      ],
+      tests: ['public/lib/angular-mocks/angular-mocks.js']
+    },
+    css: ['modules/*/client/css/*.css'],
+    less: ['modules/*/client/less/*.less'],
+    sass: ['modules/*/client/scss/*.scss'],
+    js: [
+      'modules/core/client/app/config.js',
+      'modules/core/client/app/init.js',
+      'modules/*/client/*.js',
+      'modules/*/client/**/*.js'
+    ],
+    views: ['modules/*/client/views/**/*.html'],
+    templates: ['build/templates.js']
+  },
+  server: {
+    gruntConfig: 'gruntfile.js',
+    gulpConfig: 'gulpfile.js',
+    allJS: [
+      'server.js',
+      'config/**/*.js',
+      'modules/*/server/**/*.js'
+    ],
+    models: 'modules/*/server/models/**/*.js',
+    routes: [
+      'modules/!(core)/server/routes/**/*.js',
+      'modules/core/server/routes/**/*.js'
+    ],
+    sockets: 'modules/*/server/sockets/**/*.js',
+    config: 'modules/*/server/config/*.js',
+    policies: 'modules/*/server/policies/*.js',
+    views: 'modules/*/server/views/*.html'
+  }
+};
+'use strict';
+module.exports = {};
+'use strict';
+module.exports = {
+  client: {
+    lib: {
+      css: [
+        'public/lib/bootstrap/dist/css/bootstrap.min.css',
+        'public/lib/bootstrap/dist/css/bootstrap-theme.min.css'
+      ],
+      js: [
+        'public/lib/angular/angular.min.js',
+        'public/lib/angular-resource/angular-resource.min.js',
+        'public/lib/angular-animate/angular-animate.min.js',
+        'public/lib/angular-messages/angular-messages.min.js',
+        'public/lib/angular-ui-router/release/angular-ui-router.min.js',
+        'public/lib/angular-ui-utils/ui-utils.min.js',
+        'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'public/lib/angular-file-upload/angular-file-upload.min.js',
+        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js'
+      ]
+    },
+    css: 'public/dist/application.min.css',
+    js: 'public/dist/application.min.js'
+  }
+};
+'use strict';
+module.exports = {
+  tests: {
+    client: ['modules/*/tests/client/**/*.js'],
+    server: ['modules/*/tests/server/**/*.js'],
+    e2e: ['modules/*/tests/e2e/**/*.js']
+  }
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var _ = require('lodash'), chalk = require('chalk'), glob = require('glob'), fs = require('fs'), path = require('path');
+/**
+ * Get files by glob patterns
+ */
+var getGlobbedPaths = function (globPatterns, excludes) {
+  // URL paths regex
+  var urlRegex = new RegExp('^(?:[a-z]+:)?//', 'i');
+  // The output array
+  var output = [];
+  // If glob pattern is array then we use each pattern in a recursive way, otherwise we use glob
+  if (_.isArray(globPatterns)) {
+    globPatterns.forEach(function (globPattern) {
+      output = _.union(output, getGlobbedPaths(globPattern, excludes));
+    });
+  } else if (_.isString(globPatterns)) {
+    if (urlRegex.test(globPatterns)) {
+      output.push(globPatterns);
+    } else {
+      var files = glob.sync(globPatterns);
+      if (excludes) {
+        files = files.map(function (file) {
+          if (_.isArray(excludes)) {
+            for (var i in excludes) {
+              file = file.replace(excludes[i], '');
+            }
+          } else {
+            file = file.replace(excludes, '');
+          }
+          return file;
+        });
+      }
+      output = _.union(output, files);
+    }
+  }
+  return output;
+};
+/**
+ * Validate NODE_ENV existence
+ */
+var validateEnvironmentVariable = function () {
+  var environmentFiles = glob.sync('./config/env/' + process.env.NODE_ENV + '.js');
+  console.log();
+  if (!environmentFiles.length) {
+    if (process.env.NODE_ENV) {
+      console.error(chalk.red('+ Error: No configuration file found for "' + process.env.NODE_ENV + '" environment using development instead'));
+    } else {
+      console.error(chalk.red('+ Error: NODE_ENV is not defined! Using default development environment'));
+    }
+    process.env.NODE_ENV = 'development';
+  }
+  // Reset console color
+  console.log(chalk.white(''));
+};
+/**
+ * Validate Secure=true parameter can actually be turned on
+ * because it requires certs and key files to be available
+ */
+var validateSecureMode = function (config) {
+  if (!config.secure || config.secure.ssl !== true) {
+    return true;
+  }
+  var privateKey = fs.existsSync(path.resolve(config.secure.privateKey));
+  var certificate = fs.existsSync(path.resolve(config.secure.certificate));
+  if (!privateKey || !certificate) {
+    console.log(chalk.red('+ Error: Certificate file or key file is missing, falling back to non-SSL mode'));
+    console.log(chalk.red('  To create them, simply run the following from your shell: sh ./scripts/generate-ssl-certs.sh'));
+    console.log();
+    config.secure.ssl = false;
+  }
+};
+/**
+ * Validate Session Secret parameter is not set to default in production
+ */
+var validateSessionSecret = function (config, testing) {
+  if (process.env.NODE_ENV !== 'production') {
+    return true;
+  }
+  if (config.sessionSecret === 'MEAN') {
+    if (!testing) {
+      console.log(chalk.red('+ WARNING: It is strongly recommended that you change sessionSecret config while running in production!'));
+      console.log(chalk.red('  Please add `sessionSecret: process.env.SESSION_SECRET || \'super amazing secret\'` to '));
+      console.log(chalk.red('  `config/env/production.js` or `config/env/local.js`'));
+      console.log();
+    }
+    return false;
+  } else {
+    return true;
+  }
+};
+/**
+ * Initialize global configuration files
+ */
+var initGlobalConfigFolders = function (config, assets) {
+  // Appending files
+  config.folders = {
+    server: {},
+    client: {}
+  };
+  // Setting globbed client paths
+  config.folders.client = getGlobbedPaths(path.join(process.cwd(), 'modules/*/client/'), process.cwd().replace(new RegExp(/\\/g), '/'));
+};
+/**
+ * Initialize global configuration files
+ */
+var initGlobalConfigFiles = function (config, assets) {
+  // Appending files
+  config.files = {
+    server: {},
+    client: {}
+  };
+  // Setting Globbed model files
+  config.files.server.models = getGlobbedPaths(assets.server.models);
+  // Setting Globbed route files
+  config.files.server.routes = getGlobbedPaths(assets.server.routes);
+  // Setting Globbed config files
+  config.files.server.configs = getGlobbedPaths(assets.server.config);
+  // Setting Globbed socket files
+  config.files.server.sockets = getGlobbedPaths(assets.server.sockets);
+  // Setting Globbed policies files
+  config.files.server.policies = getGlobbedPaths(assets.server.policies);
+  // Setting Globbed js files
+  config.files.client.js = getGlobbedPaths(assets.client.lib.js, 'public/').concat(getGlobbedPaths(assets.client.js, ['public/']));
+  // Setting Globbed css files
+  config.files.client.css = getGlobbedPaths(assets.client.lib.css, 'public/').concat(getGlobbedPaths(assets.client.css, ['public/']));
+  // Setting Globbed test files
+  config.files.client.tests = getGlobbedPaths(assets.client.tests);
+};
+/**
+ * Initialize global configuration
+ */
+var initGlobalConfig = function () {
+  // Validate NODE_ENV existence
+  validateEnvironmentVariable();
+  // Get the default assets
+  var defaultAssets = require(path.join(process.cwd(), 'config/assets/default'));
+  // Get the current assets
+  var environmentAssets = require(path.join(process.cwd(), 'config/assets/', process.env.NODE_ENV)) || {};
+  // Merge assets
+  var assets = _.merge(defaultAssets, environmentAssets);
+  // Get the default config
+  var defaultConfig = require(path.join(process.cwd(), 'config/env/default'));
+  // Get the current config
+  var environmentConfig = require(path.join(process.cwd(), 'config/env/', process.env.NODE_ENV)) || {};
+  // Merge config files
+  var config = _.merge(defaultConfig, environmentConfig);
+  // read package.json for MEAN.JS project information
+  var pkg = require(path.resolve('./package.json'));
+  config.meanjs = pkg;
+  // We only extend the config object with the local.js custom/local environment if we are on
+  // production or development environment. If test environment is used we don't merge it with local.js
+  // to avoid running test suites on a prod/dev environment (which delete records and make modifications)
+  if (process.env.NODE_ENV !== 'test') {
+    config = _.merge(config, fs.existsSync(path.join(process.cwd(), 'config/env/local.js')) && require(path.join(process.cwd(), 'config/env/local.js')) || {});
+  }
+  // Initialize global globbed files
+  initGlobalConfigFiles(config, assets);
+  // Initialize global globbed folders
+  initGlobalConfigFolders(config, assets);
+  // Validate Secure SSL mode can be used
+  validateSecureMode(config);
+  // Validate session secret
+  validateSessionSecret(config);
+  // Expose configuration utilities
+  config.utils = {
+    getGlobbedPaths: getGlobbedPaths,
+    validateSessionSecret: validateSessionSecret
+  };
+  return config;
+};
+/**
+ * Set configuration object
+ */
+module.exports = initGlobalConfig();
+'use strict';
+var cfenv = require('cfenv'), appEnv = cfenv.getAppEnv();
+var cfMongoUrl = function () {
+  if (appEnv.getService('mean-mongo')) {
+    var mongoCreds = appEnv.getService('mean-mongo').credentials;
+    return mongoCreds.uri || mongoCreds.url;
+  } else {
+    throw new Error('No service names "mean-mongo" bound to the application.');
+  }
+}();
+var getCred = function (serviceName, credProp) {
+  return appEnv.getService(serviceName) ? appEnv.getService(serviceName).credentials[credProp] : undefined;
+};
+module.exports = {
+  port: appEnv.port,
+  db: {
+    uri: cfMongoUrl,
+    options: {
+      user: '',
+      pass: ''
+    }
+  },
+  log: {
+    // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
+    format: 'combined',
+    // Stream defaults to process.stdout
+    // By default we want logs to go to process.out so the Cloud Foundry Loggregator will collect them
+    options: {}
+  },
+  facebook: {
+    clientID: getCred('mean-facebook', 'id') || 'APP_ID',
+    clientSecret: getCred('mean-facebook', 'secret') || 'APP_SECRET',
+    callbackURL: '/api/auth/facebook/callback'
+  },
+  twitter: {
+    clientID: getCred('mean-twitter', 'key') || 'CONSUMER_KEY',
+    clientSecret: getCred('mean-twitter', 'secret') || 'CONSUMER_SECRET',
+    callbackURL: '/api/auth/twitter/callback'
+  },
+  google: {
+    clientID: getCred('mean-google', 'id') || 'APP_ID',
+    clientSecret: getCred('mean-google', 'secret') || 'APP_SECRET',
+    callbackURL: '/api/auth/google/callback'
+  },
+  linkedin: {
+    clientID: getCred('mean-linkedin', 'id') || 'APP_ID',
+    clientSecret: getCred('mean-linkedin', 'secret') || 'APP_SECRET',
+    callbackURL: '/api/auth/linkedin/callback'
+  },
+  github: {
+    clientID: getCred('mean-github', 'id') || 'APP_ID',
+    clientSecret: getCred('mean-github', 'secret') || 'APP_SECRET',
+    callbackURL: '/api/auth/github/callback'
+  },
+  paypal: {
+    clientID: getCred('mean-paypal', 'id') || 'CLIENT_ID',
+    clientSecret: getCred('mean-paypal', 'secret') || 'CLIENT_SECRET',
+    callbackURL: '/api/auth/paypal/callback',
+    sandbox: false
+  },
+  mailer: {
+    from: getCred('mean-mail', 'from') || 'MAILER_FROM',
+    options: {
+      service: getCred('mean-mail', 'service') || 'MAILER_SERVICE_PROVIDER',
+      auth: {
+        user: getCred('mean-mail', 'username') || 'MAILER_EMAIL_ID',
+        pass: getCred('mean-mail', 'password') || 'MAILER_PASSWORD'
+      }
+    }
+  },
+  seedDB: {
+    seed: process.env.MONGO_SEED === 'true' ? true : false,
+    options: {
+      logResults: process.env.MONGO_SEED_LOG_RESULTS === 'false' ? false : true,
+      seedUser: {
+        username: process.env.MONGO_SEED_USER_USERNAME || 'user',
+        provider: 'local',
+        email: process.env.MONGO_SEED_USER_EMAIL || 'user@localhost.com',
+        firstName: 'User',
+        lastName: 'Local',
+        displayName: 'User Local',
+        roles: ['user']
+      },
+      seedAdmin: {
+        username: process.env.MONGO_SEED_ADMIN_USERNAME || 'admin',
+        provider: 'local',
+        email: process.env.MONGO_SEED_ADMIN_EMAIL || 'admin@localhost.com',
+        firstName: 'Admin',
+        lastName: 'Local',
+        displayName: 'Admin Local',
+        roles: [
+          'user',
+          'admin'
+        ]
+      }
+    }
+  }
+};
+'use strict';
+module.exports = {
+  app: {
+    title: 'MEAN.JS',
+    description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
+    keywords: 'mongodb, express, angularjs, node.js, mongoose, passport',
+    googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
+  },
+  port: process.env.PORT || 3000,
+  templateEngine: 'swig',
+  // Session Cookie settings
+  sessionCookie: {
+    // session expiration is set by default to 24 hours
+    maxAge: 24 * (60 * 60 * 1000),
+    // httpOnly flag makes sure the cookie is only accessed
+    // through the HTTP protocol and not JS/browser
+    httpOnly: true,
+    // secure cookie should be turned to true to provide additional
+    // layer of security so that the cookie is set only when working
+    // in HTTPS mode.
+    secure: false
+  },
+  // sessionSecret should be changed for security measures and concerns
+  sessionSecret: process.env.SESSION_SECRET || 'MEAN',
+  // sessionKey is set to the generic sessionId key used by PHP applications
+  // for obsecurity reasons
+  sessionKey: 'sessionId',
+  sessionCollection: 'sessions',
+  logo: 'modules/core/client/img/brand/logo.png',
+  favicon: 'modules/core/client/img/brand/favicon.ico',
+  uploads: {
+    profileUpload: {
+      dest: './modules/users/client/img/profile/uploads/',
+      // Profile upload destination path
+      limits: {
+        fileSize: 1 * 1024 * 1024  // Max file size in bytes (1 MB)
+      }
+    }
+  }
+};
+'use strict';
+var defaultEnvConfig = require('./default');
+module.exports = {
+  db: {
+    uri: 'mongodb://localhost:40000/eposrodb',
+    options: {
+      user: '',
+      pass: ''
+    }
+  },
+  log: {
+    // logging with Morgan - https://github.com/expressjs/morgan
+    // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
+    format: 'dev',
+    options: {}
+  },
+  app: { title: defaultEnvConfig.app.title + ' - Development Environment' },
+  facebook: {
+    clientID: process.env.FACEBOOK_ID || 'APP_ID',
+    clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/facebook/callback'
+  },
+  twitter: {
+    clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
+    clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
+    callbackURL: '/api/auth/twitter/callback'
+  },
+  google: {
+    clientID: process.env.GOOGLE_ID || '280740946812-lhbf1ncl688bgggfgdp9njotmbrenp7p.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET || 'TOUohji8sMF0Z9V7dFOwTKKZ',
+    callbackURL: '/api/auth/google/callback'
+  },
+  linkedin: {
+    clientID: process.env.LINKEDIN_ID || 'APP_ID',
+    clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/linkedin/callback'
+  },
+  github: {
+    clientID: process.env.GITHUB_ID || 'APP_ID',
+    clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/github/callback'
+  },
+  paypal: {
+    clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
+    clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
+    callbackURL: '/api/auth/paypal/callback',
+    sandbox: true
+  },
+  mailer: {
+    from: process.env.MAILER_FROM || 'MAILER_FROM',
+    options: {
+      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+      auth: {
+        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
+        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+      }
+    }
+  },
+  livereload: false,
+  seedDB: {
+    seed: process.env.MONGO_SEED === 'true' ? true : false,
+    options: {
+      logResults: process.env.MONGO_SEED_LOG_RESULTS === 'false' ? false : true,
+      seedUser: {
+        username: process.env.MONGO_SEED_USER_USERNAME || 'user',
+        provider: 'local',
+        email: process.env.MONGO_SEED_USER_EMAIL || 'user@localhost.com',
+        firstName: 'User',
+        lastName: 'Local',
+        displayName: 'User Local',
+        roles: ['user']
+      },
+      seedAdmin: {
+        username: process.env.MONGO_SEED_ADMIN_USERNAME || 'admin',
+        provider: 'local',
+        email: process.env.MONGO_SEED_ADMIN_EMAIL || 'admin@localhost.com',
+        firstName: 'Admin',
+        lastName: 'Local',
+        displayName: 'Admin Local',
+        roles: [
+          'user',
+          'admin'
+        ]
+      }
+    }
+  }
+};
+'use strict';
+// Rename this file to local.js for having a local configuration variables that
+// will not get commited and pushed to remote repositories.
+// Use it for your API keys, passwords, etc.
+/* For example:
+
+module.exports = {
+  db: {
+    uri: 'mongodb://localhost/local-dev',
+    options: {
+      user: '',
+      pass: ''
+    }
+  },
+  sessionSecret: process.env.SESSION_SECRET || 'youshouldchangethistosomethingsecret',
+  facebook: {
+    clientID: process.env.FACEBOOK_ID || 'APP_ID',
+    clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/facebook/callback'
+  }
+};
+*/
+'use strict';
+// Rename this file to local.js for having a local configuration variables that
+// will not get commited and pushed to remote repositories.
+// Use it for your API keys, passwords, etc.
+/* For example:
+
+module.exports = {
+  db: {
+    uri: 'mongodb://localhost/local-dev',
+    options: {
+      user: '',
+      pass: ''
+    }
+  },
+  sessionSecret: process.env.SESSION_SECRET || 'youshouldchangethistosomethingsecret',
+  facebook: {
+    clientID: process.env.FACEBOOK_ID || 'APP_ID',
+    clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/facebook/callback'
+  }
+};
+*/
+'use strict';
+module.exports = {
+  secure: {
+    ssl: true,
+    privateKey: './config/sslcerts/key.pem',
+    certificate: './config/sslcerts/cert.pem'
+  },
+  port: process.env.PORT || 8443,
+  db: {
+    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean',
+    options: {
+      user: '',
+      pass: ''
+    },
+    // Enable mongoose debug mode
+    debug: process.env.MONGODB_DEBUG || false
+  },
+  log: {
+    // logging with Morgan - https://github.com/expressjs/morgan
+    // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
+    format: process.env.LOG_FORMAT || 'combined',
+    options: {
+      // Stream defaults to process.stdout
+      // Uncomment/comment to toggle the logging to a log on the file system
+      stream: {
+        directoryPath: process.env.LOG_DIR_PATH || process.cwd(),
+        fileName: process.env.LOG_FILE || 'access.log',
+        rotatingLogs: {
+          // for more info on rotating logs - https://github.com/holidayextras/file-stream-rotator#usage
+          active: process.env.LOG_ROTATING_ACTIVE === 'true' ? true : false,
+          // activate to use rotating logs 
+          fileName: process.env.LOG_ROTATING_FILE || 'access-%DATE%.log',
+          // if rotating logs are active, this fileName setting will be used
+          frequency: process.env.LOG_ROTATING_FREQUENCY || 'daily',
+          verbose: process.env.LOG_ROTATING_VERBOSE === 'true' ? true : false
+        }
+      }
+    }
+  },
+  facebook: {
+    clientID: process.env.FACEBOOK_ID || 'APP_ID',
+    clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/facebook/callback'
+  },
+  twitter: {
+    clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
+    clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
+    callbackURL: '/api/auth/twitter/callback'
+  },
+  google: {
+    clientID: process.env.GOOGLE_ID || 'APP_ID',
+    clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/google/callback'
+  },
+  linkedin: {
+    clientID: process.env.LINKEDIN_ID || 'APP_ID',
+    clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/linkedin/callback'
+  },
+  github: {
+    clientID: process.env.GITHUB_ID || 'APP_ID',
+    clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/github/callback'
+  },
+  paypal: {
+    clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
+    clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
+    callbackURL: '/api/auth/paypal/callback',
+    sandbox: false
+  },
+  mailer: {
+    from: process.env.MAILER_FROM || 'MAILER_FROM',
+    options: {
+      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+      auth: {
+        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
+        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+      }
+    }
+  },
+  seedDB: {
+    seed: process.env.MONGO_SEED === 'true' ? true : false,
+    options: {
+      logResults: process.env.MONGO_SEED_LOG_RESULTS === 'false' ? false : true,
+      seedUser: {
+        username: process.env.MONGO_SEED_USER_USERNAME || 'user',
+        provider: 'local',
+        email: process.env.MONGO_SEED_USER_EMAIL || 'user@localhost.com',
+        firstName: 'User',
+        lastName: 'Local',
+        displayName: 'User Local',
+        roles: ['user']
+      },
+      seedAdmin: {
+        username: process.env.MONGO_SEED_ADMIN_USERNAME || 'admin',
+        provider: 'local',
+        email: process.env.MONGO_SEED_ADMIN_EMAIL || 'admin@localhost.com',
+        firstName: 'Admin',
+        lastName: 'Local',
+        displayName: 'Admin Local',
+        roles: [
+          'user',
+          'admin'
+        ]
+      }
+    }
+  }
+};
+'use strict';
+var defaultEnvConfig = require('./default');
+module.exports = {
+  db: {
+    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/mean-test',
+    options: {
+      user: '',
+      pass: ''
+    },
+    // Enable mongoose debug mode
+    debug: process.env.MONGODB_DEBUG || false
+  },
+  log: {
+    // logging with Morgan - https://github.com/expressjs/morgan
+    // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
+    format: process.env.LOG_FORMAT || 'combined',
+    options: {
+      // Stream defaults to process.stdout
+      // Uncomment/comment to toggle the logging to a log on the file system
+      stream: {
+        directoryPath: process.cwd(),
+        fileName: 'access.log',
+        rotatingLogs: {
+          // for more info on rotating logs - https://github.com/holidayextras/file-stream-rotator#usage
+          active: false,
+          // activate to use rotating logs 
+          fileName: 'access-%DATE%.log',
+          // if rotating logs are active, this fileName setting will be used
+          frequency: 'daily',
+          verbose: false
+        }
+      }
+    }
+  },
+  port: process.env.PORT || 3001,
+  app: { title: defaultEnvConfig.app.title + ' - Test Environment' },
+  facebook: {
+    clientID: process.env.FACEBOOK_ID || 'APP_ID',
+    clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/facebook/callback'
+  },
+  twitter: {
+    clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
+    clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
+    callbackURL: '/api/auth/twitter/callback'
+  },
+  google: {
+    clientID: process.env.GOOGLE_ID || 'APP_ID',
+    clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/google/callback'
+  },
+  linkedin: {
+    clientID: process.env.LINKEDIN_ID || 'APP_ID',
+    clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/linkedin/callback'
+  },
+  github: {
+    clientID: process.env.GITHUB_ID || 'APP_ID',
+    clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
+    callbackURL: '/api/auth/github/callback'
+  },
+  paypal: {
+    clientID: process.env.PAYPAL_ID || 'CLIENT_ID',
+    clientSecret: process.env.PAYPAL_SECRET || 'CLIENT_SECRET',
+    callbackURL: '/api/auth/paypal/callback',
+    sandbox: true
+  },
+  mailer: {
+    from: process.env.MAILER_FROM || 'MAILER_FROM',
+    options: {
+      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+      auth: {
+        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
+        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+      }
+    }
+  },
+  seedDB: {
+    seed: process.env.MONGO_SEED === 'true' ? true : false,
+    options: {
+      logResults: process.env.MONGO_SEED_LOG_RESULTS === 'false' ? false : true,
+      seedUser: {
+        username: process.env.MONGO_SEED_USER_USERNAME || 'user',
+        provider: 'local',
+        email: process.env.MONGO_SEED_USER_EMAIL || 'user@localhost.com',
+        firstName: 'User',
+        lastName: 'Local',
+        displayName: 'User Local',
+        roles: ['user']
+      },
+      seedAdmin: {
+        username: process.env.MONGO_SEED_ADMIN_USERNAME || 'admin',
+        provider: 'local',
+        email: process.env.MONGO_SEED_ADMIN_EMAIL || 'admin@localhost.com',
+        firstName: 'Admin',
+        lastName: 'Local',
+        displayName: 'Admin Local',
+        roles: [
+          'user',
+          'admin'
+        ]
+      }
+    }
+  },
+  // This config is set to true during grunt coverage
+  coverage: process.env.COVERAGE || false
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var config = require('../config'), mongoose = require('./mongoose'), express = require('./express'), chalk = require('chalk'), seed = require('./seed');
+function seedDB() {
+  if (config.seedDB && config.seedDB.seed) {
+    console.log(chalk.bold.red('Warning:  Database seeding is turned on'));
+    seed.start();
+  }
+}
+// Initialize Models
+mongoose.loadModels(seedDB);
+module.exports.loadModels = function loadModels() {
+  mongoose.loadModels();
+};
+module.exports.init = function init(callback) {
+  mongoose.connect(function (db) {
+    // Initialize express
+    var app = express.init(db);
+    if (callback)
+      callback(app, db, config);
+  });
+};
+module.exports.start = function start(callback) {
+  var _this = this;
+  _this.init(function (app, db, config) {
+    // Start the app by listening on <port>
+    app.listen(config.port, function () {
+      // Logging initialization
+      console.log('--');
+      console.log(chalk.green(config.app.title));
+      console.log(chalk.green('Environment:\t\t\t' + process.env.NODE_ENV));
+      console.log(chalk.green('Port:\t\t\t\t' + config.port));
+      console.log(chalk.green('Database:\t\t\t\t' + config.db.uri));
+      if (process.env.NODE_ENV === 'secure') {
+        console.log(chalk.green('HTTPs:\t\t\t\ton'));
+      }
+      console.log(chalk.green('App version:\t\t\t' + config.meanjs.version));
+      if (config.meanjs['meanjs-version'])
+        console.log(chalk.green('MEAN.JS version:\t\t\t' + config.meanjs['meanjs-version']));
+      console.log('--');
+      if (callback)
+        callback(app, db, config);
+    });
+  });
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var config = require('../config'), express = require('express'), morgan = require('morgan'), logger = require('./logger'), bodyParser = require('body-parser'), session = require('express-session'), MongoStore = require('connect-mongo')(session), favicon = require('serve-favicon'), compress = require('compression'), methodOverride = require('method-override'), cookieParser = require('cookie-parser'), helmet = require('helmet'), flash = require('connect-flash'), consolidate = require('consolidate'), path = require('path');
+/**
+ * Initialize local variables
+ */
+module.exports.initLocalVariables = function (app) {
+  // Setting application local variables
+  app.locals.title = config.app.title;
+  app.locals.description = config.app.description;
+  if (config.secure && config.secure.ssl === true) {
+    app.locals.secure = config.secure.ssl;
+  }
+  app.locals.keywords = config.app.keywords;
+  app.locals.googleAnalyticsTrackingID = config.app.googleAnalyticsTrackingID;
+  app.locals.facebookAppId = config.facebook.clientID;
+  app.locals.jsFiles = config.files.client.js;
+  app.locals.cssFiles = config.files.client.css;
+  app.locals.livereload = config.livereload;
+  app.locals.logo = config.logo;
+  app.locals.favicon = config.favicon;
+  // Passing the request url to environment locals
+  app.use(function (req, res, next) {
+    res.locals.host = req.protocol + '://' + req.hostname;
+    res.locals.url = req.protocol + '://' + req.headers.host + req.originalUrl;
+    next();
+  });
+};
+/**
+ * Initialize application middleware
+ */
+module.exports.initMiddleware = function (app) {
+  // Showing stack errors
+  app.set('showStackError', true);
+  // Enable jsonp
+  app.enable('jsonp callback');
+  // Should be placed before express.static
+  app.use(compress({
+    filter: function (req, res) {
+      return /json|text|javascript|css|font|svg/.test(res.getHeader('Content-Type'));
+    },
+    level: 9
+  }));
+  // Initialize favicon middleware
+  app.use(favicon(app.locals.favicon));
+  // Enable logger (morgan)
+  app.use(morgan(logger.getFormat(), logger.getOptions()));
+  // Environment dependent middleware
+  if (process.env.NODE_ENV === 'development') {
+    // Disable views cache
+    app.set('view cache', false);
+  } else if (process.env.NODE_ENV === 'production') {
+    app.locals.cache = 'memory';
+  }
+  // Request body parsing middleware should be above methodOverride
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
+  app.use(methodOverride());
+  // Add the cookie parser and flash middleware
+  app.use(cookieParser());
+  app.use(flash());
+};
+/**
+ * Configure view engine
+ */
+module.exports.initViewEngine = function (app) {
+  // Set swig as the template engine
+  app.engine('server.view.html', consolidate[config.templateEngine]);
+  // Set views path and view engine
+  app.set('view engine', 'server.view.html');
+  app.set('views', './');
+};
+/**
+ * Configure Express session
+ */
+module.exports.initSession = function (app, db) {
+  // Express MongoDB session storage
+  app.use(session({
+    saveUninitialized: true,
+    resave: true,
+    secret: config.sessionSecret,
+    cookie: {
+      maxAge: config.sessionCookie.maxAge,
+      httpOnly: config.sessionCookie.httpOnly,
+      secure: config.sessionCookie.secure && config.secure.ssl
+    },
+    key: config.sessionKey,
+    store: new MongoStore({
+      mongooseConnection: db.connection,
+      collection: config.sessionCollection
+    })
+  }));
+};
+/**
+ * Invoke modules server configuration
+ */
+module.exports.initModulesConfiguration = function (app, db) {
+  config.files.server.configs.forEach(function (configPath) {
+    require(path.resolve(configPath))(app, db);
+  });
+};
+/**
+ * Configure Helmet headers configuration
+ */
+module.exports.initHelmetHeaders = function (app) {
+  // Use helmet to secure Express headers
+  var SIX_MONTHS = 15778476000;
+  app.use(helmet.xframe());
+  app.use(helmet.xssFilter());
+  app.use(helmet.nosniff());
+  app.use(helmet.ienoopen());
+  app.use(helmet.hsts({
+    maxAge: SIX_MONTHS,
+    includeSubdomains: true,
+    force: true
+  }));
+  app.disable('x-powered-by');
+};
+/**
+ * Configure the modules static routes
+ */
+module.exports.initModulesClientRoutes = function (app) {
+  // Setting the app router and static folder
+  app.use('/', express.static(path.resolve('./public')));
+  // Globbing static routing
+  config.folders.client.forEach(function (staticPath) {
+    app.use(staticPath, express.static(path.resolve('./' + staticPath)));
+  });
+};
+/**
+ * Configure the modules ACL policies
+ */
+module.exports.initModulesServerPolicies = function (app) {
+  // Globbing policy files
+  config.files.server.policies.forEach(function (policyPath) {
+    require(path.resolve(policyPath)).invokeRolesPolicies();
+  });
+};
+/**
+ * Configure the modules server routes
+ */
+module.exports.initModulesServerRoutes = function (app) {
+  // Globbing routing files
+  config.files.server.routes.forEach(function (routePath) {
+    require(path.resolve(routePath))(app);
+  });
+};
+/**
+ * Configure error handling
+ */
+module.exports.initErrorRoutes = function (app) {
+  app.use(function (err, req, res, next) {
+    // If the error object doesn't exists
+    if (!err) {
+      return next();
+    }
+    // Log it
+    console.error(err.stack);
+    // Redirect to error page
+    res.redirect('/server-error');
+  });
+};
+/**
+ * Configure Socket.io
+ */
+module.exports.configureSocketIO = function (app, db) {
+  // Load the Socket.io configuration
+  var server = require('./socket.io')(app, db);
+  // Return server object
+  return server;
+};
+/**
+ * Initialize the Express application
+ */
+module.exports.init = function (db) {
+  // Initialize express app
+  var app = express();
+  // Initialize local variables
+  this.initLocalVariables(app);
+  // Initialize Express middleware
+  this.initMiddleware(app);
+  // Initialize Express view engine
+  this.initViewEngine(app);
+  // Initialize Express session
+  this.initSession(app, db);
+  // Initialize Modules configuration
+  this.initModulesConfiguration(app);
+  // Initialize Helmet security headers
+  this.initHelmetHeaders(app);
+  // Initialize modules static client routes
+  this.initModulesClientRoutes(app);
+  // Initialize modules server authorization policies
+  this.initModulesServerPolicies(app);
+  // Initialize modules server routes
+  this.initModulesServerRoutes(app);
+  // Initialize error routes
+  this.initErrorRoutes(app);
+  // Configure Socket.io
+  app = this.configureSocketIO(app, db);
+  return app;
+};
+'use strict';
+var _ = require('lodash'), config = require('../config'), chalk = require('chalk'), fileStreamRotator = require('file-stream-rotator'), fs = require('fs');
+// list of valid formats for the logging
+var validFormats = [
+  'combined',
+  'common',
+  'dev',
+  'short',
+  'tiny'
+];
+// build logger service
+var logger = {
+  getFormat: getLogFormat,
+  // log format to use
+  getOptions: getLogOptions  // log options to use
+};
+// export the logger service
+module.exports = logger;
+/**
+ * The format to use with the logger
+ *
+ * Returns the log.format option set in the current environment configuration
+ */
+function getLogFormat() {
+  var format = config.log && config.log.format ? config.log.format.toString() : 'combined';
+  // make sure we have a valid format
+  if (!_.includes(validFormats, format)) {
+    format = 'combined';
+    if (process.env.NODE_ENV !== 'test') {
+      console.log();
+      console.log(chalk.yellow('Warning: An invalid format was provided. The logger will use the default format of "' + format + '"'));
+      console.log();
+    }
+  }
+  return format;
+}
+/**
+ * The options to use with the logger
+ *
+ * Returns the log.options object set in the current environment configuration.
+ * NOTE: Any options, requiring special handling (e.g. 'stream'), that encounter an error will be removed from the options.
+ */
+function getLogOptions() {
+  var options = config.log && config.log.options ? _.clone(config.log.options, true) : {};
+  // check if the current environment config has the log stream option set
+  if (_.has(options, 'stream')) {
+    try {
+      // check if we need to use rotating logs
+      if (_.has(options, 'stream.rotatingLogs') && options.stream.rotatingLogs.active) {
+        if (options.stream.rotatingLogs.fileName.length && options.stream.directoryPath.length) {
+          // ensure the log directory exists
+          if (!fs.existsSync(options.stream.directoryPath)) {
+            fs.mkdirSync(options.stream.directoryPath);
+          }
+          options.stream = fileStreamRotator.getStream({
+            filename: options.stream.directoryPath + '/' + options.stream.rotatingLogs.fileName,
+            frequency: options.stream.rotatingLogs.frequency,
+            verbose: options.stream.rotatingLogs.verbose
+          });
+        } else {
+          // throw a new error so we can catch and handle it gracefully
+          throw new Error('An invalid fileName or directoryPath was provided for the rotating logs option.');
+        }
+      } else {
+        // create the WriteStream to use for the logs
+        if (options.stream.fileName.length && options.stream.directoryPath.length) {
+          // ensure the log directory exists
+          if (!fs.existsSync(options.stream.directoryPath)) {
+            fs.mkdirSync(options.stream.directoryPath);
+          }
+          options.stream = fs.createWriteStream(options.stream.directoryPath + '/' + config.log.options.stream.fileName, { flags: 'a' });
+        } else {
+          // throw a new error so we can catch and handle it gracefully
+          throw new Error('An invalid fileName or directoryPath was provided for stream option.');
+        }
+      }
+    } catch (err) {
+      // remove the stream option
+      delete options.stream;
+      if (process.env.NODE_ENV !== 'test') {
+        console.log();
+        console.log(chalk.red('An error has occured during the creation of the WriteStream. The stream option has been omitted.'));
+        console.log(chalk.red(err));
+        console.log();
+      }
+    }
+  }
+  return options;
+}
+'use strict';
+/**
+ * Module dependencies.
+ */
+var config = require('../config'), chalk = require('chalk'), path = require('path'), mongoose = require('mongoose');
+// Load the mongoose models
+module.exports.loadModels = function (callback) {
+  // Globbing model files
+  config.files.server.models.forEach(function (modelPath) {
+    require(path.resolve(modelPath));
+  });
+  if (callback)
+    callback();
+};
+// Initialize Mongoose
+module.exports.connect = function (cb) {
+  var _this = this;
+  var db = mongoose.connect(config.db.uri, config.db.options, function (err) {
+    // Log Error
+    if (err) {
+      console.error(chalk.red('Could not connect to MongoDB!'));
+      console.log(err);
+    } else {
+      // Enabling mongoose debug mode if required
+      mongoose.set('debug', config.db.debug);
+      // Call callback FN
+      if (cb)
+        cb(db);
+    }
+  });
+};
+module.exports.disconnect = function (cb) {
+  mongoose.disconnect(function (err) {
+    console.info(chalk.yellow('Disconnected from MongoDB.'));
+    cb(err);
+  });
+};
+'use strict';
+module.exports.profileUploadFileFilter = function (req, file, cb) {
+  if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/gif') {
+    return cb(new Error('Only image files are allowed!'), false);
+  }
+  cb(null, true);
+};
+'use strict';
+var _ = require('lodash'), config = require('../config'), mongoose = require('mongoose'), chalk = require('chalk'), crypto = require('crypto');
+// global seed options object
+var seedOptions = {};
+function removeUser(user) {
+  return new Promise(function (resolve, reject) {
+    var User = mongoose.model('User');
+    User.find({ username: user.username }).remove(function (err) {
+      if (err) {
+        reject(new Error('Failed to remove local ' + user.username));
+      }
+      resolve();
+    });
+  });
+}
+function saveUser(user) {
+  return function () {
+    return new Promise(function (resolve, reject) {
+      // Then save the user
+      user.save(function (err, theuser) {
+        if (err) {
+          reject(new Error('Failed to add local ' + user.username));
+        } else {
+          resolve(theuser);
+        }
+      });
+    });
+  };
+}
+function checkUserNotExists(user) {
+  return new Promise(function (resolve, reject) {
+    var User = mongoose.model('User');
+    User.find({ username: user.username }, function (err, users) {
+      if (err) {
+        reject(new Error('Failed to find local account ' + user.username));
+      }
+      if (users.length === 0) {
+        resolve();
+      } else {
+        reject(new Error('Failed due to local account already exists: ' + user.username));
+      }
+    });
+  });
+}
+function reportSuccess(password) {
+  return function (user) {
+    return new Promise(function (resolve, reject) {
+      if (seedOptions.logResults) {
+        console.log(chalk.bold.red('Database Seeding:\t\t\tLocal ' + user.username + ' added with password set to ' + password));
+      }
+      resolve();
+    });
+  };
+}
+// save the specified user with the password provided from the resolved promise
+function seedTheUser(user) {
+  return function (password) {
+    return new Promise(function (resolve, reject) {
+      var User = mongoose.model('User');
+      // set the new password
+      user.password = password;
+      if (user.username === seedOptions.seedAdmin.username && process.env.NODE_ENV === 'production') {
+        checkUserNotExists(user).then(saveUser(user)).then(reportSuccess(password)).then(function () {
+          resolve();
+        }).catch(function (err) {
+          reject(err);
+        });
+      } else {
+        removeUser(user).then(saveUser(user)).then(reportSuccess(password)).then(function () {
+          resolve();
+        }).catch(function (err) {
+          reject(err);
+        });
+      }
+    });
+  };
+}
+// report the error
+function reportError(reject) {
+  return function (err) {
+    if (seedOptions.logResults) {
+      console.log();
+      console.log('Database Seeding:\t\t\t' + err);
+      console.log();
+    }
+    reject(err);
+  };
+}
+module.exports.start = function start(options) {
+  // Initialize the default seed options
+  seedOptions = _.clone(config.seedDB.options, true);
+  // Check for provided options
+  if (_.has(options, 'logResults')) {
+    seedOptions.logResults = options.logResults;
+  }
+  if (_.has(options, 'seedUser')) {
+    seedOptions.seedUser = options.seedUser;
+  }
+  if (_.has(options, 'seedAdmin')) {
+    seedOptions.seedAdmin = options.seedAdmin;
+  }
+  var User = mongoose.model('User');
+  return new Promise(function (resolve, reject) {
+    var adminAccount = new User(seedOptions.seedAdmin);
+    var userAccount = new User(seedOptions.seedUser);
+    //If production only seed admin if it does not exist
+    if (process.env.NODE_ENV === 'production') {
+      User.generateRandomPassphrase().then(seedTheUser(adminAccount)).then(function () {
+        resolve();
+      }).catch(reportError(reject));
+    } else {
+      // Add both Admin and User account
+      User.generateRandomPassphrase().then(seedTheUser(userAccount)).then(User.generateRandomPassphrase).then(seedTheUser(adminAccount)).then(function () {
+        resolve();
+      }).catch(reportError(reject));
+    }
+  });
+};
+'use strict';
+// Load the module dependencies
+var config = require('../config'), path = require('path'), fs = require('fs'), http = require('http'), https = require('https'), cookieParser = require('cookie-parser'), passport = require('passport'), socketio = require('socket.io'), session = require('express-session'), MongoStore = require('connect-mongo')(session);
+// Define the Socket.io configuration method
+module.exports = function (app, db) {
+  var server;
+  if (config.secure && config.secure.ssl === true) {
+    // Load SSL key and certificate
+    var privateKey = fs.readFileSync(path.resolve(config.secure.privateKey), 'utf8');
+    var certificate = fs.readFileSync(path.resolve(config.secure.certificate), 'utf8');
+    var options = {
+      key: privateKey,
+      cert: certificate,
+      //  requestCert : true,
+      //  rejectUnauthorized : true,
+      secureProtocol: 'TLSv1_method',
+      ciphers: [
+        'ECDHE-RSA-AES128-GCM-SHA256',
+        'ECDHE-ECDSA-AES128-GCM-SHA256',
+        'ECDHE-RSA-AES256-GCM-SHA384',
+        'ECDHE-ECDSA-AES256-GCM-SHA384',
+        'DHE-RSA-AES128-GCM-SHA256',
+        'ECDHE-RSA-AES128-SHA256',
+        'DHE-RSA-AES128-SHA256',
+        'ECDHE-RSA-AES256-SHA384',
+        'DHE-RSA-AES256-SHA384',
+        'ECDHE-RSA-AES256-SHA256',
+        'DHE-RSA-AES256-SHA256',
+        'HIGH',
+        '!aNULL',
+        '!eNULL',
+        '!EXPORT',
+        '!DES',
+        '!RC4',
+        '!MD5',
+        '!PSK',
+        '!SRP',
+        '!CAMELLIA'
+      ].join(':'),
+      honorCipherOrder: true
+    };
+    // Create new HTTPS Server
+    server = https.createServer(options, app);
+  } else {
+    // Create a new HTTP server
+    server = http.createServer(app);
+  }
+  // Create a new Socket.io server
+  var io = socketio.listen(server);
+  // Create a MongoDB storage object
+  var mongoStore = new MongoStore({
+    mongooseConnection: db.connection,
+    collection: config.sessionCollection
+  });
+  // Intercept Socket.io's handshake request
+  io.use(function (socket, next) {
+    // Use the 'cookie-parser' module to parse the request cookies
+    cookieParser(config.sessionSecret)(socket.request, {}, function (err) {
+      // Get the session id from the request cookies
+      var sessionId = socket.request.signedCookies ? socket.request.signedCookies[config.sessionKey] : undefined;
+      if (!sessionId)
+        return next(new Error('sessionId was not found in socket.request'), false);
+      // Use the mongoStorage instance to get the Express session information
+      mongoStore.get(sessionId, function (err, session) {
+        if (err)
+          return next(err, false);
+        if (!session)
+          return next(new Error('session was not found for ' + sessionId), false);
+        // Set the Socket.io session information
+        socket.request.session = session;
+        // Use Passport to populate the user details
+        passport.initialize()(socket.request, {}, function () {
+          passport.session()(socket.request, {}, function () {
+            if (socket.request.user) {
+              next(null, true);
+            } else {
+              next(new Error('User is not authenticated'), false);
+            }
+          });
+        });
+      });
+    });
+  });
+  // Add an event listener to the 'connection' event
+  io.on('connection', function (socket) {
+    config.files.server.sockets.forEach(function (socketConfiguration) {
+      require(path.resolve(socketConfiguration))(io, socket);
+    });
+  });
+  return server;
+};
+'use strict';
+/**
+ * Render the main application page
+ */
+exports.renderIndex = function (req, res) {
+  res.render('modules/core/server/views/index', { user: req.user || null });
+};
+/**
+ * Render the server error page
+ */
+exports.renderServerError = function (req, res) {
+  res.status(500).render('modules/core/server/views/500', { error: 'Oops! Something went wrong...' });
+};
+/**
+ * Render the server not found responses
+ * Performs content-negotiation on the Accept HTTP header
+ */
+exports.renderNotFound = function (req, res) {
+  res.status(404).format({
+    'text/html': function () {
+      res.render('modules/core/server/views/404', { url: req.originalUrl });
+    },
+    'application/json': function () {
+      res.json({ error: 'Path not found' });
+    },
+    'default': function () {
+      res.send('Path not found');
+    }
+  });
+};
+'use strict';
+/**
+ * Get unique error field name
+ */
+var getUniqueErrorMessage = function (err) {
+  var output;
+  try {
+    var fieldName = err.errmsg.substring(err.errmsg.lastIndexOf('.$') + 2, err.errmsg.lastIndexOf('_1'));
+    output = fieldName.charAt(0).toUpperCase() + fieldName.slice(1) + ' already exists';
+  } catch (ex) {
+    output = 'Unique field already exists';
+  }
+  return output;
+};
+/**
+ * Get the error message from error object
+ */
+exports.getErrorMessage = function (err) {
+  var message = '';
+  if (err.code) {
+    switch (err.code) {
+    case 11000:
+    case 11001:
+      message = getUniqueErrorMessage(err);
+      break;
+    default:
+      message = 'Something went wrong';
+    }
+  } else {
+    for (var errName in err.errors) {
+      if (err.errors[errName].message) {
+        message = err.errors[errName].message;
+      }
+    }
+  }
+  return message;
+};
+'use strict';
+module.exports = function (app) {
+  // Root routing
+  var core = require('../controllers/core.server.controller');
+  // Define error pages
+  app.route('/server-error').get(core.renderServerError);
+  // Return a 404 for all undefined api, module or lib routes
+  app.route('/:url(api|modules|lib)/*').get(core.renderNotFound);
+  // Define application route
+  app.route('/*').get(core.renderIndex);
+};
+'use strict';
+/**
+ * Module dependencies
+ */
+var path = require('path'), config = require(path.resolve('./config/config'));
+/**
+ * Trulo module init function.
+ */
+module.exports = function (app, db) {
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var mongoose = require('mongoose'), _ = require('lodash');
+/**
+ * Create a 
+ */
+exports.create = function (req, res) {
+};
+/**
+ * Show the current 
+ */
+exports.read = function (req, res) {
+};
+/**
+ * Update a 
+ */
+exports.update = function (req, res) {
+};
+/**
+ * Delete an 
+ */
+exports.delete = function (req, res) {
+};
+/**
+ * List of 
+ */
+exports.list = function (req, res) {
+};
+'use strict';
+var trulo = require('../models/trulo.server.model');
+/**
+ * Module dependencies.
+ */
+var mongoose = require('mongoose'), _ = require('lodash');
+//var trulo = require('../../client/services/trulo.client.service.js');
+/**
+ * Create a 
+ */
+exports.create = function (req, res) {
+};
+/**
+ * Show the current 
+ */
+exports.read = function (req, res) {
+};
+/**
+ * Update a 
+ */
+exports.update = function (req, res) {
+};
+/**
+ * Delete an 
+ */
+exports.delete = function (req, res) {
+};
+/**
+ * List of 
+ */
+exports.list = function (req, res) {
+};
+exports.addToCart = function (req, res) {
+  var pdtID = parseInt(req.body.pdtID);
+  var userID = req.body.userID;
+  var city = req.body.city;
+  //set session variable with city
+  //req.session.city = city;//somehwhat like this?
+  trulo.addToCart(userID, pdtID, city, function (str) {
+    res.send(str);
+  });
+};
+exports.removeFromCart = function (req, res) {
+  var pdtID = parseInt(req.body.pdtID);
+  var userID = req.body.userID;
+  var city = req.body.city;
+  trulo.removeFromCart(userID, pdtID, function (str) {
+    res.send(str);
+  });
+};
+exports.fetchCart = function (req, res) {
+  var userID = req.body.userID;
+  trulo.fetchCart(userID, function (cart) {
+    res.send(cart);
+  });
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var mongoose = require('mongoose'), _ = require('lodash');
+var trulo = require('../models/trulo.server.model');
+/**
+ * Create a 
+ */
+exports.create = function (req, res) {
+};
+/**
+ * Show the current 
+ */
+exports.read = function (req, res) {
+};
+/**
+ * Update a 
+ */
+exports.update = function (req, res) {
+};
+/**
+ * Delete an 
+ */
+exports.delete = function (req, res) {
+};
+/**
+ * List of categories
+ */
+exports.list = function (req, res) {
+  //TODO obtain catID from req.params
+  var catID = req.query.catID;
+  trulo.getCategories(catID, function (cats) {
+    res.json(cats);
+  });
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var mongoose = require('mongoose'), _ = require('lodash');
+var trulo = require('../models/trulo.server.model');
+/**
+ * Create a 
+ */
+exports.create = function (req, res) {
+};
+/**
+ * Show the current 
+ */
+exports.read = function (req, res) {
+};
+/**
+ * Update a 
+ */
+exports.update = function (req, res) {
+};
+/**
+ * Delete an 
+ */
+exports.delete = function (req, res) {
+};
+/**
+ * List of products of a given category
+ */
+//TODO
+exports.list = function (req, res) {
+};
+exports.search = function (req, res) {
+};
+exports.getProducts = function (req, res) {
+  console.log('Inside products.server.controller to fetch products of catID=' + req.query.catID);
+  var cat = req.query.catID;
+  var page = req.query.lastPage;
+  //TODO fetch products from solr
+  var products = [];
+  for (var j = 1; j < 6; j++) {
+    var pdt = {
+      id: j.toString(),
+      name: 'Product' + j,
+      catID: cat
+    };
+    products.push(pdt);
+  }
+  res.send(products);
+};
+'use strict';
+var solr = require('solr-client');
+/**
+ * Module dependencies.
+ */
+var doSearch = function (client, query, cb) {
+  client.search(query, function (err, obj) {
+    if (err)
+      console.log(err);
+    else {
+      console.log(obj.response.docs);
+      cb(obj.response.docs);
+    }
+  });
+};
+exports.getProductsBySearchString = function (pname, cb) {
+  var client = solr.createClient('127.0.0.1', '9393', 'eposro');
+  var query = client.createQuery()  //  /select
+.q(pname).dismax();
+};
+exports.getProductsByCategory = function (catID, cb) {
+  var client = solr.createClient('127.0.0.1', '9393', 'eposro');
+  var query = client.createQuery().q({ cats: catID });
+  doSearch(client, query, cb);
+};
+'use strict';
+var MongoClient = require('mongodb').MongoClient;
+var async = require('async');
+var dbConn;
+MongoClient.connect('mongodb://localhost:40000/eposro', function (err, db) {
+  if (!err) {
+    dbConn = db;
+    console.log('Connected Successfully');
+  } else {
+    console.log(err);
+  }
+});
+///functions for populating the products from excel sheet
+exports.saveProduct = function (product, cb) {
+  var pcollection = dbConn.collection('products');
+  var idcollection = dbConn.collection('IDs');
+  if (product._id === undefined)
+    //read id from database
+    {
+      var query = {};
+      var sort = [];
+      var operator = { $inc: { 'last_pdt_id': 1 } };
+      var options = { new: true };
+      idcollection.findAndModify(query, sort, operator, options, function (err, doc) {
+        if (!err) {
+          var id = doc.last_pdt_id;
+          product._id = id;
+          insert_product_internal(pcollection, product, cb);
+        } else {
+          console.log(err);
+        }
+      });
+    }
+  else
+    //directly insert the product
+    {
+      insert_product_internal(pcollection, product, cb);
+    }
+};
+function insert_product_internal(collection, product, cb) {
+  collection.insert(product, function (err, result) {
+    if (!err) {
+      cb(null, result);
+    } else {
+      console.log(err);
+    }
+  });
+}
+exports.findCategoryId = function (cat, cb) {
+  var category = dbConn.collection('category');
+  category.find({ 'name': cat }).toArray(function (err, result) {
+    if (!err) {
+      var cids = [];
+      for (var i = 0; i < result.length; i++) {
+        cids.push(result[i]._id);
+      }
+      cb(null, cids);
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.findCityId = function (city, cb) {
+  var cities = dbConn.collection('cities');
+  cities.findOne({ 'city': city.toLowerCase() }, function (err, result) {
+    if (!err) {
+      cb(null, result._id);
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.getLastPdtId = function (cb) {
+  var IDs = dbConn.collection('IDs');
+  IDs.findOne(function (err, res) {
+    if (!err) {
+      cb(null, res.last_pdt_id);
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.getProductVars = function (pname, brand, cb) {
+  var pcollection = dbConn.collection('products');
+  pcollection.find({
+    'pname': pname,
+    'brand': brand
+  }).toArray(function (err, result) {
+    if (!err) {
+      //build a pseudo product
+      var vars = [];
+      for (var i = 0; i < result.length; i++) {
+        var product = {};
+        product.vid = result[i]._id;
+        product.vname = result[i].pname;
+        product.facets = result[i].facets;
+        vars.push(product);
+      }
+      cb(null, vars);
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.getRelatedPdts = function (last_pdt_id, cb) {
+  var pcollection = dbConn.collection('products');
+  //generate random 2 products
+  var rand = Math.floor(Math.random() * last_pdt_id), srand;
+  var relPdts = [];
+  pcollection.findOne({ _id: rand }, function (err, result) {
+    if (!err) {
+      if (result !== null) {
+        var pdt = {};
+        pdt.id = result._id;
+        pdt.pname = result.pname;
+        pdt.img = result.img;
+        relPdts.push(pdt);
+      }
+      srand = Math.floor(Math.random() * last_pdt_id);
+      pcollection.findOne({ _id: srand }, function (err, result) {
+        if (!err) {
+          if (result !== null) {
+            pdt = {};
+            pdt.id = result._id;
+            pdt.pname = result.pname;
+            pdt.img = result.img;
+            relPdts.push(pdt);
+          }
+          cb(null, relPdts);
+        } else {
+          console.log(err);
+        }
+      });
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.writeLastPdtId = function (last_id, cb) {
+  var IDs = dbConn.collection('IDs');
+  IDs.findOne(function (err, res) {
+    if (!err) {
+      IDs.update({ _id: res._id }, { $set: { 'last_pdt_id': last_id } }, function (err, res) {
+        if (!err) {
+          cb(null, res);
+        } else {
+          console.log(err);
+        }
+      });
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.getCategories = function (id, cb) {
+  var category = dbConn.collection('category');
+  category.find({ parent_id: parseInt(id) }).toArray(function (err, res) {
+    if (!err) {
+      var cats = [];
+      for (var i = 0; i < res.length; i++) {
+        cats.push({
+          catID: res[i]._id,
+          title: res[i].name
+        });
+      }
+      cb(cats);
+    }
+  });
+};
+exports.checkForProduct = function (gtin, cb) {
+  var products = dbConn.collection('products');
+  products.find({ 'gtin': gtin }).toArray(function (err, res) {
+    if (!err) {
+      if (res.length === 0) {
+        cb(null, 0);
+      } else {
+        cb(null, 1);
+      }
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.updateProdVars = function (vars, product, cb) {
+  var products = dbConn.collection('products');
+  var variant = {};
+  variant.vid = product._id;
+  variant.vname = product.pname;
+  variant.facets = product.facets;
+  var count = 0;
+  if (JSON.stringify(vars) !== '[]') {
+    for (var i = 0; i < vars.length; i++) {
+      products.update({ _id: vars[i].vid }, { $push: { 'vars': variant } }, function (err, res) {
+        if (!err) {
+          console.log('Variant ' + i);
+          count++;
+          if (count === vars.length) {
+            cb(null, 1);
+          } else {
+            console.log(err);
+          }
+        }
+      });
+    }
+  } else {
+    cb(null, 0);
+  }
+};
+/////functions related to cart///
+exports.addToCart = function (userId, pid, current_city, cb) {
+  console.log('Inside server model');
+  var cart = {};
+  var users = dbConn.collection('users');
+  var products = dbConn.collection('products');
+  var cities = dbConn.collection('cities');
+  async.waterfall([
+    //functions to be executed in order
+    function (callback) {
+      //find the user with the user id
+      var users = dbConn.collection('users');
+      users.findOne({
+        _id: userId,
+        cart: { $exists: true }
+      }, function (err, res) {
+        if (!err) {
+          callback(null, res);
+        }
+      });
+    },
+    function (user, callback) {
+      if (user !== undefined) {
+        //cart field exits
+        var flag = 0, price = 0;
+        user.cart.products.forEach(function (product) {
+          if (product.pid === pid) {
+            flag = 1;
+            price = product.price;
+            return;
+          }
+        });
+        callback(null, flag, price);
+      } else {
+        //create the cart subdocument and add product
+        cart.products = [];
+        cart.estimated_cost = 0;
+        users.update({ _id: userId }, { $set: { 'cart': cart } }, function (err, res) {
+          if (!err) {
+            callback(null, 0, null);
+            return;
+          } else {
+            console.log(err);
+          }
+        });
+      }
+    },
+    function (flag, price) {
+      if (flag === 1) {
+        users.update({
+          _id: userId,
+          'cart.products.pid': pid
+        }, {
+          $inc: {
+            'cart.products.$.count': 1,
+            'cart.estimated_cost': parseInt(price)
+          }
+        }, function (err, res) {
+          if (!err) {
+            cb('product Incremented');
+            return;
+          } else {
+            console.log(err);
+            return;
+          }
+        });
+      } else {
+        //create product
+        var prod = {};
+        prod.pid = pid;
+        cities.findOne({ city: current_city }, function (err, res) {
+          if (!err) {
+            var city_id = res._id;
+            products.findOne({
+              _id: pid,
+              'price.mrp.city': city_id
+            }, {
+              'price.mrp.$': 1,
+              'pname': 1
+            }, function (err, res) {
+              if (!err) {
+                if (res !== null) {
+                  prod.name = res.pname;
+                  prod.price = res.price.mrp[0].mrp;
+                  //add this product to the database now
+                  prod.count = 1;
+                  users.update({ _id: userId }, {
+                    $push: { 'cart.products': prod },
+                    $inc: { 'cart.estimated_cost': parseInt(prod.price) }
+                  }, function (err, res) {
+                    if (!err) {
+                      cb('Product Added successfully');
+                      return;
+                    } else {
+                      console.log(err);
+                      return;
+                    }
+                  });
+                } else {
+                  cb('No Product Exists');
+                  return;
+                }
+              }
+            });
+          }
+        });
+      }
+    }
+  ], function (err, res) {
+    if (!err) {
+      console.log('All the functions executed properly');
+    }
+  });
+};
+exports.removeFromCart = function (userId, pid, cb) {
+  //decrement count of the product from cart
+  var users = dbConn.collection('users');
+  var products = dbConn.collection('products');
+  users.findOne({
+    _id: userId,
+    'cart.products.pid': pid
+  }, { 'cart.products': 1 }, function (err, res) {
+    if (!err) {
+      //search the products with given pid
+      if (res === null) {
+        cb('Product does not exist in cart');
+        return;
+      }
+      var price, count, total_prod = res.cart.products.length;
+      for (var i = 0; i < total_prod; i++) {
+        if (res.cart.products[i].pid === pid) {
+          price = res.cart.products[i].price;
+          count = res.cart.products[i].count;
+          break;
+        }
+      }
+      if (count !== 1) {
+        users.update({
+          _id: userId,
+          'cart.products.pid': pid
+        }, {
+          $inc: {
+            'cart.estimated_cost': -parseInt(price),
+            'cart.products.$.count': -1
+          }
+        }, function (err, res) {
+          if (!err) {
+            cb('Product Count decremented');
+            return;
+          } else {
+            console.log(err);
+            return;
+          }
+        });
+      } else {
+        users.update({ _id: userId }, {
+          $pull: { 'cart.products': { 'pid': pid } },
+          $inc: { 'cart.estimated_cost': -parseInt(price) }
+        }, function (err, res) {
+          if (!err) {
+            if (total_prod === 1) {
+              users.update({ _id: userId }, { $unset: { cart: true } }, function (err, res) {
+                if (!err) {
+                  cb('cart removed from user ' + userId);
+                  return;
+                } else {
+                  console.log(err);
+                }
+              });
+            } else {
+              cb('product removed from cart');
+              return;
+            }
+          } else {
+            console.log(err);
+          }
+        });
+      }
+    }
+  });
+};
+exports.checkOut = function (userId, cb) {
+  //read the last order id used from IDs collection
+  var IDs = dbConn.collection('IDs');
+  var orders = dbConn.collection('orders');
+  var users = dbConn.collection('users');
+  async.waterfall([
+    function (callback) {
+      IDs.findOne({}, function (err, res) {
+        if (!err) {
+          callback(null, res.last_order_id);
+          return;
+        } else {
+          console.log(err);
+          return;
+        }
+      });
+    },
+    function (last_order_id, callback) {
+      if (last_order_id !== null) {
+        users.findOne({ _id: userId }, function (err, res) {
+          if (!err) {
+            callback(null, last_order_id, res);
+            return;
+          }
+        });
+      }
+    },
+    function (last_order_id, user, callback) {
+      //create order
+      if (user !== null) {
+        var order = {};
+        order._id = ++last_order_id;
+        order.ordered_by = userId;
+        order.vendors_serving = [];
+        order.selected_vendors = [];
+        order.items = user.cart.products;
+        order.estimated_cost = user.cart.estimated_cost;
+        order.processing_status = 0;
+        if (user.cart.order_mode !== undefined) {
+          order.order_mode = user.cart.order_mode;
+        } else {
+          order.order_mode = user.default_delivery_preference;
+        }
+        //write this to order collection
+        orders.insert(order, function (err, res) {
+          if (!err) {
+            //update last order_id
+            IDs.update({}, { $set: { 'last_order_id': last_order_id } }, function (err, res) {
+              if (!err) {
+                //update the user collection to contain that order id
+                callback(null, order._id);
+                return;
+              }
+            });
+          }
+        });
+      }
+    },
+    function (current_order, callback) {
+      if (current_order !== null) {
+        users.update({ _id: userId }, {
+          $push: { orderIDs: current_order },
+          $unset: { cart: true }
+        }, function (err, res) {
+          if (!err) {
+            cb('Successfully added the order ' + current_order);
+            return;
+          } else {
+            console.log(err);
+            return;
+          }
+        });
+      }
+    }
+  ], function (err, result) {
+    if (!err) {
+      console.log('All functions are executed');
+      return;
+    }
+  });
+};
+exports.fetchCart = function (userId, cb) {
+  console.log('FInding cart for user ' + userId);
+  var users = dbConn.collection('users');
+  users.findOne({ _id: userId }, function (err, res) {
+    if (!err) {
+      if (res.cart !== undefined) {
+        console.log('Sending cart for user ' + userId + ' where count = ' + res.cart.products[0].count);
+        cb(res.cart);
+        return;
+      } else {
+        console.log('Sending null Cart ');
+        cb(null);
+        return;
+      }
+    } else {
+      console.log(err);
+    }
+  });
+};
+////////////functions for finding best vendor////
+exports.getUnProcessedOrders = function (cb) {
+  //finds all the orders that are yet to be processed
+  var orders = dbConn.collection('orders');
+  orders.find({ processing_status: 0 }).toArray(function (err, res) {
+    if (!err) {
+      cb(null, res);
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.findCustomerById = function (cid, cb) {
+  var users = dbConn.collection('users');
+  users.findOne({ _id: cid }, function (err, res) {
+    if (!err) {
+      cb(null, res);
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.getPickUpVendors = function (loc, items, maxdist, cb) {
+  var vendors = dbConn.collection('vendors');
+  vendors.aggregate([
+    {
+      $geoNear: {
+        near: {
+          type: 'Point',
+          coordinates: loc
+        },
+        distanceField: 'distance',
+        maxDistance: maxdist,
+        spherical: true
+      }
+    },
+    { $match: { 'products.pid': { $all: items } } },
+    { $sort: { distance: 1 } }
+  ], function (err, res) {
+    if (!err) {
+      cb(null, res);
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.getHomeDelVen = function (loc, items, cb) {
+  var vendors = dbConn.collection('vendors');
+  vendors.aggregate([
+    {
+      $geoNear: {
+        near: {
+          type: 'Point',
+          coordinates: loc
+        },
+        distanceField: 'distance',
+        maxDistance: 3000,
+        query: { delivery_mode: 1 },
+        spherical: true
+      }
+    },
+    {
+      $project: {
+        _id: 1,
+        name: 1,
+        products: 1,
+        delivery_mode: 1,
+        address: 1,
+        id: 1,
+        distance: 1,
+        'cmpval': {
+          $cmp: [
+            '$distance',
+            '$serving_radius'
+          ]
+        }
+      }
+    },
+    {
+      $match: {
+        $and: [
+          { 'products.pid': { $all: items } },
+          { 'cmpval': -1 }
+        ]
+      }
+    },
+    { $sort: { distance: 1 } }
+  ], function (err, res) {
+    if (!err) {
+      cb(null, res);
+    } else {
+      console.log(err);
+    }
+  });
+};
+'use strict';
+module.exports = function (app) {
+  // Routing logic   
+  // ...
+  var category = require('../controllers/category.server.controller');
+  var product = require('../controllers/product.server.controller');
+  var cart = require('../controllers/cart.server.controller');
+  app.get('/api/categories', category.list);
+  app.get('/api/products', product.getProducts);
+  app.post('/api/addToCart', cart.addToCart);
+  app.post('/api/removeFromCart', cart.removeFromCart);
+  app.post('/api/cart', cart.fetchCart);
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var passport = require('passport'), FacebookStrategy = require('passport-facebook').Strategy, users = require('../../controllers/users.server.controller');
+module.exports = function (config) {
+  // Use facebook strategy
+  passport.use(new FacebookStrategy({
+    clientID: config.facebook.clientID,
+    clientSecret: config.facebook.clientSecret,
+    callbackURL: config.facebook.callbackURL,
+    profileFields: [
+      'id',
+      'name',
+      'displayName',
+      'emails',
+      'photos'
+    ],
+    passReqToCallback: true
+  }, function (req, accessToken, refreshToken, profile, done) {
+    // Set the provider data and include tokens
+    var providerData = profile._json;
+    providerData.accessToken = accessToken;
+    providerData.refreshToken = refreshToken;
+    // Create the user OAuth profile
+    var providerUserProfile = {
+      firstName: profile.name.givenName,
+      lastName: profile.name.familyName,
+      displayName: profile.displayName,
+      email: profile.emails ? profile.emails[0].value : undefined,
+      username: profile.username || generateUsername(profile),
+      profileImageURL: profile.id ? '//graph.facebook.com/' + profile.id + '/picture?type=large' : undefined,
+      provider: 'facebook',
+      providerIdentifierField: 'id',
+      providerData: providerData
+    };
+    // Save the user OAuth profile
+    users.saveOAuthUserProfile(req, providerUserProfile, done);
+    function generateUsername(profile) {
+      var username = '';
+      if (profile.emails) {
+        username = profile.emails[0].value.split('@')[0];
+      } else if (profile.name) {
+        username = profile.name.givenName[0] + profile.name.familyName;
+      }
+      return username.toLowerCase() || undefined;
+    }
+  }));
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var passport = require('passport'), GithubStrategy = require('passport-github').Strategy, users = require('../../controllers/users.server.controller');
+module.exports = function (config) {
+  // Use github strategy
+  passport.use(new GithubStrategy({
+    clientID: config.github.clientID,
+    clientSecret: config.github.clientSecret,
+    callbackURL: config.github.callbackURL,
+    passReqToCallback: true
+  }, function (req, accessToken, refreshToken, profile, done) {
+    // Set the provider data and include tokens
+    var providerData = profile._json;
+    providerData.accessToken = accessToken;
+    providerData.refreshToken = refreshToken;
+    // Create the user OAuth profile
+    var displayName = profile.displayName ? profile.displayName.trim() : profile.username.trim();
+    var iSpace = displayName.indexOf(' ');
+    // index of the whitespace following the firstName
+    var firstName = iSpace !== -1 ? displayName.substring(0, iSpace) : displayName;
+    var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
+    var providerUserProfile = {
+      firstName: firstName,
+      lastName: lastName,
+      displayName: displayName,
+      email: profile.emails[0].value,
+      username: profile.username,
+      // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+      profileImageURL: providerData.avatar_url ? providerData.avatar_url : undefined,
+      // jscs:enable
+      provider: 'github',
+      providerIdentifierField: 'id',
+      providerData: providerData
+    };
+    // Save the user OAuth profile
+    users.saveOAuthUserProfile(req, providerUserProfile, done);
+  }));
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var passport = require('passport'), GoogleStrategy = require('passport-google-oauth').OAuth2Strategy, users = require('../../controllers/users.server.controller');
+module.exports = function (config) {
+  // Use google strategy
+  passport.use(new GoogleStrategy({
+    clientID: config.google.clientID,
+    clientSecret: config.google.clientSecret,
+    callbackURL: config.google.callbackURL,
+    passReqToCallback: true
+  }, function (req, accessToken, refreshToken, profile, done) {
+    // Set the provider data and include tokens
+    var providerData = profile._json;
+    providerData.accessToken = accessToken;
+    providerData.refreshToken = refreshToken;
+    // Create the user OAuth profile
+    var providerUserProfile = {
+      firstName: profile.name.givenName,
+      lastName: profile.name.familyName,
+      displayName: profile.displayName,
+      email: profile.emails[0].value,
+      username: profile.username,
+      profileImageURL: providerData.picture ? providerData.picture : undefined,
+      provider: 'google',
+      providerIdentifierField: 'id',
+      providerData: providerData
+    };
+    // Save the user OAuth profile
+    users.saveOAuthUserProfile(req, providerUserProfile, done);
+  }));
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var passport = require('passport'), LinkedInStrategy = require('passport-linkedin').Strategy, users = require('../../controllers/users.server.controller');
+module.exports = function (config) {
+  // Use linkedin strategy
+  passport.use(new LinkedInStrategy({
+    consumerKey: config.linkedin.clientID,
+    consumerSecret: config.linkedin.clientSecret,
+    callbackURL: config.linkedin.callbackURL,
+    passReqToCallback: true,
+    profileFields: [
+      'id',
+      'first-name',
+      'last-name',
+      'email-address',
+      'picture-url'
+    ]
+  }, function (req, accessToken, refreshToken, profile, done) {
+    // Set the provider data and include tokens
+    var providerData = profile._json;
+    providerData.accessToken = accessToken;
+    providerData.refreshToken = refreshToken;
+    // Create the user OAuth profile
+    var providerUserProfile = {
+      firstName: profile.name.givenName,
+      lastName: profile.name.familyName,
+      displayName: profile.displayName,
+      email: profile.emails[0].value,
+      username: profile.username,
+      profileImageURL: providerData.pictureUrl ? providerData.pictureUrl : undefined,
+      provider: 'linkedin',
+      providerIdentifierField: 'id',
+      providerData: providerData
+    };
+    // Save the user OAuth profile
+    users.saveOAuthUserProfile(req, providerUserProfile, done);
+  }));
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var passport = require('passport'), LocalStrategy = require('passport-local').Strategy, User = require('mongoose').model('User');
+module.exports = function () {
+  // Use local strategy
+  passport.use(new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password'
+  }, function (username, password, done) {
+    User.findOne({ username: username.toLowerCase() }, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user || !user.authenticate(password)) {
+        return done(null, false, { message: 'Invalid username or password' });
+      }
+      return done(null, user);
+    });
+  }));
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var passport = require('passport'), PayPalStrategy = require('passport-paypal-openidconnect').Strategy, users = require('../../controllers/users.server.controller');
+module.exports = function (config) {
+  passport.use(new PayPalStrategy({
+    clientID: config.paypal.clientID,
+    clientSecret: config.paypal.clientSecret,
+    callbackURL: config.paypal.callbackURL,
+    scope: 'openid profile email',
+    sandbox: config.paypal.sandbox,
+    passReqToCallback: true
+  }, function (req, accessToken, refreshToken, profile, done) {
+    // Set the provider data and include tokens
+    var providerData = profile._json;
+    providerData.accessToken = accessToken;
+    providerData.refreshToken = refreshToken;
+    // Create the user OAuth profile
+    var providerUserProfile = {
+      firstName: profile.name.givenName,
+      lastName: profile.name.familyName,
+      displayName: profile.displayName,
+      email: profile._json.email,
+      username: profile.username,
+      provider: 'paypal',
+      providerIdentifierField: 'user_id',
+      providerData: providerData
+    };
+    // Save the user OAuth profile
+    users.saveOAuthUserProfile(req, providerUserProfile, done);
+  }));
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var passport = require('passport'), TwitterStrategy = require('passport-twitter').Strategy, users = require('../../controllers/users.server.controller');
+module.exports = function (config) {
+  // Use twitter strategy
+  passport.use(new TwitterStrategy({
+    consumerKey: config.twitter.clientID,
+    consumerSecret: config.twitter.clientSecret,
+    callbackURL: config.twitter.callbackURL,
+    passReqToCallback: true
+  }, function (req, token, tokenSecret, profile, done) {
+    // Set the provider data and include tokens
+    var providerData = profile._json;
+    providerData.token = token;
+    providerData.tokenSecret = tokenSecret;
+    // Create the user OAuth profile
+    var displayName = profile.displayName.trim();
+    var iSpace = displayName.indexOf(' ');
+    // index of the whitespace following the firstName
+    var firstName = iSpace !== -1 ? displayName.substring(0, iSpace) : displayName;
+    var lastName = iSpace !== -1 ? displayName.substring(iSpace + 1) : '';
+    var providerUserProfile = {
+      firstName: firstName,
+      lastName: lastName,
+      displayName: displayName,
+      username: profile.username,
+      profileImageURL: profile.photos[0].value.replace('normal', 'bigger'),
+      provider: 'twitter',
+      providerIdentifierField: 'id_str',
+      providerData: providerData
+    };
+    // Save the user OAuth profile
+    users.saveOAuthUserProfile(req, providerUserProfile, done);
+  }));
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var passport = require('passport'), User = require('mongoose').model('User'), path = require('path'), config = require(path.resolve('./config/config'));
+/**
+ * Module init function.
+ */
+module.exports = function (app, db) {
+  // Serialize sessions
+  passport.serializeUser(function (user, done) {
+    done(null, user.id);
+  });
+  // Deserialize sessions
+  passport.deserializeUser(function (id, done) {
+    User.findOne({ _id: id }, '-salt -password', function (err, user) {
+      done(err, user);
+    });
+  });
+  // Initialize strategies
+  config.utils.getGlobbedPaths(path.join(__dirname, './strategies/**/*.js')).forEach(function (strategy) {
+    require(path.resolve(strategy))(config);
+  });
+  // Add passport's middleware
+  app.use(passport.initialize());
+  app.use(passport.session());
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var path = require('path'), mongoose = require('mongoose'), User = mongoose.model('User'), errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+/**
+ * Show the current user
+ */
+exports.read = function (req, res) {
+  res.json(req.model);
+};
+/**
+ * Update a User
+ */
+exports.update = function (req, res) {
+  var user = req.model;
+  //For security purposes only merge these parameters
+  user.firstName = req.body.firstName;
+  user.lastName = req.body.lastName;
+  user.displayName = user.firstName + ' ' + user.lastName;
+  user.roles = req.body.roles;
+  user.save(function (err) {
+    if (err) {
+      return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+    }
+    res.json(user);
+  });
+};
+/**
+ * Delete a user
+ */
+exports.delete = function (req, res) {
+  var user = req.model;
+  user.remove(function (err) {
+    if (err) {
+      return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+    }
+    res.json(user);
+  });
+};
+/**
+ * List of Users
+ */
+exports.list = function (req, res) {
+  User.find({}, '-salt -password').sort('-created').populate('user', 'displayName').exec(function (err, users) {
+    if (err) {
+      return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+    }
+    res.json(users);
+  });
+};
+/**
+ * User middleware
+ */
+exports.userByID = function (req, res, next, id) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({ message: 'User is invalid' });
+  }
+  User.findById(id, '-salt -password').exec(function (err, user) {
+    if (err) {
+      return next(err);
+    } else if (!user) {
+      return next(new Error('Failed to load user ' + id));
+    }
+    req.model = user;
+    next();
+  });
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var _ = require('lodash');
+/**
+ * Extend user's controller
+ */
+module.exports = _.extend(require('./users/users.authentication.server.controller'), require('./users/users.authorization.server.controller'), require('./users/users.password.server.controller'), require('./users/users.profile.server.controller'));
+'use strict';
+/**
+ * Module dependencies.
+ */
+var path = require('path'), errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')), mongoose = require('mongoose'), passport = require('passport'), User = mongoose.model('User');
+// URLs for which user can't be redirected on signin
+var noReturnUrls = [
+  '/authentication/signin',
+  '/authentication/signup'
+];
+/**
+ * Signup
+ */
+exports.signup = function (req, res) {
+  // For security measurement we remove the roles from the req.body object
+  delete req.body.roles;
+  // Init Variables
+  var user = new User(req.body);
+  var message = null;
+  // Add missing user fields
+  user.provider = 'local';
+  user.displayName = user.firstName + ' ' + user.lastName;
+  // Then save the user
+  user.save(function (err) {
+    if (err) {
+      return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+    } else {
+      // Remove sensitive data before login
+      user.password = undefined;
+      user.salt = undefined;
+      req.login(user, function (err) {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.json(user);
+        }
+      });
+    }
+  });
+};
+/**
+ * Signin after passport authentication
+ */
+exports.signin = function (req, res, next) {
+  passport.authenticate('local', function (err, user, info) {
+    if (err || !user) {
+      res.status(400).send(info);
+    } else {
+      // Remove sensitive data before login
+      user.password = undefined;
+      user.salt = undefined;
+      req.login(user, function (err) {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.json(user);
+        }
+      });
+    }
+  })(req, res, next);
+};
+/**
+ * Signout
+ */
+exports.signout = function (req, res) {
+  req.logout();
+  res.redirect('/');
+};
+/**
+ * OAuth provider call
+ */
+exports.oauthCall = function (strategy, scope) {
+  return function (req, res, next) {
+    // Set redirection path on session.
+    // Do not redirect to a signin or signup page
+    if (noReturnUrls.indexOf(req.query.redirect_to) === -1) {
+      req.session.redirect_to = req.query.redirect_to;
+    }
+    // Authenticate
+    passport.authenticate(strategy, scope)(req, res, next);
+  };
+};
+/**
+ * OAuth callback
+ */
+exports.oauthCallback = function (strategy) {
+  return function (req, res, next) {
+    // Pop redirect URL from session
+    var sessionRedirectURL = req.session.redirect_to;
+    delete req.session.redirect_to;
+    passport.authenticate(strategy, function (err, user, redirectURL) {
+      if (err) {
+        return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
+      }
+      if (!user) {
+        return res.redirect('/authentication/signin');
+      }
+      req.login(user, function (err) {
+        if (err) {
+          return res.redirect('/authentication/signin');
+        }
+        return res.redirect(redirectURL || sessionRedirectURL || '/');
+      });
+    })(req, res, next);
+  };
+};
+/**
+ * Helper function to save or update a OAuth user profile
+ */
+exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
+  if (!req.user) {
+    // Define a search query fields
+    var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
+    var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+    // Define main provider search query
+    var mainProviderSearchQuery = {};
+    mainProviderSearchQuery.provider = providerUserProfile.provider;
+    mainProviderSearchQuery[searchMainProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+    // Define additional provider search query
+    var additionalProviderSearchQuery = {};
+    additionalProviderSearchQuery[searchAdditionalProviderIdentifierField] = providerUserProfile.providerData[providerUserProfile.providerIdentifierField];
+    // Define a search query to find existing user with current provider profile
+    var searchQuery = {
+      $or: [
+        mainProviderSearchQuery,
+        additionalProviderSearchQuery
+      ]
+    };
+    User.findOne(searchQuery, function (err, user) {
+      if (err) {
+        return done(err);
+      } else {
+        if (!user) {
+          var possibleUsername = providerUserProfile.username || (providerUserProfile.email ? providerUserProfile.email.split('@')[0] : '');
+          User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
+            user = new User({
+              firstName: providerUserProfile.firstName,
+              lastName: providerUserProfile.lastName,
+              username: availableUsername,
+              displayName: providerUserProfile.displayName,
+              email: providerUserProfile.email,
+              profileImageURL: providerUserProfile.profileImageURL,
+              provider: providerUserProfile.provider,
+              providerData: providerUserProfile.providerData
+            });
+            // And save the user
+            user.save(function (err) {
+              return done(err, user);
+            });
+          });
+        } else {
+          return done(err, user);
+        }
+      }
+    });
+  } else {
+    // User is already logged in, join the provider data to the existing user
+    var user = req.user;
+    // Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
+    if (user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
+      // Add the provider data to the additional provider data field
+      if (!user.additionalProvidersData) {
+        user.additionalProvidersData = {};
+      }
+      user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
+      // Then tell mongoose that we've updated the additionalProvidersData field
+      user.markModified('additionalProvidersData');
+      // And save the user
+      user.save(function (err) {
+        return done(err, user, '/settings/accounts');
+      });
+    } else {
+      return done(new Error('User is already connected using this provider'), user);
+    }
+  }
+};
+/**
+ * Remove OAuth provider
+ */
+exports.removeOAuthProvider = function (req, res, next) {
+  var user = req.user;
+  var provider = req.query.provider;
+  if (!user) {
+    return res.status(401).json({ message: 'User is not authenticated' });
+  } else if (!provider) {
+    return res.status(400).send();
+  }
+  // Delete the additional provider
+  if (user.additionalProvidersData[provider]) {
+    delete user.additionalProvidersData[provider];
+    // Then tell mongoose that we've updated the additionalProvidersData field
+    user.markModified('additionalProvidersData');
+  }
+  user.save(function (err) {
+    if (err) {
+      return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+    } else {
+      req.login(user, function (err) {
+        if (err) {
+          return res.status(400).send(err);
+        } else {
+          return res.json(user);
+        }
+      });
+    }
+  });
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var _ = require('lodash'), mongoose = require('mongoose'), User = mongoose.model('User');
+/**
+ * User middleware
+ */
+exports.userByID = function (req, res, next, id) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({ message: 'User is invalid' });
+  }
+  User.findOne({ _id: id }).exec(function (err, user) {
+    if (err) {
+      return next(err);
+    } else if (!user) {
+      return next(new Error('Failed to load User ' + id));
+    }
+    req.profile = user;
+    next();
+  });
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var path = require('path'), config = require(path.resolve('./config/config')), errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')), mongoose = require('mongoose'), User = mongoose.model('User'), nodemailer = require('nodemailer'), async = require('async'), crypto = require('crypto');
+var smtpTransport = nodemailer.createTransport(config.mailer.options);
+/**
+ * Forgot for reset password (forgot POST)
+ */
+exports.forgot = function (req, res, next) {
+  async.waterfall([
+    // Generate random token
+    function (done) {
+      crypto.randomBytes(20, function (err, buffer) {
+        var token = buffer.toString('hex');
+        done(err, token);
+      });
+    },
+    // Lookup user by username
+    function (token, done) {
+      if (req.body.username) {
+        User.findOne({ username: req.body.username.toLowerCase() }, '-salt -password', function (err, user) {
+          if (!user) {
+            return res.status(400).send({ message: 'No account with that username has been found' });
+          } else if (user.provider !== 'local') {
+            return res.status(400).send({ message: 'It seems like you signed up using your ' + user.provider + ' account' });
+          } else {
+            user.resetPasswordToken = token;
+            user.resetPasswordExpires = Date.now() + 3600000;
+            // 1 hour
+            user.save(function (err) {
+              done(err, token, user);
+            });
+          }
+        });
+      } else {
+        return res.status(400).send({ message: 'Username field must not be blank' });
+      }
+    },
+    function (token, user, done) {
+      var httpTransport = 'http://';
+      if (config.secure && config.secure.ssl === true) {
+        httpTransport = 'https://';
+      }
+      res.render(path.resolve('modules/users/server/templates/reset-password-email'), {
+        name: user.displayName,
+        appName: config.app.title,
+        url: httpTransport + req.headers.host + '/api/auth/reset/' + token
+      }, function (err, emailHTML) {
+        done(err, emailHTML, user);
+      });
+    },
+    // If valid email, send reset email using service
+    function (emailHTML, user, done) {
+      var mailOptions = {
+        to: user.email,
+        from: config.mailer.from,
+        subject: 'Password Reset',
+        html: emailHTML
+      };
+      smtpTransport.sendMail(mailOptions, function (err) {
+        if (!err) {
+          res.send({ message: 'An email has been sent to the provided email with further instructions.' });
+        } else {
+          return res.status(400).send({ message: 'Failure sending email' });
+        }
+        done(err);
+      });
+    }
+  ], function (err) {
+    if (err) {
+      return next(err);
+    }
+  });
+};
+/**
+ * Reset password GET from email token
+ */
+exports.validateResetToken = function (req, res) {
+  User.findOne({
+    resetPasswordToken: req.params.token,
+    resetPasswordExpires: { $gt: Date.now() }
+  }, function (err, user) {
+    if (!user) {
+      return res.redirect('/password/reset/invalid');
+    }
+    res.redirect('/password/reset/' + req.params.token);
+  });
+};
+/**
+ * Reset password POST from email token
+ */
+exports.reset = function (req, res, next) {
+  // Init Variables
+  var passwordDetails = req.body;
+  var message = null;
+  async.waterfall([
+    function (done) {
+      User.findOne({
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: { $gt: Date.now() }
+      }, function (err, user) {
+        if (!err && user) {
+          if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
+            user.password = passwordDetails.newPassword;
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+            user.save(function (err) {
+              if (err) {
+                return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+              } else {
+                req.login(user, function (err) {
+                  if (err) {
+                    res.status(400).send(err);
+                  } else {
+                    // Remove sensitive data before return authenticated user
+                    user.password = undefined;
+                    user.salt = undefined;
+                    res.json(user);
+                    done(err, user);
+                  }
+                });
+              }
+            });
+          } else {
+            return res.status(400).send({ message: 'Passwords do not match' });
+          }
+        } else {
+          return res.status(400).send({ message: 'Password reset token is invalid or has expired.' });
+        }
+      });
+    },
+    function (user, done) {
+      res.render('modules/users/server/templates/reset-password-confirm-email', {
+        name: user.displayName,
+        appName: config.app.title
+      }, function (err, emailHTML) {
+        done(err, emailHTML, user);
+      });
+    },
+    // If valid email, send reset email using service
+    function (emailHTML, user, done) {
+      var mailOptions = {
+        to: user.email,
+        from: config.mailer.from,
+        subject: 'Your password has been changed',
+        html: emailHTML
+      };
+      smtpTransport.sendMail(mailOptions, function (err) {
+        done(err, 'done');
+      });
+    }
+  ], function (err) {
+    if (err) {
+      return next(err);
+    }
+  });
+};
+/**
+ * Change Password
+ */
+exports.changePassword = function (req, res, next) {
+  // Init Variables
+  var passwordDetails = req.body;
+  var message = null;
+  if (req.user) {
+    if (passwordDetails.newPassword) {
+      User.findById(req.user.id, function (err, user) {
+        if (!err && user) {
+          if (user.authenticate(passwordDetails.currentPassword)) {
+            if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
+              user.password = passwordDetails.newPassword;
+              user.save(function (err) {
+                if (err) {
+                  return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+                } else {
+                  req.login(user, function (err) {
+                    if (err) {
+                      res.status(400).send(err);
+                    } else {
+                      res.send({ message: 'Password changed successfully' });
+                    }
+                  });
+                }
+              });
+            } else {
+              res.status(400).send({ message: 'Passwords do not match' });
+            }
+          } else {
+            res.status(400).send({ message: 'Current password is incorrect' });
+          }
+        } else {
+          res.status(400).send({ message: 'User is not found' });
+        }
+      });
+    } else {
+      res.status(400).send({ message: 'Please provide a new password' });
+    }
+  } else {
+    res.status(400).send({ message: 'User is not signed in' });
+  }
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var _ = require('lodash'), fs = require('fs'), path = require('path'), errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')), mongoose = require('mongoose'), multer = require('multer'), config = require(path.resolve('./config/config')), User = mongoose.model('User');
+/**
+ * Update user details
+ */
+exports.update = function (req, res) {
+  // Init Variables
+  var user = req.user;
+  // For security measurement we remove the roles from the req.body object
+  delete req.body.roles;
+  if (user) {
+    // Merge existing user
+    user = _.extend(user, req.body);
+    user.updated = Date.now();
+    user.displayName = user.firstName + ' ' + user.lastName;
+    user.save(function (err) {
+      if (err) {
+        return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+      } else {
+        req.login(user, function (err) {
+          if (err) {
+            res.status(400).send(err);
+          } else {
+            res.json(user);
+          }
+        });
+      }
+    });
+  } else {
+    res.status(400).send({ message: 'User is not signed in' });
+  }
+};
+/**
+ * Update profile picture
+ */
+exports.changeProfilePicture = function (req, res) {
+  var user = req.user;
+  var message = null;
+  var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
+  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
+  // Filtering to upload only images
+  upload.fileFilter = profileUploadFileFilter;
+  if (user) {
+    upload(req, res, function (uploadError) {
+      if (uploadError) {
+        return res.status(400).send({ message: 'Error occurred while uploading profile picture' });
+      } else {
+        user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename;
+        user.save(function (saveError) {
+          if (saveError) {
+            return res.status(400).send({ message: errorHandler.getErrorMessage(saveError) });
+          } else {
+            req.login(user, function (err) {
+              if (err) {
+                res.status(400).send(err);
+              } else {
+                res.json(user);
+              }
+            });
+          }
+        });
+      }
+    });
+  } else {
+    res.status(400).send({ message: 'User is not signed in' });
+  }
+};
+/**
+ * Send User
+ */
+exports.me = function (req, res) {
+  res.json(req.user || null);
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var mongoose = require('mongoose'), Schema = mongoose.Schema, crypto = require('crypto'), validator = require('validator'), generatePassword = require('generate-password'), owasp = require('owasp-password-strength-test');
+/**
+ * A Validation function for local strategy properties
+ */
+var validateLocalStrategyProperty = function (property) {
+  return this.provider !== 'local' && !this.updated || property.length;
+};
+/**
+ * A Validation function for local strategy email
+ */
+var validateLocalStrategyEmail = function (email) {
+  return this.provider !== 'local' && !this.updated || validator.isEmail(email);
+};
+/**
+ * User Schema
+ */
+var UserSchema = new Schema({
+  firstName: {
+    type: String,
+    trim: true,
+    default: '',
+    validate: [
+      validateLocalStrategyProperty,
+      'Please fill in your first name'
+    ]
+  },
+  lastName: {
+    type: String,
+    trim: true,
+    default: '',
+    validate: [
+      validateLocalStrategyProperty,
+      'Please fill in your last name'
+    ]
+  },
+  displayName: {
+    type: String,
+    trim: true
+  },
+  email: {
+    type: String,
+    unique: true,
+    lowercase: true,
+    trim: true,
+    default: '',
+    validate: [
+      validateLocalStrategyEmail,
+      'Please fill a valid email address'
+    ]
+  },
+  username: {
+    type: String,
+    unique: 'Username already exists',
+    required: 'Please fill in a username',
+    lowercase: true,
+    trim: true
+  },
+  password: {
+    type: String,
+    default: ''
+  },
+  salt: { type: String },
+  profileImageURL: {
+    type: String,
+    default: 'modules/users/client/img/profile/default.png'
+  },
+  provider: {
+    type: String,
+    required: 'Provider is required'
+  },
+  providerData: {},
+  additionalProvidersData: {},
+  roles: {
+    type: [{
+        type: String,
+        enum: [
+          'user',
+          'admin'
+        ]
+      }],
+    default: ['user'],
+    required: 'Please provide at least one role'
+  },
+  updated: { type: Date },
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  /* For reset password */
+  resetPasswordToken: { type: String },
+  resetPasswordExpires: { type: Date }
+});
+/**
+ * Hook a pre save method to hash the password
+ */
+UserSchema.pre('save', function (next) {
+  if (this.password && this.isModified('password')) {
+    this.salt = crypto.randomBytes(16).toString('base64');
+    this.password = this.hashPassword(this.password);
+  }
+  next();
+});
+/**
+ * Hook a pre validate method to test the local password
+ */
+UserSchema.pre('validate', function (next) {
+  if (this.provider === 'local' && this.password && this.isModified('password')) {
+    var result = owasp.test(this.password);
+    if (result.errors.length) {
+      var error = result.errors.join(' ');
+      this.invalidate('password', error);
+    }
+  }
+  next();
+});
+/**
+ * Create instance method for hashing a password
+ */
+UserSchema.methods.hashPassword = function (password) {
+  if (this.salt && password) {
+    return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'base64'), 10000, 64).toString('base64');
+  } else {
+    return password;
+  }
+};
+/**
+ * Create instance method for authenticating user
+ */
+UserSchema.methods.authenticate = function (password) {
+  return this.password === this.hashPassword(password);
+};
+/**
+ * Find possible not used username
+ */
+UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
+  var _this = this;
+  var possibleUsername = username.toLowerCase() + (suffix || '');
+  _this.findOne({ username: possibleUsername }, function (err, user) {
+    if (!err) {
+      if (!user) {
+        callback(possibleUsername);
+      } else {
+        return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
+      }
+    } else {
+      callback(null);
+    }
+  });
+};
+/**
+* Generates a random passphrase that passes the owasp test.
+* Returns a promise that resolves with the generated passphrase, or rejects with an error if something goes wrong.
+* NOTE: Passphrases are only tested against the required owasp strength tests, and not the optional tests.
+*/
+UserSchema.statics.generateRandomPassphrase = function () {
+  return new Promise(function (resolve, reject) {
+    var password = '';
+    var repeatingCharacters = new RegExp('(.)\\1{2,}', 'g');
+    // iterate until the we have a valid passphrase. 
+    // NOTE: Should rarely iterate more than once, but we need this to ensure no repeating characters are present.
+    while (password.length < 20 || repeatingCharacters.test(password)) {
+      // build the random password
+      password = generatePassword.generate({
+        length: Math.floor(Math.random() * 20) + 20,
+        // randomize length between 20 and 40 characters
+        numbers: true,
+        symbols: false,
+        uppercase: true,
+        excludeSimilarCharacters: true
+      });
+      // check if we need to remove any repeating characters.
+      password = password.replace(repeatingCharacters, '');
+    }
+    // Send the rejection back if the passphrase fails to pass the strength test
+    if (owasp.test(password).errors.length) {
+      reject(new Error('An unexpected problem occured while generating the random passphrase'));
+    } else {
+      // resolve with the validated passphrase
+      resolve(password);
+    }
+  });
+};
+mongoose.model('User', UserSchema);
+'use strict';
+/**
+ * Module dependencies.
+ */
+var acl = require('acl');
+// Using the memory backend
+acl = new acl(new acl.memoryBackend());
+/**
+ * Invoke Admin Permissions
+ */
+exports.invokeRolesPolicies = function () {
+  acl.allow([{
+      roles: ['admin'],
+      allows: [
+        {
+          resources: '/api/users',
+          permissions: '*'
+        },
+        {
+          resources: '/api/users/:userId',
+          permissions: '*'
+        }
+      ]
+    }]);
+};
+/**
+ * Check If Admin Policy Allows
+ */
+exports.isAllowed = function (req, res, next) {
+  var roles = req.user ? req.user.roles : ['guest'];
+  // Check for user roles
+  acl.areAnyRolesAllowed(roles, req.route.path, req.method.toLowerCase(), function (err, isAllowed) {
+    if (err) {
+      // An authorization error occurred.
+      return res.status(500).send('Unexpected authorization error');
+    } else {
+      if (isAllowed) {
+        // Access granted! Invoke next middleware
+        return next();
+      } else {
+        return res.status(403).json({ message: 'User is not authorized' });
+      }
+    }
+  });
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var adminPolicy = require('../policies/admin.server.policy'), admin = require('../controllers/admin.server.controller');
+module.exports = function (app) {
+  // User route registration first. Ref: #713
+  require('./users.server.routes.js')(app);
+  // Users collection routes
+  app.route('/api/users').get(adminPolicy.isAllowed, admin.list);
+  // Single user routes
+  app.route('/api/users/:userId').get(adminPolicy.isAllowed, admin.read).put(adminPolicy.isAllowed, admin.update).delete(adminPolicy.isAllowed, admin.delete);
+  // Finish by binding the user middleware
+  app.param('userId', admin.userByID);
+};
+'use strict';
+/**
+ * Module dependencies.
+ */
+var passport = require('passport');
+module.exports = function (app) {
+  // User Routes
+  var users = require('../controllers/users.server.controller');
+  // Setting up the users password api
+  app.route('/api/auth/forgot').post(users.forgot);
+  app.route('/api/auth/reset/:token').get(users.validateResetToken);
+  app.route('/api/auth/reset/:token').post(users.reset);
+  // Setting up the users authentication api
+  app.route('/api/auth/signup').post(users.signup);
+  app.route('/api/auth/signin').post(users.signin);
+  app.route('/api/auth/signout').get(users.signout);
+  // Setting the facebook oauth routes
+  app.route('/api/auth/facebook').get(users.oauthCall('facebook', { scope: ['email'] }));
+  app.route('/api/auth/facebook/callback').get(users.oauthCallback('facebook'));
+  // Setting the twitter oauth routes
+  app.route('/api/auth/twitter').get(users.oauthCall('twitter'));
+  app.route('/api/auth/twitter/callback').get(users.oauthCallback('twitter'));
+  // Setting the google oauth routes
+  app.route('/api/auth/google').get(users.oauthCall('google', {
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'
+    ]
+  }));
+  app.route('/api/auth/google/callback').get(users.oauthCallback('google'));
+  // Setting the linkedin oauth routes
+  app.route('/api/auth/linkedin').get(users.oauthCall('linkedin', {
+    scope: [
+      'r_basicprofile',
+      'r_emailaddress'
+    ]
+  }));
+  app.route('/api/auth/linkedin/callback').get(users.oauthCallback('linkedin'));
+  // Setting the github oauth routes
+  app.route('/api/auth/github').get(users.oauthCall('github'));
+  app.route('/api/auth/github/callback').get(users.oauthCallback('github'));
+  // Setting the paypal oauth routes
+  app.route('/api/auth/paypal').get(users.oauthCall('paypal'));
+  app.route('/api/auth/paypal/callback').get(users.oauthCallback('paypal'));
+};
+'use strict';
+module.exports = function (app) {
+  // User Routes
+  var users = require('../controllers/users.server.controller');
+  // Setting up the users profile api
+  app.route('/api/users/me').get(users.me);
+  app.route('/api/users').put(users.update);
+  app.route('/api/users/accounts').delete(users.removeOAuthProvider);
+  app.route('/api/users/password').post(users.changePassword);
+  app.route('/api/users/picture').post(users.changeProfilePicture);
+  // Finish by binding the user middleware
+  app.param('userId', users.userByID);
+};
+'use strict';
 // Init the application configuration module for AngularJS application
 var ApplicationConfiguration = function () {
   // Init module configuration options
