@@ -101,4 +101,41 @@ class DocManager(SDM):
         flat_doc = super()._clean_doc(doc, namespace, timestamp)
         print(json.dumps(flat_doc))
         return flat_doc		
+    
+    def reformat(dict):
+        new_docs = []
+        new_prod = {}
+        for key, value in dict.items():
+            """ if(key starts with "cities")
+                    split key by "." => keypart[0], keypart[1], value
+                    new_prod['cities'][keypart[1]] = value
+                if(key == "pricing.default_mrp")
+                    new_prod["default_mrp"] = value
+                    del dict['pricing.default_mrp']
+                if(key startswith 'pricing.mrp')
+                    split key by '.' => 'pricing', 'mrp', index, 'city'
+                    new_prod['city.'value'.mrp'] = dict['pricing.''mrp.' index '.mrp']
+            """
+        """Now identify variants
+        for key, value in new_prod.items():
+            """ if(key startswith 'vars.')
         
+    
+    @wrap_exceptions
+    def upsert(self, doc, namespace, timestamp):
+        """Update or insert a document into Solr
+
+        This method should call whatever add/insert/update method exists for
+        the backend engine and add the document in there. The input will
+        always be one mongo document, represented as a Python dictionary.
+        """
+        flat_doc = self._clean_doc(doc, namespace, timestamp)
+        
+        docs = reformat(flat_doc)
+        if self.auto_commit_interval is not None:
+            self.solr.add(docs,
+                          commit=(self.auto_commit_interval == 0),
+                          commitWithin=u(self.auto_commit_interval))
+        else:
+            self.solr.add(docs,
+                          commit=False)

@@ -104,7 +104,8 @@ module.exports = function (grunt) {
           node: true,
           mocha: true,
           jasmine: true,
-		  laxcomma: false
+		  laxcomma: false,
+		  indent: false
         }
       }
     },
@@ -234,8 +235,7 @@ module.exports = function (grunt) {
 		options: {
 		// Task-specific options go here.
 		},
-		files: defaultAssets.client.js
-		
+		files:  _.union(defaultAssets.server.gruntConfig, defaultAssets.server.allJS, defaultAssets.client.js)		
 	}
   });
 
