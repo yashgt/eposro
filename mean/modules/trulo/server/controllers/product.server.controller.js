@@ -43,7 +43,7 @@ exports.getProducts = function (req, res) {
       id: j.toString(),
       name: 'Product' + j,
       catID: cat,
-      mrp: 25
+        mrp: 20
     };
     products.push(pdt);
   }

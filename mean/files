@@ -207,13 +207,11 @@ angular.module('core').controller('HeaderController', [
     myCart.fetchCart(3, function (cart) {
       $scope.cartCount = 0;
       $scope.cartValue = 0;
-      if (cart === null) {
-        console.log('In header controller , cart is null');
-      } else {
+      if (cart !== null) {
         for (var i = 0; i < cart.products.length; i++) {
           $scope.cartCount += cart.products[i].count;
+          $scope.cartValue += parseInt(cart.products[i].price) * $scope.cartCount;
         }
-        $scope.cartValue = cart.estimated_cost;
       }
       console.log('Fetched cart successfully with cartcount = ' + $scope.cartCount + ' & value=' + $scope.cartValue);
     });
@@ -650,10 +648,6 @@ angular.module('trulo').factory('Mycart', [
         console.log('In mycart service,Fetching cart');
         trulo.fetchCart(userId, function (cartResponse) {
           cart = cartResponse;
-          /*if( cart == null)
-                        console.log("In mycart service, cart = null");
-                    else
-                        console.log("In mycart service, cart = "+cart.products[0].count);    */
           cb(cart);
         });
       },
@@ -780,7 +774,7 @@ angular.module('trulo').factory('Trulo', [
         $http.post('/api/cart', data).success(function (res) {
           console.log('Response received in trulo service as ' + res);
           //console.log('In epsvc cart:' + res.products[0].count);
-          if (res === null) {
+          if (res === 'null') {
             console.log('Sending res null in epsvc');
             cb(null);
           } else {

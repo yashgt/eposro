@@ -37,10 +37,9 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
             if( cart != null){
                 for( var i=0; i<cart.products.length; i++){
                     $scope.cartCount += cart.products[i].count;
-                    $scope.cartValue += parseInt(cart.products[i].price);
+                    $scope.cartValue += parseInt(cart.products[i].price)*$scope.cartCount;
                 }
             }
-            
             console.log("Fetched cart successfully with cartcount = "+$scope.cartCount+" & value="+$scope.cartValue);
 		});
         myCart.onAddToCart(this.addToCart);
