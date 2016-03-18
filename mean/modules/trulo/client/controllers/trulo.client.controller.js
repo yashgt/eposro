@@ -13,7 +13,7 @@ angular.module('trulo').controller('TruloController', [
         $scope.getCategories = function () {
             
             console.log('Fetching categories in controller');
-            trulo.getCategories(function (catsResponse,pageResponse,productsResponse) {
+            trulo.getCategories(0,function (catsResponse,pageResponse,productsResponse) {
                 console.log('Categories fetched successfully');
                 
                 $scope.categories = catsResponse;
@@ -44,10 +44,22 @@ angular.module('trulo').controller('TruloController', [
         };
 
         $scope.getSubCat = function (parent) {
-
-            trulo.getCategories(function (cats) {
+            console.log("Fetching subcategories of parent = "+parent);
+            trulo.getCategories(parent,function (catsResponse,pageResponse,productsResponse) {
+                console.log('Sub Categories fetched successfully');
+            
+                if( catsResponse.length == 0)
+                    $scope.hideMe = 1;
+                else
+                    $scope.hideMe = 0;
+                $scope.subCategories = catsResponse;
+                if( $scope.subCategories.length!=0)
+                    console.log($scope.subCategories[1].title);
+                //$scope.lastPageLoaded = pageResponse;
+                //$scope.products = productsResponse;
 
             });
+         
         };
 
         $scope.scrollTop = function () {
@@ -58,19 +70,21 @@ angular.module('trulo').controller('TruloController', [
             if (i == 0) {
                 // this is called by a top-level category
                 $scope.breadCrumbs = [];
-
             }
-            /*else{
-                if( $scope.breadCrumbs.length > 1){
-                    $scope.breadCrumbs.pop();
-                }
-            }*/
             $scope.breadCrumbs.push(cat);
-            if ($scope.breadCrumbs.length == 3)
-                $scope.hideMe = 1;
-            else
-                $scope.hideMe = 0;
-
         };
+        
+        $scope.popBread = function(cat){
+            //TODO display products by applying filters
+            var i = 0;
+            while( i < $scope.breadCrumbs.length ){
+                if( $scope.breadCrumbs[i] == cat ){
+                    break;
+                }
+                i++;
+            }
+            $scope.breadCrumbs.splice(i+1,$scope.breadCrumbs.length-1);
+            this.getSubCat(cat.catID);
+        }
     }
 ]);

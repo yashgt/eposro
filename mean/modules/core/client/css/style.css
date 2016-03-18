@@ -19,3 +19,16 @@
 .browse-body{
 	padding-top: -40px;
 }
+.sub-categories-row{
+    position: relative;
+    padding: 0px;
+    margin-top: 7px;
+    height: 10px;
+    width: 100%;
+}
+body{
+	padding-top:50px;
+}
+@media screen and (max-width: 768px) {
+    body { padding-top: 140px; }
+}

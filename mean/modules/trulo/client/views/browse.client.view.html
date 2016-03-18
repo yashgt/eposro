@@ -8,12 +8,29 @@
                 </md-tab-body>
             </md-tab>
             <md-tab id="tab-button" ng-repeat="cat in categories" 
-            md-on-select="fetchNextPage(cat.catID,0);setBreadArray(cat.title,0);scrollTop();getSubCat(cat.catID);">
+            md-on-select="fetchNextPage(cat.catID,0);setBreadArray(cat,0);scrollTop();getSubCat(cat.catID);">
                 <md-tab-label>
                     {{cat.title}}
                 </md-tab-label>
 
                 <md-tab-body>
+                    <div class="sub-categories-row">
+                        <md-menu id="sub-cat-button" ng-hide="hideMe">
+                            <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                            </md-button>
+                            <md-menu-content width=6>
+                                <md-menu-item ng-repeat="subCat in subCategories">
+                                    <md-button ng-click="getSubCat(subCat.catID);setBreadArray(subCat,1)">
+                                        {{subCat.title}}
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                        <ol class="breadcrumb" id="breadcrumb" style="float:right">
+                            <li ng-repeat="bread in breadCrumbs"><a href="#" ng-click="popBread(bread)">{{bread.title}}</a></li>
+                        </ol>
+                    </div>
                     <div id="products-row" infinite-scroll="fetchNextPage(nextCategory,1)" infinite-scroll-disabled="busy">
 
                         <md-grid-list md-cols-lg="3" md-cols-xs="1" md-cols-gt="3" md-cols-md="2" md-cols-sm="1" md-gutter="5px" md-row-height="2:1">

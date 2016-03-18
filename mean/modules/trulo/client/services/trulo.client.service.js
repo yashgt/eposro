@@ -4,9 +4,9 @@ angular.module('trulo').factory('Trulo', [
   , function ($http) {
         return {
             //generalize this for getting sub-categories as well
-            getCategories: function (cb) {
-                console.log("Inside service to get products");
-                $http.get('/api/categories?catID=0').success(function (response) {
+            getCategories: function (parent,cb) {
+                console.log("Inside service to get categories of parent = "+parent);
+                $http.get('/api/categories?catID='+parent).success(function (response) {
                     var categories = response;
                     var lastPageLoaded = [];
                     var products = [];
@@ -40,10 +40,10 @@ angular.module('trulo').factory('Trulo', [
                     cb(productsOfCurrentCat, lastPage, busy); //$scope.productsOfCurrentCat = products[j].pdt;
                     //$scope.busy = false;
                 });
-            },
+            }
 
 
-            addToCart: function (pdt) {
+            , addToCart: function (pdt) {
                 var data = {
                     'pdtID': pdt
                     , 'userID': 3
