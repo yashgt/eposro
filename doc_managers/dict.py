@@ -1,9 +1,6 @@
-# i hav provided an implicit doc
-newDoc = []
-newProduct = {}
-
 # THIS IS THE 'FLATTEND' DOCUMENT WHICH IS GIVEN BY DEFAULT SOLR_DOC_MANAGER
-d = {
+
+dict = {
 	'_id':5
 	,'v': 1		
 	,'name':"Collared T-shirt"
@@ -24,15 +21,61 @@ d = {
     ,'vars.1.facets.size':"L"
 
 	,'pricing.default_mrp': 500
-    ,'mrp.0.city':5
-    ,'mrp.0.mrp' : 520
+    ,'pricing.mrp.0.city':5
+    ,'pricing.mrp.0.mrp' : 520
  }
 
 #DO YOUR CHANGES HERE****
-    def reformat(dict):
-        new_docs = []
-        new_prod = {}
-        for key, value in dict.items():
+def reformat(dict):
+ 
+new_docs = []
+new_prod = {}
+
+count = 0
+
+for k, v in dict.iteritems():
+    if k.split('.')[0] == 'vars':
+        if count == 0:
+            docNums  = int(k.split('.')[1])
+            count = count + 1
+        elif int(k.split('.')[1]) > docNums :
+            docNums  = int(k.split('.')[1])
+    
+docNums = docNums + 1		# docNums variable tells how many documents to be created
+
+for i in range(docNums): 	
+    new_prod = {}
+    for key, value in dict.items():
+        if (key.split(".")[0] != 'cities') & (key.split('.')[0] != 'vars') & (key.split('.')[0] != 'pricing'):
+            new_prod[key] = value
+        if key.split(".")[0] == 'cities':
+            new_prod.setdefault(key.split('.')[0],[]).append(value)
+        if key.split('.')[0] == 'pricing':
+            if key.split(".")[0] + '.' + key.split(".")[1] == 'pricing.default_mrp':
+                new_prod[key.split('.')[1]] = value
+               #del dict['pricing.default_mrp']
+            if key.split('.')[0] + '.' + key.split('.')[1] == 'pricing.mrp':
+                if key.split('.')[3] == 'mrp':
+                    continue
+                else:    
+                    new_prod[key.split('.')[3] + '.' + str(value)+ '.' + key.split('.')[1]] = dict['pricing.mrp.' + key.split('.')[2] + '.mrp']
+        if key.split('.')[0] == 'vars':
+            if int(key.split('.')[1]) == i:
+                new_prod[key.split('.',2)[2]] = value
+    new_docs.append(new_prod)
+
+"""
+    if key.split(".")[0] == 'cities':
+        new_prod.setdefault(key.split('.')[0],[]).append(value)
+    if key.split('.')[0] == 'pricing':
+        if key.split(".")[0] + '.' + key.split(".")[1] == 'pricing.default_mrp':
+            new_prod.setdefault(key.split('.')[0],{})[key.split('.')[1]] = value
+        if key.split(".")[0] + '.' + key.split(".")[1] == 'pricing.mrp':
+            a = {key.split('.')[3] : value}
+            mrp.append(a)
+            new_prod.setdefault(key.split('.')[0],{})[key.split('.')[1]] = mrp"""
+			
+			
             """ if(key starts with "cities")
                     split key by "." => keypart[0], keypart[1], value
                     new_prod['cities'][keypart[1]] = value
@@ -45,7 +88,8 @@ d = {
             """
         """Now identify variants
         for key, value in new_prod.items():
-            """ if(key startswith 'vars.')
+            """ 
+					
         
     
     @wrap_exceptions
@@ -66,29 +110,4 @@ d = {
         else:
             self.solr.add(docs,
                           commit=False)
-
-
-"""
-	if key == "cats":
-		for i in range(len(value)):
-			print "key :", key, "   ***value :", value[i] 
-	elif key == "facets":
-		for i,j in value.iteritems():
-                        print "key :", key, "   ***value :", value[i]
-	elif key == "attrs": 
-		for i,j in value.iteritems():
-			print "key :", key, "   ***value :", value[i]
-        elif key == "cities":
-		for i in range(len(value)):
-			print "key :", key, "   ***value :", value[i]
-	#elif key == "pricing":
-	#	for i,j in value.iteritems():
-	#		print "key :", key, "***value :", value[i]
-	else:
-		print "key :",key,"   ***value :",d[key]
-			
-"""	
-for key,value in newProduct.iteritems():
-        print key, value
-		
 
