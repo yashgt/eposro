@@ -13,12 +13,7 @@
     margin-top: 40px;
     margin-left: -30px;
 }
-.content{
-	margin-top:-20px;
-}
-.browse-body{
-	padding-top: -40px;
-}
+
 .sub-categories-row{
     position: relative;
     padding: 0px;
@@ -26,9 +21,17 @@
     height: 10px;
     width: 100%;
 }
-body{
+/*body{
 	padding-top:50px;
-}
+}*/
 @media screen and (max-width: 768px) {
-    body { padding-top: 140px; }
+    body { padding-top: 70px; }
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+}
+.btn1{
+	width:5px;
+	height:10px;
 }

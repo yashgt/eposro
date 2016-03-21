@@ -549,7 +549,7 @@ exports.checkOut = function (userId, cb) {
         }
     });
 };
-exports.fetchCart = function (userId,cb) {
+exports.fetchCart = function (userId, cb) {
     console.log("FInding cart for user "+userId);
     var users = dbConn.collection('users');
     users.findOne({
@@ -698,3 +698,15 @@ exports.getHomeDelVen = function (loc, items, cb) {
         }
     });
 };
+
+exports.getProductDetails=function (pid,cb) {
+     var products=dbConn.collection("products");
+     products.findOne({_id:pid},function (err,res) {
+          if(!err){
+            cb(res);
+            return;
+          }
+          else
+            console.log(err);
+     });
+}

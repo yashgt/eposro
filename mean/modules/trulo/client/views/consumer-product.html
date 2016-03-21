@@ -1,1 +1,42 @@
-<p>View that shows an indvidual product to the Consumer</p>
+<div class="container" style="padding-top:20px">
+    <div layout="column">
+        <md-card layout="row">
+            <!--<md-card-header>
+                <md-card-header-text>
+                    <span class="md-title">{{product.pname}}</span>
+                    <span class="md-subhead">{{ product.brand}}</span>
+                </md-card-header-text>
+            </md-card-header>-->
+            <div flex="50">
+                <img ng-src="modules/trulo/client/img/mango.png" class="md-card-image"  alt="image caption">
+                <!-- load the above image according to the product. For the time being statis image loaded -->
+            </div>
+            <div layout="column" flex="50">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{product.pname}}</span>
+                        <span class="md-subhead">{{ product.brand}}</span>
+                        <span class="md-subhead">₹ {{product.price.mrp[0].mrp}}</span><!--display price according to the city-->
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <p>
+                        {{product.desc}}
+                    </p>
+                </md-card-content>
+                <md-card-actions layout="row" layout-xs="column">
+                    <md-button class="btn1 md-raised" ng-click="add()" flex="30"><span class="glyphicon glyphicon-plus"></span></md-button>
+                    <md-input-container flex="40">
+                        <label>Quantity</label>
+                        <input type="number" ng-model="quantity"/>
+                    </md-input-container>
+                    <md-button class="btn1 md-raised" ng-click="remove()" flex="30"><span class="glyphicon glyphicon-minus"></span></md-button>                
+                </md-card-actions>
+
+            </div>
+        </md-card>
+        <div>
+            <h4>Suggestions</h4>
+        </div>
+    </div> 
+</div>

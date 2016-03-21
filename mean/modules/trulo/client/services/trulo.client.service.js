@@ -43,18 +43,18 @@ angular.module('trulo').factory('Trulo', [
             }
 
 
-            , addToCart: function (pdt) {
+            , addToCart: function (pdtID) {
                 var data = {
-                    'pdtID': pdt
+                    'pdtID': pdtID
                     , 'userID': 3
                     , 'city': 'goa'
                 };
                 console.log("add:Sending data with id="+data['pdtID']);
                 $http.post('/api/addToCart', data).success(function (response) {});
             }
-            , removeFromCart: function (pdt) {
+            , removeFromCart: function (pdtID) {
                 var data = {
-                    'pdtID': pdt
+                    'pdtID': pdtID
                     , 'userID': 3
                     , 'city': 'goa'
                 };
@@ -78,6 +78,11 @@ angular.module('trulo').factory('Trulo', [
                         console.log('Sending some res in epsvc as '+res);
                         cb(res);
                     }
+                });
+            }
+            , getProductById: function(id, cb){
+                $http.get('/api/product-detail?id='+id).success(function(product){
+                    cb(product);
                 });
             }
         };

@@ -40,7 +40,7 @@ exports.getProducts = function (req, res) {
   var products = [];
   for (var j = 1; j < 6; j++) {
     var pdt = {
-      id: j.toString(),
+      _id: j.toString(),
       name: 'Product' + j,
       catID: cat,
         mrp: 20
@@ -49,3 +49,9 @@ exports.getProducts = function (req, res) {
   }
     res.send(products);
 };
+exports.getProductDetails = function(req,res){
+    var id = parseInt(req.query.id);
+    trulo.getProductDetails(id,function(product){
+        res.json(product);
+    });
+}

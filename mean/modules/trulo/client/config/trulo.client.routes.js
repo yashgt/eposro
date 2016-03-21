@@ -22,7 +22,8 @@ angular.module('trulo').config(['$stateProvider', '$urlRouterProvider',
       })
       
       .state('products',{
-          url:'/product',
+          url:'/product/:_id',
+          controller: "ProductDetailController",
           templateUrl:'modules/trulo/client/views/consumer-product.html'
       })
       
