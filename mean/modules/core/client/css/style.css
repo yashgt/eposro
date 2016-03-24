@@ -21,17 +21,40 @@
     height: 10px;
     width: 100%;
 }
-/*body{
-	padding-top:50px;
-}*/
 @media screen and (max-width: 768px) {
     body { padding-top: 70px; }
 }
-input[type=number]::-webkit-inner-spin-button, 
+/*input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
-}
+}*/
 .btn1{
 	width:5px;
 	height:10px;
+}
+.product-detail{
+	padding-top:20px;
+}
+.cart{
+	padding-top : 20px;
+}
+#footer {
+    width: 100%;
+    height: 60px;
+   
+    position: fixed;
+    bottom: 0;
+}
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+#content {
+    margin: 0 auto;
+    padding: 60px 0;
 }

@@ -1,4 +1,4 @@
-<div class="container" style="padding-top:20px">
+<div class="container product-detail">
     <div layout="column">
         <md-card layout="row">
             <!--<md-card-header>
@@ -25,12 +25,16 @@
                     </p>
                 </md-card-content>
                 <md-card-actions layout="row" layout-xs="column">
-                    <md-button class="btn1 md-raised" ng-click="add()" flex="30"><span class="glyphicon glyphicon-plus"></span></md-button>
+                    <md-input-container>
+                        <label>Qauntity</label>
+                        <input type="number" ng-model="count" min="0" ng-change="updateCart(count)"/>
+                    </md-input-container>
+                    <!--<md-button class="btn1 md-raised" ng-click="add()" flex="30"><span class="glyphicon glyphicon-plus"></span></md-button>
                     <md-input-container flex="40">
                         <label>Quantity</label>
                         <input type="number" ng-model="quantity"/>
                     </md-input-container>
-                    <md-button class="btn1 md-raised" ng-click="remove()" flex="30"><span class="glyphicon glyphicon-minus"></span></md-button>                
+                    <md-button class="btn1 md-raised" ng-click="remove()" flex="30"><span class="glyphicon glyphicon-minus"></span></md-button>-->
                 </md-card-actions>
 
             </div>
