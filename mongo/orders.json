@@ -1,17 +1,16 @@
 {
     ordered_by: 1,
-    vendors_serving:[],//all the vendors who can serve the order
-    selected_vendor:[],//currently evaluted vendor
+    vendors_serving:[],
+    selected_vendor:[],
     items:[
         {id:6,name:"goaDairyFlavouredMilk",mrp:15,qty:10},
         {id:2,name:"Milk Hatsun",mrp:23,qty:5},
         {id:3,name:"Milk Cavin's ",mrp:25,qty:6}
     ],
     estimated_cost:415,
-    processing_status:0//1-vendor found,2-accepted,3-rejected,
+    processing_status:0,
     order_mode:1, 
-    criteria: //
-    //show top 5 vendors if om=0
+    criteria: 
 }
 {
     ordered_by: 2,
