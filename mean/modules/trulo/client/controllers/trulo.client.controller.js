@@ -9,7 +9,9 @@ angular.module('trulo').controller('TruloController', [
         $scope.breadCrumbs = [];
         $scope.nextCategory = 1; //category id of dairy tab
         $scope.cartCount = 0;
-        
+        $scope.delivery = 0;
+        $scope.quantity = 0;
+        $scope.count = $scope.quantity;
         $scope.getCategories = function () {
             
             console.log('Fetching categories in controller');
@@ -85,6 +87,28 @@ angular.module('trulo').controller('TruloController', [
             }
             $scope.breadCrumbs.splice(i+1,$scope.breadCrumbs.length-1);
             this.getSubCat(cat.catID);
+        }
+        
+        $scope.fetchCart = function(){
+            myCart.fetchCart(3,function(cartResponse){
+                $scope.cart = cartResponse;
+                //console.log($scope.cart.products);
+            });
+        }
+               
+        $scope.updateCart = function(count){
+            console.log("In updateCart, count = "+count);
+            if( count == null)
+                return;
+            if( count < $scope.quantity){
+                myCart.addToCart();
+                console.log("Call remove from cart");
+            }  
+            else if( count > $scope.quantity){
+                myCart.removeFromCart();
+                console.log("Call add to cart");
+            }
+            $scope.quantity = count;
         }
     }
 ]);

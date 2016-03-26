@@ -1,1 +1,82 @@
-<p>Shows my cart</p>
+<section class="row" ng-controller="TruloController">
+    <div class="panel panel-default" style="width:95%;margin: auto;margin-top: 2%">
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">CheckOut <span class="glyphicon glyphicon-shopping-cart"></span></h2>
+        </div>
+        <div class="panel-body">
+            <div class="cart" ng-init="fetchCart()">
+                <div layout="row" layout-xs="column" layout-margin class="well well-sm" ng-repeat="product in cart.products">
+                    <div flex="30" layout="row" flex-xs="100">
+                        <h4 flex-xs="50">{{product.name}}</h4>
+                        <p flex-xs="50" style="padding-top:10px">₹ {{product.price}}</p>
+                    </div>
+                    <div layout="row" flex="70" flex-xs="100">
+                        <div layout-margin flex-xs="50">
+                            <!--<div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+                                <input type="number" class="form-control">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </span>
+                            </div>-->
+                            <md-input-container>
+                                <label>Qauntity</label>
+                                <input type="number" ng-model="count" min="0" ng-change="updateCart(count)"/>
+                            </md-input-container>
+                        </div>
+                        <div layout-margin flex-xs="50">
+                            <button type="button" class=" btn btn-danger btn-circle"><span class="glyphicon glyphicon-remove"></span></button>
+                        </div>
+                    </div>
+                </div>
+                <div layout="column" layout-margin>
+                    <div layout="row">
+                        <md-radio-group ng-model="delivery" style="margin-top:20px">
+                            <md-radio-button ng-value="0" name="delivery">Home Delivery</md-radio-button>
+                        </md-radio-group>
+                        <md-input-container flex>
+                            <label>Walking dist in meters</label>
+                            <input type="number" ng-disabled="delivery"/>
+                        </md-input-container>
+                    </div>
+                    <md-radio-group ng-model="delivery">
+                        <md-radio-button ng-value="1" name="delivery">Self Pickup</md-radio-button>
+                    </md-radio-group>
+                </div>
+                <!--<div layout="row">
+        <md-radio-group ng-model="delivery">
+            <div class="radio">
+                    
+                </div>
+                 <md-input-container flex>
+                    <label>Walking dist</label>
+                    <input type="number"/>
+                </md-input-container>
+
+            <div class="radio">
+                <md-radio-button value="2" name="delivery">Self Pickup</md-radio-button>
+            </div>
+        </md-radio-group>
+    </div>-->
+                <div layout="row">
+                    <div flex="30">
+                        <h1>₹ {{cart.estimated_cost}}</h1>
+                        <div class="btn btn-success" ng-click="placeOrder()">Place Order</div>
+                    </div>
+                    <div flex="30"></div>
+                    <div flex="40">
+                        <md-checkbox>
+                            Allow Multiple Vendors
+                        </md-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

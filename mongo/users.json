@@ -39,7 +39,7 @@
    },
     orderIDs: [1,3],
     default_delivery_preference: 1, 
-    max_walking_distance:1000
+    max_walking_distance:2000
 }
 {
     _id: 2,

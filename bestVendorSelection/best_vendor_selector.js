@@ -20,11 +20,17 @@ setTimeout(function(){
 			}
 			
 			//get users max walk distance
-			var max_walk_dist=customer.max_walk_dist;
+			if(customer.max_walking_distance==undefined){
+				var max_walking_distance=1000;
+			}
+			else{
+				var max_walking_distance=parseInt(customer.max_walking_distance);
+			}
+			//console.log(customer._id+" "+max_walking_distance);
 
 			var final_vendors=[];
-			if(orders[i].order_mode==0){
-				final_vendors=wait.for(dbfun.getPickUpVendors,curr_loc,items,max_walk_dist);
+			if(orders[i].order_mode==0){//pick up order
+				final_vendors=wait.for(dbfun.getPickUpVendors,curr_loc,items,max_walking_distance);
 				if(JSON.stringify(final_vendors)!='[]'){
 				console.log("\n\nThe Pick Up order "+i+" can be picked up from following vendors ");
 				for(var j=0;j<final_vendors.length;j++){
@@ -39,7 +45,8 @@ setTimeout(function(){
 				final_vendors=wait.for(dbfun.getHomeDelVen,curr_loc,items);
 				if(JSON.stringify(final_vendors)!='[]'){
 				console.log("\n\nThe Home delivery order "+i+" will be served by follwing vendor ");
-				console.log(final_vendors[0].name+" distance = "+Math.ceil(final_vendors[0].distance));
+				//console.log(final_vendors);
+				console.log(final_vendors[0].name+" distance = "+Math.ceil(final_vendors[0].distance)+" meters");
 				}
 				else{
 					console.log("\n\norder "+i+" cannot be serviced");

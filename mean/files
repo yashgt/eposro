@@ -525,11 +525,9 @@ module.exports = {
 // Rename this file to local.js for having a local configuration variables that
 // will not get commited and pushed to remote repositories.
 // Use it for your API keys, passwords, etc.
-/* For example:
-
 module.exports = {
   db: {
-    uri: 'mongodb://localhost/local-dev',
+    uri: 'mongodb://localhost:40000/local-dev',
     options: {
       user: '',
       pass: ''
@@ -542,7 +540,6 @@ module.exports = {
     callbackURL: '/api/auth/facebook/callback'
   }
 };
-*/
 'use strict';
 module.exports = {
   secure: {
@@ -1521,7 +1518,11 @@ exports.removeFromCart = function (req, res) {
 exports.fetchCart = function (req, res) {
   var userID = req.body.userID;
   trulo.fetchCart(userID, function (cart) {
-    res.send(cart);
+    console.log('Sending res = ' + cart);
+    if (cart === null)
+      res.send('null');
+    else
+      res.send(cart);
   });
 };
 'use strict';
@@ -1602,13 +1603,20 @@ exports.getProducts = function (req, res) {
   var products = [];
   for (var j = 1; j < 6; j++) {
     var pdt = {
-      id: j.toString(),
+      _id: j.toString(),
       name: 'Product' + j,
-      catID: cat
+      catID: cat,
+      mrp: 20
     };
     products.push(pdt);
   }
   res.send(products);
+};
+exports.getProductDetails = function (req, res) {
+  var id = parseInt(req.query.id);
+  trulo.getProductDetails(id, function (product) {
+    res.json(product);
+  });
 };
 'use strict';
 var solr = require('solr-client');
@@ -2219,6 +2227,16 @@ exports.getHomeDelVen = function (loc, items, cb) {
     }
   });
 };
+exports.getProductDetails = function (pid, cb) {
+  var products = dbConn.collection('products');
+  products.findOne({ _id: pid }, function (err, res) {
+    if (!err) {
+      cb(res);
+      return;
+    } else
+      console.log(err);
+  });
+};
 'use strict';
 module.exports = function (app) {
   // Routing logic   
@@ -2231,6 +2249,7 @@ module.exports = function (app) {
   app.post('/api/addToCart', cart.addToCart);
   app.post('/api/removeFromCart', cart.removeFromCart);
   app.post('/api/cart', cart.fetchCart);
+  app.get('/api/product-detail', product.getProductDetails);
 };
 'use strict';
 /**
@@ -3925,7 +3944,8 @@ angular.module('trulo').config([
       url: '/merchant',
       templateUrl: 'modules/trulo/client/views/browse.client.view.html'
     }).state('products', {
-      url: '/product',
+      url: '/product/:_id',
+      controller: 'ProductDetailController',
       templateUrl: 'modules/trulo/client/views/consumer-product.html'
     }).state('profile', {
       url: '/profile',
@@ -3940,6 +3960,64 @@ angular.module('trulo').config([
       url: '/myshop',
       templateUrl: 'modules/trulo/client/views/myshop.html'
     });
+  }
+]);
+'use strict';
+angular.module('trulo').controller('CartController', [
+  '$scope',
+  'Trulo',
+  'Mycart',
+  function ($scope, trulo, myCart) {
+    console.log('In CartController');
+    $scope.cart = myCart.fetchCart(3, function (cartResponse) {
+      $scope.cart = cartResponse;
+      console.log($scope.cart.products);
+    });
+  }
+]);
+'use strict';
+angular.module('trulo').controller('ProductDetailController', [
+  '$scope',
+  '$stateParams',
+  'Trulo',
+  'Mycart',
+  function ($scope, $stateParams, trulo, myCart) {
+    $scope._id = $stateParams._id;
+    console.log('Received details req for ' + $stateParams._id);
+    $scope.quantity = 0;
+    trulo.getProductById($scope._id, function (productResponse) {
+      $scope.product = productResponse;
+      $scope.quantity = myCart.getCount($scope.product);
+      $scope.count = $scope.quantity;
+      console.log('Product received is ' + $scope.product.name);
+    });
+    /*$scope.add = function(){
+          $scope.quantity++;
+          myCart.addToCart($scope.product);
+      }
+      $scope.remove = function(){
+          if( $scope.quantity <=0)
+              return;
+          $scope.quantity--;
+          myCart.removeFromCart($scope.product);
+      }
+      $scope.addToCart = function(){
+          //TODO add product to cart
+          myCart.addToCart();
+      };*/
+    $scope.updateCart = function (count) {
+      console.log('In updateCart, count = ' + count);
+      if (count === null)
+        return;
+      if (count < $scope.quantity) {
+        myCart.removeFromCart($scope.product);
+        console.log('Call remove from cart');
+      } else if (count > $scope.quantity) {
+        myCart.addToCart($scope.product);
+        console.log('Call add to cart');
+      }
+      $scope.quantity = count;
+    };
   }
 ]);
 'use strict';
@@ -3961,9 +4039,12 @@ angular.module('trulo').controller('TruloController', [
     $scope.nextCategory = 1;
     //category id of dairy tab
     $scope.cartCount = 0;
+    $scope.delivery = 0;
+    $scope.quantity = 0;
+    $scope.count = $scope.quantity;
     $scope.getCategories = function () {
       console.log('Fetching categories in controller');
-      trulo.getCategories(function (catsResponse, pageResponse, productsResponse) {
+      trulo.getCategories(0, function (catsResponse, pageResponse, productsResponse) {
         console.log('Categories fetched successfully');
         $scope.categories = catsResponse;
         $scope.lastPageLoaded = pageResponse;
@@ -3984,7 +4065,17 @@ angular.module('trulo').controller('TruloController', [
       });
     };
     $scope.getSubCat = function (parent) {
-      trulo.getCategories(function (cats) {
+      console.log('Fetching subcategories of parent = ' + parent);
+      trulo.getCategories(parent, function (catsResponse, pageResponse, productsResponse) {
+        console.log('Sub Categories fetched successfully');
+        if (catsResponse.length === 0)
+          $scope.hideMe = 1;
+        else
+          $scope.hideMe = 0;
+        $scope.subCategories = catsResponse;
+        if ($scope.subCategories.length !== 0)
+          console.log($scope.subCategories[1].title);  //$scope.lastPageLoaded = pageResponse;
+                                                       //$scope.products = productsResponse;
       });
     };
     $scope.scrollTop = function () {
@@ -3995,16 +4086,37 @@ angular.module('trulo').controller('TruloController', [
         // this is called by a top-level category
         $scope.breadCrumbs = [];
       }
-      /*else{
-                if( $scope.breadCrumbs.length > 1){
-                    $scope.breadCrumbs.pop();
-                }
-            }*/
       $scope.breadCrumbs.push(cat);
-      if ($scope.breadCrumbs.length === 3)
-        $scope.hideMe = 1;
-      else
-        $scope.hideMe = 0;
+    };
+    $scope.popBread = function (cat) {
+      //TODO display products by applying filters
+      var i = 0;
+      while (i < $scope.breadCrumbs.length) {
+        if ($scope.breadCrumbs[i] === cat) {
+          break;
+        }
+        i++;
+      }
+      $scope.breadCrumbs.splice(i + 1, $scope.breadCrumbs.length - 1);
+      this.getSubCat(cat.catID);
+    };
+    $scope.fetchCart = function () {
+      myCart.fetchCart(3, function (cartResponse) {
+        $scope.cart = cartResponse;  //console.log($scope.cart.products);
+      });
+    };
+    $scope.updateCart = function (count) {
+      console.log('In updateCart, count = ' + count);
+      if (count === null)
+        return;
+      if (count < $scope.quantity) {
+        myCart.addToCart();
+        console.log('Call remove from cart');
+      } else if (count > $scope.quantity) {
+        myCart.removeFromCart();
+        console.log('Call add to cart');
+      }
+      $scope.quantity = count;
     };
   }
 ]);
@@ -4044,7 +4156,6 @@ angular.module('trulo').factory('Mycart', [
     var cnt = 0;
     var val = 0;
     var cart;
-    //fetch the value and count from server using the Trulo service
     return {
       value: 20,
       count: 0,
@@ -4052,27 +4163,29 @@ angular.module('trulo').factory('Mycart', [
         console.log('In mycart service,Fetching cart');
         trulo.fetchCart(userId, function (cartResponse) {
           cart = cartResponse;
+          console.log(cart);
           cb(cart);
         });
       },
       addToCart: function (pdt) {
-        console.log('Add:In mycart service received id=' + pdt.id);
-        trulo.addToCart(pdt.id);
+        console.log('Add:In mycart service received id=' + pdt._id);
+        trulo.addToCart(pdt._id);
         if (this.addToCartCB)
           this.addToCartCB(pdt);
       },
       removeFromCart: function (pdt) {
-        console.log('Remove:In mycart service received id=' + pdt.id);
-        trulo.removeFromCart(pdt.id);
+        console.log('Remove:In mycart service received id=' + pdt._id);
+        trulo.removeFromCart(pdt._id);
         if (this.removeFromCartCB)
           this.removeFromCartCB(pdt);
       },
       getCount: function (pdt) {
         if (cart === null) {
+          console.log('Returning 0 count');
           return 0;
         }
         for (var i = 0; i < cart.products.length; i++) {
-          if (cart.products[i].pid === pdt.id) {
+          if (cart.products[i].pid === pdt._id) {
             return cart.products[i].count;
           }
         }
@@ -4083,7 +4196,7 @@ angular.module('trulo').factory('Mycart', [
           return 0;
         }
         for (var i = 0; i < cart.products.length; i++) {
-          if (cart.products[i].pid === pdt.id) {
+          if (cart.products[i].pid === pdt._id) {
             return cart.products[i].price;
           }
         }
@@ -4115,9 +4228,9 @@ angular.module('trulo').factory('Trulo', [
   function ($http) {
     return {
       //generalize this for getting sub-categories as well
-      getCategories: function (cb) {
-        console.log('Inside service to get products');
-        $http.get('/api/categories?catID=0').success(function (response) {
+      getCategories: function (parent, cb) {
+        console.log('Inside service to get categories of parent = ' + parent);
+        $http.get('/api/categories?catID=' + parent).success(function (response) {
           var categories = response;
           var lastPageLoaded = [];
           var products = [];
@@ -4152,9 +4265,9 @@ angular.module('trulo').factory('Trulo', [
                                                      //$scope.busy = false;
         });
       },
-      addToCart: function (pdt) {
+      addToCart: function (pdtID) {
         var data = {
-          'pdtID': pdt,
+          'pdtID': pdtID,
           'userID': 3,
           'city': 'goa'
         };
@@ -4162,9 +4275,9 @@ angular.module('trulo').factory('Trulo', [
         $http.post('/api/addToCart', data).success(function (response) {
         });
       },
-      removeFromCart: function (pdt) {
+      removeFromCart: function (pdtID) {
         var data = {
-          'pdtID': pdt,
+          'pdtID': pdtID,
           'userID': 3,
           'city': 'goa'
         };
@@ -4185,6 +4298,11 @@ angular.module('trulo').factory('Trulo', [
             console.log('Sending some res in epsvc as ' + res);
             cb(res);
           }
+        });
+      },
+      getProductById: function (id, cb) {
+        $http.get('/api/product-detail?id=' + id).success(function (product) {
+          cb(product);
         });
       }
     };
