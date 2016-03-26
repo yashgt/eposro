@@ -43,16 +43,20 @@ angular.module('trulo').factory('Trulo', [
             }
 
 
-            , addToCart: function (pdtID) {
+            , addToCart: function (pdtID,cb) {
                 var data = {
                     'pdtID': pdtID
                     , 'userID': 3
                     , 'city': 'goa'
                 };
                 console.log("add:Sending data with id="+data['pdtID']);
-                $http.post('/api/addToCart', data).success(function (response) {});
+                $http.post('/api/addToCart', data).success(function (response){
+                    if(response!=null){
+                        cb(response)
+                    }
+                });
             }
-            , removeFromCart: function (pdtID) {
+            , removeFromCart: function (pdtID,cb) {
                 var data = {
                     'pdtID': pdtID
                     , 'userID': 3
@@ -60,7 +64,9 @@ angular.module('trulo').factory('Trulo', [
                 };
                 console.log("Remove:Sending data with id="+data['pdtID']);
                 $http.post('/api/removeFromCart', data).success(function (response) {
-                    console.log('Returned in cb');
+                     if(response!=null){
+                        cb(response)
+                    }
                 });
             }
             , fetchCart: function (userID, cb) {
@@ -83,6 +89,31 @@ angular.module('trulo').factory('Trulo', [
             , getProductById: function(id, cb){
                 $http.get('/api/product-detail?id='+id).success(function(product){
                     cb(product);
+                });
+            }
+            ,placeOrder:function (uid,cb) {
+                var data={
+                    'userID':uid
+                };
+                console.log("Placing order for ="+data['userID']);
+                $http.post('/api/placeOrder', data).success(function (response) {
+                    console.log('Returned in cb in place order'+response);
+                    cb('Successfully placed order');
+                });
+                 
+            }
+            ,removeProductDirectly:function(pdt,cb){
+                var data={
+                    'pdtID':pdt
+                    ,'userID':3
+                    ,'city':'goa'
+                };
+                console.log("Remove Product:Sending data with id="+data['pdtID']);
+                $http.post('/api/removeProductDirectly', data).success(function (response) {
+                    console.log('Returned in cb');
+                     if(response!=null){
+                        cb(response)
+                    }
                 });
             }
         };

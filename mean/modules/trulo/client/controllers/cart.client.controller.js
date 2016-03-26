@@ -6,6 +6,6 @@ angular.module('trulo').controller('CartController', ['$scope','Trulo','Mycart',
       $scope.cart = myCart.fetchCart(3,function(cartResponse){
           $scope.cart = cartResponse;
           console.log($scope.cart.products);
-      })
+      });
   }
 ]);
