@@ -82,38 +82,20 @@ class EPDocumentFlattener(DocumentFlattener):
 
 
 class DocManager(SDM):
-	"""The DocManager class creates a connection to the backend engine and
-		adds/removes documents, and in the case of rollback, searches for them.
-
-		The reason for storing id/doc pairs as opposed to doc's is so that multiple
-		updates to the same doc reflect the most up to date version as opposed to
-		multiple, slightly different versions of a doc.
-    
-
-
-		def __init__(self, url, auto_commit_interval=DEFAULT_COMMIT_INTERVAL, unique_key='_id', chunk_size=DEFAULT_MAX_BULK, **kwargs):
-		super().__init__(url, auto_commit_interval, unique_key, chunk_size, **kwargs)
-		self._formatter = EPDocumentFlattener() """
-	"""def _clean_doc(self, doc, namespace, timestamp):
-		flat_doc = super()._clean_doc(doc, namespace, timestamp)
-		print(json.dumps(flat_doc))
-		return flat_doc
-	"""	
-	def reformat(dict):
+	def reformat(self,dict):
 		new_docs = []
 		new_prod = {}
 
 		count = 0
 		docNums = 0
 	
-		for k, v in dict.iteritems():
+		for k, v in dict.items():
 			if k.split('.')[0] == 'vars':
 				if count == 0:
 					docNums  = int(k.split('.')[1])
 					count = count + 1
 				elif int(k.split('.')[1]) > docNums :
 					docNums  = int(k.split('.')[1])
-    
 		docNums = docNums + 1		# docNums variable tells how many documents to be created
 
 		for i in range(docNums): 	
@@ -136,33 +118,22 @@ class DocManager(SDM):
 					if int(key.split('.')[1]) == i:
 						new_prod[key.split('.',2)[2]] = value
 			new_docs.append(new_prod)
-		print new_docs
+		print(new_docs)
 		return new_docs
 	
 	@wrap_exceptions
 	def upsert(self, doc, namespace, timestamp):
-		"""
-		Update or insert a document into Solr
-
-        This method should call whatever add/insert/update method exists for
-        the backend engine and add the document in there. The input will
-        always be one mongo document, represented as a Python dictionary.
-        """	
-		print "ok"
+		print("In upsert")
 		flat_doc = self._clean_doc(doc, namespace, timestamp)
-		
-		docs = reformat(flat_doc)
+		print(flat_doc)
+		docs = self.reformat(flat_doc)
 		if self.auto_commit_interval is not None:
 			self.solr.add(docs, commit=(self.auto_commit_interval == 0), commitWithin=u(self.auto_commit_interval))
 		else:
 			self.solr.add(docs, commit=False)
 	
 	def bulk_upsert(self, docs, namespace, timestamp):
-		"""Update or insert multiple documents into Solr
-
-        docs may be any iterable
-        """
-		print "hey"
+		print("hey")
 		if self.auto_commit_interval is not None:
 			add_kwargs = {
 				"commit": (self.auto_commit_interval == 0),
@@ -172,25 +143,20 @@ class DocManager(SDM):
 			add_kwargs = {"commit": False}
 		
 		for i in docs:
-			print i
+			print(i)
 		
 		cleaned = (self._clean_doc(d, namespace, timestamp) for d in docs)
-		print cleaned	
+		"""print cleaned	"""
 		
 		if self.chunk_size > 0:
-			print "hell0 27"
+			print("hell0 27")
 			batch = list(next(cleaned) for i in range(self.chunk_size))
 			while batch:
 				for i in batch:
-					print i
+					print(i)
 				a = [y for x in batch for y in x]
-				print a
+				print(a)
 				self.solr.add(a, **add_kwargs)
 				batch = list(next(cleaned) for i in range(self.chunk_size))
 		else:
 			self.solr.add(cleaned, **add_kwargs)
-						  
-
-		
-		
-	
