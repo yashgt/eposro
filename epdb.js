@@ -519,4 +519,13 @@ exports.saveBrand=function(cbrand,cgln,cb){
 			return;
 		}
 	});
+};
+exports.clearCollections = function(table,cb){
+	setTimeout(function(){
+		var coll = dbConn.collection(table);
+		coll.remove({});
+		cb();
+	},5000);
+	
+	
 }

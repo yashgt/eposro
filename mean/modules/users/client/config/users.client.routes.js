@@ -6,7 +6,6 @@ angular.module('users').config(['$stateProvider',
     // Users state routing
     $stateProvider
       .state('settings', {
-        abstract: true,
         url: '/settings',
         templateUrl: 'modules/users/client/views/settings/settings.client.view.html',
         data: {
@@ -16,6 +15,10 @@ angular.module('users').config(['$stateProvider',
       .state('settings.profile', {
         url: '/profile',
         templateUrl: 'modules/users/client/views/settings/edit-profile.client.view.html'
+      })
+      .state('settings.address', {
+        url: '/address',
+        templateUrl: 'modules/users/client/views/settings/add-address.client.view.html'
       })
       .state('settings.password', {
         url: '/password',

@@ -1,6 +1,6 @@
 {"_id":1.0
 ,"city":"pune"
-,cats:[{cat_id:1, v:1}, {cat_id:2, v:1}] //Each city has a Version for every category. When a new product gets added to a category AND it is tagged to a city, the version of the category in the city is incremented.
+,cats:[{cat_id:1, v:1}, {cat_id:2, v:1}]
 }
 {"_id":2.0,"city":"mumbai"}
 {"_id":3.0,"city":"nagpur"}

@@ -20,15 +20,15 @@ angular.module('trulo').factory('Mycart', [
                     cb(cart);
                 });
             }
-            , addToCart: function (pdt) {
+            , addToCart: function (pdt,cb) {
                 console.log("Add:In mycart service received id=" + pdt._id);
-                trulo.addToCart(pdt._id);
+                trulo.addToCart(pdt._id,cb);
                 if (this.addToCartCB)
                     this.addToCartCB(pdt);
             }
-            , removeFromCart: function (pdt) {
+            , removeFromCart: function (pdt,cb) {
                 console.log("Remove:In mycart service received id=" + pdt._id);
-                trulo.removeFromCart(pdt._id);
+                trulo.removeFromCart(pdt._id,cb);
                 if (this.removeFromCartCB)
                     this.removeFromCartCB(pdt);
             }
@@ -60,6 +60,10 @@ angular.module('trulo').factory('Mycart', [
             }
             , onSubtractFromCart: function (cb) {
                 this.removeFromCartCB = cb;
+            }
+            ,removeProductDirectly:function(pdt,cb){
+                console.log("Remove Product:In mycart service received id=" + pdt.id);
+                trulo.removeProductDirectly(pdt._id,cb);
             }
         };
   }
