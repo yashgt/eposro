@@ -6,68 +6,46 @@
         <div class="panel-body">
             <div class="cart" ng-init="fetchCart()">
                 <div layout="row" layout-xs="column" layout-margin class="well well-sm" ng-repeat="product in cart.products">
-                    <div flex="30" layout="row" flex-xs="100">
-                        <h4 flex-xs="50">{{product.name}}</h4>
-                        <p flex-xs="50" style="padding-top:10px">₹ {{product.price}}</p>
+                    <div flex="30">
+                        <h4>{{product.name}}</h4>
+                        <p style="float:left">₹ {{product.price}}</p>
                     </div>
-                    <div layout="row" flex="70" flex-xs="100">
-                        <div layout-margin flex-xs="50">
-                            <!--<div class="input-group">
+                    <div layout="row" flex="70">
+                        <div layout-margin flex="50">
+                            <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
+                        <button class="btn btn-default" type="button" ng-click="addProd(product);"><span class="glyphicon glyphicon-plus"></span></button>
                                 </span>
-                                <input type="number" class="form-control">
+                                <button type="button" class="btn btn-primary" disabled style="width: 100%;">{{product.count}}
+                                </button>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <span class="glyphicon glyphicon-minus"></span>
-                                    </button>
+                        <button class="btn btn-default" type="button" ng-click="subtractProd(product);"><span class="glyphicon glyphicon-minus"></span></button>
                                 </span>
-                            </div>-->
-                            <md-input-container>
-                                <label>Qauntity</label>
-                                <input type="number" ng-model="count" min="0" ng-change="updateCart(count)"/>
-                            </md-input-container>
+                            </div>
                         </div>
-                        <div layout-margin flex-xs="50">
-                            <button type="button" class=" btn btn-danger btn-circle"><span class="glyphicon glyphicon-remove"></span></button>
+                        <div layout-margin flex="20">
+                            <button type="button" class=" btn btn-danger btn-circle" ng-click="removeProductDirectly(product);"><span class="glyphicon glyphicon-remove"></span></button>
                         </div>
                     </div>
                 </div>
                 <div layout="column" layout-margin>
                     <div layout="row">
-                        <md-radio-group ng-model="delivery" style="margin-top:20px">
-                            <md-radio-button ng-value="0" name="delivery">Home Delivery</md-radio-button>
+                        <md-radio-group ng-model="order_mode" style="margin-top:20px">
+                            <md-radio-button ng-value="0" name="order_mode">Self PickUp </md-radio-button>
                         </md-radio-group>
                         <md-input-container flex>
                             <label>Walking dist in meters</label>
-                            <input type="number" ng-disabled="delivery"/>
+                            <input type="number" ng-disabled="order_mode"/>
                         </md-input-container>
                     </div>
-                    <md-radio-group ng-model="delivery">
-                        <md-radio-button ng-value="1" name="delivery">Self Pickup</md-radio-button>
+                    <md-radio-group ng-model="order_mode">
+                        <md-radio-button ng-value="1" name="order_mode">Home Delivery</md-radio-button>
                     </md-radio-group>
                 </div>
-                <!--<div layout="row">
-        <md-radio-group ng-model="delivery">
-            <div class="radio">
-                    
-                </div>
-                 <md-input-container flex>
-                    <label>Walking dist</label>
-                    <input type="number"/>
-                </md-input-container>
-
-            <div class="radio">
-                <md-radio-button value="2" name="delivery">Self Pickup</md-radio-button>
-            </div>
-        </md-radio-group>
-    </div>-->
                 <div layout="row">
                     <div flex="30">
                         <h1>₹ {{cart.estimated_cost}}</h1>
-                        <div class="btn btn-success" ng-click="placeOrder()">Place Order</div>
+                        <div class="btn btn-success" ng-click="placeOrder();" ng-disabled="Obutton">Place Order</div>
                     </div>
                     <div flex="30"></div>
                     <div flex="40">
@@ -76,6 +54,11 @@
                         </md-checkbox>
                     </div>
                 </div>
+                
+                  <md-button ng-click="openToast()">
+                    Open a Toast!
+                  </md-button>
+                
             </div>
         </div>
     </div>

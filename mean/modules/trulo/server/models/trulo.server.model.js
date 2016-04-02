@@ -556,6 +556,7 @@ exports.fetchCart = function (userId, cb) {
         _id: userId
     }, function (err, res) {
         if (!err) {
+            console.log(res.cart + " "+userId);
             if (res.cart != undefined) {
                 console.log("Sending cart for user "+userId+" where count = "+res.cart.products[0].count);
                 cb(res.cart);
@@ -570,6 +571,49 @@ exports.fetchCart = function (userId, cb) {
         }
     });
 };
+exports.removeProductDirectly = function(userId, pid, cb) {
+    var users = dbConn.collection("users");
+    users.findOne({
+            _id: userId,
+            "cart.products.pid": pid
+        }, {
+            "cart.products": 1
+        },
+        function(err, res) {
+            if (!err) {
+                if (res == null) {
+                    cb("Such Product Does not exist");
+                    return;
+                } else {
+                    var price, count, total_prod = res.cart.products.length;
+                    for (var i = 0; i < total_prod; i++) {
+                        if (res.cart.products[i].pid === pid) {
+                            price = res.cart.products[i].price;
+                            count = res.cart.products[i].count;
+                            break;
+                        }
+                    }
+                    users.update(
+                        {_id:userId,"cart.products.pid": pid},
+                        {
+                            $inc:{'cart.estimated_cost': -count*parseInt(price)},
+                            $pull:{"cart.products":{"pid":pid}}
+                        },
+                        function (err,res) {
+                             if(!err){
+                                cb("Product Removed From CArt");
+                                return;
+                             } 
+                             else{
+                                console.log(err);
+                             }
+                        }
+                        );
+
+                }
+            }
+        });
+}
 ////////////functions for finding best vendor////
 exports.getUnProcessedOrders = function (cb) {
     //finds all the orders that are yet to be processed

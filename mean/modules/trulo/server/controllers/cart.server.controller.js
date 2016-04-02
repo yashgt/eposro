@@ -58,3 +58,12 @@ exports.fetchCart = function (req, res) {
           res.send(cart);
   });
 };
+
+exports.removeProductDirectly = function(req, res) {
+    var pdtID = parseInt(req.body.pdtID);
+    var userID = req.body.userID;
+    var city = req.body.city;
+    trulo.removeProductDirectly(userID, pdtID, function(str) {
+        res.send(str);
+    });
+}

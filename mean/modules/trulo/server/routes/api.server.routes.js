@@ -5,11 +5,13 @@ module.exports = function (app) {
   var category = require('../controllers/category.server.controller');
   var product = require('../controllers/product.server.controller');
   var cart = require('../controllers/cart.server.controller');
-    
+  var order= require('../controllers/order.server.controller'); 
+  
   app.get('/api/categories', category.list);
   app.get('/api/products', product.getProducts);
   app.post('/api/addToCart', cart.addToCart);
+  app.post('/api/removeProductDirectly', cart.removeProductDirectly);
   app.post('/api/removeFromCart', cart.removeFromCart);
   app.post('/api/cart', cart.fetchCart);
-  app.get('/api/product-detail',product.getProductDetails);
+  app.post('/api/placeOrder',order.placeOrder);
 };

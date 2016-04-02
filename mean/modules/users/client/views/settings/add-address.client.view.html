@@ -1,0 +1,64 @@
+<section class="row" ng-controller="AddAddressController">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">Add Your Address! <span class="glyphicon glyphicon-map-marker"></span></h2>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" class="addform" name="addForm" novalidate>
+                <div class="form-group">
+                    <label for="hno" class="control-label col-xs-3">House No</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="hno" placeholder="Enter House No." ng-model="address.hno">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="street" class="control-label col-xs-3">Street</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="street" placeholder="Enter Street" ng-model="address.street">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="landmark" class="control-label col-xs-3">Landmark</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="landmark" placeholder="Landmark" ng-model="address.landmark" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="city" class="control-label col-xs-3">City</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="city" placeholder="Enter City" ng-model="address.city" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="taluka" class="control-label col-xs-3">Taluka</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="taluka" placeholder="Enter Taluka" ng-model="address.taluka" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="state" class="control-label col-xs-3">State</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="state" placeholder="Enter State" ng-model="address.state" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pincode" class="control-label col-xs-3">Pincode</label>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="pincode" placeholder="Enter Pincode" ng-model="address.pincode">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3">Your Location</label>
+                    <div class="col-xs-9">
+                        <div id="map"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-offset-2 col-xs-10">
+                        <button type="submit" class="btn btn-primary" ng-disabled="addForm.$invalid" ng-click="onSubmit()">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
