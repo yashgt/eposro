@@ -16,11 +16,11 @@ angular.module('trulo').controller('TruloController', [
         
         $scope.getCategories = function () {
             
-            //console.log('Fetching categories in controller');
+            console.log('Fetching categories in controller');
             trulo.getCategories(0,function (catsResponse,pageResponse,productsResponse) {
-                //console.log('Categories fetched successfully');
+                console.log('Categories fetched successfully');
                 $scope.categories = catsResponse;
-                //console.log($scope.categories);
+                console.log($scope.categories);
                 $scope.lastPageLoaded = pageResponse;
                 $scope.products = productsResponse;
                 //console.log($scope.categories[1].title);
@@ -48,9 +48,9 @@ angular.module('trulo').controller('TruloController', [
         };
 
         $scope.getSubCat = function (parent) {
-            //console.log("Fetching subcategories of parent = "+parent);
+            console.log("Fetching subcategories of parent = "+parent);
             trulo.getCategories(parent,function (catsResponse,pageResponse,productsResponse) {
-                //console.log('Sub Categories fetched successfully');
+                console.log('Sub Categories fetched successfully');
             
                 if( catsResponse.length == 0)
                     $scope.hideMe = 1;
@@ -94,7 +94,7 @@ angular.module('trulo').controller('TruloController', [
         $scope.fetchCart = function(){
             myCart.fetchCart(3,function(cartResponse){
                 $scope.cart = cartResponse;
-                //console.log($scope.cart.products);
+                console.log($scope.cart.products);
             });
         }
         
