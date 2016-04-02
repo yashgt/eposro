@@ -12,6 +12,6 @@ module.exports = function (app) {
   app.post('/api/addToCart', cart.addToCart);
   app.post('/api/removeProductDirectly', cart.removeProductDirectly);
   app.post('/api/removeFromCart', cart.removeFromCart);
-  app.post('/api/cart', cart.fetchCart);
+  app.get('/api/cart', cart.fetchCart);
   app.post('/api/placeOrder',order.placeOrder);
 };

@@ -49,7 +49,7 @@ exports.removeFromCart = function (req, res) {
   });
 };
 exports.fetchCart = function (req, res) {
-  var userID = req.body.userID;
+  var userID = req.query.userID;
   trulo.fetchCart(userID, function (cart) {
       console.log("Sending res = "+cart);
       if( cart == null)

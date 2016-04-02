@@ -553,11 +553,12 @@ exports.fetchCart = function (userId, cb) {
     console.log("FInding cart for user "+userId);
     var users = dbConn.collection('users');
     users.findOne({
-        _id: userId
+        _id: parseInt(userId)
     }, function (err, res) {
         if (!err) {
+            console.log(res);
             console.log(res.cart + " "+userId);
-            if (res.cart != undefined) {
+            if (res.cart != undefined && res.cart.products.length!=0) {
                 console.log("Sending cart for user "+userId+" where count = "+res.cart.products[0].count);
                 cb(res.cart);
                 return;
