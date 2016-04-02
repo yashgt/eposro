@@ -82,6 +82,7 @@ class EPDocumentFlattener(DocumentFlattener):
 
 
 class DocManager(SDM):
+	
 	def reformat(self,dict):
 		new_docs = []
 		new_prod = {}
