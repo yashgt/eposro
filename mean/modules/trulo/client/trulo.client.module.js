@@ -1,4 +1,6 @@
 'use strict';
 
 // Use application configuration module to register a new module
-ApplicationConfiguration.registerModule('trulo', ['users','ngMaterial','infinite-scroll']);
+ApplicationConfiguration.registerModule('trulo', [
+    'users','ngMaterial','infinite-scroll','ui.bootstrap','ncy-angular-breadcrumb'
+]);

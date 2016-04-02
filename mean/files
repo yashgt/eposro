@@ -13,7 +13,8 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/angular-material/angular-material.css'
+        'public/lib/angular-material/angular-material.css',
+        'https://fonts.googleapis.com/icon?family=Material+Icons'
       ],
       js: [
         'public/lib/jquery/dist/jquery.js',
@@ -28,7 +29,9 @@ module.exports = {
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js'
+        'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
+        'public/lib/bootstrap/dist/js/bootstrap.js',
+        'public/lib/angular-breadcrumb/dist/angular-breadcrumb.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
@@ -1604,7 +1607,7 @@ exports.getProducts = function (req, res) {
   for (var j = 1; j < 6; j++) {
     var pdt = {
       _id: j.toString(),
-      name: 'Product' + j,
+      pname: 'Product' + j,
       catID: cat,
       mrp: 20
     };
@@ -3530,7 +3533,9 @@ ApplicationConfiguration.registerModule('core.admin.routes', ['ui.router']);
 ApplicationConfiguration.registerModule('trulo', [
   'users',
   'ngMaterial',
-  'infinite-scroll'
+  'infinite-scroll',
+  'ui.bootstrap',
+  'ncy-angular-breadcrumb'
 ]);
 'use strict';
 // Use Applicaion configuration module to register a new module
@@ -3929,13 +3934,15 @@ angular.module('trulo').run([
 ]);
 'use strict';
 //Setting up route
-angular.module('trulo').config([
+angular.module('trulo').config(function ($breadcrumbProvider) {
+  $breadcrumbProvider.setOptions({ prefixStateName: '{catID}' });
+}).config([
   '$stateProvider',
   '$urlRouterProvider',
   function ($stateProvider, $urlRouterProvider) {
     // Trulo state routing
     $stateProvider.state('browse', {
-      url: '/',
+      url: '/{catID}',
       templateUrl: 'modules/trulo/client/views/browse.client.view.html'
     }).state('search', {
       url: '/search',
@@ -3984,39 +3991,36 @@ angular.module('trulo').controller('ProductDetailController', [
   function ($scope, $stateParams, trulo, myCart) {
     $scope._id = $stateParams._id;
     console.log('Received details req for ' + $stateParams._id);
-    $scope.quantity = 0;
+    //$scope.productCount = myCart.getCount($scope.product);;
     trulo.getProductById($scope._id, function (productResponse) {
       $scope.product = productResponse;
-      $scope.quantity = myCart.getCount($scope.product);
-      $scope.count = $scope.quantity;
-      console.log('Product received is ' + $scope.product.name);
+      $scope.productCount = myCart.getCount($scope.product);
+      $scope.quantity = $scope.productCount;
     });
-    /*$scope.add = function(){
-          $scope.quantity++;
-          myCart.addToCart($scope.product);
-      }
-      $scope.remove = function(){
-          if( $scope.quantity <=0)
-              return;
-          $scope.quantity--;
-          myCart.removeFromCart($scope.product);
-      }
-      $scope.addToCart = function(){
-          //TODO add product to cart
-          myCart.addToCart();
-      };*/
-    $scope.updateCart = function (count) {
-      console.log('In updateCart, count = ' + count);
-      if (count === null)
+    $scope.add = function () {
+      $scope.productCount++;
+    };
+    $scope.subtract = function () {
+      if ($scope.productCount <= 0) {
+        $scope.productCount = 0;
         return;
-      if (count < $scope.quantity) {
-        myCart.removeFromCart($scope.product);
-        console.log('Call remove from cart');
-      } else if (count > $scope.quantity) {
-        myCart.addToCart($scope.product);
-        console.log('Call add to cart');
       }
-      $scope.quantity = count;
+      $scope.productCount--;
+    };
+    $scope.addToCart = function () {
+      if ($scope.quantity < $scope.productCount) {
+        console.log('Add to cart');
+        for (var i = 0; i < $scope.productCount - $scope.quantity; i++) {
+          myCart.addToCart($scope.product);
+        }
+        $scope.quantity = $scope.productCount;
+      } else if ($scope.quantity > $scope.productCount) {
+        console.log('Remove from cart');
+        for (var i = 0; i < $scope.quantity - $scope.productCount; i++) {
+          myCart.removeFromCart($scope.product);
+        }
+        $scope.quantity = $scope.productCount;
+      }
     };
   }
 ]);
@@ -4042,11 +4046,13 @@ angular.module('trulo').controller('TruloController', [
     $scope.delivery = 0;
     $scope.quantity = 0;
     $scope.count = $scope.quantity;
+    $scope.isCollapsed = false;
     $scope.getCategories = function () {
       console.log('Fetching categories in controller');
       trulo.getCategories(0, function (catsResponse, pageResponse, productsResponse) {
         console.log('Categories fetched successfully');
         $scope.categories = catsResponse;
+        console.log($scope.categories);
         $scope.lastPageLoaded = pageResponse;
         $scope.products = productsResponse;  //console.log($scope.categories[1].title);
       });
@@ -4110,10 +4116,10 @@ angular.module('trulo').controller('TruloController', [
       if (count === null)
         return;
       if (count < $scope.quantity) {
-        myCart.addToCart();
+        myCart.removeFromCart();
         console.log('Call remove from cart');
       } else if (count > $scope.quantity) {
-        myCart.removeFromCart();
+        myCart.addToCart();
         console.log('Call add to cart');
       }
       $scope.quantity = count;
@@ -4130,11 +4136,12 @@ angular.module('trulo').directive('product', [
       scope: { product: '=data' },
       link: function postLink(scope, element, attrs) {
         scope.productCount = myCart.getCount(scope.product);
+        scope.quantity = scope.productCount;
         console.log('Pro count = ' + scope.productCount);
+        scope.quantity = scope.productCount;
         scope.add = function () {
           scope.productCount++;
           console.log('Sending product id = ' + scope.product.id);
-          myCart.addToCart(scope.product);
         };
         scope.subtract = function () {
           if (scope.productCount <= 0) {
@@ -4142,7 +4149,21 @@ angular.module('trulo').directive('product', [
             return;
           }
           scope.productCount--;
-          myCart.removeFromCart(scope.product);
+        };
+        scope.addToCart = function () {
+          if (scope.quantity < scope.productCount) {
+            console.log('Add to cart');
+            for (var i = 0; i < scope.productCount - scope.quantity; i++) {
+              myCart.addToCart(scope.product);
+            }
+            scope.quantity = scope.productCount;
+          } else if (scope.quantity > scope.productCount) {
+            console.log('Remove from cart');
+            for (var i = 0; i < scope.quantity - scope.productCount; i++) {
+              myCart.removeFromCart(scope.product);
+            }
+            scope.quantity = scope.productCount;
+          }
         };
       }
     };
@@ -4288,6 +4309,7 @@ angular.module('trulo').factory('Trulo', [
       },
       fetchCart: function (userID, cb) {
         var data = { 'userID': userID };
+        //make this a get request and obtain userID from session
         $http.post('/api/cart', data).success(function (res) {
           console.log('Response received in trulo service as ' + res);
           //console.log('In epsvc cart:' + res.products[0].count);

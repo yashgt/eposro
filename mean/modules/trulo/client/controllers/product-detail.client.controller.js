@@ -4,42 +4,39 @@ angular.module('trulo').controller('ProductDetailController', ['$scope', '$state
   function ($scope,$stateParams,trulo,myCart) {
       $scope._id = $stateParams._id;
       console.log("Received details req for "+$stateParams._id);
-      $scope.quantity = 0;
+      //$scope.productCount = myCart.getCount($scope.product);;
       
       trulo.getProductById($scope._id, function(productResponse){
           $scope.product = productResponse;
-          $scope.quantity = myCart.getCount($scope.product);
-          $scope.count = $scope.quantity;
-          console.log("Product received is "+$scope.product.name);
+          $scope.productCount = myCart.getCount($scope.product);
+          $scope.quantity = $scope.productCount;
       });
-      /*$scope.add = function(){
-          $scope.quantity++;
-          myCart.addToCart($scope.product);
+      $scope.add = function(){
+        $scope.productCount++;
       }
-      $scope.remove = function(){
-          if( $scope.quantity <=0)
-              return;
-          $scope.quantity--;
-          myCart.removeFromCart($scope.product);
+      
+      $scope.subtract = function () {
+        if ($scope.productCount <= 0) {
+            $scope.productCount = 0;
+                return;
+        }
+        $scope.productCount--;
       }
       $scope.addToCart = function(){
-          //TODO add product to cart
-          myCart.addToCart();
-      };*/
-      
-      $scope.updateCart = function(count){
-        console.log("In updateCart, count = "+count);
-        if( count == null)
-            return;
-        if( count < $scope.quantity){
-            myCart.removeFromCart($scope.product);
-            console.log("Call remove from cart");
-        }  
-        else if( count > $scope.quantity){
-            myCart.addToCart($scope.product);
-            console.log("Call add to cart");
-        }
-        $scope.quantity = count;
-      }
+          if( $scope.quantity< $scope.productCount){
+              console.log("Add to cart");
+              for(var i=0; i<$scope.productCount-$scope.quantity; i++){
+                myCart.addToCart($scope.product);
+              }
+              $scope.quantity = $scope.productCount;
+          }
+          else if($scope.quantity> $scope.productCount){
+              console.log("Remove from cart");
+              for(var i=0; i<$scope.quantity-$scope.productCount ; i++){
+                myCart.removeFromCart($scope.product);
+              }
+              $scope.quantity = $scope.productCount;
+          }
+      }  
   }
 ]);

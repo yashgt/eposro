@@ -1,22 +1,16 @@
 <div class="container product-detail">
     <div layout="column">
         <md-card layout="row">
-            <!--<md-card-header>
-                <md-card-header-text>
-                    <span class="md-title">{{product.pname}}</span>
-                    <span class="md-subhead">{{ product.brand}}</span>
-                </md-card-header-text>
-            </md-card-header>-->
             <div flex="50">
-                <img ng-src="modules/trulo/client/img/mango.png" class="md-card-image"  alt="image caption">
-                <!-- load the above image according to the product. For the time being statis image loaded -->
+                <img ng-src="modules/trulo/client/img/{{product._id}}.jpg"  id="product-detail-image" alt="image caption">
+                <!-- load the above image according to the product. For the time being static image loaded -->
             </div>
             <div layout="column" flex="50">
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline">{{product.pname}}</span>
-                        <span class="md-subhead">{{ product.brand}}</span>
-                        <span class="md-subhead">₹ {{product.price.mrp[0].mrp}}</span><!--display price according to the city-->
+                        <span class="md-subhead">Brand</span>
+                        <span class="md-subhead">₹ {{product.mrp}}</span><!--display price according to the city-->
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-content>
@@ -24,17 +18,16 @@
                         {{product.desc}}
                     </p>
                 </md-card-content>
-                <md-card-actions layout="row" layout-xs="column">
-                    <md-input-container>
-                        <label>Qauntity</label>
-                        <input type="number" ng-model="count" min="0" ng-change="updateCart(count)"/>
-                    </md-input-container>
-                    <!--<md-button class="btn1 md-raised" ng-click="add()" flex="30"><span class="glyphicon glyphicon-plus"></span></md-button>
-                    <md-input-container flex="40">
-                        <label>Quantity</label>
-                        <input type="number" ng-model="quantity"/>
-                    </md-input-container>
-                    <md-button class="btn1 md-raised" ng-click="remove()" flex="30"><span class="glyphicon glyphicon-minus"></span></md-button>-->
+                <md-card-actions layout="row" layout-xs="column" layout-margin>
+                    <div flex-xs="80" layout="row" layout-margin>
+                        <button flex-xs="20" class="btn btn-default" ng-click="add()">+</button>
+                        <input flex-xs="40" class="form-control" ng-model="productCount" style="width:60px"/>
+                        <button flex-xs="20" class="btn btn-default" ng-click="subtract()">-</button>
+                    </div>
+                    <div layout-margin>
+                        <button class="btn btn-success" ng-click="addToCart()">Add</button>
+                    </div>
+                    
                 </md-card-actions>
 
             </div>

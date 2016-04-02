@@ -13,28 +13,28 @@ angular.module('trulo').factory('Mycart', [
             value: 20
             , count: 0
             , fetchCart: function (userId, cb) {
-                console.log("In mycart service,Fetching cart");
+                //console.log("In mycart service,Fetching cart");
                 trulo.fetchCart(userId, function (cartResponse) {
                     cart = cartResponse;
-                    console.log(cart);
+                   // console.log(cart);
                     cb(cart);
                 });
             }
             , addToCart: function (pdt) {
-                console.log("Add:In mycart service received id=" + pdt._id);
+                //console.log("Add:In mycart service received id=" + pdt._id);
                 trulo.addToCart(pdt._id);
                 if (this.addToCartCB)
                     this.addToCartCB(pdt);
             }
             , removeFromCart: function (pdt) {
-                console.log("Remove:In mycart service received id=" + pdt._id);
+                //console.log("Remove:In mycart service received id=" + pdt._id);
                 trulo.removeFromCart(pdt._id);
                 if (this.removeFromCartCB)
                     this.removeFromCartCB(pdt);
             }
             , getCount: function (pdt) {
                 if (cart == null) {
-                    console.log("Returning 0 count");
+                    //console.log("Returning 0 count");
                     return 0;
                 }
                 for (var i = 0; i < cart.products.length; i++) {

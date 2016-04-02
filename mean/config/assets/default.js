@@ -6,7 +6,8 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/angular-material/angular-material.css'
+        'public/lib/angular-material/angular-material.css',
+		'https://fonts.googleapis.com/icon?family=Material+Icons'
       ],
       js: [
         'public/lib/jquery/dist/jquery.js',
@@ -21,7 +22,9 @@ module.exports = {
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js'
+        'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
+		'public/lib/bootstrap/dist/js/bootstrap.js',
+		'public/lib/angular-breadcrumb/dist/angular-breadcrumb.js'
         
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

@@ -12,13 +12,15 @@ angular.module('trulo').controller('TruloController', [
         $scope.delivery = 0;
         $scope.quantity = 0;
         $scope.count = $scope.quantity;
+        $scope.isCollapsed = false;
+        
         $scope.getCategories = function () {
             
-            console.log('Fetching categories in controller');
+            //console.log('Fetching categories in controller');
             trulo.getCategories(0,function (catsResponse,pageResponse,productsResponse) {
-                console.log('Categories fetched successfully');
-                
+                //console.log('Categories fetched successfully');
                 $scope.categories = catsResponse;
+                //console.log($scope.categories);
                 $scope.lastPageLoaded = pageResponse;
                 $scope.products = productsResponse;
                 //console.log($scope.categories[1].title);
@@ -46,9 +48,9 @@ angular.module('trulo').controller('TruloController', [
         };
 
         $scope.getSubCat = function (parent) {
-            console.log("Fetching subcategories of parent = "+parent);
+            //console.log("Fetching subcategories of parent = "+parent);
             trulo.getCategories(parent,function (catsResponse,pageResponse,productsResponse) {
-                console.log('Sub Categories fetched successfully');
+                //console.log('Sub Categories fetched successfully');
             
                 if( catsResponse.length == 0)
                     $scope.hideMe = 1;
@@ -95,20 +97,22 @@ angular.module('trulo').controller('TruloController', [
                 //console.log($scope.cart.products);
             });
         }
-               
+        
+        
         $scope.updateCart = function(count){
-            console.log("In updateCart, count = "+count);
+            //console.log("In updateCart, count = "+count);
             if( count == null)
                 return;
             if( count < $scope.quantity){
-                myCart.addToCart();
-                console.log("Call remove from cart");
+                myCart.removeFromCart();
+                //console.log("Call remove from cart");
             }  
             else if( count > $scope.quantity){
-                myCart.removeFromCart();
-                console.log("Call add to cart");
+                myCart.addToCart();
+                //console.log("Call add to cart");
             }
             $scope.quantity = count;
         }
+        
     }
 ]);

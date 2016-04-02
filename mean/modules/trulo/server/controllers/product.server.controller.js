@@ -41,7 +41,7 @@ exports.getProducts = function (req, res) {
   for (var j = 1; j < 6; j++) {
     var pdt = {
       _id: j.toString(),
-      name: 'Product' + j,
+      pname: 'Product' + j,
       catID: cat,
         mrp: 20
     };

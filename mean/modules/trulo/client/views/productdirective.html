@@ -1,15 +1,25 @@
-<div class ="thumbnail">
-    <div class="bgimg">
-        <div class="caption">
-            <md-button ui-sref="products({_id: product._id})"><h2>{{product._id}}</h2></md-button>
-            <h5>Category : {{product.catID}}</h5>
-
-            <p>
-                <a href="#" class="btn btn-primary" role="button" align="center" ng-click="add()">+ </a>
-                    {{ productCount }} 
-                <a href="#" class="btn btn-default" role="button" align="center" ng-click="subtract()">-</a>
-            </p>
+<md-content class="md-padding product" layout="column" flex>
+    <div class="thumbnail">
+        <a ui-sref="products({_id: product._id})" class="thumbnail">
+            <img ng-src="modules/trulo/client/img/{{product._id}}.jpg" alt="image caption" id="product-image">
+        </a>
+        <div layout="column" layout-xs="row" class="caption" id="product-info">
+            <div flex-xs="60">
+                <a ui-sref="products({_id: product._id})">
+                    <h3 id="product-name">{{product.pname}}</h3>
+                </a>
+                <p id="price">₹{{product.mrp}}</p>
+            </div>
+            <div flex-xs="40" layout-xs="column" layout="row" layout-margin>
+                <div id="add-remove-buttons">
+                    <button class="btn btn-default" ng-click="add()">+</button>
+                        {{ productCount }}
+                    <button class="btn btn-default" ng-click="subtract()">-</button>
+                </div>
+                <div id="add-to-cart-button">
+                    <button class="btn btn-success" ng-click="addToCart()">Add</button>
+                </div>
+            </div>
         </div>
     </div>
-      
-</div>
+</md-content>
