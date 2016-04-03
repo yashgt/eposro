@@ -10,6 +10,11 @@ module.exports = {
       pass: ''
     }
   },
+  solr: {
+    uri: 'localhost',
+    port:'9393',
+    core:'eposro'
+  },
   log: {
     // logging with Morgan - https://github.com/expressjs/morgan
     // Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
