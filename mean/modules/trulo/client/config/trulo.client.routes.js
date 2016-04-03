@@ -13,11 +13,9 @@ angular.module('trulo')
             // Trulo state routing
         $stateProvider
             .state('browse', {
-                    url: '/:title'
+                    url: '/:catID'
+                    , controller:'TruloController'
                     , templateUrl: 'modules/trulo/client/views/browse.client.view.html'
-                    , ncyBreadcrumb: {
-                        label: '' //??
-                    }
                 })
            
             .state('search', {
