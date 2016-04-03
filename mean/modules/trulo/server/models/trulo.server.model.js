@@ -56,7 +56,7 @@ exports.findCategoryId = function (cat, cb) {
     var category = dbConn.collection('category');
     category.find({
         'name': cat
-    }).toArray(function (err, result) {
+    }).sort({_id:1}).toArray(function (err, result) {
         if (!err) {
             var cids = [];
             for (var i = 0; i < result.length; i++) {
@@ -177,7 +177,7 @@ exports.getCategories = function (id, cb) {
     var category = dbConn.collection('category');
     category.find({
         parent_id: parseInt(id)
-    }).toArray(function (err, res) {
+    }).sort({_id:1}).toArray(function (err, res) {
         if (!err) {
             var cats = [];
             for (var i = 0; i < res.length; i++) {
@@ -185,6 +185,7 @@ exports.getCategories = function (id, cb) {
                     catID: res[i]._id
                     , title: res[i].name
                 });
+                //console.log(cats);
             }
             cb(cats);
         }
@@ -553,11 +554,12 @@ exports.fetchCart = function (userId, cb) {
     console.log("FInding cart for user "+userId);
     var users = dbConn.collection('users');
     users.findOne({
-        _id: userId
+        _id: parseInt(userId)
     }, function (err, res) {
         if (!err) {
+            console.log(res);
             console.log(res.cart + " "+userId);
-            if (res.cart != undefined) {
+            if (res.cart != undefined && res.cart.products.length!=0) {
                 console.log("Sending cart for user "+userId+" where count = "+res.cart.products[0].count);
                 cb(res.cart);
                 return;
