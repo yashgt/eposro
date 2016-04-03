@@ -1,5 +1,6 @@
 'use strict';
 var solr = require('solr-client');
+var path = require('path');
 var config = require(path.resolve('./config/config'));;
 var client = solr.createClient(config.solr.uri,config.solr.port,config.solr.core);
 
