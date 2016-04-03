@@ -10,6 +10,7 @@ module.exports = {
 		'https://fonts.googleapis.com/icon?family=Material+Icons'
       ],
       js: [
+      	'https://maps.googleapis.com/maps/api/js?key=AIzaSyAFaBU7eTSMBpOtJdofTbCvLYOsUwHFpmk',
         'public/lib/jquery/dist/jquery.js',
         'public/lib/angular/angular.js',
         'public/lib/angular-resource/angular-resource.js',
@@ -24,7 +25,10 @@ module.exports = {
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
 		'public/lib/bootstrap/dist/js/bootstrap.js',
-		'public/lib/angular-breadcrumb/dist/angular-breadcrumb.js'
+		'public/lib/angular-breadcrumb/dist/angular-breadcrumb.js',
+		'public/lib/lodash/dist/lodash.js',
+        'public/lib/angular-simple-logger/dist/angular-simple-logger.js',
+        'public/lib/angular-google-maps/dist/angular-google-maps.js'
         
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

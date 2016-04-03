@@ -1,5 +1,5 @@
 'use strict';
-
+//cart.count value = total amount
 angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Mycart'
   , function ($scope, $state, Authentication, Menus, myCart) {
         // Expose view variables

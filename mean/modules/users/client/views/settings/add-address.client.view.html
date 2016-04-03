@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label for="city" class="control-label col-xs-3">City</label>
                     <div class="col-xs-9">
-                        <input type="text" class="form-control" id="city" placeholder="Enter City" ng-model="address.city" required>
+                        <input type="text" class="form-control" id="city" placeholder="Enter City" ng-model="address.city" ng-change="changeStateCity()" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label for="state" class="control-label col-xs-3">State</label>
                     <div class="col-xs-9">
-                        <input type="text" class="form-control" id="state" placeholder="Enter State" ng-model="address.state" required>
+                        <input type="text" class="form-control" id="state" placeholder="Enter State" ng-model="address.state" ng-change="changeStateCity()" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -50,7 +50,9 @@
                 <div class="form-group">
                     <label class="control-label col-xs-3">Your Location</label>
                     <div class="col-xs-9">
-                        <div id="map"></div>
+                        <div class="map">
+                            <location address="raw_address" location="address.location"></location>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">

@@ -1,8 +1,8 @@
 'use strict';
 var solr = require('solr-client');
-/**
- * Module dependencies.
- */
+var config = require(path.resolve('./config/config'));;
+var client = solr.createClient(config.solr.uri,config.solr.port,config.solr.core);
+
 var doSearch = function (client, query, cb) {
   client.search(query, function (err, obj) {
     if (err)
@@ -14,12 +14,10 @@ var doSearch = function (client, query, cb) {
   });
 };
 exports.getProductsBySearchString = function (pname, cb) {
-  var client = solr.createClient('127.0.0.1', '9393', 'eposro');
   var query = client.createQuery()  //  /select
 .q(pname).dismax();
 };
 exports.getProductsByCategory = function (catID, cb) {
-  var client = solr.createClient('127.0.0.1', '9393', 'eposro');
   var query = client.createQuery().q({ cats: catID });
   doSearch(client, query, cb);
 };

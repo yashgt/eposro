@@ -14,7 +14,6 @@
 
 """Receives documents from the oplog worker threads and indexes them
 into the backend.
-
 This file is a document manager for the Solr search engine, but the intent
 is that this file can be used as an example to add on different backends.
 To extend this to other systems, simply implement the exact same class and
@@ -52,7 +51,6 @@ decoder = json.JSONDecoder()
 
 class EPDocumentFlattener(DocumentFlattener):
     """Formatter that completely flattens documents and unwinds arrays:
-
     An example:
       {"a": 2,
        "b": {
@@ -62,10 +60,8 @@ class EPDocumentFlattener(DocumentFlattener):
        },
        "e": [6, 7, 8]
       }
-
     becomes:
       {"a": 2, "b.c.d": 5, "e.0": 6, "e.1": 7, "e.2": 8}
-
     """
 
     def transform_element(self, key, value):
@@ -102,19 +98,18 @@ class DocManager(SDM):
 		for i in range(docNums): 	
 			new_prod = {}
 			for key, value in dict.items():
-				if (key.split(".")[0] != 'cities') & (key.split('.')[0] != 'vars') & (key.split('.')[0] != 'pricing'):
+				if (key.split(".")[0] != 'cities') & (key.split('.')[0] != 'vars') & (key.split('.')[0] != 'price'):
 					new_prod[key] = value
 				if key.split(".")[0] == 'cities':
 					new_prod.setdefault(key.split('.')[0],[]).append(value)
-				if key.split('.')[0] == 'pricing':
-					if key.split(".")[0] + '.' + key.split(".")[1] == 'pricing.default_mrp':
+				if key.split('.')[0] == 'price':
+					if key.split(".")[0] + '.' + key.split(".")[1] == 'price.default_mrp':
 						new_prod[key.split('.')[1]] = value
-						#del dict['pricing.default_mrp']
-					if key.split('.')[0] + '.' + key.split('.')[1] == 'pricing.mrp':
+					if key.split('.')[0] + '.' + key.split('.')[1] == 'price.mrp':
 						if key.split('.')[3] == 'mrp':
 							continue
 						else:    
-							new_prod[key.split('.')[3] + '.' + str(value)+ '.' + key.split('.')[1]] = dict['pricing.mrp.' + key.split('.')[2] + '.mrp']
+							new_prod[key.split('.')[3] + '.' + str(value)+ '.' + key.split('.')[1]] = dict['price.mrp.' + key.split('.')[2] + '.mrp']
 				if key.split('.')[0] == 'vars':
 					if int(key.split('.')[1]) == i:
 						new_prod[key.split('.',2)[2]] = value
