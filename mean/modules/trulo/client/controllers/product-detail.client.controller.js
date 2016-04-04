@@ -26,14 +26,18 @@ angular.module('trulo').controller('ProductDetailController', ['$scope', '$state
           if( $scope.quantity< $scope.productCount){
               console.log("Add to cart");
               for(var i=0; i<$scope.productCount-$scope.quantity; i++){
-                myCart.addToCart($scope.product);
+                myCart.addToCart($scope.product,function(response){
+                    
+                });
               }
               $scope.quantity = $scope.productCount;
           }
           else if($scope.quantity> $scope.productCount){
               console.log("Remove from cart");
               for(var i=0; i<$scope.quantity-$scope.productCount ; i++){
-                myCart.removeFromCart($scope.product);
+                myCart.removeFromCart($scope.product,function(response){
+                    
+                });
               }
               $scope.quantity = $scope.productCount;
           }

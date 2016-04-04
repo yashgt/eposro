@@ -17,6 +17,7 @@ module.exports = {
         'https://fonts.googleapis.com/icon?family=Material+Icons'
       ],
       js: [
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyAFaBU7eTSMBpOtJdofTbCvLYOsUwHFpmk',
         'public/lib/jquery/dist/jquery.js',
         'public/lib/angular/angular.js',
         'public/lib/angular-resource/angular-resource.js',
@@ -31,7 +32,10 @@ module.exports = {
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
         'public/lib/bootstrap/dist/js/bootstrap.js',
-        'public/lib/angular-breadcrumb/dist/angular-breadcrumb.js'
+        'public/lib/angular-breadcrumb/dist/angular-breadcrumb.js',
+        'public/lib/lodash/dist/lodash.js',
+        'public/lib/angular-simple-logger/dist/angular-simple-logger.js',
+        'public/lib/angular-google-maps/dist/angular-google-maps.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
@@ -424,6 +428,11 @@ module.exports = {
       user: '',
       pass: ''
     }
+  },
+  solr: {
+    uri: 'localhost',
+    port: '9393',
+    core: 'eposro'
   },
   log: {
     // logging with Morgan - https://github.com/expressjs/morgan
@@ -1519,7 +1528,7 @@ exports.removeFromCart = function (req, res) {
   });
 };
 exports.fetchCart = function (req, res) {
-  var userID = req.body.userID;
+  var userID = req.query.userID;
   trulo.fetchCart(userID, function (cart) {
     console.log('Sending res = ' + cart);
     if (cart === null)
@@ -1669,9 +1678,9 @@ exports.getProductDetails = function (req, res) {
 };
 'use strict';
 var solr = require('solr-client');
-/**
- * Module dependencies.
- */
+var path = require('path');
+var config = require(path.resolve('./config/config'));
+var client = solr.createClient(config.solr.uri, config.solr.port, config.solr.core);
 var doSearch = function (client, query, cb) {
   client.search(query, function (err, obj) {
     if (err)
@@ -1683,12 +1692,10 @@ var doSearch = function (client, query, cb) {
   });
 };
 exports.getProductsBySearchString = function (pname, cb) {
-  var client = solr.createClient('127.0.0.1', '9393', 'eposro');
   var query = client.createQuery()  //  /select
 .q(pname).dismax();
 };
 exports.getProductsByCategory = function (catID, cb) {
-  var client = solr.createClient('127.0.0.1', '9393', 'eposro');
   var query = client.createQuery().q({ cats: catID });
   doSearch(client, query, cb);
 };
@@ -1742,7 +1749,7 @@ function insert_product_internal(collection, product, cb) {
 }
 exports.findCategoryId = function (cat, cb) {
   var category = dbConn.collection('category');
-  category.find({ 'name': cat }).toArray(function (err, result) {
+  category.find({ 'name': cat }).sort({ _id: 1 }).toArray(function (err, result) {
     if (!err) {
       var cids = [];
       for (var i = 0; i < result.length; i++) {
@@ -1848,14 +1855,14 @@ exports.writeLastPdtId = function (last_id, cb) {
 };
 exports.getCategories = function (id, cb) {
   var category = dbConn.collection('category');
-  category.find({ parent_id: parseInt(id) }).toArray(function (err, res) {
+  category.find({ parent_id: parseInt(id) }).sort({ _id: 1 }).toArray(function (err, res) {
     if (!err) {
       var cats = [];
       for (var i = 0; i < res.length; i++) {
         cats.push({
           catID: res[i]._id,
           title: res[i].name
-        });
+        });  //console.log(cats);
       }
       cb(cats);
     }
@@ -2165,10 +2172,11 @@ exports.checkOut = function (userId, cb) {
 exports.fetchCart = function (userId, cb) {
   console.log('FInding cart for user ' + userId);
   var users = dbConn.collection('users');
-  users.findOne({ _id: userId }, function (err, res) {
+  users.findOne({ _id: parseInt(userId) }, function (err, res) {
     if (!err) {
+      console.log(res);
       console.log(res.cart + ' ' + userId);
-      if (res.cart !== undefined) {
+      if (res.cart !== undefined && res.cart.products.length !== 0) {
         console.log('Sending cart for user ' + userId + ' where count = ' + res.cart.products[0].count);
         cb(res.cart);
         return;
@@ -2337,8 +2345,9 @@ module.exports = function (app) {
   app.post('/api/addToCart', cart.addToCart);
   app.post('/api/removeProductDirectly', cart.removeProductDirectly);
   app.post('/api/removeFromCart', cart.removeFromCart);
-  app.post('/api/cart', cart.fetchCart);
+  app.get('/api/cart', cart.fetchCart);
   app.post('/api/placeOrder', order.placeOrder);
+  app.get('/api/product-detail', product.getProductDetails);
 };
 'use strict';
 /**
@@ -3625,7 +3634,10 @@ ApplicationConfiguration.registerModule('trulo', [
 ]);
 'use strict';
 // Use Applicaion configuration module to register a new module
-ApplicationConfiguration.registerModule('users', ['core']);
+ApplicationConfiguration.registerModule('users', [
+  'core',
+  'uiGmapgoogle-maps'
+]);
 ApplicationConfiguration.registerModule('users.admin', ['core.admin']);
 ApplicationConfiguration.registerModule('users.admin.routes', ['core.admin.routes']);
 'use strict';
@@ -3685,6 +3697,7 @@ angular.module('core').config([
   }
 ]);
 'use strict';
+//cart.count value = total amount
 angular.module('core').controller('HeaderController', [
   '$scope',
   '$state',
@@ -4029,10 +4042,8 @@ angular.module('trulo').config(function ($breadcrumbProvider) {
     // Trulo state routing
     $stateProvider.state('browse', {
       url: '/:catID',
-      templateUrl: 'modules/trulo/client/views/browse.client.view.html',
-      ncyBreadcrumb: {
-        label: ''  //??
-      }
+      controller: 'TruloController',
+      templateUrl: 'modules/trulo/client/views/browse.client.view.html'
     }).state('search', {
       url: '/search',
       templateUrl: 'modules/trulo/client/views/search.client.view.html'
@@ -4100,13 +4111,15 @@ angular.module('trulo').controller('ProductDetailController', [
       if ($scope.quantity < $scope.productCount) {
         console.log('Add to cart');
         for (var i = 0; i < $scope.productCount - $scope.quantity; i++) {
-          myCart.addToCart($scope.product);
+          myCart.addToCart($scope.product, function (response) {
+          });
         }
         $scope.quantity = $scope.productCount;
       } else if ($scope.quantity > $scope.productCount) {
         console.log('Remove from cart');
         for (var i = 0; i < $scope.quantity - $scope.productCount; i++) {
-          myCart.removeFromCart($scope.product);
+          myCart.removeFromCart($scope.product, function (response) {
+          });
         }
         $scope.quantity = $scope.productCount;
       }
@@ -4124,7 +4137,15 @@ angular.module('trulo').controller('TruloController', [
   '$scope',
   'Trulo',
   'Mycart',
-  function ($scope, trulo, myCart) {
+  '$stateParams',
+  function ($scope, trulo, myCart, $stateParams) {
+    if ($stateParams.catID === null) {
+      $scope.catParameter = 0;
+      console.log('Null parameter');
+    } else {
+      console.log('Category parameter=' + $stateParams.catID);
+      $scope.catParameter = $stateParams.catID;  //reading the browse category
+    }
     $scope.lastPageLoaded = [];
     $scope.products = [];
     $scope.busy = false;
@@ -4241,13 +4262,15 @@ angular.module('trulo').directive('product', [
           if (scope.quantity < scope.productCount) {
             //console.log("Add to cart");
             for (var i = 0; i < scope.productCount - scope.quantity; i++) {
-              myCart.addToCart(scope.product);
+              myCart.addToCart(scope.product, function (response) {
+              });
             }
             scope.quantity = scope.productCount;
           } else if (scope.quantity > scope.productCount) {
             //console.log("Remove from cart");
             for (var i = 0; i < scope.quantity - scope.productCount; i++) {
-              myCart.removeFromCart(scope.product);
+              myCart.removeFromCart(scope.product, function (response) {
+              });
             }
             scope.quantity = scope.productCount;
           }
@@ -4352,6 +4375,7 @@ angular.module('trulo').factory('Trulo', [
   '$http',
   function ($http) {
     return {
+      //generalize this for getting sub-categories as well
       getCategories: function (parent, cb) {
         console.log('Inside service to get categories of parent = ' + parent);
         $http.get('/api/categories?catID=' + parent).success(function (response) {
@@ -4370,8 +4394,8 @@ angular.module('trulo').factory('Trulo', [
         });
       },
       getProductsByCat: function (catID, lastPage, products, cb) {
-        //console.log("sending catID=" + catID);
-        //console.log(products[1].pdt);
+        console.log('sending catID=' + catID);
+        console.log(products[1].pdt);
         $http.get('/api/products?catID=' + catID + '&lastPage=' + lastPage).success(function (response) {
           lastPage++;
           //find the index into the products array where products of this category are found
@@ -4389,37 +4413,42 @@ angular.module('trulo').factory('Trulo', [
                                                      //$scope.busy = false;
         });
       },
-      addToCart: function (pdtID) {
+      addToCart: function (pdtID, cb) {
         var data = {
           'pdtID': pdtID,
           'userID': 3,
           'city': 'goa'
         };
-        //console.log("add:Sending data with id="+data['pdtID']);
+        console.log('add:Sending data with id=' + data.pdtID);
         $http.post('/api/addToCart', data).success(function (response) {
+          if (response !== null) {
+            cb(response);
+          }
         });
       },
-      removeFromCart: function (pdtID) {
+      removeFromCart: function (pdtID, cb) {
         var data = {
           'pdtID': pdtID,
           'userID': 3,
           'city': 'goa'
         };
-        //console.log("Remove:Sending data with id="+data['pdtID']);
+        console.log('Remove:Sending data with id=' + data.pdtID);
         $http.post('/api/removeFromCart', data).success(function (response) {
+          if (response !== null) {
+            cb(response);
+          }
         });
       },
       fetchCart: function (userID, cb) {
         var data = { 'userID': userID };
-        //make this a get request and obtain userID from session
-        $http.post('/api/cart', data).success(function (res) {
-          // console.log("Response received in trulo service as "+res);
+        $http.get('/api/cart?userID=3').success(function (res) {
+          console.log('Response received in trulo service as ' + res);
           //console.log('In epsvc cart:' + res.products[0].count);
           if (res === 'null') {
-            //console.log('Sending res null in epsvc');
+            console.log('Sending res null in epsvc');
             cb(null);
           } else {
-            //console.log('Sending some res in epsvc as '+res);
+            console.log('Sending some res in epsvc as ' + res);
             cb(res);
           }
         });
@@ -4427,6 +4456,36 @@ angular.module('trulo').factory('Trulo', [
       getProductById: function (id, cb) {
         $http.get('/api/product-detail?id=' + id).success(function (product) {
           cb(product);
+        });
+      },
+      placeOrder: function (uid, cb) {
+        var data = { 'userID': uid };
+        console.log('Placing order for =' + data.userID);
+        $http.post('/api/placeOrder', data).success(function (response) {
+          console.log('Returned in cb in place order' + response);
+          cb('Successfully placed order');
+        });
+      },
+      removeProductDirectly: function (pdt, cb) {
+        var data = {
+          'pdtID': pdt,
+          'userID': 3,
+          'city': 'goa'
+        };
+        console.log('Remove Product:Sending data with id=' + data.pdtID);
+        $http.post('/api/removeProductDirectly', data).success(function (response) {
+          console.log('Returned in cb');
+          if (response !== null) {
+            cb(response);
+          }
+        });
+      },
+      saveAddress: function (uid, cb) {
+        var data = { 'userID': uid };
+        console.log('Saving address for =' + data.userID);
+        $http.post('/api/saveAddress', data).success(function (response) {
+          console.log('Returned in cb in save Address' + response);
+          cb('Successfully saved Address');
         });
       }
     };
@@ -4578,9 +4637,19 @@ angular.module('users').config([
 'use strict';
 angular.module('users').controller('AddAddressController', [
   '$scope',
-  '$http',
-  function ($scope, $http) {
+  'Trulo',
+  function ($scope, trulo) {
+    $scope.raw_address = 'India';
+    $scope.address = {};
+    $scope.address.location = '';
+    $scope.address.city = '';
+    $scope.address.state = '';
     $scope.onSubmit = function () {
+      console.log($scope.address);
+    };
+    $scope.changeStateCity = function () {
+      console.log('In the change city and state');
+      $scope.raw_address = $scope.address.city + ', ' + $scope.address.state;
     };
   }
 ]);
@@ -4915,6 +4984,103 @@ angular.module('users').controller('SettingsController', [
     $scope.user = Authentication.user;
   }
 ]);
+'use strict';
+angular.module('users').directive('location', [function () {
+    return {
+      templateUrl: 'modules/users/client/views/settings/location-directive.client.view.html',
+      restrict: 'E',
+      scope: {
+        address: '=address',
+        current_location: '=location'
+      },
+      link: function postLink(scope, element, attrs) {
+        var geoFlag = false;
+        scope.location = {
+          latitude: 27,
+          longitude: 58
+        };
+        scope.map = {
+          center: scope.location,
+          zoom: 6,
+          options: {
+            streetViewControl: false,
+            scrollwheel: false
+          }
+        };
+        scope.marker = {
+          key: 1,
+          position: scope.location,
+          decimals: 4
+        };
+        scope.windowOptions = {
+          visible: false,
+          title: 'This is your current Location'
+        };
+        //methods
+        scope.onGeoLoc = function () {
+          return geoFlag;
+        };
+        scope.onClick = function () {
+          scope.windowOptions.visible = !scope.windowOptions.visible;
+        };
+        //detecting users current location using geolocation api
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+            scope.location.latitude = position.coords.latitude;
+            scope.location.longitude = position.coords.longitude;
+            scope.current_location = scope.location;
+            geoFlag = true;
+            //map
+            scope.map.center = scope.location;
+            scope.map.zoom = 19;
+            scope.map.options.draggable = false;
+            //marker
+            scope.marker.position = scope.location;
+            scope.marker.key = 2;
+            scope.marker.options = { draggable: false };
+            scope.$apply()  //console.log(scope.map);
+;
+          });
+        } else {
+          geoFlag = false;
+          console.log('Geolocation cannot be found');
+        }
+        /////////////////////end of geolocation////////////////////////////
+        scope.$watch('scope.address', function (oldVal, newVal) {
+          console.log(scope.address + ' Changed');
+          if (geoFlag === false) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': scope.address }, function (results, status) {
+              if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+                scope.location.latitude = results[0].geometry.location.lat();
+                scope.location.longitude = results[0].geometry.location.lng();
+                console.log(scope.location);
+                scope.map.center = scope.location;
+                scope.map.zoom = 6;
+                scope.map.options.draggable = true;
+                //marker
+                scope.marker.position = scope.location;
+                scope.marker.key = 1;
+                scope.marker.options = { draggable: true };
+                scope.marker.events = {
+                  dragend: function (marker, eventName, args) {
+                    console.log('marker dragend' + scope.address);
+                    scope.location.latitude = marker.getPosition().lat();
+                    scope.location.longitude = marker.getPosition().lng();
+                    scope.current_location = scope.location;
+                  }
+                };
+                console.log(scope.marker);
+                scope.$apply();
+              } else {
+                console.log(status);
+              }
+            });
+          }
+        });
+      }
+    };
+  }]);
 'use strict';
 angular.module('users').directive('passwordValidator', [
   'PasswordValidator',
