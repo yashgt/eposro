@@ -1,0 +1,1 @@
+%SOLR_HOME%\example\exampledocs\http://host:port/solr/core/update?stream.body=<delete><query>*:*</query></delete>&commit=true
