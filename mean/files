@@ -4033,16 +4033,13 @@ angular.module('trulo').run([
 ]);
 'use strict';
 //Setting up route
-angular.module('trulo').config(function ($breadcrumbProvider) {
-  $breadcrumbProvider.setOptions({ prefixStateName: 'home' });
-}).config([
+angular.module('trulo').config([
   '$stateProvider',
   '$urlRouterProvider',
   function ($stateProvider, $urlRouterProvider) {
     // Trulo state routing
     $stateProvider.state('browse', {
-      url: '/:catID',
-      controller: 'TruloController',
+      url: '/',
       templateUrl: 'modules/trulo/client/views/browse.client.view.html'
     }).state('search', {
       url: '/search',
@@ -4137,15 +4134,8 @@ angular.module('trulo').controller('TruloController', [
   '$scope',
   'Trulo',
   'Mycart',
-  '$stateParams',
-  function ($scope, trulo, myCart, $stateParams) {
-    if ($stateParams.catID === null) {
-      $scope.catParameter = 0;
-      console.log('Null parameter');
-    } else {
-      console.log('Category parameter=' + $stateParams.catID);
-      $scope.catParameter = $stateParams.catID;  //reading the browse category
-    }
+  function ($scope, trulo, myCart) {
+    $scope.map = {};
     $scope.lastPageLoaded = [];
     $scope.products = [];
     $scope.busy = false;
@@ -4157,7 +4147,11 @@ angular.module('trulo').controller('TruloController', [
     $scope.quantity = 0;
     $scope.count = $scope.quantity;
     $scope.isCollapsed = false;
-    $scope.getCategories = function () {
+    $scope.showProducts = function (catID) {
+      //make a SOLR query to fetch products of this catID
+      setBreadArray(catID);
+    };
+    var getCategories = function () {
       console.log('Fetching categories in controller');
       trulo.getCategories(0, function (catsResponse, pageResponse, productsResponse) {
         console.log('Categories fetched successfully');
@@ -4167,6 +4161,9 @@ angular.module('trulo').controller('TruloController', [
         $scope.products = productsResponse;  //console.log($scope.categories[1].title);
       });
     };
+    if ($scope.categories === undefined) {
+      getCategories();
+    }
     $scope.fetchNextPage = function (catID, flag) {
       $scope.nextCategory = catID;
       //if( flag == 0)
@@ -4197,11 +4194,14 @@ angular.module('trulo').controller('TruloController', [
     $scope.scrollTop = function () {
       $(document).scrollTop(0);
     };
-    $scope.setBreadArray = function (cat, i) {
-      if (i === 0) {
-        // this is called by a top-level category
-        $scope.breadCrumbs = [];
+    var getCategoryTitle = function (catID) {
+      for (var i = 0; i < $scope.categories.length; i++) {
+        if ($scope.categories[i].catID === catID)
+          return $scope.categories[i].title;
       }
+    };
+    var setBreadArray = function (catID) {
+      var cat = getCategoryTitle(catID);
       $scope.breadCrumbs.push(cat);
     };
     $scope.popBread = function (cat) {
@@ -4233,6 +4233,30 @@ angular.module('trulo').controller('TruloController', [
       }
       $scope.quantity = count;
     };
+    $scope.init = function (q) {
+      $scope.q = q;
+      //here we issue the actual query using jQuery
+      $.ajax({
+        url: 'http://localhost:9393/solr/eposro/select?q=*%3A*&wt=json&indent=true&qt=amul',
+        data: {
+          'q': $scope.q,
+          'wt': 'json',
+          'rows': 3
+        },
+        traditional: true,
+        cache: true,
+        async: true,
+        dataType: 'jsonp',
+        success: function (data) {
+          //and when we get the query back we 
+          //stick the results in the scope
+          $scope.$apply(function () {
+            $scope.results = data.response.docs;
+          });
+        },
+        jsonp: 'json.wrf'
+      });
+    };
   }
 ]);
 'use strict';
@@ -4243,36 +4267,34 @@ angular.module('trulo').directive('product', [
       templateUrl: 'modules/trulo/client/views/productdirective.html',
       restrict: 'E',
       scope: { product: '=data' },
-      link: function postLink(scope, element, attrs) {
-        scope.productCount = myCart.getCount(scope.product);
-        scope.quantity = scope.productCount;
-        console.log('Pro count = ' + scope.productCount);
-        scope.quantity = scope.productCount;
-        scope.add = function () {
-          scope.productCount++;  //console.log("Sending product id = "+scope.product.id);
+      controller: function ($scope) {
+        $scope.productCount = myCart.getCount($scope.product);
+        $scope.quantity = $scope.productCount;
+        console.log('Pro count = ' + $scope.productCount);
+        $scope.quantity = $scope.productCount;
+        $scope.add = function () {
+          $scope.productCount++;  //console.log("Sending product id = "+$scope.product.id);
         };
-        scope.subtract = function () {
-          if (scope.productCount <= 0) {
-            scope.productCount = 0;
+        $scope.subtract = function () {
+          if ($scope.productCount <= 0) {
+            $scope.productCount = 0;
             return;
           }
-          scope.productCount--;
+          $scope.productCount--;
         };
-        scope.addToCart = function () {
-          if (scope.quantity < scope.productCount) {
+        $scope.addToCart = function () {
+          if ($scope.quantity < $scope.productCount) {
             //console.log("Add to cart");
-            for (var i = 0; i < scope.productCount - scope.quantity; i++) {
-              myCart.addToCart(scope.product, function (response) {
-              });
+            for (var i = 0; i < $scope.productCount - $scope.quantity; i++) {
+              myCart.addToCart($scope.product);
             }
-            scope.quantity = scope.productCount;
-          } else if (scope.quantity > scope.productCount) {
+            $scope.quantity = $scope.productCount;
+          } else if ($scope.quantity > $scope.productCount) {
             //console.log("Remove from cart");
-            for (var i = 0; i < scope.quantity - scope.productCount; i++) {
-              myCart.removeFromCart(scope.product, function (response) {
-              });
+            for (var i = 0; i < $scope.quantity - $scope.productCount; i++) {
+              myCart.removeFromCart($scope.product);
             }
-            scope.quantity = scope.productCount;
+            $scope.quantity = $scope.productCount;
           }
         };
       }
@@ -4395,7 +4417,7 @@ angular.module('trulo').factory('Trulo', [
       },
       getProductsByCat: function (catID, lastPage, products, cb) {
         console.log('sending catID=' + catID);
-        console.log(products[1].pdt);
+        //console.log(products[1].pdt);
         $http.get('/api/products?catID=' + catID + '&lastPage=' + lastPage).success(function (response) {
           lastPage++;
           //find the index into the products array where products of this category are found
@@ -4413,20 +4435,19 @@ angular.module('trulo').factory('Trulo', [
                                                      //$scope.busy = false;
         });
       },
-      addToCart: function (pdtID, cb) {
+      addToCart: function (pdtID) {
         var data = {
           'pdtID': pdtID,
           'userID': 3,
           'city': 'goa'
         };
-        console.log('add:Sending data with id=' + data.pdtID);
+        //console.log("add:Sending data with id="+data['pdtID']);
         $http.post('/api/addToCart', data).success(function (response) {
           if (response !== null) {
-            cb(response);
           }
         });
       },
-      removeFromCart: function (pdtID, cb) {
+      removeFromCart: function (pdtID) {
         var data = {
           'pdtID': pdtID,
           'userID': 3,
@@ -4435,7 +4456,6 @@ angular.module('trulo').factory('Trulo', [
         console.log('Remove:Sending data with id=' + data.pdtID);
         $http.post('/api/removeFromCart', data).success(function (response) {
           if (response !== null) {
-            cb(response);
           }
         });
       },

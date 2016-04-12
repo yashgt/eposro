@@ -2,19 +2,14 @@
 
 //Setting up route
 angular.module('trulo')
-    .config(function ($breadcrumbProvider) {
-        $breadcrumbProvider.setOptions({
-            prefixStateName: 'home'
-        });
-    })
+    
     .config(['$stateProvider', '$urlRouterProvider',
 
   function ($stateProvider, $urlRouterProvider) {
             // Trulo state routing
         $stateProvider
             .state('browse', {
-                    url: '/:catID'
-                    , controller:'TruloController'
+                    url: '/'
                     , templateUrl: 'modules/trulo/client/views/browse.client.view.html'
                 })
            

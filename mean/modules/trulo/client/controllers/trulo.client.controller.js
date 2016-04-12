@@ -1,17 +1,8 @@
 'use strict';
 angular.module('trulo').controller('TruloController', [
-  '$scope','Trulo','Mycart','$stateParams'
-    , function ($scope, trulo,myCart,$stateParams) {
-        
-        if( $stateParams.catID == null ){
-            $scope.catParameter = 0;
-            console.log("Null parameter");
-        }
-        else{
-            console.log("Category parameter="+$stateParams.catID);
-            $scope.catParameter = $stateParams.catID;//reading the browse category
-        }
-        
+  '$scope','Trulo','Mycart'
+    , function ($scope, trulo,myCart) {
+        $scope.map = {};
         $scope.lastPageLoaded = [];
         $scope.products = [];
         $scope.busy = false;
@@ -23,8 +14,12 @@ angular.module('trulo').controller('TruloController', [
         $scope.count = $scope.quantity;
         $scope.isCollapsed = false;
         
+        $scope.showProducts = function(catID){
+            //make a SOLR query to fetch products of this catID
+            setBreadArray(catID);
+        }
         
-        $scope.getCategories = function () {
+        var getCategories = function () {
             
             console.log('Fetching categories in controller');
             trulo.getCategories(0,function (catsResponse,pageResponse,productsResponse) {
@@ -37,6 +32,10 @@ angular.module('trulo').controller('TruloController', [
             });
         };
 
+        if( $scope.categories == undefined){
+            getCategories();
+        }
+        
         $scope.fetchNextPage = function (catID, flag) {
             $scope.nextCategory = catID;
             //if( flag == 0)
@@ -79,12 +78,15 @@ angular.module('trulo').controller('TruloController', [
         $scope.scrollTop = function () {
             $(document).scrollTop(0);
         };
-        $scope.setBreadArray = function (cat, i) {
-
-            if (i == 0) {
-                // this is called by a top-level category
-                $scope.breadCrumbs = [];
+        
+        var getCategoryTitle = function(catID){
+            for(var i =0 ; i< $scope.categories.length; i++){
+                if( $scope.categories[i].catID == catID)
+                    return $scope.categories[i].title;
             }
+        }
+        var setBreadArray = function (catID) {
+            var cat = getCategoryTitle(catID);
             $scope.breadCrumbs.push(cat);
         };
         
@@ -123,6 +125,32 @@ angular.module('trulo').controller('TruloController', [
             }
             $scope.quantity = count;
         }
-        
+     
+         
+        $scope.init = function (q) {
+            $scope.q = q;
+
+            //here we issue the actual query using jQuery
+            $.ajax({
+                url: "http://localhost:9393/solr/eposro/select?q=*%3A*&wt=json&indent=true&qt=amul",
+                data: {
+                    "q": $scope.q,
+                    "wt": "json",
+                    "rows":3
+                },
+                traditional: true,
+                cache: true,
+                async: true,
+                dataType: 'jsonp',
+                success: function (data) {
+                    //and when we get the query back we 
+                    //stick the results in the scope
+                    $scope.$apply(function () {
+                        $scope.results = data.response.docs;
+                    });
+                },
+                jsonp: 'json.wrf'
+            });
+        }
     }
 ]);

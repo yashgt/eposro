@@ -1,15 +1,14 @@
-<div class="container-fluid" ng-init="getCategories()">       
+<div class="container-fluid">       
             
     <md-content class="md-padding">
         <md-tabs md-border-bottom md-autoselect md-dynamic-height md-swipe-content>
-            <md-tab label="Home" ng-init="$index=0" md-active="catParameter==$index">
+            <md-tab label="Home">
                 <md-tab-body>
                     <p>Display all the recommnedations{{catParameter}}</p>
                 </md-tab-body>
             </md-tab>
-            <md-tab ng-repeat="cat in categories" ng-init="$index=cat.catID" 
-            md-active="catParameter==$index"
-            md-on-select="fetchNextPage(cat.catID,0);scrollTop();getSubCat(cat.catID);" ui-sref="browse({catID: cat.catID})">
+            <md-tab ng-repeat="cat in categories" ng-init="map[''+cat.catID] = $index" md-active="map[''+catParameter] == $index"
+            md-on-select="fetchNextPage(cat.catID,0);scrollTop();getSubCat(cat.catID);showProducts(cat.catID)">
                 <md-tab-label>
                     {{cat.title}}
                 </md-tab-label>
@@ -21,19 +20,23 @@
                             </md-button>
                             <md-menu-content width=6>
                                 <md-menu-item ng-repeat="subCat in subCategories">
-                                    <md-button ng-click="getSubCat(subCat.catID)">
+                                    <md-button ng-click="getSubCat(subCat.catID);showProducts(subCat.catID)">
                                         {{subCat.title}}
                                     </md-button>
                                 </md-menu-item>
                             </md-menu-content>
                         </md-menu>
-                        <!--<div ncy-breadcrumb></div>-->
+                        <ol class="breadcrumb">
+                            <li ng-repeat="bread in breadCrumbs">
+                                <a ng-click="showProducts(subcat.catID)">bread</a>
+                            </li>
+                        </ol>
                     </div>
                     <div id="products-row" infinite-scroll="fetchNextPage(nextCategory,1)" infinite-scroll-disabled="busy">
-
+                        
                         <md-grid-list md-cols-lg="4" md-cols-xs="1" md-cols-gt="4" md-cols-md="3" md-cols-sm="2" md-gutter="5px" md-row-height="400px">
                             <md-grid-tile ng-repeat="p in productsOfCurrentCat">
-                                    <product data="p" id="product-item" layout-fill></product>
+                                    <!--<product data="p" id="product-item" layout-fill></product>-->
                             </md-grid-tile> 
                         </md-grid-list>
                         <div ng-show="busy">Loading more products....</div>
