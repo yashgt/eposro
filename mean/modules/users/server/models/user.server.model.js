@@ -24,6 +24,16 @@ var validateLocalStrategyEmail = function (email) {
   return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email));
 };
 
+var validateLocalStrategyMobile = function (mobile) {
+ if((this.provider !== 'local' && !this.updated)||(/^\d{10}$/.test(mobile))){
+  console.log(mobile + "true");
+  return true;
+ }
+  //console.log(validator.isMobilePhone(mobile,"en-IN"));
+  //return (validator.isMobilePhone(mobile,'en-IN'));
+  return false;
+};
+
 /**
  * User Schema
  */
@@ -52,12 +62,14 @@ var UserSchema = new Schema({
     default: '',
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
-  username: {
-    type: String,
-    unique: 'Username already exists',
-    required: 'Please fill in a username',
-    lowercase: true,
-    trim: true
+  mobileNumber:{
+    type:String,
+    unique:'Mobile Number Already Exists',
+    validate: [validateLocalStrategyMobile, 'Please fill a valid Mobile Number']
+  },
+  cstNumber:{
+    type:String,
+    unique:'CST number Already Exists'
   },
   password: {
     type: String,

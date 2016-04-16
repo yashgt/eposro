@@ -10,22 +10,22 @@ var passport = require('passport'),
 module.exports = function () {
   // Use local strategy
   passport.use(new LocalStrategy({
-    usernameField: 'username',
+    mobilenumField: 'mobileNumber',
     passwordField: 'password'
   },
-  function (username, password, done) {
+  function (mobile, password, done) {
     User.findOne({
-      username: username.toLowerCase()
+      mobileNumber: mobile
     }, function (err, user) {
       if (err) {
         return done(err);
       }
       if (!user || !user.authenticate(password)) {
         return done(null, false, {
-          message: 'Invalid username or password'
+          message: 'Invalid mobile number or password'
         });
       }
-
+      console.log(user);
       return done(null, user);
     });
   }));
