@@ -109,7 +109,15 @@
    
    <field name="pname" type="text_general" indexed="true" stored="true" required="true" />
    <field name="brand" type="text_general" indexed="true" stored="true" required="true" />
+   <field name="desc" type="text_general" indexed="true" stored="true" required="true" />
+
    <field name="cats" type="int" indexed="true" stored="true" required="false" multiValued="true" />
+   <field name="cats.0" type="int" indexed="true" stored="true" required="false" multiValued="true" />
+   <field name="cats.1" type="int" indexed="true" stored="true" required="false" multiValued="true" />
+   <field name="cats.2" type="int" indexed="true" stored="true" required="false" multiValued="true" />
+   <field name="cats.3" type="int" indexed="true" stored="true" required="false" multiValued="true" />
+   <field name="cats.4" type="int" indexed="true" stored="true" required="false" multiValued="true" />
+   
    <dynamicField name="facets.*" type="text_general" indexed="true" stored="true" />
    
    <field name="vname_all" type="text_en" indexed="true" multiValued="true" />

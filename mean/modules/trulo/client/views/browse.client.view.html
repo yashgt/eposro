@@ -2,17 +2,17 @@
             
     <md-content class="md-padding">
         <md-tabs md-border-bottom md-autoselect md-dynamic-height md-swipe-content>
-            <md-tab label="Home">
+            <md-tab label="Home" ng-init="$index=0" md-active="catParameter==$index">
                 <md-tab-body>
-                    <p>Display all the recommnedations</p>
+                    <p>Display all the recommnedations{{catParameter}}</p>
                 </md-tab-body>
             </md-tab>
-            <md-tab id="tab-button" ng-repeat="cat in categories" ui-sref="browse({title: cat.title})"
-            md-on-select="fetchNextPage(cat.catID,0);scrollTop();getSubCat(cat.catID);">
+            <md-tab ng-repeat="cat in categories" ng-init="$index=cat.catID" 
+            md-active="catParameter==$index"
+            md-on-select="fetchNextPage(cat.catID,0);scrollTop();getSubCat(cat.catID);" ui-sref="browse({catID: cat.catID})">
                 <md-tab-label>
                     {{cat.title}}
                 </md-tab-label>
-
                 <md-tab-body>
                     <div class="sub-categories-row">
                         <md-menu id="sub-cat-button" ng-hide="hideMe">
@@ -21,8 +21,7 @@
                             </md-button>
                             <md-menu-content width=6>
                                 <md-menu-item ng-repeat="subCat in subCategories">
-                                    <md-button ui-sref=".subCategory" 
-                                    ng-click="getSubCat(subCat.catID)">
+                                    <md-button ng-click="getSubCat(subCat.catID)">
                                         {{subCat.title}}
                                     </md-button>
                                 </md-menu-item>

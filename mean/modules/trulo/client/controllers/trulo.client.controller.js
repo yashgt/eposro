@@ -1,8 +1,17 @@
 'use strict';
 angular.module('trulo').controller('TruloController', [
-  '$scope','Trulo','Mycart'
-    , function ($scope, trulo,myCart) {
-
+  '$scope','Trulo','Mycart','$stateParams'
+    , function ($scope, trulo,myCart,$stateParams) {
+        
+        if( $stateParams.catID == null ){
+            $scope.catParameter = 0;
+            console.log("Null parameter");
+        }
+        else{
+            console.log("Category parameter="+$stateParams.catID);
+            $scope.catParameter = $stateParams.catID;//reading the browse category
+        }
+        
         $scope.lastPageLoaded = [];
         $scope.products = [];
         $scope.busy = false;
@@ -13,6 +22,7 @@ angular.module('trulo').controller('TruloController', [
         $scope.quantity = 0;
         $scope.count = $scope.quantity;
         $scope.isCollapsed = false;
+        
         
         $scope.getCategories = function () {
             
