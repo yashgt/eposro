@@ -1,0 +1,671 @@
+Hello, world!
+Status: success
+Getting products
+Going to 12180
+Getting products
+Going to next page
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385015","pdtName":"Nargis Supreme (100 gms)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385084","pdtName":"Nargis 25 Tea Bags (50 gms)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385046","pdtName":"Nargis Gold (250 gms)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385022","pdtName":"Nargis Supreme (250 gms)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385091","pdtName":"Nargis 100 Tea Bags (200 gms)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385053","pdtName":"Nargis Yellow (Rs 20)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385114","pdtName":"Nargis Yellow (Rs 10)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385121","pdtName":"Nargis Green Premium CTC 500 GMS Poly Pack","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385138","pdtName":"Nargis Green Premium CTC 1 KG Poly Pack","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385060","pdtName":"Nargis Yellow Premium CTC 250 gms Poly Pack","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385077","pdtName":"Limtex Special Tetrapack Defenses (500 gms)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385039","pdtName":"Nargis Gold (100 gms)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385107","pdtName":"Nargis Yellow (Rs 5)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385145","pdtName":"Nargis Yellow (Rs 1)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385152","pdtName":"Nargis Tea Cups (Lemon)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385176","pdtName":"Nargis Tea Cups (Jasmine)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385169","pdtName":"Nargis Tea Cups (Earl Grey)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385206","pdtName":"Nargis Green (500 gms) Tetra Pack","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385183","pdtName":"Nargis Tea Cups (Cardamom)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385190","pdtName":"Nargis Tea Cups (Green Tea)","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+Getting products
+Going to next after 12180
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385220","pdtName":"Nargis Anytime Premium CTC 250 gms Poly Pack","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385251","pdtName":"Nargis Green Premium CTC 250 Gms Poly Pack","ht":"","len":"","qty":"","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385237","pdtName":"Nargis Yellow Premium CTC 500 gms Poly Pack","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385299","pdtName":"Avedan 250 Gms","ht":"","len":"","qty":"","wd":"","wtvol":""}
+
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385329","pdtName":"NARGIS GREEN 50 GM PREMIUM CTC TEA","ht":"","len":"","qty":"","wd":"","wtvol":""}
+0
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385213","pdtName":"Nargis Green (250 gms) Tetra Pack","ht":"","len":"","qty":"0","wd":"","wtvol":""}
+
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385305","pdtName":"Avedan 1 Kg","ht":"","len":"","qty":"","wd":"","wtvol":""}
+
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385282","pdtName":"Nargis Green Dust 500 Gms","ht":"","len":"","qty":"","wd":"","wtvol":""}
+
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385275","pdtName":"Nargis Green Dust 1 Kg","ht":"","len":"","qty":"","wd":"","wtvol":""}
+
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385268","pdtName":"Nargis Green Dust 250 gms","ht":"","len":"","qty":"","wd":"","wtvol":""}
+
+{"compCode":"8908001385","compId":"12180","compName":"LIMTEX TEA & INDUSTRIES LTD.","gtin":"8908001385312","pdtName":"NARGIS GREEN 100GM PREMIUM CTC TEA","ht":"","len":"","qty":"","wd":"","wtvol":""}
+Getting products
+Going to next after 8089
+0
+{"compCode":"89041068","compId":"8089","compName":"LINC PEN & PLASTICS LTD.","gtin":"8904106800026","pdtName":"lazor gel bl 1 refill","ht":"","len":"","qty":"0","wd":"","wtvol":"0"}
+Getting products
+Going to next after 1448
+Getting products
+Going to next after 10150
+Getting products
+Going to next after 19459
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980018","pdtName":"ARTELIN 30 INJ.","ht":"","len":"","qty":"","wd":"","wtvol":"Combi pack"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980025","pdtName":"ARTELIN 60 INJ.","ht":"","len":"","qty":"","wd":"","wtvol":"Combi pack"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980049","pdtName":"ANTHEL","ht":"","len":"","qty":"","wd":"","wtvol":"10x1x1 Tab"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980032","pdtName":"ARTELIN 120 INJ.","ht":"","len":"","qty":"","wd":"","wtvol":"Combi pack"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980056","pdtName":"MSP Tablet","ht":"","len":"","qty":"","wd":"","wtvol":"1x4 tablet"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980070","pdtName":"Azithromycin Tablets 500 mg","ht":"","len":"","qty":"","wd":"","wtvol":"1x3 tablet"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980063","pdtName":"Azithromycin Tablets 250 mg","ht":"","len":"","qty":"","wd":"","wtvol":"1x6 tablet"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980087","pdtName":"Sugidone 5% Solution","ht":"","len":"","qty":"","wd":"","wtvol":"1000 ml"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980094","pdtName":"Sugidone 7.5% Solution","ht":"","len":"","qty":"","wd":"","wtvol":"1000 ml"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980100","pdtName":"Sugidone 10% Solution","ht":"","len":"","qty":"","wd":"","wtvol":"1000 ml"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980124","pdtName":"SILDEQUE-50 Tablet","ht":"","len":"","qty":"","wd":"","wtvol":"1x4 Tablet"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980117","pdtName":"BCO-Z Tablet","ht":"","len":"","qty":"","wd":"","wtvol":"3x10Tablet"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980155","pdtName":"SILDEQUE-100","ht":"","len":"","qty":"","wd":"","wtvol":""}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980162","pdtName":"TADANIQUE Tablets","ht":"","len":"","qty":"","wd":"","wtvol":"1x4 tablet"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980148","pdtName":"SILDEQUE-100 Tablets","ht":"","len":"","qty":"","wd":"","wtvol":"1x4 tablet"}
+
+{"compCode":"890606398","compId":"19459","compName":"Lincoln Pharmaceuticals Ltd","gtin":"8906063980131","pdtName":"SILDEQUE-50","ht":"","len":"","qty":"","wd":"","wtvol":""}
+Getting products
+Going to next page
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041840013","pdtName":"ARH JUNIOR","ht":"0.070 CM","len":"0.070 CM","qty":"0","wd":"0.022 CM","wtvol":"16 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041840020","pdtName":"ARH","ht":"0.080 CM","len":"0.090 CM","qty":"0","wd":"0.022 CM","wtvol":"24 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041840037","pdtName":"ARH FORTE","ht":"0.080 CM","len":"0.090 CM","qty":"0","wd":"0.022 CM","wtvol":"28 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041840044","pdtName":"CEFLIN-1000 INJECTION","ht":"5.6","len":"2.7","qty":"0","wd":"2.7","wtvol":"1000 mg"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041840846","pdtName":"CEEPRO-500 TABLTS ( KENYA)","ht":"6","len":"8.4","qty":"","wd":"7.8","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841010","pdtName":"KONAZOLE CREAM ( KENYA )","ht":"2.6","len":"10.6","qty":"0","wd":"2","wtvol":"15 GM"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841089","pdtName":"NEPIN-SR 20 TABLETS ( KENYA)","ht":"5.3","len":"7.3","qty":"","wd":"3.3","wtvol":"10X10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841119","pdtName":"OMLINK-20 CAPSULES","ht":"6.2","len":"19.2","qty":"","wd":"5.5","wtvol":"10X10 CAP"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841331","pdtName":"ALLCILLIN -500 CAPSULES ( MADAGASKAR)","ht":"6.5","len":"8.5","qty":"0","wd":"8","wtvol":"10X10 CAPS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841379","pdtName":"ANTHEL TABLETS ( MADAGASKAR)","ht":"4.1","len":"7.7","qty":"0","wd":"1.6","wtvol":"1 TABLETS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841386","pdtName":"ANTHEL TABLETS ( MADAGASKAR)","ht":"8","len":"21","qty":"0","wd":"8.5","wtvol":"25X1X1 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841362","pdtName":"AMPICILLIN SODIUM FOR INJECTION BP ( MADAGASKAR)","ht":"10","len":"14","qty":"0","wd":"0","wtvol":"50 VIALS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841522","pdtName":"DOLOMOL TABLETS ( MADAGASKAR)","ht":"5.5","len":"10","qty":"0","wd":"4.1","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841348","pdtName":"ALLMYCIN S-500 TABLETS ( MADAGASKAR)","ht":"6","len":"9","qty":"0","wd":"8","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841423","pdtName":"CAPRIL-50 TABLETS ( MADAGASKAR)","ht":"3.2","len":"8.7","qty":"0","wd":"2","wtvol":"3X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841430","pdtName":"CEEPRO-500 TABLETS ( MADAGASKAR)","ht":"6","len":"8.4","qty":"0","wd":"7.8","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841577","pdtName":"LIGNOCAINE INJECTION BP 2% ( MADAGASKAR )","ht":"8","len":"14","qty":"0","wd":"0","wtvol":"25 X 30 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841591","pdtName":"NYSTATIN TABLETS BP 500000 IU","ht":"6.7","len":"15.5","qty":"0","wd":"6.2","wtvol":"10 X 10 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841393","pdtName":"ANTHEL SUSPENSION","ht":"7","len":"3.5","qty":"0","wd":"3.5","wtvol":"10 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841546","pdtName":"FETON-Z SR CAPSULES ( MADAGASKAR)","ht":"6.5","len":"7.5","qty":"0","wd":"3","wtvol":"3X10 CAPS"}
+Getting products
+Going to next page
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841607","pdtName":"OMLINK-20 CAPSULES ( MADAGASKAR)","ht":"6.2","len":"19.2","qty":"0","wd":"5.5","wtvol":"10X10 CAP"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841638","pdtName":"RANILINK-150 TABLETS ( MADAGASKAR)","ht":"6.7","len":"15.5","qty":"0","wd":"4","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841652","pdtName":"ROXILIN-150 TABLETS","ht":"6.5","len":"16.5","qty":"0","wd":"4.5","wtvol":"10X1X10 C"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841997","pdtName":"GENFER CAPSULES ( MOZAMBIQUE )","ht":"6.5","len":"7.5","qty":"0","wd":"3","wtvol":"3X10 CAPS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841805","pdtName":"FLUCAN-200 TABLETS ( MALAWI )","ht":"5","len":"7.3","qty":"0","wd":"3.2","wtvol":"10X1 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842154","pdtName":"DERMOLIN-GM CREAM ( MYANMAR )","ht":"2.6","len":"11","qty":"0","wd":"2","wtvol":"10 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842741","pdtName":"ANTHEL TABLETS ( RWANDA )","ht":"4.1","len":"7.7","qty":"0","wd":"1.6","wtvol":"1 TABLETS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842239","pdtName":"NEPIN-SR 20 TABLETS ( MYANMAR )","ht":"5.3","len":"7.3","qty":"0","wd":"3.3","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841928","pdtName":"BRUGEN-S SUSPENSION ( MOZAMBIQUE )","ht":"12","len":"5","qty":"0","wd":"5","wtvol":"100 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842086","pdtName":"SANTRO-100 TABLETS ( MOZAMBIQUE )","ht":"6","len":"7.6","qty":"0","wd":"1.2","wtvol":"4 TABLETS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842116","pdtName":"VIVIAN INJECTION ( MOZAMBIQUE )","ht":"10","len":"9","qty":"0","wd":"","wtvol":"10X10X3 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841737","pdtName":"VIVIAN GEL","ht":"3.5","len":"14","qty":"0","wd":"2.5","wtvol":"30 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842208","pdtName":"M-FORLIN 500 TABLETS ( MYANMAR )","ht":"6.8","len":"15.5","qty":"0","wd":"4.8","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841645","pdtName":"ROXILIN-150 TABLETS","ht":"4.1","len":"9.3","qty":"0","wd":"1.6","wtvol":"10 TABLETS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842024","pdtName":"GENCIN INJECTION","ht":"0","len":"9","qty":"0","wd":"10","wtvol":"100X2ML AP"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841720","pdtName":"VIVIAN-50 TABLETS","ht":"5","len":"7.3","qty":"0","wd":"3.2","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841935","pdtName":"CIPROGEN-O DROPS","ht":"7.5","len":"3","qty":"0","wd":"3","wtvol":"10 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841843","pdtName":"KONAZOL TABLETS ( MALAWI )","ht":"5.5","len":"9","qty":"0","wd":"4","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842031","pdtName":"CARGEN TABLETS","ht":"5","len":"8.8","qty":"0","wd":"3.6","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041841751","pdtName":"ALLMYCIN-S 250 TABLETS ( MALAWI )","ht":"10","len":"7.5","qty":"0","wd":"","wtvol":"1000 TABS"}
+Getting products
+Going to next page
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842758","pdtName":"CAPRIL-25 TABLETS ( RWANDA )","ht":"5","len":"8.2","qty":"0","wd":"4","wtvol":"10 X 10 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842765","pdtName":"CEFLIN-1000 INJ. ( RWANDA )","ht":"5.6","len":"4.8","qty":"0","wd":"2.7","wtvol":"1 VIAL "}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842772","pdtName":"CHLORAMPHENICOL SOD. SUCCINATE FOR INJ. USP 1 GM ( RWANDA )","ht":"14","len":"10","qty":"0","wd":"0","wtvol":"50 VIALS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842819","pdtName":"ERYTHROMYCIN STEARATE SUSP. 125 MG / 5 ML ( RWANDA )","ht":"12","len":"5","qty":"0","wd":"5","wtvol":"100 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842826","pdtName":"HYDROCORTISONE SOD. SUCCINATE FOR INJ. BP 100 MG ( RWANDA )","ht":"10","len":"14","qty":"0","wd":"0","wtvol":"50 VIALS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842970","pdtName":"SPASLIN-H TABLETS ( RWANDA )","ht":"5.7","len":"5.5","qty":"0","wd":"0","wtvol":"1000 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842871","pdtName":"M-FORLIN 500 TABLETS ( RWANDA )","ht":"5.5","len":"10.2","qty":"0","wd":"4.2","wtvol":"10 X 10 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041842857","pdtName":"L-GENTA DROPS ( RWANDA )","ht":"6.5","len":"2.8","qty":"0","wd":"2.8","wtvol":"10 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843441","pdtName":"adrenaline injection BP ( 1 in 1000 )","ht":"10","len":"","qty":"","wd":"9","wtvol":"10x10x1ml "}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843588","pdtName":"FLUCAN TABLETS ( TANZANIA )","ht":"5.6","len":"16.5","qty":"0","wd":"4.5","wtvol":"10X1 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843595","pdtName":"FLUCOMOL CAPSULES","ht":"7.5","len":"8.5","qty":"0","wd":"1.2","wtvol":"10 CAPS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843519","pdtName":"CLOTRILIN-V CREAM ( TANZANIA )","ht":"4.5","len":"13","qty":"0","wd":"2.5","wtvol":"15 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843557","pdtName":"DIOLIN TABLETS","ht":"4.5","len":"6","qty":"0","wd":"3.7","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843618","pdtName":"HYDROCORTISONE S.S. INJECTION ( TANZANIA )","ht":"8","len":"15","qty":"0","wd":"","wtvol":"50 VIALS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843649","pdtName":"KOFLAM TABLETS","ht":"1.","len":"16","qty":"0","wd":"6.5","wtvol":"10X1X10 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843571","pdtName":"FLUCAN TABLETS ( TANZANIA )","ht":"4.1","len":"5.3","qty":"0","wd":"1.6","wtvol":"1 TABLETS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843601","pdtName":"FLUCOMOL CAPSULES","ht":"9.8","len":"13.0","qty":"0","wd":"9","wtvol":"10X1X10 C"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843700","pdtName":"LIGNOCAINE INJECTION ( TANZANIA )","ht":"10","len":"15","qty":"0","wd":"","wtvol":"25X30 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843540","pdtName":"DIASIX INJECTION ( TANZANIA )","ht":"10","len":"9","qty":"0","wd":"","wtvol":"10X10X2 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843632","pdtName":"KOFLAM TABLETS","ht":"6.1","len":"9.5","qty":"0","wd":"1.5","wtvol":"10 TABLETS"}
+Getting products
+Going to next page
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843717","pdtName":"LINCODERM CREAM ( TANZANIA )","ht":"3","len":"10","qty":"0","wd":"2.5","wtvol":"15 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843724","pdtName":"LINCOSONE CREAM","ht":"2.6","len":"11","qty":"0","wd":"2","wtvol":"10 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843793","pdtName":"NAM SYRUP ( TANZANIA )","ht":"11.5","len":"4.8","qty":"0","wd":"4.8","wtvol":"100 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843823","pdtName":"OMLINK-20 CAPSULES ( TANZANIA )","ht":"6","len":"19.2","qty":"0","wd":"1.2","wtvol":"1X10 CAP"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843816","pdtName":"NORZOLE TABLETS ( TANZANIA )","ht":"8.7","len":"13","qty":"0","wd":"6.5","wtvol":"10X10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843861","pdtName":"ROXILIN-150 TABLETS","ht":"4.1","len":"9.3","qty":"","wd":"1.6","wtvol":"1X10 TABS"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843878","pdtName":"ROXILIN-150 TABLETS","ht":"9.5","len":"16.5","qty":"","wd":"4.5","wtvol":"10X1X10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843939","pdtName":"TOFLOX-200 TABLETS","ht":"4.1","len":"9.3","qty":"","wd":"1.6","wtvol":"1X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843953","pdtName":"VIVIAN PLUS TABLETS ( TANZANIA )","ht":"3.6","len":"10.5","qty":"0","wd":"1","wtvol":"1X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844097","pdtName":"ANTHEL TABLETS","ht":"4.1","len":"7.7","qty":"0","wd":"1.6","wtvol":""}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843991","pdtName":"VIVIAN GEL ( TANZANIA )","ht":"3","len":"12.5","qty":"0","wd":"2.4","wtvol":"30 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844080","pdtName":"VIVIAN INJECTION","ht":"10","len":"9","qty":"0","wd":"","wtvol":"10X10X3 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843809","pdtName":"NORZOLE TABLETS ( TANZANIA )","ht":"8.3","len":"6","qty":"0","wd":"1.1","wtvol":"10 TABLETS"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843946","pdtName":"TOFLOX-200 TABLETS","ht":"9.5","len":"16.5","qty":"","wd":"4.5","wtvol":"10X1X10 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844103","pdtName":"AZILIN-250 TABLETS","ht":"4.0","len":"9.0","qty":"0","wd":"1.2","wtvol":"6 TABLETS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843847","pdtName":"PHENARZINE INJECTION","ht":"0","len":"14","qty":"0","wd":"10","wtvol":"100X2ML AP"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843984","pdtName":"VIVIAN-50 TABLETS","ht":"5","len":"7.3","qty":"0","wd":"3.2","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843830","pdtName":"OMLINK-20 CAPSULES ( TANZANIA )","ht":"13.5","len":"19.5","qty":"0","wd":"6.4","wtvol":"10X1X10 C"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844004","pdtName":"VITAMIN B COMPLEX INJECTION","ht":"10","len":"0","qty":"","wd":"15","wtvol":"50X10 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041843915","pdtName":"SPASLIN-H INJECTION","ht":"0","len":"9","qty":"0","wd":"10","wtvol":"100X2ML AP"}
+Getting products
+Going to next page
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844127","pdtName":"AZILIN-500 TABLETS","ht":"4.1","len":"7.7","qty":"0","wd":"1.6","wtvol":"3 TABLETS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844134","pdtName":"AZILIN-500 TABLETS","ht":"8.0","len":"8.5","qty":"0","wd":"8.5","wtvol":"10X1X3 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844271","pdtName":"NEPIN-SR 20 TABLETS","ht":"5.3","len":"7.3","qty":"0","wd":"3.3","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844226","pdtName":"KONAZOL CREAM 2%","ht":"2.6","len":"10.6","qty":"0","wd":"2.0","wtvol":"15 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844264","pdtName":"NEOVAG TABLETS","ht":"7.2","len":"17.5","qty":"0","wd":"2.5","wtvol":"14 TABLETS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844318","pdtName":"SOLUDINE-M OINTMENT","ht":"3","len":"12.5","qty":"0","wd":"2.2","wtvol":"20 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844288","pdtName":"OMLINK-20 CAPSULES","ht":"6.2","len":"19.2","qty":"0","wd":"5.5","wtvol":"10X10 CAP"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844295","pdtName":"PENTALINK-40 TABLETS ( UGANDA )","ht":"5.5","len":"12","qty":"0","wd":"1.7","wtvol":"3X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844325","pdtName":"STROM-50 CASPSULES","ht":"6.5","len":"7.3","qty":"0","wd":"5.5","wtvol":"10X10 CAPS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844332","pdtName":"TOFLOX-200 TABLETS","ht":"4.1","len":"9.3","qty":"0","wd":"1.6","wtvol":"10 TABLETS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844349","pdtName":"TOFLOX-200 TABLETS","ht":"16.5","len":"9.5","qty":"0","wd":"4.5","wtvol":"10X1X10 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844400","pdtName":"AMPICILLIN SODIUM FOR INJECTION BP 500 MG ( ZAMBIA)","ht":"8","len":"","qty":"0","wd":"15","wtvol":"50X1 VIAL"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844486","pdtName":"DEEXA DROPS ( ZAMBIA)","ht":"6.5","len":"2.8","qty":"0","wd":"2.8","wtvol":"10 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844523","pdtName":"DIOLIN TABLETS ( ZAMBIA )","ht":"4","len":"7.2","qty":"0","wd":"3.3","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844493","pdtName":"DEEXA-N DROPS ( ZAMBIA)","ht":"6.5","len":"2.8","qty":"0","wd":"2.8","wtvol":"10 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844530","pdtName":"DERMOFULVIN-125 TABLETS ( ZAMBIA)","ht":"3.9","len":"7.3","qty":"0","wd":"3.2","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844554","pdtName":"KONAZOL CREAM ( ZAMBIA )","ht":"2.6","len":"10.6","qty":"0","wd":"2","wtvol":"15 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844561","pdtName":"L-GENTA DROPS ( ZAMBIA )","ht":"6.5","len":"2.8","qty":"0","wd":"2.8","wtvol":"10 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844110","pdtName":"AZILIN-250 TABLETS","ht":"9.5","len":"13.0","qty":"0","wd":"4.5","wtvol":"10X1X6 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844547","pdtName":"HYDROCORTISONE SODIUM SUCCINATE FOR INJECTION BP ( ZAMBIA )","ht":"8","len":"15","qty":"0","wd":"","wtvol":"50 VIAL"}
+Getting products
+Going to next page
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844585","pdtName":"LIGNOCAINE INJECTION ( ZAMBIA )","ht":"10","len":"14","qty":"0","wd":"","wtvol":"25 VIALS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844622","pdtName":"MAJEROL TABLETS ( ZAMBIA )","ht":"7.5","len":"7","qty":"0","wd":"","wtvol":"1000 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844653","pdtName":"MICOLIN CREAM ( ZAMBIA )","ht":"2.6","len":"10.7","qty":"0","wd":"2","wtvol":"15 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844790","pdtName":"RIFALIN TABLETS ( ZAMBIA )","ht":"10","len":"7","qty":"0","wd":"4.2","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844691","pdtName":"OMLINK-20 CAPSULES ( ZAMBIA )","ht":"6.2","len":"19.2","qty":"0","wd":"5.5","wtvol":"10X10 CAP"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844813","pdtName":"SILVO CREAM ( ZAMBIA )","ht":"2.6","len":"10.7","qty":"0","wd":"2","wtvol":"15 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844868","pdtName":"VIVIAN GEL ( ZAMBIA)","ht":"3","len":"12.5","qty":"0","wd":"2.4","wtvol":"30 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844837","pdtName":"TE-DE-V TABLETS ( ZAMBIA)","ht":"7.2","len":"17.5","qty":"0","wd":"1.5","wtvol":"1X6 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844806","pdtName":"ASTHAMOL TABLETS ( ZAMBIA )","ht":"5","len":"7.3","qty":"0","wd":"3.2","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844929","pdtName":"ANOL-50 TABLETS ( MALAWI )","ht":"5.5","len":"12","qty":"0","wd":"1.7","wtvol":"3X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844875","pdtName":"VITAMIN B COMPLEX INJECTION ( ZAMBIA )","ht":"10","len":"14","qty":"0","wd":"","wtvol":"50 VIALS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844967","pdtName":"BET CREAM","ht":"2.6","len":"10.7","qty":"0","wd":"2","wtvol":"15 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844936","pdtName":"ANOL-50 TABLETS ( MALAWI )","ht":"5.5","len":"12","qty":"0","wd":"4.8","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844950","pdtName":"ANOL-100 TABLETS ( MALAWI )","ht":"5.5","len":"12","qty":"0","wd":"4.8","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844820","pdtName":"SOLUDINE OINTMENT","ht":"2.6","len":"10.7","qty":"0","wd":"2","wtvol":"15 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844998","pdtName":"DERMOFULVIN-125 TABLETS","ht":"3.9","len":"7.3","qty":"0","wd":"3.2","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844974","pdtName":"CLOTRILIN-500 TABLETS ( MALAWI )","ht":"4","len":"11.5","qty":"0","wd":"1.2","wtvol":"1T & APPL"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844943","pdtName":"ANOL-100 TABLETS ( MALAWI )","ht":"5.5","len":"12","qty":"0","wd":"1.7","wtvol":"3X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844981","pdtName":"DERMOFULVIN FORTE TABLETS","ht":"5.5","len":"10","qty":"0","wd":"4.1","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845001","pdtName":"DERMOFULVIN 125 TABLETS ( MALAWI )","ht":"5.7","len":"5.5","qty":"0","wd":"0","wtvol":"1000 TAB"}
+Getting products
+Going to next page
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845025","pdtName":"ENLOW-5 TABLETS","ht":"5.2","len":"12.5","qty":"0","wd":"2.8","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845018","pdtName":"ENLOW-10 TABLETS","ht":"5.2","len":"12.5","qty":"0","wd":"2.8","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845049","pdtName":"KLARO-250","ht":"8.5","len":"13.5","qty":"0","wd":"8","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845032","pdtName":"FETON-Z SR CAPSULES","ht":"6.5","len":"7.5","qty":"0","wd":"3","wtvol":"3 X 10 CAP"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845056","pdtName":"LINCODYL TABLETS ( MALAWI )","ht":"5.2","len":"12.5","qty":"0","wd":"2.8","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845063","pdtName":"LINCODYL TABLETS ( MALAWI )","ht":"5.7","len":"5.5","qty":"0","wd":"0","wtvol":"1000 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845070","pdtName":"PA-12 TABLETS ( MALAWI )","ht":"10","len":"13","qty":"0","wd":"10","wtvol":"10X1X12 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845094","pdtName":"VALPIN-CR-200 TABLETS","ht":"6.5","len":"15.5","qty":"0","wd":"4","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845087","pdtName":"STROM-50 TABLETS","ht":"6","len":"8.5","qty":"0","wd":"4","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845131","pdtName":"PA-12 TABLETS ( MALAWI )","ht":"9.7","len":"9.7","qty":"0","wd":"1.2","wtvol":"1X12 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845117","pdtName":"TADALIN-20 TABLETS","ht":"6","len":"7.6","qty":"0","wd":"1.2","wtvol":"4 TABLETS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845148","pdtName":"LINCOSONE CREAM","ht":"11.5","len":"11","qty":"0","wd":"11.2","wtvol":"20X10 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845100","pdtName":"VIVIAN-SP TABLETS ( MALAWI )","ht":"6.5","len":"9.5","qty":"0","wd":"8","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845124","pdtName":"TADALIN-20 TABLETS","ht":"8","len":"12.5","qty":"0","wd":"6.5","wtvol":"10X1X4 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845155","pdtName":"SILVO CREAM","ht":"3.0","len":"12.5","qty":"0","wd":"2.2","wtvol":"20 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845162","pdtName":"THEO-MINE TABLETS","ht":"6","len":"9","qty":"0","wd":"4","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845216","pdtName":"NYSTATIN VAGINAL TABLETS USP 1.0 L IU ( RWANDA )","ht":"5.7","len":"5.5","qty":"0","wd":"0","wtvol":"100 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845193","pdtName":"PENTALINK-40 TABLETS ( UGANDA )","ht":"5.5","len":"12","qty":"0","wd":"4.8","wtvol":"10X10 TAB"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845186","pdtName":"NOCIGEL INJECTION ( CONGO )","ht":"8","len":"10","qty":"0","wd":"1.8","wtvol":"5X2 ML AMP"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845209","pdtName":"PYRAZINAMIDE TABLETS BP 500 MG","ht":"5.5","len":"10","qty":"0","wd":"4.1","wtvol":"10 X 10 T"}
+Getting products
+Going to next page
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845223","pdtName":"VIVIAN GEL ( TANZANIA )","ht":"13","len":"12.5","qty":"0","wd":"12.5","wtvol":"20X30 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845278","pdtName":"KONAZOL CREAM ( ZAMBIA )","ht":"11","len":"11","qty":"0","wd":"10.5","wtvol":"20X15 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845230","pdtName":"VIVIAN PLUS TABLETS ( TANZANIA )","ht":"10.8","len":"10.5","qty":"0","wd":"4","wtvol":"10X1X10 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845285","pdtName":"DIOLIN TABLETS ( ZAMBIA )","ht":"5.7","len":"5.4","qty":"0","wd":"3.3","wtvol":"1000 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845247","pdtName":"LINCODERM CREAM ( TANZANIA )","ht":"10.5","len":"13.5","qty":"0","wd":"13","wtvol":"20X15 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845292","pdtName":"IBUN TABLETS ( ZAMBIA )","ht":"6","len":"8.4","qty":"0","wd":"7.8","wtvol":"10X10 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845308","pdtName":"VIVIAN ROLL ON ( ZAMBIA )","ht":"9","len":"16.2","qty":"0","wd":"","wtvol":"40 gm"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845322","pdtName":"SPASLIN DROPS ( KENYA )","ht":"9","len":"3.5","qty":"0","wd":"3.5","wtvol":"30 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845261","pdtName":"VIVIAN GEL ( ZAMBIA)","ht":"13","len":"12.5","qty":"0","wd":"12.5","wtvol":"20X30 GM"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845315","pdtName":"AMINOPHYLLINE TABLETS BP ( ZAMBIA )","ht":"5.7","len":"5.4","qty":"0","wd":"","wtvol":"1000 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845339","pdtName":"STROM INJECTION ( KENYA )","ht":"12.5","len":"15.5","qty":"0","wd":"1.5","wtvol":"10X2ML AMP"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845346","pdtName":"VAGINAX-100 TABLETS ( GHANA )","ht":"7.3","len":"15.5","qty":"0","wd":"1.5","wtvol":"1X6 TABS"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845353","pdtName":"STAGYLTABLETS ( GHANA )","ht":"5.6","len":"6.9","qty":"0","wd":"1.5","wtvol":"2 Tablets"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845360","pdtName":"STAGYLTABLETS ( GHANA )","ht":"7.3","len":"16","qty":"0","wd":"11.5","wtvol":"20x1x2 T"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845377","pdtName":"CYPRODINE SYRUP ( MADAGASKAR )","ht":"13.5","len":"4.5","qty":"0","wd":"4.5","wtvol":"100 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845384","pdtName":"CYPRODINE SYRUP ( MADAGASKAR )","ht":"16","len":"5.8","qty":"0","wd":"5.8","wtvol":"200 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845391","pdtName":"CYPROVITAL+ SYRUP ( MADAGASKAR )","ht":"13.5","len":"4.5","qty":"0","wd":"4.5","wtvol":"100 ML"}
+0
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845414","pdtName":"VIVIAN GEL ( MYANMAR )","ht":"3.0","len":"9.5","qty":"0","wd":"2.4","wtvol":"15 GM"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845452","pdtName":"ENALAPRIL MALEATE TABLETS USP 5 MG","ht":"5.7","len":"5.5","qty":"","wd":"","wtvol":"1000 TABS"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845469","pdtName":"HYDROCHLOROTHIAZIDE TABLETS BP 25 MG","ht":"5.7","len":"5.5","qty":"","wd":"","wtvol":"1000 TABS"}
+Getting products
+Going to next page
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845476","pdtName":"METRONIDAZOLE TABLETS BP 200 MG","ht":"7.5","len":"7.0","qty":"","wd":"","wtvol":"1000 TABS"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845483","pdtName":"NIFEDIPINE SUSTAINED RELEASE TABLETS 20 MG","ht":"5.7","len":"5.5","qty":"","wd":"","wtvol":"1000 TABS"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845490","pdtName":"BURNFIX CREAM","ht":"2.6","len":"10.6","qty":"","wd":"2.0","wtvol":"15 GM"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845506","pdtName":"BURNFIX CREAM","ht":"3.5","len":"14.0","qty":"","wd":"2.5","wtvol":"30 GM"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845858","pdtName":"MEBEMDAZOLE TABLETS USP 100 MG","ht":"","len":"","qty":"","wd":"","wtvol":"1000 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845841","pdtName":"GEBEDOL TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10X1X10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845865","pdtName":"M-FORLIN 500 TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845872","pdtName":"M-FORLIN 850 TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845889","pdtName":"ABACOFF COUGH SYRUP","ht":"","len":"","qty":"","wd":"","wtvol":"100 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845919","pdtName":"DEEXA INJECTION","ht":"","len":"","qty":"","wd":"","wtvol":"10X10X2 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845902","pdtName":"SANTRO-100 TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"4 TABLETS"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845896","pdtName":"ARYTHROMYCIN STEARATE FOR ORAL SUSPENSION 125 MG /ML","ht":"","len":"","qty":"","wd":"","wtvol":"100 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845933","pdtName":"PROLIN INJECTION","ht":"","len":"","qty":"","wd":"","wtvol":""}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845964","pdtName":"TRIXON-O 100 TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845926","pdtName":"GENCIN INJECTION","ht":"","len":"","qty":"","wd":"","wtvol":"10X10X2 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845971","pdtName":"TRIXON-O 200 TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845940","pdtName":"SETERNAM-L SUSPENSION","ht":"","len":"","qty":"","wd":"","wtvol":"60 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845988","pdtName":"OLEVO-500 TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845957","pdtName":"AMOXIDIN-PLUS TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"3 X 10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041845995","pdtName":"ZOFLUNEX-150 CAPSULES","ht":"","len":"","qty":"","wd":"","wtvol":"30X1X1 C"}
+Getting products
+Going to next page
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846008","pdtName":"LENOCARB TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846046","pdtName":"OMLINK-20 CAPSULES","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 C"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846091","pdtName":"ATENOBIOTECH 100 MG","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846077","pdtName":"DIFLAME GEL","ht":"","len":"","qty":"","wd":"","wtvol":"15 GM"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846787","pdtName":"AZILIN-500 TABLETS","ht":"8.2","len":"13.2","qty":"","wd":"1.2","wtvol":"10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846022","pdtName":"TRIXON-O SUSPENSION","ht":"","len":"","qty":"","wd":"","wtvol":"60 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846084","pdtName":"AMLOBIOTECH 5 MG","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041847012","pdtName":"PROLIN 200 NATURAL CAPSULES","ht":"9.2","len":"12.8","qty":"","wd":"5.5","wtvol":"100 CAPS"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848026","pdtName":"DOLOMOL TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"1000 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846015","pdtName":"NAM PLUS TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846039","pdtName":"AZILIN SUSPENSION","ht":"","len":"","qty":"","wd":"","wtvol":"30 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041847005","pdtName":"PROLIN 200 NATURAL CAPSULES","ht":"5.2","len":"9.0","qty":"","wd":"1.1","wtvol":"10 CAPS"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846541","pdtName":"BIOCEPHIN-250 INJECTION","ht":"7.8","len":"4.2","qty":"","wd":"2.8","wtvol":"250 MG"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846053","pdtName":"DOMI-UP TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846770","pdtName":"AZILIN-250 TABLETS","ht":"6.3","len":"13.0","qty":"","wd":"14.3","wtvol":"10X1X10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848019","pdtName":"DERMOLIN CREAM","ht":"","len":"","qty":"","wd":"","wtvol":"15 GM"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848033","pdtName":"VIVIAN PLUS TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10X10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846763","pdtName":"AZILIN-250 TABLETS","ht":"6.0","len":"14.0","qty":"","wd":"1.2","wtvol":"10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846060","pdtName":"DICLOFENAC SODIUM INJECTION 3 ML","ht":"","len":"","qty":"","wd":"","wtvol":"20X5X3 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846794","pdtName":"AZILIN-500 TABLETS","ht":"8.5","len":"13.5","qty":"","wd":"13.","wtvol":"10X1X10 T"}
+Getting products
+Going to next page
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848040","pdtName":"LIDOCAINE & ADRENALINE INJECTION","ht":"","len":"","qty":"","wd":"","wtvol":"30 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848200","pdtName":"IBUPAR TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10X1X10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848187","pdtName":"EXTRADOL TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"50 X 2 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848163","pdtName":"NAZOL-200 TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10X10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848286","pdtName":"TOFLOX-TZ TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844684","pdtName":"NYSTATIN FOR ORAL SUSPENSION USP 1 LAC IU","ht":"3.7","len":"9.0","qty":"","wd":"3.7","wtvol":"30 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844615","pdtName":"LINQUINE-F INJECTION","ht":"8","len":"15","qty":"","wd":"","wtvol":"10X10X2ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844769","pdtName":"PERILIN INJECTION ( ZAMBIA )","ht":"10","len":"9","qty":"","wd":"0","wtvol":"10X10X2ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844455","pdtName":"CLOTRILIN CRM 1% ( ZAMBIA )","ht":"3.2","len":"12.0","qty":"","wd":"2.5","wtvol":"20 GM"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848231","pdtName":"FUMET SUSPENSION","ht":"","len":"","qty":"","wd":"","wtvol":"60 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848262","pdtName":"SALPHYLLIN SYRUP","ht":"","len":"","qty":"","wd":"","wtvol":"100 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848248","pdtName":"NEOVAG TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"1X14 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848194","pdtName":"LEVOZIN TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10X10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848255","pdtName":"BTC KIT","ht":"","len":"","qty":"","wd":"","wtvol":"1X1 KIT"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848279","pdtName":"WARCEF-500 TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10X1X10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848170","pdtName":"AC-FENAC TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"3 X 10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848224","pdtName":"DERMOFULVIN FORTE TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10X10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844851","pdtName":"VIVIAN INJECTION ( ZAMBIA )","ht":"10","len":"9","qty":"","wd":"0","wtvol":"10X10X3ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041848217","pdtName":"MEFLIN-500 TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10X10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041844370","pdtName":"ACEASE TABLETS ( ZAMBIA )","ht":"9.5","len":"19.5","qty":"","wd":"0","wtvol":"1000 TABS"}
+Getting products
+Going to next after 13312
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846107","pdtName":"ATENOBIOTECH 50 MG","ht":"","len":"","qty":"","wd":"","wtvol":"10 X 10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846121","pdtName":"LEVOBIOTECH 500MG","ht":"","len":"","qty":"","wd":"","wtvol":"10X10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846114","pdtName":"DOLOMUSKQLAR TABLETS","ht":"","len":"","qty":"","wd":"","wtvol":"10X10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846701","pdtName":"GEBEDICLO-50 TABLETS ( GHANA )","ht":"3.0","len":"6.4","qty":"","wd":"0.9","wtvol":"10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846497","pdtName":"SILVO CREAM","ht":"3.5","len":"14.5","qty":"","wd":"2.5","wtvol":"30 GM"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846725","pdtName":"GEBEDICLO-100 TABLETS ( GHANA )","ht":"3.2","len":"7.2","qty":"","wd":"0.9","wtvol":"10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846718","pdtName":"GEBEDICLO-50 TABLETS ( GHANA )","ht":"6.7","len":"9.5","qty":"","wd":"3.3","wtvol":"10X1X10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846749","pdtName":"AMIDERM CREAM ( GHANA )","ht":"3.5","len":"14.0","qty":"","wd":"2.5","wtvol":"30 GM"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846886","pdtName":"AMLIN-5 TABLETS","ht":"3.4","len":"7.4","qty":"","wd":"2.0","wtvol":"3 X 10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846909","pdtName":"LOSA-H TABLETS","ht":"3.4","len":"7.4","qty":"","wd":"2.0","wtvol":"3 X 10 TAB"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846756","pdtName":"AMIDERM CREAM ( GHANA 0","ht":"14.5","len":"14.5","qty":"","wd":"8.8","wtvol":"12X30 GM"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846800","pdtName":"TRIXON-O DRY SYRUP ( CAMBODIA )","ht":"9.8","len":"4.2","qty":"","wd":"4.2","wtvol":"60 ML"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846732","pdtName":"GEBEDICLO-100 TABLETS ( GHANA )","ht":"7.5","len":"9.5","qty":"","wd":"3.5","wtvol":"10X1X10 T"}
+
+{"compCode":"890604184","compId":"13312","compName":"LINCOLN PHARMACEUTICALS LTD.","gtin":"8906041846893","pdtName":"AMLIN-10 TABLETS","ht":"3.4","len":"7.4","qty":"","wd":"2.0","wtvol":"3 X 10 TAB"}
+Getting products
+Going to next after 20782
+Getting products
+Going to next after 19854
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829004","pdtName":"Premium Fresh FINE DUST Tea","ht":"","len":"","qty":"","wd":"","wtvol":"100 gms"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829035","pdtName":"Lagro Tea","ht":"","len":"","qty":"","wd":"","wtvol":"35 gm"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829042","pdtName":"Premium Fresh FINE DUST Tea","ht":"","len":"","qty":"","wd":"","wtvol":"35 gm"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829011","pdtName":"Premium Fresh FINE DUST Tea","ht":"","len":"","qty":"","wd":"","wtvol":"250 gms"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829028","pdtName":"Premium Fresh FINE DUST Tea","ht":"","len":"","qty":"","wd":"","wtvol":"500 gms"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829097","pdtName":"Lagrotea (The Best Indian Tea) Jar","ht":"","len":"","qty":"","wd":"","wtvol":"100 gms"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829073","pdtName":"Lagro Best Indian Tea (CTC)","ht":"","len":"","qty":"","wd":"","wtvol":"1500 ml"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829110","pdtName":"Lagrotea (The Best Indian Tea) Jar","ht":"","len":"","qty":"","wd":"","wtvol":"400 gms"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829059","pdtName":"Lagro Tea (Premium Fresh Fine Dust Tea)","ht":"","len":"","qty":"","wd":"","wtvol":"1 kg"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829103","pdtName":"Lagrotea (The Best Indian Tea) Jar","ht":"","len":"","qty":"","wd":"","wtvol":"200 gms"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829080","pdtName":"Lagro Best Indian Tea (CTC)","ht":"","len":"","qty":"","wd":"","wtvol":"500 ml"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829141","pdtName":"Lagrotea (The Best Indian Tea) Bag","ht":"","len":"","qty":"","wd":"","wtvol":"5 Kg"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829134","pdtName":"Lagrotea (The Best Indian Tea) Jar","ht":"","len":"","qty":"","wd":"","wtvol":"1800 gms"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829127","pdtName":"Lagrotea (The Best Indian Tea) Jar","ht":"","len":"","qty":"","wd":"","wtvol":"800 gms"}
+
+{"compCode":"8908004829","compId":"19854","compName":"Lineage Agro Industries Pvt Ltd","gtin":"8908004829066","pdtName":"Lagro Best Indian Tea (CTC)","ht":"","len":"","qty":"","wd":"","wtvol":"2 ltr"}
+Getting products
+Going to next after 24504
+Getting products
+Going to next after 18598
+Getting products
+Going to next after 10455
+Getting products
+Going to next after 20030
+Getting products
+Going to next after 24461
+Getting products
+Going to next after 9065
+0
+{"compCode":"8903220","compId":"9065","compName":"LINK UP TEXTILES LTD.","gtin":"8903220000077","pdtName":"2 PC PYJAMA & TOPS","ht":"1.5","len":"70","qty":"0","wd":"46","wtvol":"0.30"}
+0
+{"compCode":"8903220","compId":"9065","compName":"LINK UP TEXTILES LTD.","gtin":"8903220000084","pdtName":"2 PC PYJAMA & TOPS","ht":"1.5","len":"92","qty":"0","wd":"55","wtvol":"0.35"}
+0
+{"compCode":"8903220","compId":"9065","compName":"LINK UP TEXTILES LTD.","gtin":"8903220000091","pdtName":"set pj pant yarn dyed w/ lurex and satin","ht":"1.5","len":"92","qty":"0","wd":"55","wtvol":"0.35"}
+0
+{"compCode":"8903220","compId":"9065","compName":"LINK UP TEXTILES LTD.","gtin":"8903220001029","pdtName":"Pyjama & Tops - 2","ht":"70","len":"80","qty":"0","wd":"45","wtvol":"0"}
+0
+{"compCode":"8903220","compId":"9065","compName":"LINK UP TEXTILES LTD.","gtin":"8903220001043","pdtName":"Tops & Pyjama - 1","ht":"70","len":"80","qty":"0","wd":"45","wtvol":"0"}
+0
+{"compCode":"8903220","compId":"9065","compName":"LINK UP TEXTILES LTD.","gtin":"8903220001036","pdtName":"Pyjama & Tops","ht":"120","len":"115","qty":"0","wd":"55","wtvol":"0"}
+0
+{"compCode":"8903220","compId":"9065","compName":"LINK UP TEXTILES LTD.","gtin":"8903220100074","pdtName":"2","ht":"","len":"","qty":"0","wd":"","wtvol":"0"}
+0
+{"compCode":"8903220","compId":"9065","compName":"LINK UP TEXTILES LTD.","gtin":"8903220001012","pdtName":"Top & Pyjama - 1","ht":"70","len":"80","qty":"0","wd":"45","wtvol":"0"}
+0
+{"compCode":"8903220","compId":"9065","compName":"LINK UP TEXTILES LTD.","gtin":"8903220001050","pdtName":"Tops & Pyjama - 2","ht":"70","len":"80","qty":"0","wd":"45","wtvol":"0"}
+0
+{"compCode":"8903220","compId":"9065","compName":"LINK UP TEXTILES LTD.","gtin":"8903220001067","pdtName":"Pyjamas","ht":"95","len":"90","qty":"0","wd":"45","wtvol":"0"}
+Terminate batch job (Y/N)? Terminate batch job (Y/N)? Terminate batch job (Y/N)? 
