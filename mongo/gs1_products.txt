@@ -1,0 +1,343 @@
+Hello, world!
+Status: success
+23196,890607650,A B Trading Co,Food and beverages,Flour  and products,Wheat flour,8906076500005,organic whole wheat (atta),0,0,0,0,5 kg
+11442,890603482,A.J. EXPORTS,Food and beverages,Flour  and products,Wheat flour,8906034820398,Ethiopian type of flour 1,,,,,1 kg
+11442,890603482,A.J. EXPORTS,Food and beverages,Flour  and products,Wheat flour,8906034820404,Ethiopian type of flour 2,,,,,1 kg
+11183,89041474,ADANI FOOD PRODUCTS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8904147403910,ADANI WHEAT FLOUR 4 LBS,0,0,0,,0
+11371,8908001066,ADITYA EXTRACTIONS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001066037,CHAKKI FRESH ATTA,,58,38.5,58,10 kg
+20619,,AAA Roller Flour Mills Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005206033,MAIDA (WHEAT FLOUR),,,,,
+22838,8908006305,A D S Enterprises,Food and beverages,Flour  and products,Wheat flour,8908006305179,AARUDHRA SOOJI,,215,330,,1 KG
+22838,8908006305,A D S Enterprises,Food and beverages,Flour  and products,Wheat flour,8908006305100,AARUDHRA MAIDA,,290,410,,1 KG
+22838,8908006305,A D S Enterprises,Food and beverages,Flour  and products,Wheat flour,8908006305025,AARUDHRA CHAKKI ATTA,,,,,500 gms
+22838,8908006305,A D S Enterprises,Food and beverages,Flour  and products,Wheat flour,8908006305094,AARUDHRA MAIDA,,240,350,,500 gms
+22838,8908006305,A D S Enterprises,Food and beverages,Flour  and products,Wheat flour,8908006305063,AARUDHRA CHAKKI ATTA,,830,560,,10 kg
+22838,8908006305,A D S Enterprises,Food and beverages,Flour  and products,Wheat flour,8908006305148,AARUDHRA SOOJI,,170,270,,200 gms
+21785,890607159,Aagman Agro foods,Food and beverages,Flour  and products,Wheat flour,8906071590322,KAVISHA PASTA 200 GMS,,,,,
+17331,89042093,AACHI MASALA FOODS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904209300386,Roasted Vermicelli,,,,,180g
+22838,8908006305,A D S Enterprises,Food and beverages,Flour  and products,Wheat flour,8908006305056,AARUDHRA CHAKKI ATTA,,450,670,,5000 gms
+20619,,AAA Roller Flour Mills Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005206026,CHAKKI FRESH ATTA 10 KGS,,,,,
+22838,8908006305,A D S Enterprises,Food and beverages,Flour  and products,Wheat flour,8908006305162,AARUDHRA SOOJI,,215,330,,500 gms
+20619,,AAA Roller Flour Mills Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005206019,CHAKKI FRESH ATTA 5 KGS,,,,,
+24199,8908007025,Abhyankar Brothers,Food and beverages,Flour  and products,Wheat flour,8908007025335,SATU PITH,,,,,200GM
+22838,8908006305,A D S Enterprises,Food and beverages,Flour  and products,Wheat flour,8908006305032,AARUDHRA CHAKKI ATTA,,290,410,,1000 gms
+11371,8908001066,ADITYA EXTRACTIONS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001066044,CHAKKI FRESH ATTA,,47,30,47,5 kg
+11371,8908001066,ADITYA EXTRACTIONS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001066235,MAIDA 500 GRAM,,23.5,17.0,23.5,500 gms
+11371,8908001066,ADITYA EXTRACTIONS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001066099,MAIDA,,28,20,28,1 KG
+11371,8908001066,ADITYA EXTRACTIONS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001066105,ATTA 1 KG,,25,17,25,1 KG
+8459,89041188,AFM FOODS LIMITED,Food and beverages,Flour  and products,Wheat flour,8904118801516,AFM Maida 500g,0,,,,0
+8459,89041188,AFM FOODS LIMITED,Food and beverages,Flour  and products,Wheat flour,8904118801530,AFM Dalia 400g,0,,,,0
+8459,89041188,AFM FOODS LIMITED,Food and beverages,Flour  and products,Wheat flour,8904118801523,AFM Suji 500g,0,,,,0
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134001,Maida 50Kg,0,,,,
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134018,Maida 20Kg,0,,,,
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134025,Suji 90 Kg,0,,,,
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134049,Suji 20 Kg,0,,,,
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134032,Suji 50 Kg,0,,,,
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134070,Maida Bis 20 Kg,0,,,,
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134056,Atta F 50 Kg,0,,,,
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134063,Maida Bis 50 Kg,0,,,,
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134087,Atta 50 Kg,0,,,,
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134094,Atta 20 Kg,0,,,,
+12849,890604023,AGROHA ENTERPRISES PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906040230105,Malak chakki Atta,0,,,,5 kg
+14065,8908002134,AGRA ROLLER FLOUR MILLS,Food and beverages,Flour  and products,Wheat flour,8908002134100,Atta Sp 50kg,,,,,
+12849,890604023,AGROHA ENTERPRISES PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906040230099,Malak chakki Atta,0,,,,25 kg
+12849,890604023,AGROHA ENTERPRISES PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906040230112,Malak chakki Atta,0,,,,1kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840159,AJAY ATTA,0,0,0,0,25kg
+12849,890604023,AGROHA ENTERPRISES PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906040230136,Shri Hari Atta,,,,,25 kg
+12849,890604023,AGROHA ENTERPRISES PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906040230129,Malak Atta- 10kg,,,,,10 kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840142,AJAY ATTA,0,0,0,0,50kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840166,AJAY ATTA,0,0,0,0,10kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840173,AJAY ATTA,0,0,0,0,5kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840203,JK ATTA,0,0,0,0,25kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840197,JK ATTA,0,0,0,0,50kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840180,AJAY ATTA,0,0,0,0,1kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840210,JK ATTA,0,0,0,0,5kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840227,JK ATTA,0,0,0,0,5kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840234,JK ATTA,0,0,0,0,1kg
+20314,890606684,Ajay Udyog,Food and beverages,Flour  and products,Wheat flour,8906066840241,JK ATTA,0,0,0,0,1kg
+11908,890603658,AKG EXIM PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8906036580030,Whole wheat Chaki Fresh Atta (5kg),0,,,,
+23726,8908006777,Akshaya Speciality Foods,Food and beverages,Flour  and products,Wheat flour,8908006777006,Wheat flour,0,0,0,0,1 Kg
+23726,8908006777,Akshaya Speciality Foods,Food and beverages,Flour  and products,Wheat flour,8908006777044,wheat Flour,,,,,
+23726,8908006777,Akshaya Speciality Foods,Food and beverages,Flour  and products,Wheat flour,8908006777013,Wheat flour,0,0,0,0,2 Kg
+23726,8908006777,Akshaya Speciality Foods,Food and beverages,Flour  and products,Wheat flour,8908006777037,Wheat flour,0,0,0,0,10 Kg
+23726,8908006777,Akshaya Speciality Foods,Food and beverages,Flour  and products,Wheat flour,8908006777020,Wheat flour,0,0,0,0,5 Kg
+6586,8901578,AMAR EXPORTS,Food and beverages,Flour  and products,Wheat flour,8901578001647,Assal Wheat Flour 500 Gm,,,,,
+7368,890601766,AMBIKA FOOD INDUSTRIES PVT LTD,Food and beverages,Flour  and products,Wheat flour,8906017660102,Ambika Gold Chakki Atta,,,,,
+21705,8908005769,Amis Food Products,Food and beverages,Flour  and products,Wheat flour,8908005769057,Whole wheat Atta,,,,,1 Kg
+7368,890601766,AMBIKA FOOD INDUSTRIES PVT LTD,Food and beverages,Flour  and products,Wheat flour,8906017660058,Ambika Gold Chakki Atta,,,,,
+22819,8908006297,Anand Bhog Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908006297375,Anand Bhog Supreme Atta 1 Kg,,,,,1 Kg
+21705,8908005769,Amis Food Products,Food and beverages,Flour  and products,Wheat flour,8908005769064,Whole wheat Atta,,,,,5 Kg
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814000,PENNE RIGATE (DRY PASTA),0,0,14.8 cms,29.8 cms,500 GRAMS
+12919,890604047,ANANTHA FOOD GRAINS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8906040470129,maida,0,,,,500 gm
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814062,SPAGHETTI (FRESH PASTA),0,6.5 cms,13.6 cms,20.8 cms,250 GRAMS
+22819,8908006297,Anand Bhog Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908006297382,Anand Bhog Supreme Atta 5 Kg,,,,,5 Kg
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814109,SPINACH & CHEESE (RAVIOLI),0,6.5 cms,13.6 cms,20.8 cms,250 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814048,GOMITI(DRY PASTA),0,0,14.8 cms,29.8 cms,500 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814017,FUSILLI (DRY PASTA),0,0,14.8 cms,29.8 cms,500 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814055,TAGLIATELLE (DRY PASTA),0,0,14.8 cms,29.8 cms,250 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814093,LASAGNE (FRESH PASTA),0,6.5 cms,13.6 cms,20.8 cms,500 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814024,MACCHERONI (DRY PASTA),0,0,14.8 cms,29.8 cms,500 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814116,CHICKEN (RAVIOLI),0,6.5 cms,13.6 cms,20.8 cms,250 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814031,CONCHIGLIE (DRY PASTA),0,0,14.8 cms,29.8 cms,500 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814086,TAGLIATELLE (FRESH PASTA),0,6.5 cms,13.6 cms,20.8 cms,250 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814079,TAGLIOLINI (FRESH PASTA),0,6.5 cms,13.6 cms,20.8 cms,250 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814130,FISH (RAVIOLI),0,6.5 cms,13.6 cms,20.8 cms,250 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814147,PENNE RIGATE (DRY PASTA),0,0,16.2 cms,22.5 cms,200 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814161,CONCHIGLIE (DRY PASTA),0,0,16.2 cms,22.5 cms,200 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814178,MACCHERONI (DRY PASTA),0,0,16.2 cms,22.5 cms,200 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814123,BEEF (RAVIOLI),0,6.5 cms,13.6 cms,20.8 cms,250 GRAMS
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814154,FUSILLI (DRY PASTA),0,0,16.2 cms,22.5 cms,200 GRAMS
+21474,8908005642,Angur Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005642053,ANGUR NOODLES - 1 KGS,,,,,
+21474,8908005642,Angur Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005642046,ANGUR BEST SEV - 100 GRAMME,,,,,
+21474,8908005642,Angur Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005642008,ANGUR PREMIUMSEV - 150 GRAMME,,,,,
+19831,8908004814,Anaya Fruit Products,Food and beverages,Flour  and products,Wheat flour,8908004814185,GOMITI (DRY PASTA),0,0,16.2 cms,22.5 cms,200 GRAMS
+21474,8908005642,Angur Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005642060,ANGUR NOODLES - 800 GRAMME,,,,,
+21390,890607019,Anil Industries,Food and beverages,Flour  and products,Wheat flour,8906070190035,SOMYA GOLD AATA,,,,,5 kg
+21474,8908005642,Angur Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005642077,ANGUR CHAKKI ATTA - 5 KGS,,,,,
+21390,890607019,Anil Industries,Food and beverages,Flour  and products,Wheat flour,8906070190028,SOMYA GOLD AATA,,,,,2 kg
+21474,8908005642,Angur Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005642039,ANGUR U SEV - 200 GRAMME,,,,,
+21474,8908005642,Angur Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005642084,ANGUR CHAKKI GOLD ATTA - 25 KGS,,,,,
+21474,8908005642,Angur Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005642015,ANGUR GOLD SEV - 180 GRAMME,,,,,
+21474,8908005642,Angur Foods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908005642022,ANGUR GOLD SEV - 500 GRAMME,,,,,
+21390,890607019,Anil Industries,Food and beverages,Flour  and products,Wheat flour,8906070190042,SOMYA GOLD AATA,,,,,10 kg
+21390,890607019,Anil Industries,Food and beverages,Flour  and products,Wheat flour,8906070190011,SOMYA GOLD AATA,,,,,1 kg
+21390,890607019,Anil Industries,Food and beverages,Flour  and products,Wheat flour,8906070190066,SOMYA GOLD AATA,,,,,50 kg
+21390,890607019,Anil Industries,Food and beverages,Flour  and products,Wheat flour,8906070190059,SOMYA GOLD AATA,,,,,25 kg
+16730,8908003291,ANJANI FOOD PRODUCTS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908003291017,10-10 MAIDA,,,,,50 KG
+22420,8908006105,Anjali Multi Trade,Food and beverages,Flour  and products,Wheat flour,8908006105007,ANJALI GOLD CHAKKI FRESH ATTA 5 KG,,0,0,0,0
+22420,8908006105,Anjali Multi Trade,Food and beverages,Flour  and products,Wheat flour,8908006105014,ANJALI GOLD CHAKKI FRESH ATTA 10 KG,,,,,
+16730,8908003291,ANJANI FOOD PRODUCTS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908003291031,SUPER PANNA SOOJI,,,,,50 KG
+16730,8908003291,ANJANI FOOD PRODUCTS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908003291000,Super panna maida,,,,,50kg
+16730,8908003291,ANJANI FOOD PRODUCTS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908003291055,SUPER PANNA TANDOORI ATTA,,,,,50 KG
+16730,8908003291,ANJANI FOOD PRODUCTS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908003291048,SUPER PANNA RAWA,,,,,50 KG
+16730,8908003291,ANJANI FOOD PRODUCTS PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908003291024,MOJO MAIDA,,,,,50 KG
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780017,Atta,0,,,,1 kg.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780024,Atta,0,,,,5 Kg.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780048,Maida,0,,,,1 Kg.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780031,Atta,0,,,,10 Kg.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780215,Special Atta (For Roomali & Tandoori Rotis),,,,,500 gms.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780055,Maida,0,,,,500 gms.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780079,Sooji,0,,,,250 gms.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780062,Sooji,0,,,,500 gms.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780222,Special Atta (For Roomali & Tandoori Rotis),,,,,1 kg.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780239,Sooji,,,,,200 gms.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780437,Chakki Fresh Atta,,,,,25 Kg.
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909006,Anmol Atta 5 kg poly beg,0,,,,5 kg
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780444,Chakki Fresh Atta,,,,,50 Kg.
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909037,Anmol Atta,,,,,50 kg.
+7046,890601578,ANKIT INDIA LTD,Food and beverages,Flour  and products,Wheat flour,8906015780451,Maida,,,,,25 Kg.
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909082,Anmol Atta Carry bag,,,,,5 kg. 
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909044,Anmol Atta Tandoori,,,,,50 kg. 
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909075,Anmol Atta Carry bag,,,,,10 kg. 
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909068,Anmol Atta,,,,,20 kg. 
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909099,Anmol Besan bag,,,,,25 kg. 
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909051,Anmol Atta,,,,,25 kg. 
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909105,Anmol Besan bag,,,,,10 kg. 
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909136,Anmol Atta 10 Kg. Poly Pack,,,,,10 kg.
+13564,8908001909,ANMOL OIL AND FOOD PVT.LTD.,Food and beverages,Flour  and products,Wheat flour,8908001909112,Anmol Sarbati Atta bag,,,,,25 kg. 
+10854,8908000870,ANNAPURNA UNIVERSAL FOODS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000870857,Jaimin Chakki Gold Atta,,,,,
+10854,8908000870,ANNAPURNA UNIVERSAL FOODS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000870987,Jaimin Chakki Gold Atta,,,,,5kg
+24028,8908006939,Aparnaa Agro,Food and beverages,Flour  and products,Wheat flour,8908006939008,Whole Wheat Chakki Atta 1 Kg,,,,,
+24028,8908006939,Aparnaa Agro,Food and beverages,Flour  and products,Wheat flour,8908006939022,Whole Wheat Chakki Atta 5 Kg,,,,,
+24028,8908006939,Aparnaa Agro,Food and beverages,Flour  and products,Wheat flour,8908006939015,Whole Wheat Chakki Atta 3 Kg,,,,,
+24028,8908006939,Aparnaa Agro,Food and beverages,Flour  and products,Wheat flour,8908006939039,Premium Wheat Mill Atta 1 Kg,,,,,
+10835,8908000857,ARJUN FLOUR & OIL INDUSTRIES,Food and beverages,Flour  and products,Wheat flour,8908000857001,Arjun Special Atta 10kg,0,,,,
+10835,8908000857,ARJUN FLOUR & OIL INDUSTRIES,Food and beverages,Flour  and products,Wheat flour,8908000857025,Arjun Special Atta 05kgL,0,,,,
+10835,8908000857,ARJUN FLOUR & OIL INDUSTRIES,Food and beverages,Flour  and products,Wheat flour,8908000857018,Arjun Special Atta 10kgL,0,,,,
+10835,8908000857,ARJUN FLOUR & OIL INDUSTRIES,Food and beverages,Flour  and products,Wheat flour,8908000857995,Sevenstar Chakki Fresh Atta 10kg,0,,,,
+24028,8908006939,Aparnaa Agro,Food and beverages,Flour  and products,Wheat flour,8908006939046,Super Fine Wheat Maida 1 kg,,,,,
+20840,8908005321,Arogyam Organics Private Ltd,Food and beverages,Flour  and products,Wheat flour,8908005321026,ORGANIC WHEAT ATTA,0,26,17.8,0,0
+21430,8908005622,Arohi Products,Food and beverages,Flour  and products,Wheat flour,8908005622031,WHEAT KURDAI 200g,,0,0,0,0
+12323,890603809,ARPIT ENTERPRISES,Food and beverages,Flour  and products,Wheat flour,8906038090032,WEEAT 10 KG ATTA,,,,,
+12323,890603809,ARPIT ENTERPRISES,Food and beverages,Flour  and products,Wheat flour,8906038090056,WEEAT 1 KG ATTA,,,,,
+12323,890603809,ARPIT ENTERPRISES,Food and beverages,Flour  and products,Wheat flour,8906038090018,JEEVAN SATHI 1 KG ATTA,,,,,
+12323,890603809,ARPIT ENTERPRISES,Food and beverages,Flour  and products,Wheat flour,8906038090063,JEEVAN SATHI 5 KG ATTA,,,,,
+12323,890603809,ARPIT ENTERPRISES,Food and beverages,Flour  and products,Wheat flour,8906038090049,WEEAT 5KG ATTA,,,,,
+9310,8908000180,ARR FOODS AND CONSUMER PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000180345,ARR CHAKKI ATTA,0,24,34,,500G
+12323,890603809,ARPIT ENTERPRISES,Food and beverages,Flour  and products,Wheat flour,8906038090070,JEEVAN SATHI 10 KG ATTA,,,,,
+9310,8908000180,ARR FOODS AND CONSUMER PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000180024,ROASTED VERMICELLI,,240,340,,180G
+9310,8908000180,ARR FOODS AND CONSUMER PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000180109,ARR RAVA,0,32,22,,500G
+9310,8908000180,ARR FOODS AND CONSUMER PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000180321,ARR MAIDA,0,24,34,,500G
+9310,8908000180,ARR FOODS AND CONSUMER PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000180413,ARR PAYASAM VERMICELLI,0,,,,180g
+9310,8908000180,ARR FOODS AND CONSUMER PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000180406,ARR SHORTCUT VERMICELLI,0,,,,180g
+6904,8901843,ART EXPORT,Food and beverages,Flour  and products,Wheat flour,8901843001969,Wheat flour refined 200 G,0,,,,0
+6904,8901843,ART EXPORT,Food and beverages,Flour  and products,Wheat flour,8901843001976,Wheat flour refined 500 G,0,,,,0
+15321,890604949,ARYA FARM PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8906049490340,Wheat Flour,0,0,0,,1 Kg
+15321,890604949,ARYA FARM PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8906049492634,NF WHOLE WHEAT ATTA1KG,0,0,0,0,1 Kg
+15321,890604949,ARYA FARM PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8906049490357,Wheat Flour,0,0,0,,5 Kg
+19708,890606500,Ashcom Agro Products & Consumer Goods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8906065000486,NATURE N ME WHEAT ATTA,0,0,0,0,1 kg
+21441,8908005629,Ashoka Food Industries,Food and beverages,Flour  and products,Wheat flour,8908005629009,roop rajat wheat atta,,50,8,30,10 kg
+19708,890606500,Ashcom Agro Products & Consumer Goods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8906065000523,NATURE N ME MAIDA,0,0,0,0,500 g
+19708,890606500,Ashcom Agro Products & Consumer Goods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8906065000493,NATURE N ME WHEAT BRAN,0,0,0,0,200 g
+19708,890606500,Ashcom Agro Products & Consumer Goods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8906065000554,NATURE N ME MULTI GRAIN ATTA,0,0,0,0,1 kg
+19708,890606500,Ashcom Agro Products & Consumer Goods Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8906065000684,,NATURE N ME WHEAT ATTA,,,,,5 kg
+21441,8908005629,Ashoka Food Industries,Food and beverages,Flour  and products,Wheat flour,8908005629016,Roop Rajat Wheat Flour - 5kg,,48,7,25,5 kg
+21441,8908005629,Ashoka Food Industries,Food and beverages,Flour  and products,Wheat flour,8908005629030,Roop Rajat Atta 25kg,,,,,25 kg
+9974,8908000498,ASWINI HOMEO & AYURVEDIC PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000498020,ASWINI DIABETIC AATA,0,,,,3 Kgs
+11551,8908001138,ASWINI HOMEO & AYURVEDIC PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908001138000,ASWINI DIABETIC AATA,,,,,1000
+9974,8908000498,ASWINI HOMEO & AYURVEDIC PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000498013,ASWINI DIABETIC AATA,0,,,,1 Kg
+9974,8908000498,ASWINI HOMEO & AYURVEDIC PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000498037,PREMIUM ASWINI DIABETIC AATA,0,,,,1 Kg
+9974,8908000498,ASWINI HOMEO & AYURVEDIC PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000498044,ASWINI DIABETIC AATA,0,,,,500 gms
+9974,8908000498,ASWINI HOMEO & AYURVEDIC PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000498068,PREMIUM ASWINI DIABETIC AATA,0,,,,3 Kgs
+9156,890602758,AVA PRODUCTS & SERVICES,Food and beverages,Flour  and products,Wheat flour,8906027581190,Whole Wheat Powder - 1kg,,,,,
+9974,8908000498,ASWINI HOMEO & AYURVEDIC PRODUCTS PVT LTD,Food and beverages,Flour  and products,Wheat flour,8908000498051,ASWINI SHARBATI AATA,0,,,,1 Kg
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600019,Shreebhog Atta 5 Kg,0, ,,,5 Kg
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600026,Sheebhog Atta 10 Kg,0, ,,,10 Kg
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600033,Shreebhog Dalia 400g,0,,,,400g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600040,Shreebhog Dalia 500g,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600071,Shreebhog Desi Wheat Atta 10 kg,0, ,,,10 kg
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600057,Shreebhog Wheat Fibre 350g,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600101,Shreebhog Sooji 500g,0,,,,500g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600064,Shreebhog Atta 50 Kg,0,,,,50 Kg
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600125,Shreebhog Maida 500g,0, ,,,500g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600279,Shreebhog Porridge 400g,0,,,,400g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600118,Shreebhog Sooji 1 kg,0,,,,1 kg
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600132,Shreebhog Maida 1 kg,0, ,,,1 kg
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600286,Shreebhog Wheat Fibre 250g,0, ,,,250g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600453,Shreebhog Halwa Sooji 500g,0,,,,500g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600590,Shreebhog Sooji 10 kg,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600583,Shreebhog Dalia 25kg,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600620,Multigrain Atta 5 kg,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600798,Shreebhog Roasted Dalia 500g,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600637,Green Bite Multigrain Atta 1 kg,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600699,Green Bite Instanat Dalia 200g,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600835,Shreebhog Idly Rawa 1 kg,0,,,,1 kg
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600866,Green Bite Porridge 200g (Sugar Free),0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600859,Shreebhog Roasted Sooji 1kg,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600842,Shreebhog Atta 10 kg,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600804,Shreebhog Roasted Sooji 500g,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600880,Green Bite Porridge 200g (with Choco),0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600873,Green Bite Porridge 30g,0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140600897,Green Bite Porridge 200g (with Oats & Multigrains),0,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601481,Shreebhog Atta 25 kg,,,,,25 kg
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601597,Wheatlay Plain Vermicelli 200g,,,,,200g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601580,Wheatlay Plain Vermicelli 125g,,,,,125g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601641,Wheatlay Macroni 100g,,,,,100g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601689,Wheatlay Penne Pasta 500g,,,,,500g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601672,Wheatlay Penne Pasta 200g,,,,,20
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601665,Wheatlay Macroni 500g,,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601610,Wheatlay Roasted Vermicelli 100g,,,,,100g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601603,Wheatlay Plain Vermicelli 500g,,,,,500g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601634,Wheatlay Roasted Vermicelli 500g,,,,,500g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601627,Wheatlay Roasted Vermicelli 200g,,,,,200g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601658,Wheatlay Macaroni 200g,,,,,
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601696,Wheatlay Fusilli Pasta 200g,,,,,200g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601719,Wheatlay Shell Pasta 200g,,,,,200g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601733,Sreebhog Atta 10 kg X 5 Packets,,,,,50 kg
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601702,Wheatlay Fusilli Pasta 500g,,,,,500g
+10449,89041406,AVENT AGRO PVT LTD,Food and beverages,Flour  and products,Wheat flour,8904140601726,Wheatlay Shell Pasta 500g,,,,,500g
+6932,890601517,AVESTA GOOD EARTH FOODS PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906015170092,Whole Wheat Cracker - Plain,0, ,,,100 g
+6932,890601517,AVESTA GOOD EARTH FOODS PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906015170122,Whole Wheat Crackers - Roasted Garlic,0, ,,,100 g
+6932,890601517,AVESTA GOOD EARTH FOODS PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906015170108,Whole Wheat Crackers -Pepper,0, ,,,100 g
+6932,890601517,AVESTA GOOD EARTH FOODS PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906015170139,Whole Wheat Crackers - Jeera,0, ,,,100 g
+6932,890601517,AVESTA GOOD EARTH FOODS PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906015170115,Whole Wheat Crackers - Flaked Chilli,0, ,,,100 g
+6932,890601517,AVESTA GOOD EARTH FOODS PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906015170306,Whole Wheat Cracker-Teestar,0,,,,100 g
+6932,890601517,AVESTA GOOD EARTH FOODS PVT. LTD.,Food and beverages,Flour  and products,Wheat flour,8906015170146,Whole Wheat Crackers - Sesame,0, ,,,100 g
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770025,MAIDA 25 KG,0,51.82,74.58,2,25 KG
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770018,wheat flour,0,51.82,74.58,2,25 kg
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770049,WHEAT FLOUR 10KG,0,25.91,37.29,1,10 KG
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770056,MAIDA 500 GM,0,25.91,37.29,1,500 GM
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770186,WHEAT MESH(LAPSI-FADA),0,25.91,37.29,1,500 Grm.
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770063,SUJI 500 GM,0,25.91,37.29,1,500 GM
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770278,WHEAT COURSE FLOUR 500g.,,25.91,37.29,1,500g.
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770247,Wheat Flour 5kg.,,25.91,37.29,1,5kg.
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770285,Maida 1kg.,,23.4,33.45,34.5,1kg.
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770292,Suji 1kg.,,23.4,33.45,34.5,1kg.
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770483,SOOJI ROASTED 1 KG,,23.4,33.45,34.5,1KG
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046770445,BANSI-RAWA(KANSAR) 500g.,,25.91,37.29,1,500g.
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046772289,Backery Maida,,51.82,74.58,2,25kg.
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046775686,LAPSI FINE 1KG,,23.4,33.45,34.5,1KG
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046774689,LAPSI FADA 1KG,,23.4,33.45,34.5,1KG
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046778663,Maida(10 kgs.),,25.91,37.29,1,10 kgs
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166064,Double Trishul Aata Special,0,44.5,31.5,,5 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166019,Double Trishul Atta,0,94,61,,50 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166033,Double Trishul Aata,0,55,38.5,,10 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166057,Double Trishul Aata Special,0,56.5,38.5,,10 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166040,Double Trishul Aata,0,44.5,31,,5 Kg
+14618,890604677,B H MODI,Food and beverages,Flour  and products,Wheat flour,8906046773231,WHEAT COARSE FLOUR,,23.4,33.45,34.5,1KG
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166026,Double Trishul Aata,0,68,47,,20 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166071,Double Trishul Aata Sharbati,0,56.5,38.5,,10 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166088,Double Trishul Aata Sharbati,0,44.5,31.5,,5 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166118,Double Trishul Dalia,0,16,11,,200 gms
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166101,Double Trishul Dalia,0,25,14,,400 gms
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166095,Double Trishul Dalia,0,25.5,21,,1 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166156,Abhinandan Atta,,,,,20 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166163,Abhinandan Atta,,,,,10 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166125,Abhinandan Atta Special,,56,82,,10 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166149,Abhinandan Atta,,,,,50 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166132,Abhinandan Atta Special,,48,66,,5 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166194,Double Trishul Maida,,,,,500 gms
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166187,Double Trishul Maida,,,,,1 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166170,Abhinandan Atta,,,,,5 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166200,Double Trishul Sooji,,,,,1 Kg
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166217,Double Trishul Sooji,,,,,500 gms
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166224,Double Trishul Besan,,,,,1 Kg
+7222,890601673,BAGELS & BAKES,Food and beverages,Flour  and products,Wheat flour,8906016735474,NP Rustic White Bread,,,,,
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166231,Double Trishul Besan,,,,,500 gms
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166255,Double Trishul poha,,,,,500 gms
+14184,8908002166,B. P. FLOUR MILLS (P) LTD,Food and beverages,Flour  and products,Wheat flour,8908002166248,Double Trishul poha,,,,,1 Kg
+7222,890601673,BAGELS & BAKES,Food and beverages,Flour  and products,Wheat flour,8906016735528,Brown Bread,,,,,
+7222,890601673,BAGELS & BAKES,Food and beverages,Flour  and products,Wheat flour,8906016735535,Ragi Bread,,,,,200g
+7222,890601673,BAGELS & BAKES,Food and beverages,Flour  and products,Wheat flour,8906016735566,wheat Pav,,,,,150g
+7222,890601673,BAGELS & BAKES,Food and beverages,Flour  and products,Wheat flour,8906016735559,Wheat Pizza Base,,,,,150g
+24283,890608038,Bajoria Agro Processing Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8906080380006,BGC SHAHI DAAWAT CHAKKI ATTA ( POUCH PACK ),,0.00,0.00,0.00,10 KG 
+22744,8908006255,Bakers Pride Wheat Flour Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908006255016,S&B Chakki Fresh Atta,,,,,2 Kg
+22744,8908006255,Bakers Pride Wheat Flour Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908006255009,S&B Chakki Fresh Atta,,,,,1 Kg
+24283,890608038,Bajoria Agro Processing Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8906080380013,BGC SHAHI DAAWAT CHAKKI ATTA ( POUCH PACK ),,0.00,0.00,0.00,5 KG 
+22744,8908006255,Bakers Pride Wheat Flour Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908006255047,S&B Premium Maida,,,,,500 gm
+22744,8908006255,Bakers Pride Wheat Flour Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908006255023,S&B Chakki Fresh Atta,,,,,5 Kg
+22744,8908006255,Bakers Pride Wheat Flour Pvt Ltd,Food and beverages,Flour  and products,Wheat flour,8908006255030,S&B Chakki Fresh Atta,,,,,10 Kg
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990001,SAMUDRA PREMIUM MAIDA,,,,,75
+7627,890601917,BANATONE INDUSTRIES,Food and beverages,Flour  and products,Wheat flour,8906019170012,BANATONE ATTA 1Kg,0,,,,0
+7627,890601917,BANATONE INDUSTRIES,Food and beverages,Flour  and products,Wheat flour,8906019170029,BANATONE ATTA 5Kg,0,,,,0
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990018,SAMUDRA PREMIUM MAIDA,,,,,50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990025,SAMUDRA PREMIUM MAIDA,,,,,25
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990063,SAMUDRA PREMIUM MAIDA,,,,,.50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990032,SAMUDRA PREMIUM MAIDA,,,,,10
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990049,SAMUDRA PREMIUM MAIDA,,,,,5
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990056,SAMUDRA PREMIUM MAIDA,,,,,1
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990094,SAMUDRA PAROTA MAIDA,,,,,25
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990070,SAMUDRA PAROTA MAIDA,,,,,75
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990117,SAMUDRA PAROTA MAIDA,,,,,5
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990100,SAMUDRA PAROTA MAIDA,,,,,10
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990087,SAMUDRA PAROTA MAIDA,,,,,50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990124,SAMUDRA PAROTA MAIDA,,,,,1
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990148,SAMUDRA BAKERY MAIDA,,,,,75
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990131,SAMUDRA PAROTA MAIDA,,,,,.50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990155,SAMUDRA BAKERY MAIDA,,,,,50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990162,SAMUDRA BAKERY MAIDA,,,,,25
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990186,SAMUDRA BAKERY MAIDA,,,,,5
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990179,SAMUDRA BAKERY MAIDA,,,,,10
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990193,SAMUDRA MAIDA,,,,,1
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990209,SAMUDRA MAIDA,,,,,.50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990216,TIGER MAIDA,,,,,75
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990223,TIGER MAIDA,,,,,50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990230,TIGER MAIDA,,,,,25
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990247,TIGER MAIDA,,,,,10
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990254,TIGER MAIDA,,,,,5
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990261,TIGER MAIDA,,,,,1
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990308,KURUVI MAIDA,,,,,25
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990285,KURUVI MAIDA,,,,,75
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990278,TIGER MAIDA,,,,,.50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990292,KURUVI MAIDA,,,,,50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990315,KURUVI MAIDA,,,,,10
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990322,KURUVI MAIDA,,,,,5
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990353,SAMUDRA SOOJI,,,,,75
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990339,KURUVI MAIDA,,,,,1
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990384,SAMUDRA SOOJI,,,,,10
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990438,SAMUDRA ATTA,,,,,50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990360,SAMUDRA SOOJI,,,,,50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990407,SAMUDRA SOOJI,,,,,1
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990377,SAMUDRA SOOJI,,,,,25
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990391,SAMUDRA SOOJI,,,,,5
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990414,SAMUDRA SOOJI,,,,,.5
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990421,SAMUDRA ATTA,,,,,75
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990346,KURUVI MAIDA,,,,,.50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990452,SAMUDRA ATTA,,,,,10
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990445,SAMUDRA ATTA,,,,,25
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990469,SAMUDRA ATTA,,,,,5
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990483,SAMUDRA ATTA,,,,,.50
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990476,SAMUDRA ATTA,,,,,1
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990490,SAMUDRA WHOLE WHEAT ATTA,,,,,75
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990513,SAMUDRA WHOLE WHEAT ATTA,,,,,25
+20166,8908004990,Bannari Amman Flour Mill Ltd,Food and beverages,Flour  and products,Wheat flour,8908004990506,SAMUDRA WHOLE WHEAT ATTA,,,,,50
+Terminate batch job (Y/N)? 
