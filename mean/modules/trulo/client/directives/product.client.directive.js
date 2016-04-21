@@ -16,7 +16,9 @@ angular.module('trulo').directive('product', ['Mycart',
                 $scope.quantity = $scope.productCount;
                 $scope.add = function(){
                     $scope.productCount++;
-                    myCart.addToCart($scope.product);
+                    myCart.addToCart($scope.product,function(res){
+                        
+                    });
                     //console.log("Sending product id = "+$scope.product.id);
                 }
                 $scope.subtract = function () {
@@ -25,9 +27,11 @@ angular.module('trulo').directive('product', ['Mycart',
                             return;
                     }
                     $scope.productCount--;
-                    myCart.removeFromCart($scope.product);
+                    myCart.removeFromCart($scope.product,function(res){
+                        
+                    });
                 }
-                $scope.addToCart = function(){
+                /*$scope.addToCart = function(){
                     if( $scope.quantity< $scope.productCount){
                         //console.log("Add to cart");
                         for(var i=0; i<$scope.productCount-$scope.quantity; i++){
@@ -42,7 +46,7 @@ angular.module('trulo').directive('product', ['Mycart',
                         }
                         $scope.quantity = $scope.productCount;
                     }
-                }  
+                } */ 
                
             }
         };

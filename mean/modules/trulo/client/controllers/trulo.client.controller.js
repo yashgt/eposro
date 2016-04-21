@@ -1,8 +1,8 @@
 'use strict';
 angular.module('trulo').controller('TruloController', [
-  '$scope', 'Trulo', 'Mycart'
+  '$scope', 'Trulo', 'Mycart','Order'
     
-    , function ($scope, trulo, myCart) {
+    , function ($scope, trulo, myCart, order) {
         /*
             $scope.categories : All the top level categories
             $scope.subCategories : All the subCategories of current tab
@@ -20,7 +20,9 @@ angular.module('trulo').controller('TruloController', [
         $scope.quantity = 0;
         $scope.count = $scope.quantity;
         $scope.isCollapsed = false;
+        $scope.order_mode = 1;
         var products = [];
+        
         var getIndexOfTitle = function (x, array) {
             for (var i = 0; i < array.length; i++) {
                 if (x == array[i].title)
@@ -199,7 +201,14 @@ angular.module('trulo').controller('TruloController', [
         }
         $scope.fetchCart = function () {
             myCart.fetchCart(3, function (cartResponse) {
-                $scope.cart = cartResponse;
+                if( cartResponse != null){
+                    $scope.cart = cartResponse;
+                    $scope.emptyCart = 0;
+                }
+                else{
+                    $scope.emptyCart = 1;
+                    $scope.cart = [];
+                }
                 //console.log($scope.cart.products);
             });
         }
@@ -218,6 +227,90 @@ angular.module('trulo').controller('TruloController', [
             }
             $scope.quantity = count;
         }
+
+        //cart related functions
+        $scope.placeOrder = function() {
+            console.log($scope.cart);
+            if ($scope.cart == null || $scope.cart == undefined) {
+                return;
+            } else if ($scope.cart.length == 0) {
+                return;
+            } else {
+                $scope.cart.order_mode = $scope.order_mode;
+                order.placeOrder(3, function(orderResponse) {
+                    myCart.fetchCart(3, function(cartResponse) {
+                        if (cartResponse != null) {
+                            $scope.cart = cartResponse;
+                            $scope.emptyCart = 0;
+                        } else {
+                            $scope.cart = [];
+                            $scope.emptyCart = 1;
+                        }
+                    });
+                    console.log(orderResponse);
+                    return;
+                });
+            }
+            //order.placeOrder(3,$scope.cart,function(orderResponse){});
+        }
+        $scope.addProd = function(pdt) {
+            //console.log(pdt);
+            var product = {};
+            product._id = pdt.pid;
+            product.name = pdt.name;
+            product.price = pdt.price;
+            product.count = pdt.count;
+            //console.log(product);
+            myCart.addToCart(product, function(res) {
+                console.log(res);
+                myCart.fetchCart(3, function(cartResponse) {
+                    
+                    if (cartResponse != null) {
+                        $scope.cart = cartResponse;
+                        $scope.emptyCart = 0;
+                    } else {
+                        $scope.cart = [];
+                        $scope.emptyCart = 1;
+                    }
+                });
+
+            });
+        }
+        $scope.subtractProd = function(pdt) {
+            var product = {};
+            product._id = pdt.pid;
+            product.name = pdt.name;
+            product.price = pdt.price;
+            product.count = pdt.count;
+            myCart.removeFromCart(product, function(res) {
+                console.log(res);
+                myCart.fetchCart(3, function(cartResponse) {
+                    if (cartResponse != null) {
+                        $scope.cart = cartResponse;
+                    } else {
+                        $scope.cart = [];
+                    }
+                });
+            });
+        }
+        $scope.removeProductDirectly = function(pdt) {
+            var product = {};
+            product.id = pdt.pid;
+            product.name = pdt.name;
+            product.price = pdt.price;
+            product.count = pdt.count;
+            myCart.removeFromCart(product);
+            myCart.removeProductDirectly(product, function(res) {
+                myCart.fetchCart(3, function(cartResponse) {
+                    if (cartResponse != null) {
+                        $scope.cart = cartResponse;
+                    } else {
+                        $scope.cart = [];
+                    }
+                });
+            });
+        }
+
 
     }
 ]);

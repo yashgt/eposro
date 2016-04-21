@@ -20,15 +20,16 @@ angular.module('trulo').factory('Mycart', [
                     cb(cart);
                 });
             }
-            , addToCart: function (pdt) {
-                //console.log("Add:In mycart service received id=" + pdt._id);
-                trulo.addToCart(pdt._id);
+            , addToCart: function (pdt,cb) {
+                console.log("Add:In mycart service received id=" + pdt.id);
+                trulo.addToCart(pdt._id,cb);
                 if (this.addToCartCB)
                     this.addToCartCB(pdt);
+                
             }
-            , removeFromCart: function (pdt) {
+            , removeFromCart: function (pdt,cb) {
                 //console.log("Remove:In mycart service received id=" + pdt._id);
-                trulo.removeFromCart(pdt._id);
+                trulo.removeFromCart(pdt._id,cb);
                 if (this.removeFromCartCB)
                     this.removeFromCartCB(pdt);
             }

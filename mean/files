@@ -2331,6 +2331,87 @@ exports.getProductDetails = function (pid, cb) {
       console.log(err);
   });
 };
+////functions for recommendation engine
+exports.computeRFM = function (current_date, compare_date, cb) {
+  var orders = dbConn.collection('orders');
+  var rfm = dbConn.collection('rfm');
+  console.log(current_date + '  ' + compare_date);
+  orders.aggregate([
+    {
+      $match: {
+        'order_date': {
+          $gte: compare_date,
+          $lte: current_date
+        }
+      }
+    },
+    {
+      $project: {
+        'user_id': '$ordered_by',
+        'estimated_cost': 1,
+        'order_date': 1
+      }
+    },
+    {
+      $group: {
+        _id: '$user_id',
+        'recent_date': { $max: '$order_date' },
+        'frequency': { $sum: 1 },
+        'monetary': { $sum: '$estimated_cost' }
+      }
+    },
+    { $sort: { '_id': 1 } }
+  ]).toArray(function (err, res) {
+    if (!err) {
+      //go through each entry and normalize the R F and M
+      //find maximum values of frequency and money
+      var max_monetary = res[0].monetary;
+      var max_frequency = res[0].frequency;
+      var max_recency = 30;
+      for (var i = 0; i < res.length; i++) {
+        if (max_monetary < res[i].monetary) {
+          max_monetary = res[i].monetary;
+        }
+        if (max_frequency < res[i].frequency) {
+          max_frequency = res[i].frequency;
+        }
+      }
+      //convert recent_date to recency by subtracting it from current_date 
+      var normalized_r, normalized_f, normalized_m;
+      for (var i = 0; i < res.length; i++) {
+        //get the difference between the dates
+        var recent_date = res[i].recent_date.split('-');
+        var rdate = new Date(recent_date[0], recent_date[1] - 1, recent_date[2]);
+        recent_date = current_date.split('-');
+        var cdate = new Date(recent_date[0], recent_date[1] - 1, recent_date[2]);
+        var time_diff = Math.abs(cdate.getTime() - rdate.getTime());
+        var recency = Math.floor(time_diff / (1000 * 24 * 3600));
+        //normalize each value
+        normalized_f = res[i].frequency / max_frequency * 4 + 1;
+        //normalize from 1-5
+        normalized_f = Math.round(normalized_f);
+        normalized_m = res[i].monetary / max_monetary * 4 + 1;
+        normalized_m = Math.round(normalized_m);
+        normalized_r = 6 - Math.round(recency / max_recency * 4 + 1);
+        // takes value from 1-5
+        //construct an object to represent the r f and m score
+        var rfm_score = {};
+        rfm_score._id = res[i]._id;
+        rfm_score.recency = normalized_r;
+        rfm_score.frequency = normalized_f;
+        rfm_score.monetary = normalized_m;
+        //write this object to RFM collection
+        rfm.update({ _id: rfm_score._id }, rfm_score, { upsert: true }, function (err, result) {
+          if (!err) {
+            console.log('RFM for user computed ');
+          }
+        });
+      }
+    } else {
+      console.log(err);
+    }
+  });
+};
 'use strict';
 module.exports = function (app) {
   // Routing logic   
@@ -4185,7 +4266,8 @@ angular.module('trulo').controller('TruloController', [
   '$scope',
   'Trulo',
   'Mycart',
-  function ($scope, trulo, myCart) {
+  'Order',
+  function ($scope, trulo, myCart, order) {
     /*
             $scope.categories : All the top level categories
             $scope.subCategories : All the subCategories of current tab
@@ -4203,6 +4285,7 @@ angular.module('trulo').controller('TruloController', [
     $scope.quantity = 0;
     $scope.count = $scope.quantity;
     $scope.isCollapsed = false;
+    $scope.order_mode = 1;
     var products = [];
     var getIndexOfTitle = function (x, array) {
       for (var i = 0; i < array.length; i++) {
@@ -4364,7 +4447,13 @@ angular.module('trulo').controller('TruloController', [
     };
     $scope.fetchCart = function () {
       myCart.fetchCart(3, function (cartResponse) {
-        $scope.cart = cartResponse;  //console.log($scope.cart.products);
+        if (cartResponse !== null) {
+          $scope.cart = cartResponse;
+          $scope.emptyCart = 0;
+        } else {
+          $scope.emptyCart = 1;
+          $scope.cart = [];
+        }  //console.log($scope.cart.products);
       });
     };
     $scope.updateCart = function (count) {
@@ -4377,6 +4466,83 @@ angular.module('trulo').controller('TruloController', [
         myCart.addToCart();  //console.log("Call add to cart");
       }
       $scope.quantity = count;
+    };
+    //cart related functions
+    $scope.placeOrder = function () {
+      console.log($scope.cart);
+      if ($scope.cart === null || $scope.cart === undefined) {
+        return;
+      } else if ($scope.cart.length === 0) {
+        return;
+      } else {
+        $scope.cart.order_mode = $scope.order_mode;
+        order.placeOrder(3, function (orderResponse) {
+          myCart.fetchCart(3, function (cartResponse) {
+            if (cartResponse !== null) {
+              $scope.cart = cartResponse;
+            } else {
+              $scope.cart = [];
+            }
+          });
+          console.log(orderResponse);
+          return;
+        });
+      }  //order.placeOrder(3,$scope.cart,function(orderResponse){});
+    };
+    $scope.addProd = function (pdt) {
+      //console.log(pdt);
+      var product = {};
+      product._id = pdt.pid;
+      product.name = pdt.name;
+      product.price = pdt.price;
+      product.count = pdt.count;
+      //console.log(product);
+      myCart.addToCart(product, function (res) {
+        console.log(res);
+        myCart.fetchCart(3, function (cartResponse) {
+          if (cartResponse !== null) {
+            $scope.cart = cartResponse;
+            $scope.emptyCart = 0;
+          } else {
+            $scope.cart = [];
+            $scope.emptyCart = 1;
+          }
+        });
+      });
+    };
+    $scope.subtractProd = function (pdt) {
+      var product = {};
+      product._id = pdt.pid;
+      product.name = pdt.name;
+      product.price = pdt.price;
+      product.count = pdt.count;
+      myCart.removeFromCart(product, function (res) {
+        console.log(res);
+        myCart.fetchCart(3, function (cartResponse) {
+          if (cartResponse !== null) {
+            $scope.cart = cartResponse;
+          } else {
+            $scope.cart = [];
+          }
+        });
+      });
+    };
+    $scope.removeProductDirectly = function (pdt) {
+      var product = {};
+      product.id = pdt.pid;
+      product.name = pdt.name;
+      product.price = pdt.price;
+      product.count = pdt.count;
+      myCart.removeFromCart(product);
+      myCart.removeProductDirectly(product, function (res) {
+        myCart.fetchCart(3, function (cartResponse) {
+          if (cartResponse !== null) {
+            $scope.cart = cartResponse;
+          } else {
+            $scope.cart = [];
+          }
+        });
+      });
     };
   }
 ]);
@@ -4407,7 +4573,8 @@ angular.module('trulo').directive('product', [
         $scope.quantity = $scope.productCount;
         $scope.add = function () {
           $scope.productCount++;
-          myCart.addToCart($scope.product);  //console.log("Sending product id = "+$scope.product.id);
+          myCart.addToCart($scope.product, function (res) {
+          });  //console.log("Sending product id = "+$scope.product.id);
         };
         $scope.subtract = function () {
           if ($scope.productCount <= 0) {
@@ -4415,23 +4582,24 @@ angular.module('trulo').directive('product', [
             return;
           }
           $scope.productCount--;
-          myCart.removeFromCart($scope.product);
-        };
-        $scope.addToCart = function () {
-          if ($scope.quantity < $scope.productCount) {
-            //console.log("Add to cart");
-            for (var i = 0; i < $scope.productCount - $scope.quantity; i++) {
-              myCart.addToCart($scope.product);
-            }
-            $scope.quantity = $scope.productCount;
-          } else if ($scope.quantity > $scope.productCount) {
-            //console.log("Remove from cart");
-            for (var i = 0; i < $scope.quantity - $scope.productCount; i++) {
-              myCart.removeFromCart($scope.product);
-            }
-            $scope.quantity = $scope.productCount;
-          }
-        };
+          myCart.removeFromCart($scope.product, function (res) {
+          });
+        }  /*$scope.addToCart = function(){
+                    if( $scope.quantity< $scope.productCount){
+                        //console.log("Add to cart");
+                        for(var i=0; i<$scope.productCount-$scope.quantity; i++){
+                            myCart.addToCart($scope.product);
+                        }
+                        $scope.quantity = $scope.productCount;
+                    }
+                    else if($scope.quantity> $scope.productCount){
+                        //console.log("Remove from cart");
+                        for(var i=0; i<$scope.quantity-$scope.productCount ; i++){
+                            myCart.removeFromCart($scope.product);
+                        }
+                        $scope.quantity = $scope.productCount;
+                    }
+                } */;
       }
     };
   }
@@ -4455,15 +4623,15 @@ angular.module('trulo').factory('Mycart', [
           cb(cart);
         });
       },
-      addToCart: function (pdt) {
-        //console.log("Add:In mycart service received id=" + pdt._id);
-        trulo.addToCart(pdt._id);
+      addToCart: function (pdt, cb) {
+        console.log('Add:In mycart service received id=' + pdt.id);
+        trulo.addToCart(pdt._id, cb);
         if (this.addToCartCB)
           this.addToCartCB(pdt);
       },
-      removeFromCart: function (pdt) {
+      removeFromCart: function (pdt, cb) {
         //console.log("Remove:In mycart service received id=" + pdt._id);
-        trulo.removeFromCart(pdt._id);
+        trulo.removeFromCart(pdt._id, cb);
         if (this.removeFromCartCB)
           this.removeFromCartCB(pdt);
       },
@@ -4564,19 +4732,20 @@ angular.module('trulo').factory('Trulo', [
           cb(products, lastPage, busy);  //$scope.busy = false;
         });
       },
-      addToCart: function (pdtID) {
+      addToCart: function (pdtID, cb) {
         var data = {
           'pdtID': pdtID,
           'userID': 3,
           'city': 'goa'
         };
-        //console.log("add:Sending data with id="+data['pdtID']);
+        console.log('add:Sending data with id=' + data.pdtID);
         $http.post('/api/addToCart', data).success(function (response) {
           if (response !== null) {
+            cb(response);
           }
         });
       },
-      removeFromCart: function (pdtID) {
+      removeFromCart: function (pdtID, cb) {
         var data = {
           'pdtID': pdtID,
           'userID': 3,
@@ -4585,6 +4754,7 @@ angular.module('trulo').factory('Trulo', [
         //console.log("Remove:Sending data with id="+data['pdtID']);
         $http.post('/api/removeFromCart', data).success(function (response) {
           if (response !== null) {
+            cb(response);
           }
         });
       },
