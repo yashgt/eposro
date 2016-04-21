@@ -756,4 +756,74 @@ exports.getProductDetails=function (pid,cb) {
           else
             console.log(err);
      });
-}
+};
+
+////functions for recommendation engine
+exports.computeRFM=function(current_date,compare_date,cb){
+    var orders= dbConn.collection("orders");
+    var rfm= dbConn.collection("rfm");
+    console.log(current_date+"  "+compare_date)
+    orders.aggregate([{$match:{"order_date":{$gte:compare_date,$lte:current_date}}}
+        ,{$project:{"user_id":"$ordered_by","estimated_cost":1,"order_date":1}}
+        ,{$group:{_id:"$user_id","recent_date":{$max:"$order_date"},"frequency":{$sum:1},"monetary":{$sum:"$estimated_cost"}}}
+        ,{$sort:{"_id":1}}
+        ]).toArray(function(err,res){
+        if(!err){
+            //go through each entry and normalize the R F and M
+            //find maximum values of frequency and money
+            var max_monetary=res[0].monetary;
+            var max_frequency=res[0].frequency;
+            var max_recency=30;
+
+            for(var i=0;i<res.length;i++){
+                if(max_monetary<res[i].monetary){
+                    max_monetary=res[i].monetary;
+                }
+                if(max_frequency<res[i].frequency){
+                    max_frequency=res[i].frequency;
+                }
+            }
+
+            //convert recent_date to recency by subtracting it from current_date 
+            var normalized_r, normalized_f,normalized_m;
+            for(var i=0;i<res.length;i++){
+
+                //get the difference between the dates
+                var recent_date=res[i].recent_date.split('-');
+                var rdate= new Date(recent_date[0],recent_date[1]-1,recent_date[2]);
+                recent_date=current_date.split('-');
+                var cdate= new Date(recent_date[0],recent_date[1]-1,recent_date[2]);
+                var time_diff=Math.abs(cdate.getTime()-rdate.getTime());
+                var recency=Math.floor(time_diff/(1000*24*3600));
+
+                //normalize each value
+                normalized_f = ((res[i].frequency)/(max_frequency))*(4)+1;//normalize from 1-5
+                normalized_f= Math.round(normalized_f);
+
+                normalized_m = ((res[i].monetary)/(max_monetary))*(4)+1;
+                normalized_m= Math.round(normalized_m);
+
+                normalized_r =6- Math.round(((recency/max_recency)*4+1));// takes value from 1-5
+                
+                //construct an object to represent the r f and m score
+                var rfm_score={};
+                rfm_score._id=res[i]._id;
+                rfm_score.recency=normalized_r;
+                rfm_score.frequency=normalized_f;
+                rfm_score.monetary=normalized_m;
+
+                //write this object to RFM collection
+                rfm.update({_id:rfm_score._id},rfm_score,{upsert:true},function (err,result) {
+                     if(!err){
+                        console.log("RFM for user computed ");
+                     }
+                });
+
+            }
+
+        }
+        else{
+            console.log(err);
+        }
+    });
+};
