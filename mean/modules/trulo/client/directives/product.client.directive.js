@@ -11,11 +11,12 @@ angular.module('trulo').directive('product', ['Mycart',
             ,controller: function ($scope) {
                 $scope.productCount = myCart.getCount($scope.product);
                 $scope.quantity = $scope.productCount;
-                console.log("Pro count = "+$scope.productCount);
+                //console.log("Pro count = "+$scope.productCount);
                 
                 $scope.quantity = $scope.productCount;
                 $scope.add = function(){
                     $scope.productCount++;
+                    myCart.addToCart($scope.product);
                     //console.log("Sending product id = "+$scope.product.id);
                 }
                 $scope.subtract = function () {
@@ -24,6 +25,7 @@ angular.module('trulo').directive('product', ['Mycart',
                             return;
                     }
                     $scope.productCount--;
+                    myCart.removeFromCart($scope.product);
                 }
                 $scope.addToCart = function(){
                     if( $scope.quantity< $scope.productCount){

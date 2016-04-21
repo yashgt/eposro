@@ -4,6 +4,7 @@
  */
 var mongoose = require('mongoose'), _ = require('lodash');
 var trulo = require('../models/trulo.server.model');
+var solr = require('../models/solr.server.model');
 /**
  * Create a 
  */
@@ -34,21 +35,18 @@ exports.search = function (req, res) {
 };
 exports.getProducts = function (req, res) {
     console.log("Inside products.server.controller to fetch products of catID="+req.query.catID);
-  var cat = req.query.catID;
-  var page = req.query.lastPage;
-  //TODO fetch products from solr
-  var products = [];
-  for (var j = 1; j < 6; j++) {
-    var pdt = {
-      _id: j.toString(),
-      pname: 'Product' + j,
-      catID: cat,
-        mrp: 20
-    };
-    products.push(pdt);
-  }
-    res.send(products);
+    var catID = req.query.catID;
+    var lastPage = req.query.lastPage;
+    solr.getProductsByCategory(catID, lastPage, function(productsResponse){
+        res.send(productsResponse);
+    });
 };
+exports.searchProduct = function(req, res){
+    var pname = req.query.name;
+    solr.getProductsBySearchString(pname, function(response){
+        
+    });
+}
 exports.getProductDetails = function(req,res){
     var id = parseInt(req.query.id);
     trulo.getProductDetails(id,function(product){

@@ -1625,6 +1625,7 @@ exports.placeOrder = function (req, res) {
  */
 var mongoose = require('mongoose'), _ = require('lodash');
 var trulo = require('../models/trulo.server.model');
+var solr = require('../models/solr.server.model');
 /**
  * Create a 
  */
@@ -1655,20 +1656,16 @@ exports.search = function (req, res) {
 };
 exports.getProducts = function (req, res) {
   console.log('Inside products.server.controller to fetch products of catID=' + req.query.catID);
-  var cat = req.query.catID;
-  var page = req.query.lastPage;
-  //TODO fetch products from solr
-  var products = [];
-  for (var j = 1; j < 6; j++) {
-    var pdt = {
-      _id: j.toString(),
-      pname: 'Product' + j,
-      catID: cat,
-      mrp: 20
-    };
-    products.push(pdt);
-  }
-  res.send(products);
+  var catID = req.query.catID;
+  var lastPage = req.query.lastPage;
+  solr.getProductsByCategory(catID, lastPage, function (productsResponse) {
+    res.send(productsResponse);
+  });
+};
+exports.searchProduct = function (req, res) {
+  var pname = req.query.name;
+  solr.getProductsBySearchString(pname, function (response) {
+  });
 };
 exports.getProductDetails = function (req, res) {
   var id = parseInt(req.query.id);
@@ -1692,11 +1689,12 @@ var doSearch = function (client, query, cb) {
   });
 };
 exports.getProductsBySearchString = function (pname, cb) {
-  var query = client.createQuery()  //  /select
-.q(pname).dismax();
+  var query = client.createQuery().q(pname).dismax();
 };
-exports.getProductsByCategory = function (catID, cb) {
-  var query = client.createQuery().q({ cats: catID });
+exports.getProductsByCategory = function (catID, lastPage, cb) {
+  var query = client.createQuery().q({ 'cats.0': catID }).start(4 * lastPage).rows(4);
+  //start()  : number of leading documents to skip
+  //rows() : number of documents to return after start
   doSearch(client, query, cb);
 };
 'use strict';
@@ -1861,7 +1859,8 @@ exports.getCategories = function (id, cb) {
       for (var i = 0; i < res.length; i++) {
         cats.push({
           catID: res[i]._id,
-          title: res[i].name
+          title: res[i].name,
+          parentCatId: res[i].parent_id
         });  //console.log(cats);
       }
       cb(cats);
@@ -2348,6 +2347,7 @@ module.exports = function (app) {
   app.get('/api/cart', cart.fetchCart);
   app.post('/api/placeOrder', order.placeOrder);
   app.get('/api/product-detail', product.getProductDetails);
+  app.get('/api/search', product.searchProduct);
 };
 'use strict';
 /**
@@ -2519,16 +2519,17 @@ var passport = require('passport'), LocalStrategy = require('passport-local').St
 module.exports = function () {
   // Use local strategy
   passport.use(new LocalStrategy({
-    usernameField: 'username',
+    mobilenumField: 'mobileNumber',
     passwordField: 'password'
-  }, function (username, password, done) {
-    User.findOne({ username: username.toLowerCase() }, function (err, user) {
+  }, function (mobile, password, done) {
+    User.findOne({ mobileNumber: mobile }, function (err, user) {
       if (err) {
         return done(err);
       }
       if (!user || !user.authenticate(password)) {
-        return done(null, false, { message: 'Invalid username or password' });
+        return done(null, false, { message: 'Invalid mobile number or password' });
       }
+      console.log(user);
       return done(null, user);
     });
   }));
@@ -2715,12 +2716,40 @@ var path = require('path'), errorHandler = require(path.resolve('./modules/core/
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
   '/authentication/signin',
-  '/authentication/signup'
+  '/authentication/signupuser',
+  '/authentication/signupvendor'
 ];
 /**
  * Signup
  */
-exports.signup = function (req, res) {
+exports.signupuser = function (req, res) {
+  // For security measurement we remove the roles from the req.body object
+  delete req.body.roles;
+  // Init Variables
+  var user = new User(req.body);
+  var message = null;
+  // Add missing user fields
+  user.provider = 'local';
+  user.displayName = user.firstName + ' ' + user.lastName;
+  // Then save the user
+  user.save(function (err) {
+    if (err) {
+      return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+    } else {
+      // Remove sensitive data before login
+      user.password = undefined;
+      user.salt = undefined;
+      req.login(user, function (err) {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.json(user);
+        }
+      });
+    }
+  });
+};
+exports.signupvendor = function (req, res) {
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
   // Init Variables
@@ -3231,6 +3260,15 @@ var validateLocalStrategyProperty = function (property) {
 var validateLocalStrategyEmail = function (email) {
   return this.provider !== 'local' && !this.updated || validator.isEmail(email);
 };
+var validateLocalStrategyMobile = function (mobile) {
+  if (this.provider !== 'local' && !this.updated || /^\d{10}$/.test(mobile)) {
+    console.log(mobile + 'true');
+    return true;
+  }
+  //console.log(validator.isMobilePhone(mobile,"en-IN"));
+  //return (validator.isMobilePhone(mobile,'en-IN'));
+  return false;
+};
 /**
  * User Schema
  */
@@ -3268,12 +3306,17 @@ var UserSchema = new Schema({
       'Please fill a valid email address'
     ]
   },
-  username: {
+  mobileNumber: {
     type: String,
-    unique: 'Username already exists',
-    required: 'Please fill in a username',
-    lowercase: true,
-    trim: true
+    unique: 'Mobile Number Already Exists',
+    validate: [
+      validateLocalStrategyMobile,
+      'Please fill a valid Mobile Number'
+    ]
+  },
+  cstNumber: {
+    type: String,
+    unique: 'CST number Already Exists'
   },
   password: {
     type: String,
@@ -3474,7 +3517,8 @@ module.exports = function (app) {
   app.route('/api/auth/reset/:token').get(users.validateResetToken);
   app.route('/api/auth/reset/:token').post(users.reset);
   // Setting up the users authentication api
-  app.route('/api/auth/signup').post(users.signup);
+  app.route('/api/auth/signupuser').post(users.signupuser);
+  app.route('/api/auth/signupvendor').post(users.signupvendor);
   app.route('/api/auth/signin').post(users.signin);
   app.route('/api/auth/signout').get(users.signout);
   // Setting the facebook oauth routes
@@ -3704,6 +3748,7 @@ angular.module('core').controller('HeaderController', [
   'Authentication',
   'Menus',
   'Mycart',
+  'Trulo',
   function ($scope, $state, Authentication, Menus, myCart) {
     // Expose view variables
     $scope.$state = $state;
@@ -3742,6 +3787,12 @@ angular.module('core').controller('HeaderController', [
       }
       console.log('Fetched cart successfully with cartcount = ' + $scope.cartCount + ' & value=' + $scope.cartValue);
     });
+    $scope.searchProduct = function (searchQuery) {
+      console.log('Searching product ' + searchQuery);
+      trulo.searchProduct(searchQuery, function (response) {
+        console.log('In header controller');
+      });
+    };
     myCart.onAddToCart(this.addToCart);
     myCart.onSubtractFromCart(this.removeFromCart);
   }
@@ -4135,11 +4186,16 @@ angular.module('trulo').controller('TruloController', [
   'Trulo',
   'Mycart',
   function ($scope, trulo, myCart) {
+    /*
+            $scope.categories : All the top level categories
+            $scope.subCategories : All the subCategories of current tab
+            $scope.childCategories : All the next-level categories of current category
+        */
     $scope.map = {};
-    $scope.lastPageLoaded = [];
-    $scope.products = [];
+    $scope.noMoreData = 0;
+    var products = {};
+    var lastPageLoaded = {};
     $scope.busy = false;
-    $scope.breadCrumbs = [];
     $scope.nextCategory = 1;
     //category id of dairy tab
     $scope.cartCount = 0;
@@ -4147,18 +4203,74 @@ angular.module('trulo').controller('TruloController', [
     $scope.quantity = 0;
     $scope.count = $scope.quantity;
     $scope.isCollapsed = false;
+    var products = [];
+    var getIndexOfTitle = function (x, array) {
+      for (var i = 0; i < array.length; i++) {
+        if (x === array[i].title)
+          return i;
+      }
+      return -1;
+    };
+    var getIndexOfId = function (x, array) {
+      for (var i = 0; i < array.length; i++) {
+        if (x === array[i].catID)
+          return i;
+      }
+      return -1;
+    };
+    var getParent = function (catID) {
+      var i = getIndexOfId(catID, $scope.categories);
+      if (i !== -1)
+        return $scope.categories[i].parentCatId;
+      i = getIndexOfId(catID, $scope.subCategories);
+      if (i !== -1)
+        return $scope.subCategories[i].parentCatId;
+    };
+    var getCategoryTitle = function (catID) {
+      var i = getIndexOfId(catID, $scope.categories);
+      if (i !== -1)
+        return $scope.categories[i].title;
+      i = getIndexOfId(catID, $scope.subCategories);
+      if (i !== -1)
+        return $scope.subCategories[i].title;
+    };
+    var popBread = function (catID) {
+      //TODO display products by applying filters
+      //console.log("Popping " + catID);
+      var cat = getCategoryTitle(catID);
+      //console.log("Popping " + cat);
+      var i = getIndexOfTitle(cat, $scope.breadCrumbs);
+      //var i = $scope.breadCrumbs.indexOf(cat);
+      $scope.breadCrumbs.splice(i, $scope.breadCrumbs.length - i);
+    };
+    var breadExists = function (catID) {
+      var i = getIndexOfId(catID, $scope.breadCrumbs);
+      if (i === -1)
+        return 0;
+      else
+        return 1;
+    };
     $scope.showProducts = function (catID) {
       //make a SOLR query to fetch products of this catID
-      setBreadArray(catID);
+      console.log('Show products of ' + catID);
+      $scope.activateHomeTab = 0;
+      if ($scope.breadCrumbs !== undefined && breadExists(catID)) {
+        popBread(catID);
+        $scope.hideMe = 0;
+        $scope.getSubCat(catID);
+      }
+      $scope.fetchNextPage(catID, 0);
+      setBreadArray(catID, 0);
     };
     var getCategories = function () {
-      console.log('Fetching categories in controller');
-      trulo.getCategories(0, function (catsResponse, pageResponse, productsResponse) {
-        console.log('Categories fetched successfully');
+      //console.log('Fetching categories in controller');
+      trulo.getCategories(0, function (catsResponse) {
         $scope.categories = catsResponse;
-        console.log($scope.categories);
-        $scope.lastPageLoaded = pageResponse;
-        $scope.products = productsResponse;  //console.log($scope.categories[1].title);
+        //console.log(catsResponse[3].title);
+        for (var i = 0; i < $scope.categories.length; i++) {
+          products[catsResponse[i].catID] = [];
+          lastPageLoaded[catsResponse[i].catID] = 0;
+        }
       });
     };
     if ($scope.categories === undefined) {
@@ -4166,60 +4278,93 @@ angular.module('trulo').controller('TruloController', [
     }
     $scope.fetchNextPage = function (catID, flag) {
       $scope.nextCategory = catID;
-      //if( flag == 0)
-      //return;
+      //console.log("Inside fetchNextPage");
+      /*
+                var products = {
+                    '101' : [
+                        {
+                            pid: 200,
+                            pname: "Hangyo Mango Kulfi"
+                        },
+                        {
+                            pid: 201,
+                            pname: "SriKrishna Curd"
+                        },
+                        {
+                            pid: 202,
+                            pname: "Amul Milk Powder"
+                        }
+                    ],
+                    '102' : [
+                        {
+                            pid: 900,
+                            pname: "Layz Potato Chips"
+                        }
+                    ]
+		      }
+            */
       if ($scope.busy)
         return;
       $scope.busy = true;
-      trulo.getProductsByCat(catID, $scope.lastPageLoaded[catID], $scope.products, function (productsResponse, lastPageResponse, busyResponse) {
-        $scope.productsOfCurrentCat = productsResponse;
-        $scope.lastPageLoaded[catID] = lastPageResponse;
+      //if (products == undefined || products['catID'])
+      trulo.getProductsByCat(catID, lastPageLoaded[catID], products, function (productsResponse, lastPageResponse, busyResponse) {
+        if (productsResponse === null) {
+          console.log('No more data folks in controller');
+          $scope.noMoreData = true;
+          return;
+        }
+        console.log('Received resp of length ' + productsResponse.length);
+        $scope.products = productsResponse;
+        lastPageLoaded[catID] = lastPageResponse;
+        $scope.productsOfCurrentCat = $scope.products[catID];
         $scope.busy = busyResponse;
       });
     };
+    var isSubSetOf = function (array1, array2) {
+      for (var i = 0; i < array1.length; i++) {
+        if (getIndexOfId(array1[i].catID, array2) !== -1)
+          return 1;
+      }
+      return 0;
+    };
     $scope.getSubCat = function (parent) {
-      console.log('Fetching subcategories of parent = ' + parent);
+      if (getParent(parent) === 0)
+        $scope.subCategories = [];
+      //console.log("Fetching subcategories of parent = " + parent);
       trulo.getCategories(parent, function (catsResponse, pageResponse, productsResponse) {
-        console.log('Sub Categories fetched successfully');
+        //console.log('Sub Categories fetched successfully');
         if (catsResponse.length === 0)
           $scope.hideMe = 1;
         else
           $scope.hideMe = 0;
-        $scope.subCategories = catsResponse;
-        if ($scope.subCategories.length !== 0)
-          console.log($scope.subCategories[1].title);  //$scope.lastPageLoaded = pageResponse;
-                                                       //$scope.products = productsResponse;
+        //console.log(catsResponse);
+        $scope.childCategories = catsResponse;
+        if (!isSubSetOf(catsResponse, $scope.subCategories))
+          $scope.subCategories = $scope.subCategories.concat(catsResponse);
       });
     };
     $scope.scrollTop = function () {
       $(document).scrollTop(0);
     };
-    var getCategoryTitle = function (catID) {
-      for (var i = 0; i < $scope.categories.length; i++) {
-        if ($scope.categories[i].catID === catID)
-          return $scope.categories[i].title;
-      }
-    };
     var setBreadArray = function (catID) {
+      var parentCatId = getParent(catID);
       var cat = getCategoryTitle(catID);
-      $scope.breadCrumbs.push(cat);
-    };
-    $scope.popBread = function (cat) {
-      //TODO display products by applying filters
-      var i = 0;
-      while (i < $scope.breadCrumbs.length) {
-        if ($scope.breadCrumbs[i] === cat) {
-          break;
-        }
-        i++;
+      //console.log("Found parent as : "+parentCatId);
+      //console.log("Setting breadcrumb for "+cat);
+      if ($scope.breadCrumbs === undefined || parentCatId === 0) {
+        $scope.breadCrumbs = [];
       }
-      $scope.breadCrumbs.splice(i + 1, $scope.breadCrumbs.length - 1);
-      this.getSubCat(cat.catID);
+      $scope.breadCrumbs.push({
+        title: cat,
+        catID: catID
+      });
+    };
+    $scope.showHomeTab = function () {
+      $scope.activateHomeTab = 1;
     };
     $scope.fetchCart = function () {
       myCart.fetchCart(3, function (cartResponse) {
-        $scope.cart = cartResponse;
-        console.log($scope.cart.products);
+        $scope.cart = cartResponse;  //console.log($scope.cart.products);
       });
     };
     $scope.updateCart = function (count) {
@@ -4233,32 +4378,20 @@ angular.module('trulo').controller('TruloController', [
       }
       $scope.quantity = count;
     };
-    $scope.init = function (q) {
-      $scope.q = q;
-      //here we issue the actual query using jQuery
-      $.ajax({
-        url: 'http://localhost:9393/solr/eposro/select?q=*%3A*&wt=json&indent=true&qt=amul',
-        data: {
-          'q': $scope.q,
-          'wt': 'json',
-          'rows': 3
-        },
-        traditional: true,
-        cache: true,
-        async: true,
-        dataType: 'jsonp',
-        success: function (data) {
-          //and when we get the query back we 
-          //stick the results in the scope
-          $scope.$apply(function () {
-            $scope.results = data.response.docs;
-          });
-        },
-        jsonp: 'json.wrf'
-      });
-    };
   }
 ]);
+'use strict';
+angular.module('trulo').directive('errSrc', [function () {
+    return {
+      link: function postLink(scope, element, attrs) {
+        element.bind('error', function () {
+          if (attrs.src !== attrs.errSrc) {
+            attrs.$set('src', attrs.errSrc);
+          }
+        });
+      }
+    };
+  }]);
 'use strict';
 angular.module('trulo').directive('product', [
   'Mycart',
@@ -4270,10 +4403,11 @@ angular.module('trulo').directive('product', [
       controller: function ($scope) {
         $scope.productCount = myCart.getCount($scope.product);
         $scope.quantity = $scope.productCount;
-        console.log('Pro count = ' + $scope.productCount);
+        //console.log("Pro count = "+$scope.productCount);
         $scope.quantity = $scope.productCount;
         $scope.add = function () {
-          $scope.productCount++;  //console.log("Sending product id = "+$scope.product.id);
+          $scope.productCount++;
+          myCart.addToCart($scope.product);  //console.log("Sending product id = "+$scope.product.id);
         };
         $scope.subtract = function () {
           if ($scope.productCount <= 0) {
@@ -4281,6 +4415,7 @@ angular.module('trulo').directive('product', [
             return;
           }
           $scope.productCount--;
+          myCart.removeFromCart($scope.product);
         };
         $scope.addToCart = function () {
           if ($scope.quantity < $scope.productCount) {
@@ -4397,42 +4532,36 @@ angular.module('trulo').factory('Trulo', [
   '$http',
   function ($http) {
     return {
-      //generalize this for getting sub-categories as well
+      searchProduct: function (pname, cb) {
+        $http.get('/api/search?name=' + pname).success(function (response) {
+          console.log('Received response for search');
+          console.log(response);
+          cb(response);
+        });
+      },
       getCategories: function (parent, cb) {
-        console.log('Inside service to get categories of parent = ' + parent);
+        //console.log("Inside service to get categories of parent = "+parent);
         $http.get('/api/categories?catID=' + parent).success(function (response) {
           var categories = response;
-          var lastPageLoaded = [];
-          var products = [];
-          //initialize last page loaded and products array here
-          for (var i = 0; i < response.length; i++) {
-            lastPageLoaded[response[i].catID] = 0;
-            products[i] = {
-              catID: response[i].catID,
-              pdt: []
-            };
-          }
-          cb(categories, lastPageLoaded, products);
+          cb(categories);
         });
       },
       getProductsByCat: function (catID, lastPage, products, cb) {
-        console.log('sending catID=' + catID);
-        //console.log(products[1].pdt);
+        //console.log("Fetching prod for catID=" + catID + ", page = "+lastPage);
+        //var productsOfCurrentCat = [];
         $http.get('/api/products?catID=' + catID + '&lastPage=' + lastPage).success(function (response) {
           lastPage++;
-          //find the index into the products array where products of this category are found
-          for (var j = 0; j < products.length; j++) {
-            if (products[j].catID === catID) {
-              break;
-            }
+          //var productsOfCurrentCat = [];
+          if (response.length === 0) {
+            console.log('No more data folks!');
+            cb(null, lastPage, busy);
           }
           for (var i = 0; i < response.length; i++) {
-            products[j].pdt.push(response[i]);
+            products[catID].push(response[i]);  //productsOfCurrentCat.push(response[i]);
           }
-          var productsOfCurrentCat = products[j].pdt;
+          //var productsOfCurrentCat = products[catID];
           var busy = false;
-          cb(productsOfCurrentCat, lastPage, busy);  //$scope.productsOfCurrentCat = products[j].pdt;
-                                                     //$scope.busy = false;
+          cb(products, lastPage, busy);  //$scope.busy = false;
         });
       },
       addToCart: function (pdtID) {
@@ -4453,7 +4582,7 @@ angular.module('trulo').factory('Trulo', [
           'userID': 3,
           'city': 'goa'
         };
-        console.log('Remove:Sending data with id=' + data.pdtID);
+        //console.log("Remove:Sending data with id="+data['pdtID']);
         $http.post('/api/removeFromCart', data).success(function (response) {
           if (response !== null) {
           }
@@ -4462,13 +4591,13 @@ angular.module('trulo').factory('Trulo', [
       fetchCart: function (userID, cb) {
         var data = { 'userID': userID };
         $http.get('/api/cart?userID=3').success(function (res) {
-          console.log('Response received in trulo service as ' + res);
+          //console.log("Response received in trulo service as "+res);
           //console.log('In epsvc cart:' + res.products[0].count);
           if (res === 'null') {
-            console.log('Sending res null in epsvc');
+            //console.log('Sending res null in epsvc');
             cb(null);
           } else {
-            console.log('Sending some res in epsvc as ' + res);
+            //console.log('Sending some res in epsvc as '+res);
             cb(res);
           }
         });
@@ -4480,9 +4609,9 @@ angular.module('trulo').factory('Trulo', [
       },
       placeOrder: function (uid, cb) {
         var data = { 'userID': uid };
-        console.log('Placing order for =' + data.userID);
+        //console.log("Placing order for ="+data['userID']);
         $http.post('/api/placeOrder', data).success(function (response) {
-          console.log('Returned in cb in place order' + response);
+          //console.log('Returned in cb in place order'+response);
           cb('Successfully placed order');
         });
       },
@@ -4492,9 +4621,9 @@ angular.module('trulo').factory('Trulo', [
           'userID': 3,
           'city': 'goa'
         };
-        console.log('Remove Product:Sending data with id=' + data.pdtID);
+        //console.log("Remove Product:Sending data with id="+data['pdtID']);
         $http.post('/api/removeProductDirectly', data).success(function (response) {
-          console.log('Returned in cb');
+          //console.log('Returned in cb');
           if (response !== null) {
             cb(response);
           }
@@ -4502,9 +4631,9 @@ angular.module('trulo').factory('Trulo', [
       },
       saveAddress: function (uid, cb) {
         var data = { 'userID': uid };
-        console.log('Saving address for =' + data.userID);
+        //console.log("Saving address for ="+data['userID']);
         $http.post('/api/saveAddress', data).success(function (response) {
-          console.log('Returned in cb in save Address' + response);
+          //console.log('Returned in cb in save Address'+response);
           cb('Successfully saved Address');
         });
       }
@@ -4625,12 +4754,15 @@ angular.module('users').config([
       abstract: true,
       url: '/authentication',
       templateUrl: 'modules/users/client/views/authentication/authentication.client.view.html'
-    }).state('authentication.signup', {
-      url: '/signup',
-      templateUrl: 'modules/users/client/views/authentication/signup.client.view.html'
+    }).state('authentication.signupuser', {
+      url: '/signupuser',
+      templateUrl: 'modules/users/client/views/authentication/signupuser.client.view.html'
     }).state('authentication.signin', {
       url: '/signin?err',
       templateUrl: 'modules/users/client/views/authentication/signin.client.view.html'
+    }).state('authentication.signupvendor', {
+      url: '/signupvendor',
+      templateUrl: 'modules/users/client/views/authentication/signupvendor.client.view.html'
     }).state('password', {
       abstract: true,
       url: '/password',
@@ -4754,19 +4886,36 @@ angular.module('users').controller('AuthenticationController', [
     if ($scope.authentication.user) {
       $location.path('/');
     }
-    $scope.signup = function (isValid) {
+    $scope.signupuser = function (isValid) {
       $scope.error = null;
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'userForm');
         return false;
       }
-      $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
+      $http.post('/api/auth/signupuser', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
         // And redirect to the previous or home page
         $state.go($state.previous.state.name || 'home', $state.previous.params);
       }).error(function (response) {
         $scope.error = response.message;
+        console.log($scope.error);
+      });
+    };
+    $scope.signupvendor = function (isValid) {
+      $scope.error = null;
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'userForm');
+        return false;
+      }
+      $http.post('/api/auth/signupvendor', $scope.credentials).success(function (response) {
+        // If successful we assign the response to the global user model
+        $scope.authentication.user = response;
+        // And redirect to the previous or home page
+        $state.go($state.previous.state.name || 'home', $state.previous.params);
+      }).error(function (response) {
+        $scope.error = response.message;
+        console.log($scope.error);
       });
     };
     $scope.signin = function (isValid) {

@@ -1,6 +1,6 @@
 'use strict';
 //cart.count value = total amount
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Mycart'
+angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Mycart', 'Trulo'
   , function ($scope, $state, Authentication, Menus, myCart) {
         // Expose view variables
         $scope.$state = $state;
@@ -42,7 +42,16 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
             }
             console.log("Fetched cart successfully with cartcount = "+$scope.cartCount+" & value="+$scope.cartValue);
 		});
+        $scope.searchProduct = function(searchQuery){
+            console.log("Searching product "+searchQuery);
+            trulo.searchProduct(searchQuery, function(response){
+                console.log("In header controller");
+            });
+        }
+        
         myCart.onAddToCart(this.addToCart);
         myCart.onSubtractFromCart(this.removeFromCart);   
+      
+        
   }
 ]);

@@ -184,6 +184,7 @@ exports.getCategories = function (id, cb) {
                 cats.push({
                     catID: res[i]._id
                     , title: res[i].name
+                    , parentCatId: res[i].parent_id
                 });
                 //console.log(cats);
             }

@@ -1,14 +1,393 @@
-{"_id":1,"brand":"Hatsun Coop","cats":[15],"desc":"Very healthy milk which helps in complete growth","facets":{"fat percentage":4.5,"quantity":{"unit":"ml","val":500}},"gtin":"343223456","img":".\\Catalog\\CowMilk\\Arokya Milk 4.5% (500ml).jpg","pname":"Arokya Milk  ","price":{"default_mrp":"20","mrp":[{"city":4,"mrp":"22"},{"city":1,"mrp":"24"},{"city":2,"mrp":"23"}]},"vars":[]}
-{"_id":2,"brand":"Calvins Coop","cats":[15],"desc":"Delicious and healthy milk rich content of nutrients","facets":{"fat percentage":4.5,"quantity":{"unit":"ml","val":500}},"gtin":"8322142459","img":".\\Catalog\\CowMilk\\Milk Cavin's 4.5%(500ml).jpg","pname":"Milk Cavin's ","price":{"default_mrp":"25","mrp":[{"city":4,"mrp":"24"},{"city":1,"mrp":"23"},{"city":2,"mrp":"26"}]},"vars":[]}
-{"_id":3,"brand":"Hatsun Coop","cats":[15],"desc":"Tasty and Healthy milk","facets":{"fat percentage":3.4,"quantity":{"unit":"ml","val":500}},"gtin":"2325254446","img":".\\Catalog\\CowMilk\\Milk Hatsun 3% (500ml).jpg","pname":"Milk Hatsun","price":{"default_mrp":"23","mrp":[{"city":4,"mrp":"22"},{"city":1,"mrp":"24"},{"city":2,"mrp":"23"}]},"vars":[]}
-{"_id":4,"brand":"Mother Dairy","cats":[15],"desc":"Nourishing and enriching milk","facets":{"fat percentage":3,"quantity":{"unit":"ml","val":500}},"gtin":"3949292933","img":".\\Catalog\\CowMilk\\Milk Mother Dairy 3%(500ml).jpg","pname":"Milk Mother Dairy ","price":{"default_mrp":"20","mrp":[{"city":4,"mrp":"21"},{"city":1,"mrp":"20"},{"city":2,"mrp":"22"}]},"vars":[]}
-{"_id":5,"brand":"Mother Dairy","cats":[15],"desc":"Nourishing and enriching milk","facets":{"fat percentage":3,"quantity":{"unit":"ml","val":500}},"gtin":"3949292933","img":".\\Catalog\\CowMilk\\Milk Mother Dairy 3%(500ml).jpg","pname":"Milk Mother Dairy ","price":{"default_mrp":"20","mrp":[{"city":4,"mrp":"21"},{"city":1,"mrp":"20"},{"city":2,"mrp":"22"}]},"vars":[{"facets":{"fat percentage":3,"quantity":{"unit":"ml","val":500}},"vid":4,"vname":"Milk Mother Dairy "}]}
-{"_id":6,"brand":"Goa Dairy","cats":[17],"desc":"Very Tasty","facets":{"energy":{"unit":"kcal","val":20},"fat %":4,"quantity":{"unit":"ml","val":250}},"gtin":"343223456","img":".\\Catalog\\FlavouredMilk\\nestleNesquikChocolate(250ml).jpg","pname":"goaDairyFlavouredMilk","price":{"default_mrp":"15","mrp":[{"city":4,"mrp":"15"},{"city":1,"mrp":"15"},{"city":2,"mrp":"16"}]},"vars":[]}
-{"_id":7,"brand":"Nestle","cats":[17],"desc":"Sweet and Chocolaty","facets":{"energy":{"unit":"kcal","val":20},"fat %":3,"quantity":{"unit":"ml","val":250}},"gtin":"8322142459","img":".\\Catalog\\FlavouredMilk\\goaDairyFlavouredMilk(250ml).jpg","pname":"nestleNesquikChocolate","price":{"default_mrp":"22","mrp":[{"city":4,"mrp":"21"},{"city":1,"mrp":"23"},{"city":2,"mrp":"22"}]},"vars":[]}
-{"_id":8,"brand":"Nestle","cats":[17],"desc":"Chocolate Flavoured milk powder","facets":{"energy":{"unit":"kcal","val":20},"fat %":3,"quantity":{"unit":"gm","val":250}},"gtin":"2325254446","img":".\\Catalog\\FlavouredMilk\\nestleNesquikMilkAdditive(250gm).jpg","pname":"nestleNesquikMilkAdditive","price":{"default_mrp":"30","mrp":[{"city":4,"mrp":"30"},{"city":1,"mrp":"30"},{"city":2,"mrp":"30"}]},"vars":[]}
-{"_id":9,"brand":"Nestle","cats":[17],"desc":"Strawberry Flavoured milk powder","facets":{"energy":{"unit":"kcal","val":20},"fat %":4,"quantity":{"unit":"gm","val":250}},"gtin":"3949292933","img":".\\Catalog\\FlavouredMilk\\nestle-nesquik-strawberry-flavor-flavored-milk-additive(250gm).jpg","pname":"nestleNesquikStrawberry Milk Additive","price":{"default_mrp":"40","mrp":[{"city":4,"mrp":"40"},{"city":1,"mrp":"40"},{"city":2,"mrp":"40"}]},"vars":[]}
-{"_id":10,"brand":"Amul Coop","cats":[20],"desc":"Butterscotch Cone","facets":{"fat %":3,"quantity":1},"gtin":"343223456","img":".\\Catalog\\Cone\\AmulButterScotch(30rs).jpg","pname":"AmulButterScotch","price":{"default_mrp":"30","mrp":[{"city":4,"mrp":"30"},{"city":1,"mrp":"30"},{"city":2,"mrp":"30"}]},"vars":[]}
-{"_id":11,"brand":"Frosties coop","cats":[20],"desc":"Butterscotch Cone","facets":{"fat %":3,"quantity":1},"gtin":"8322142459","img":".\\Catalog\\Cone\\KapsFoodChocolate(30rs).jpg","pname":"FrostiesKingCone","price":{"default_mrp":"40","mrp":[{"city":4,"mrp":"40"},{"city":1,"mrp":"40"},{"city":2,"mrp":"40"}]},"vars":[]}
-{"_id":12,"brand":"Kaps Food","cats":[20],"desc":"Chocolate Cone","facets":{"fat %":3,"quantity":1},"gtin":"2325254446","img":".\\Catalog\\Cone\\manzaHappyCones(25rs).jpg","pname":"KapsFoodChocolate","price":{"default_mrp":"40","mrp":[{"city":4,"mrp":"40"},{"city":1,"mrp":"40"},{"city":2,"mrp":"40"}]},"vars":[]}
-{"_id":13,"brand":"Manza Coop","cats":[20],"desc":"Vannila Cone","facets":{"fat %":3,"quantity":1},"gtin":"3949292933","img":".\\Catalog\\Cone\\manzaHappyCones(25rs).jpg","pname":"manzaHappyCones","price":{"default_mrp":"25","mrp":[{"city":4,"mrp":"25"},{"city":1,"mrp":"25"},{"city":2,"mrp":"25"}]},"vars":[]}
-
+{
+    "_id": 1,
+    "brand": "Hatsun Coop",
+    "cats": [1,31,131],
+    "desc": "Very healthy milk which helps in complete growth",
+    "facets": {
+        "fat percentage": 4.5,
+        "quantity": {
+            "unit": "ml",
+            "val": 500
+        }
+    },
+    "gtin": "343223456",
+    "img": "1.jpg",
+    "pname": "Arokya Milk",
+    "price": {
+        "default_mrp": "20",
+        "mrp": [{
+            "city": 4,
+            "mrp": "22"
+        }, {
+            "city": 1,
+            "mrp": "24"
+        }, {
+            "city": 2,
+            "mrp": "23"
+        }]
+    },
+    "vars": []
+} 
+{
+    "_id": 2,
+    "brand": "Calvins Coop",
+    "cats": [1,31,131],
+    "desc": "Delicious and healthy milk rich content of nutrients",
+    "facets": {
+        "fat percentage": 4.5,
+        "quantity": {
+            "unit": "ml",
+            "val": 500
+        }
+    },
+    "gtin": "8322142459",
+    "img": "2.jpg",
+    "pname": "Milk Cavin's",
+    "price": {
+        "default_mrp": "25",
+        "mrp": [{
+            "city": 4,
+            "mrp": "24"
+        }, {
+            "city": 1,
+            "mrp": "23"
+        }, {
+            "city": 2,
+            "mrp": "26"
+        }]
+    },
+    "vars": []
+} {
+    "_id": 3,
+    "brand": "Hatsun Coop",
+    "cats": [1,31,132],
+    "desc": "Tasty and Healthy milk",
+    "facets": {
+        "fat percentage": 3.4,
+        "quantity": {
+            "unit": "ml",
+            "val": 500
+        }
+    },
+    "gtin": "2325254446",
+    "img": "3.jpg",
+    "pname": "Milk Hatsun",
+    "price": {
+        "default_mrp": "23",
+        "mrp": [{
+            "city": 4,
+            "mrp": "22"
+        }, {
+            "city": 1,
+            "mrp": "24"
+        }, {
+            "city": 2,
+            "mrp": "23"
+        }]
+    },
+    "vars": []
+} {
+    "_id": 4,
+    "brand": "Mother Dairy",
+    "cats": [1,31,132],
+    "desc": "Nourishing and enriching milk",
+    "facets": {
+        "fat percentage": 3,
+        "quantity": {
+            "unit": "ml",
+            "val": 500
+        }
+    },
+    "gtin": "3949292933",
+    "img": "4,jpg",
+    "pname": "Milk Mother Dairy",
+    "price": {
+        "default_mrp": "20",
+        "mrp": [{
+            "city": 4,
+            "mrp": "21"
+        }, {
+            "city": 1,
+            "mrp": "20"
+        }, {
+            "city": 2,
+            "mrp": "22"
+        }]
+    },
+    "vars": []
+} {
+    "_id": 5,
+    "brand": "Mother Dairy",
+    "cats": [1,31,132],
+    "desc": "Nourishing and enriching milk",
+    "facets": {
+        "fat percentage": 3,
+        "quantity": {
+            "unit": "ml",
+            "val": 500
+        }
+    },
+    "gtin": "3949292933",
+    "img": "5.jpg",
+    "pname": "Milk Mother Dairy",
+    "price": {
+        "default_mrp": "20",
+        "mrp": [{
+            "city": 4,
+            "mrp": "21"
+        }, {
+            "city": 1,
+            "mrp": "20"
+        }, {
+            "city": 2,
+            "mrp": "22"
+        }]
+    },
+    "vars": [{
+        "facets": {
+            "fat percentage": 3,
+            "quantity": {
+                "unit": "ml",
+                "val": 500
+            }
+        },
+        "vid": 4,
+        "vname": "Milk Mother Dairy "
+    }]
+} {
+    "_id": 6,
+    "brand": "Goa Dairy",
+    "cats": [1,31,133],
+    "desc": "Very Tasty",
+    "facets": {
+        "energy": {
+            "unit": "kcal",
+            "val": 20
+        },
+        "fat %": 4,
+        "quantity": {
+            "unit": "ml",
+            "val": 250
+        }
+    },
+    "gtin": "343223456",
+    "img": "6.jpg",
+    "pname": "Goa Dairy Flavoured Milk",
+    "price": {
+        "default_mrp": "15",
+        "mrp": [{
+            "city": 4,
+            "mrp": "15"
+        }, {
+            "city": 1,
+            "mrp": "15"
+        }, {
+            "city": 2,
+            "mrp": "16"
+        }]
+    },
+    "vars": []
+} {
+    "_id": 7,
+    "brand": "Nestle",
+    "cats": [1,31,133],
+    "desc": "Sweet and Chocolaty",
+    "facets": {
+        "energy": {
+            "unit": "kcal",
+            "val": 20
+        },
+        "fat %": 3,
+        "quantity": {
+            "unit": "ml",
+            "val": 250
+        }
+    },
+    "gtin": "8322142459",
+    "img": "7.jpg",
+    "pname": "Nestle Nesquik Chocolate",
+    "price": {
+        "default_mrp": "22",
+        "mrp": [{
+            "city": 4,
+            "mrp": "21"
+        }, {
+            "city": 1,
+            "mrp": "23"
+        }, {
+            "city": 2,
+            "mrp": "22"
+        }]
+    },
+    "vars": []
+} {
+    "_id": 8,
+    "brand": "Nestle",
+    "cats": [1,31,133],
+    "desc": "Chocolate Flavoured milk powder",
+    "facets": {
+        "energy": {
+            "unit": "kcal",
+            "val": 20
+        },
+        "fat %": 3,
+        "quantity": {
+            "unit": "gm",
+            "val": 250
+        }
+    },
+    "gtin": "2325254446",
+    "img": "8.jpg",
+    "pname": "Nestle Nesquik Milk Additive",
+    "price": {
+        "default_mrp": "30",
+        "mrp": [{
+            "city": 4,
+            "mrp": "30"
+        }, {
+            "city": 1,
+            "mrp": "30"
+        }, {
+            "city": 2,
+            "mrp": "30"
+        }]
+    },
+    "vars": []
+} {
+    "_id": 9,
+    "brand": "Nestle",
+    "cats": [1,31,133],
+    "desc": "Strawberry Flavoured milk powder",
+    "facets": {
+        "energy": {
+            "unit": "kcal",
+            "val": 20
+        },
+        "fat %": 4,
+        "quantity": {
+            "unit": "gm",
+            "val": 250
+        }
+    },
+    "gtin": "3949292933",
+    "img": "9.jpg",
+    "pname": "Nestle Nesquik Strawberry Milk Additive",
+    "price": {
+        "default_mrp": "40",
+        "mrp": [{
+            "city": 4,
+            "mrp": "40"
+        }, {
+            "city": 1,
+            "mrp": "40"
+        }, {
+            "city": 2,
+            "mrp": "40"
+        }]
+    },
+    "vars": []
+} {
+    "_id": 10,
+    "brand": "Amul Coop",
+    "cats": [1,32,141],
+    "desc": "Butterscotch Cone",
+    "facets": {
+        "fat %": 3,
+        "quantity": 1
+    },
+    "gtin": "343223456",
+    "img": "10.jpg",
+	"pname": "Amul Butterscotch" ,
+    "price": {
+        "default_mrp": "30",
+        "mrp": [{
+            "city": 4,
+            "mrp": "30"
+        }, {
+            "city": 1,
+            "mrp": "30"
+        }, {
+            "city": 2,
+            "mrp": "30"
+        }]
+    },
+    "vars": []
+} {
+    "_id": 11,
+    "brand": "Frosties coop",
+    "cats": [1,32,141],
+    "desc": "Butterscotch Cone",
+    "facets": {
+        "fat %": 3,
+        "quantity": 1
+    },
+    "gtin": "8322142459",
+    "img": "11.jpg",
+    "pname": "Frosties King Cone",
+    "price": {
+        "default_mrp": "40",
+        "mrp": [{
+            "city": 4,
+            "mrp": "40"
+        }, {
+            "city": 1,
+            "mrp": "40"
+        }, {
+            "city": 2,
+            "mrp": "40"
+        }]
+    },
+    "vars": []
+} {
+    "_id": 12,
+    "brand": "Kaps Food",
+    "cats": [1,32,141],
+    "desc": "Chocolate Cone",
+    "facets": {
+        "fat %": 3,
+        "quantity": 1
+    },
+    "gtin": "2325254446",
+    "img": "12.jpg",
+    "pname": "Kaps Food Chocolate",
+    "price": {
+        "default_mrp": "40",
+        "mrp": [{
+            "city": 4,
+            "mrp": "40"
+        }, {
+            "city": 1,
+            "mrp": "40"
+        }, {
+            "city": 2,
+            "mrp": "40"
+        }]
+    },
+    "vars": []
+} {
+    "_id": 13,
+    "brand": "Manza Coop",
+    "cats": [1,32,141],
+    "desc": "Vannila Cone",
+    "facets": {
+        "fat %": 3,
+        "quantity": 1
+    },
+    "gtin": "3949292933",
+    "img": "13.jpg",
+    "pname": "Manza Happy Cones",
+    "price": {
+        "default_mrp": "25",
+        "mrp": [{
+            "city": 4,
+            "mrp": "25"
+        }, {
+            "city": 1,
+            "mrp": "25"
+        }, {
+            "city": 2,
+            "mrp": "25"
+        }]
+    },
+    "vars": []
+}

@@ -15,10 +15,13 @@ var doSearch = function (client, query, cb) {
   });
 };
 exports.getProductsBySearchString = function (pname, cb) {
-  var query = client.createQuery()  //  /select
-.q(pname).dismax();
+  var query = client.createQuery().q(pname).dismax();
 };
-exports.getProductsByCategory = function (catID, cb) {
-  var query = client.createQuery().q({ cats: catID });
-  doSearch(client, query, cb);
+
+exports.getProductsByCategory = function (catID, lastPage, cb) {
+    
+    var query = client.createQuery().q({ 'cats.0': catID }).start(4*lastPage).rows(4);
+    //start()  : number of leading documents to skip
+    //rows() : number of documents to return after start
+    doSearch(client, query, cb);
 };

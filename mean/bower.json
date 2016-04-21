@@ -19,8 +19,7 @@
     "ngInfiniteScroll": "^1.2.2",
     "angular-breadcrumb": "^0.4.1",
     "material-design-icons": "^2.2.3",
-    "angular-google-maps": "^2.3.2",
-    "lodash": "^4.8.2"
+    "angular-google-maps": "^2.3.2"
   },
   "resolutions": {
     "angular": "~1.3",

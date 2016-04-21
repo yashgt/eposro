@@ -77,9 +77,11 @@ input[type=number]::-webkit-outer-spin-button {
 #price{
 	text-align: center;
 }
-#add-remove-buttons{
-	text-align: center;
-}
+
+/*#add-remove-buttons{
+	width: 50%;
+    margin: 0 auto; 
+}*/
 #product-info{
 	margin-top:-30px;
 }

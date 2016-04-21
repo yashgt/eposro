@@ -29,9 +29,9 @@
 </div>
     <!--<input type="search" class="form-control" flex="40" style="margin-top:8px" placeholder="search for products" results>-->
 <div class="input-group" flex="40" style="margin-top:8px">
-    <input type="text" class="form-control" placeholder="Search for Product..." />
+    <input type="text" ng-model="searchQuery" class="form-control" placeholder="Search for Product..." />
     <span class="input-group-btn">
-        <button ui-sref="search" class="btn btn-default" type="button">
+        <button ui-sref="search" class="btn btn-default" type="button" ng-click="searchProduct(searchQuery)">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
     </span>

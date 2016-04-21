@@ -3,41 +3,39 @@ angular.module('trulo').factory('Trulo', [
   '$http'
   , function ($http) {
         return {
-            //generalize this for getting sub-categories as well
-            getCategories: function (parent,cb) {
-                console.log("Inside service to get categories of parent = "+parent);
+            
+            searchProduct : function(pname, cb){
+                $http.get('/api/search?name='+pname).success(function(response){
+                    console.log("Received response for search");
+                    console.log(response);
+                    cb(response);
+                });
+            }
+        
+            ,getCategories: function (parent,cb) {
+                //console.log("Inside service to get categories of parent = "+parent);
                 $http.get('/api/categories?catID='+parent).success(function (response) {
                     var categories = response;
-                    var lastPageLoaded = [];
-                    var products = [];
-                    //initialize last page loaded and products array here
-                    for (var i = 0; i < response.length; i++) {
-                        lastPageLoaded[response[i].catID] = 0;
-                        products[i] = {
-                            catID: response[i].catID
-                            , pdt: []
-                        };
-                    }
-                    cb(categories, lastPageLoaded, products);
+                    cb(categories);
                 });
             }
             , getProductsByCat: function (catID, lastPage, products, cb) {
-                console.log("sending catID=" + catID);
-                //console.log(products[1].pdt);
+                //console.log("Fetching prod for catID=" + catID + ", page = "+lastPage);
+                //var productsOfCurrentCat = [];
                 $http.get('/api/products?catID=' + catID + '&lastPage=' + lastPage).success(function (response) {
                     lastPage++;
-                    //find the index into the products array where products of this category are found
-                    for (var j = 0; j < products.length; j++) {
-                        if (products[j].catID === catID) {
-                            break;
-                        }
+                    //var productsOfCurrentCat = [];
+                    if( response.length == 0){
+                        console.log("No more data folks!");
+                        cb(null, lastPage, busy);
                     }
                     for (var i = 0; i < response.length; i++) {
-                        products[j].pdt.push(response[i]);
+                        products[catID].push(response[i]);
+                        //productsOfCurrentCat.push(response[i]);
                     }
-                    var productsOfCurrentCat = products[j].pdt;
+                    //var productsOfCurrentCat = products[catID];
                     var busy = false;
-                    cb(productsOfCurrentCat, lastPage, busy); //$scope.productsOfCurrentCat = products[j].pdt;
+                    cb(products, lastPage, busy); 
                     //$scope.busy = false;
                 });
             }
@@ -62,7 +60,7 @@ angular.module('trulo').factory('Trulo', [
                     , 'userID': 3
                     , 'city': 'goa'
                 };
-                console.log("Remove:Sending data with id="+data['pdtID']);
+                //console.log("Remove:Sending data with id="+data['pdtID']);
                 $http.post('/api/removeFromCart', data).success(function (response) {
                      if(response!=null){
                         //cb(response)
@@ -74,14 +72,14 @@ angular.module('trulo').factory('Trulo', [
                     'userID': userID
                 };
                 $http.get('/api/cart?userID=3').success(function (res) {
-                    console.log("Response received in trulo service as "+res);
+                    //console.log("Response received in trulo service as "+res);
                     //console.log('In epsvc cart:' + res.products[0].count);
                     if (res == 'null') {
-                        console.log('Sending res null in epsvc');
+                        //console.log('Sending res null in epsvc');
                         cb(null);
                     } 
                     else {
-                        console.log('Sending some res in epsvc as '+res);
+                        //console.log('Sending some res in epsvc as '+res);
                         cb(res);
                     }
                 });
@@ -95,9 +93,9 @@ angular.module('trulo').factory('Trulo', [
                 var data={
                     'userID':uid
                 };
-                console.log("Placing order for ="+data['userID']);
+                //console.log("Placing order for ="+data['userID']);
                 $http.post('/api/placeOrder', data).success(function (response) {
-                    console.log('Returned in cb in place order'+response);
+                    //console.log('Returned in cb in place order'+response);
                     cb('Successfully placed order');
                 });
                  
@@ -108,9 +106,9 @@ angular.module('trulo').factory('Trulo', [
                     ,'userID':3
                     ,'city':'goa'
                 };
-                console.log("Remove Product:Sending data with id="+data['pdtID']);
+                //console.log("Remove Product:Sending data with id="+data['pdtID']);
                 $http.post('/api/removeProductDirectly', data).success(function (response) {
-                    console.log('Returned in cb');
+                    //console.log('Returned in cb');
                      if(response!=null){
                         cb(response)
                     }
@@ -120,9 +118,9 @@ angular.module('trulo').factory('Trulo', [
                 var data={
                     'userID':uid
                 };
-                console.log("Saving address for ="+data['userID']);
+                //console.log("Saving address for ="+data['userID']);
                 $http.post('/api/saveAddress', data).success(function (response) {
-                    console.log('Returned in cb in save Address'+response);
+                    //console.log('Returned in cb in save Address'+response);
                     cb('Successfully saved Address');
                 });
                  
