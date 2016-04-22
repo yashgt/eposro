@@ -3829,8 +3829,9 @@ angular.module('core').controller('HeaderController', [
   'Authentication',
   'Menus',
   'Mycart',
+  'Order',
   'Trulo',
-  function ($scope, $state, Authentication, Menus, myCart) {
+  function ($scope, $state, Authentication, Menus, myCart, order, trulo) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -3846,28 +3847,33 @@ angular.module('core').controller('HeaderController', [
       $scope.isCollapsed = false;
     });
     this.addToCart = function (pdt) {
-      $scope.cartCount++;
-      $scope.cartValue += pdt.mrp;
+      //console.log("Add to cart");
+      $scope.cartCount++;  //$scope.cartValue += pdt.mrp ;
     };
     this.removeFromCart = function (pdt) {
+      //console.log("Remove to cart");
       if ($scope.cartCount <= 0) {
         $scope.cartCount = 0;
         return;
       }
-      $scope.cartCount--;
-      $scope.cartValue -= pdt.mrp;
+      $scope.cartCount--;  //$scope.cartValue -= pdt.mrp;
     };
-    myCart.fetchCart(3, function (cart) {
-      $scope.cartCount = 0;
-      $scope.cartValue = 0;
-      if (cart !== null) {
-        for (var i = 0; i < cart.products.length; i++) {
-          $scope.cartCount += cart.products[i].count;
-          $scope.cartValue += parseInt(cart.products[i].price) * $scope.cartCount;
+    this.fetchCart = function () {
+      myCart.fetchCart(3, function (cart) {
+        console.log('Fetch Cart');
+        $scope.cartCount = 0;
+        $scope.cartValue = 0;
+        if (cart !== null) {
+          for (var i = 0; i < cart.products.length; i++) {
+            $scope.cartCount += cart.products[i].count;
+            $scope.cartValue += parseInt(cart.products[i].price) * $scope.cartCount;
+          }
         }
-      }
-      console.log('Fetched cart successfully with cartcount = ' + $scope.cartCount + ' & value=' + $scope.cartValue);
-    });
+        console.log('Fetched cart successfully with cartcount = ' + $scope.cartCount + ' & value=' + $scope.cartValue);
+      });
+    };
+    if ($scope.cartCount === undefined)
+      this.fetchCart();
     $scope.searchProduct = function (searchQuery) {
       console.log('Searching product ' + searchQuery);
       trulo.searchProduct(searchQuery, function (response) {
@@ -3876,6 +3882,8 @@ angular.module('core').controller('HeaderController', [
     };
     myCart.onAddToCart(this.addToCart);
     myCart.onSubtractFromCart(this.removeFromCart);
+    myCart.onRemoveDirectly(this.fetchCart);
+    order.onOrderPlacement(this.fetchCart);
   }
 ]);
 'use strict';
@@ -4267,7 +4275,8 @@ angular.module('trulo').controller('TruloController', [
   'Trulo',
   'Mycart',
   'Order',
-  function ($scope, trulo, myCart, order) {
+  '$mdToast',
+  function ($scope, trulo, myCart, order, $mdToast) {
     /*
             $scope.categories : All the top level categories
             $scope.subCategories : All the subCategories of current tab
@@ -4468,6 +4477,9 @@ angular.module('trulo').controller('TruloController', [
       $scope.quantity = count;
     };
     //cart related functions
+    var openToast = function ($event) {
+      $mdToast.show($mdToast.simple().textContent('Your order has been successfully placed'));  // Could also do $mdToast.showSimple('Hello');
+    };
     $scope.placeOrder = function () {
       console.log($scope.cart);
       if ($scope.cart === null || $scope.cart === undefined) {
@@ -4479,15 +4491,20 @@ angular.module('trulo').controller('TruloController', [
         order.placeOrder(3, function (orderResponse) {
           myCart.fetchCart(3, function (cartResponse) {
             if (cartResponse !== null) {
+              console.log('Not Null response');
               $scope.cart = cartResponse;
+              $scope.emptyCart = 0;
             } else {
+              console.log('Null response');
               $scope.cart = [];
+              $scope.emptyCart = 1;
             }
           });
           console.log(orderResponse);
           return;
         });
-      }  //order.placeOrder(3,$scope.cart,function(orderResponse){});
+      }  //openToast();
+         //order.placeOrder(3,$scope.cart,function(orderResponse){});
     };
     $scope.addProd = function (pdt) {
       //console.log(pdt);
@@ -4529,11 +4546,10 @@ angular.module('trulo').controller('TruloController', [
     };
     $scope.removeProductDirectly = function (pdt) {
       var product = {};
-      product.id = pdt.pid;
+      product._id = pdt.pid;
       product.name = pdt.name;
       product.price = pdt.price;
       product.count = pdt.count;
-      myCart.removeFromCart(product);
       myCart.removeProductDirectly(product, function (res) {
         myCart.fetchCart(3, function (cartResponse) {
           if (cartResponse !== null) {
@@ -4663,6 +4679,18 @@ angular.module('trulo').factory('Mycart', [
       },
       onSubtractFromCart: function (cb) {
         this.removeFromCartCB = cb;
+      },
+      removeProductDirectly: function (pdt, cb) {
+        console.log('Remove Product:In mycart service received id=' + pdt._id);
+        var order = this;
+        trulo.removeProductDirectly(pdt._id, function (res) {
+          if (order.removeDirectlyCB)
+            order.removeDirectlyCB();
+          cb(res);
+        });
+      },
+      onRemoveDirectly: function (cb) {
+        this.removeDirectlyCB = cb;
       }
     };
   }
@@ -4688,9 +4716,15 @@ angular.module('trulo').factory('Order', [
     return {
       placeOrder: function (uid, cb) {
         console.log('Inside Order service' + uid);
-        trulo.placeOrder(uid, function (orderResponse) {
-          cb(orderResponse);
+        var order = this;
+        trulo.placeOrder(uid, function (res) {
+          if (order.placeOrderCB)
+            order.placeOrderCB();
         });
+      },
+      onOrderPlacement: function (cb) {
+        console.log('In on order placement');
+        this.placeOrderCB = cb;
       }
     };
   }

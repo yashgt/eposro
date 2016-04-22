@@ -62,6 +62,19 @@ angular.module('trulo').factory('Mycart', [
             , onSubtractFromCart: function (cb) {
                 this.removeFromCartCB = cb;
             }
+            ,removeProductDirectly:function(pdt,cb){
+                console.log("Remove Product:In mycart service received id=" + pdt._id);
+                var order = this;
+                trulo.removeProductDirectly(pdt._id,function(res){
+                    if(order.removeDirectlyCB)
+                        order.removeDirectlyCB();
+                    cb(res);
+                });
+            }
+            ,onRemoveDirectly: function(cb){
+                this.removeDirectlyCB = cb;
+            }
+
         };
   }
 ]);

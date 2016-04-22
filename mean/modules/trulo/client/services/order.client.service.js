@@ -9,9 +9,16 @@ angular.module('trulo').factory('Order', ['Trulo',
     return {
       placeOrder: function (uid,cb) {
         console.log("Inside Order service"+uid);
-        trulo.placeOrder(uid,function(orderResponse){
-          cb(orderResponse);
+        var order = this;
+        trulo.placeOrder(uid,function(res){
+            if (order.placeOrderCB)
+                order.placeOrderCB();    
         });
+        
+      }
+      , onOrderPlacement: function (cb) {
+          console.log("In on order placement");
+          this.placeOrderCB = cb;
       }
     };
   }
