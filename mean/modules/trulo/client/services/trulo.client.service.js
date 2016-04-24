@@ -44,7 +44,6 @@ angular.module('trulo').factory('Trulo', [
             , addToCart: function (pdtID,cb) {
                 var data = {
                     'pdtID': pdtID
-                    , 'userID': 3
                     , 'city': 'goa'
                 };
                 console.log("add:Sending data with id="+data['pdtID']);
@@ -57,7 +56,6 @@ angular.module('trulo').factory('Trulo', [
             , removeFromCart: function (pdtID,cb) {
                 var data = {
                     'pdtID': pdtID
-                    , 'userID': 3
                     , 'city': 'goa'
                 };
                 //console.log("Remove:Sending data with id="+data['pdtID']);
@@ -67,11 +65,8 @@ angular.module('trulo').factory('Trulo', [
                     }
                 });
             }
-            , fetchCart: function (userID, cb) {
-                var data = {
-                    'userID': userID
-                };
-                $http.get('/api/cart?userID=3').success(function (res) {
+            , fetchCart: function (cb) {
+                $http.get('/api/cart').success(function (res) {
                     //console.log("Response received in trulo service as "+res);
                     //console.log('In epsvc cart:' + res.products[0].count);
                     if (res == 'null') {
@@ -89,12 +84,9 @@ angular.module('trulo').factory('Trulo', [
                     cb(product);
                 });
             }
-            ,placeOrder:function (uid,cb) {
-                var data={
-                    'userID':uid
-                };
+            ,placeOrder:function (cb) {
                 //console.log("Placing order for ="+data['userID']);
-                $http.post('/api/placeOrder', data).success(function (response) {
+                $http.post('/api/placeOrder').success(function (response) {
                     //console.log('Returned in cb in place order'+response);
                     cb('Successfully placed order');
                 });
@@ -103,7 +95,6 @@ angular.module('trulo').factory('Trulo', [
             ,removeProductDirectly:function(pdt,cb){
                 var data={
                     'pdtID':pdt
-                    ,'userID':3
                     ,'city':'goa'
                 };
                 //console.log("Remove Product:Sending data with id="+data['pdtID']);

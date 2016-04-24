@@ -200,7 +200,7 @@ angular.module('trulo').controller('TruloController', [
             $scope.activateHomeTab = 1;
         }
         $scope.fetchCart = function () {
-            myCart.fetchCart(3, function (cartResponse) {
+            myCart.fetchCart(function (cartResponse) {
                 if( cartResponse != null){
                     $scope.cart = cartResponse;
                     $scope.emptyCart = 0;
@@ -243,8 +243,8 @@ angular.module('trulo').controller('TruloController', [
                 return;
             } else {
                 $scope.cart.order_mode = $scope.order_mode;
-                order.placeOrder(3, function(orderResponse) {
-                    myCart.fetchCart(3, function(cartResponse) {
+                order.placeOrder(function(orderResponse) {
+                    myCart.fetchCart(function(cartResponse) {
                         if (cartResponse != null) {
                             console.log("Not Null response");
                             $scope.cart = cartResponse;
@@ -274,7 +274,7 @@ angular.module('trulo').controller('TruloController', [
             //console.log(product);
             myCart.addToCart(product, function(res) {
                 console.log(res);
-                myCart.fetchCart(3, function(cartResponse) {
+                myCart.fetchCart(function(cartResponse) {
                     
                     if (cartResponse != null) {
                         $scope.cart = cartResponse;
@@ -296,7 +296,7 @@ angular.module('trulo').controller('TruloController', [
             product.count = pdt.count;
             myCart.removeFromCart(product, function(res) {
                 console.log(res);
-                myCart.fetchCart(3, function(cartResponse) {
+                myCart.fetchCart(function(cartResponse) {
                     if (cartResponse != null) {
                         $scope.cart = cartResponse;
                         console.log("Cartresponse recvd");
@@ -315,7 +315,7 @@ angular.module('trulo').controller('TruloController', [
             product.count = pdt.count;
             
             myCart.removeProductDirectly(product, function(res) {
-                myCart.fetchCart(3, function(cartResponse) {
+                myCart.fetchCart(function(cartResponse) {
                     if (cartResponse != null) {
                         $scope.cart = cartResponse;
                         

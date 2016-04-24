@@ -3,67 +3,82 @@ var trulo = require('../models/trulo.server.model');
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'), _ = require('lodash');
+var mongoose = require('mongoose'),
+    _ = require('lodash');
 //var trulo = require('../../client/services/trulo.client.service.js');
 /**
- * Create a 
+ * Create a
  */
-exports.create = function (req, res) {
-};
+exports.create = function(req, res) {};
 /**
- * Show the current 
+ * Show the current
  */
-exports.read = function (req, res) {
-};
+exports.read = function(req, res) {};
 /**
- * Update a 
+ * Update a
  */
-exports.update = function (req, res) {
-};
+exports.update = function(req, res) {};
 /**
- * Delete an 
+ * Delete an
  */
-exports.delete = function (req, res) {
-};
+exports.delete = function(req, res) {};
 /**
- * List of 
+ * List of
  */
-exports.list = function (req, res) {
+exports.list = function(req, res) {};
+exports.addToCart = function(req, res) {
+
+    if (req.user != null) {
+        var pdtID = parseInt(req.body.pdtID);
+        var userID = parseInt(req.user._id);
+        var city = req.body.city;
+        //set session variable with city
+        //req.session.city = city;//somehwhat like this?
+        trulo.addToCart(userID, pdtID, city, function(str) {
+            res.send(str);
+        });
+    } else {
+        res.send('null');
+    }
 };
-exports.addToCart = function (req, res) {
-  var pdtID = parseInt(req.body.pdtID);
-  var userID = req.body.userID;
-  var city = req.body.city;
-  //set session variable with city
-  //req.session.city = city;//somehwhat like this?
-  trulo.addToCart(userID, pdtID, city, function (str) {
-    res.send(str);
-  });
+exports.removeFromCart = function(req, res) {
+    if (req.user != null) {
+        var pdtID = parseInt(req.body.pdtID);
+        var userID =parseInt(req.user._id);
+        var city = req.body.city;
+        trulo.removeFromCart(userID, pdtID, function(str) {
+            res.send(str);
+        });
+    } else {
+        res.send('null');
+    }
+
 };
-exports.removeFromCart = function (req, res) {
-  var pdtID = parseInt(req.body.pdtID);
-  var userID = req.body.userID;
-  var city = req.body.city;
-  trulo.removeFromCart(userID, pdtID, function (str) {
-    res.send(str);
-  });
-};
-exports.fetchCart = function (req, res) {
-  var userID = req.query.userID;
-  trulo.fetchCart(userID, function (cart) {
-      console.log("Sending res = "+cart);
-      if( cart == null)
-          res.send('null');
-      else
-          res.send(cart);
-  });
+exports.fetchCart = function(req, res) {
+    if (req.user != null) {
+        var userID = parseInt(req.user._id);
+        trulo.fetchCart(userID, function(cart) {
+            console.log("Sending res = " + cart);
+            if (cart == null)
+                res.send('null');
+            else
+                res.send(cart);
+        });
+    } else {
+        res.send('null');
+    }
 };
 
 exports.removeProductDirectly = function(req, res) {
-    var pdtID = parseInt(req.body.pdtID);
-    var userID = req.body.userID;
-    var city = req.body.city;
-    trulo.removeProductDirectly(userID, pdtID, function(str) {
-        res.send(str);
-    });
+    if (req.user != null) {
+        var pdtID = parseInt(req.body.pdtID);
+        var userID = parseInt(req.user._id);
+        var city = req.body.city;
+        trulo.removeProductDirectly(userID, pdtID, function(str) {
+            res.send(str);
+        });
+    }
+    else{
+        res.send('null');
+    }
 }

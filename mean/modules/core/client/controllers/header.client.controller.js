@@ -36,7 +36,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
                     //$scope.cartValue -= pdt.mrp;
                 };
                 this.fetchCart = function () {
-                    myCart.fetchCart(3, function (cart) {
+                    myCart.fetchCart(function (cart) {
                         console.log("Fetch Cart");
                         $scope.cartCount = 0;
                         $scope.cartValue = 0;
