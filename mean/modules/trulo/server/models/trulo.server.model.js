@@ -926,4 +926,92 @@ exports.decrementUserId = function(cb) {
             console.log(err);
         }
     });
-}
+};
+
+///////vendor function
+exports.addToInStock = function(vid,pid,city,cb){
+    var vendors=dbConn.collection("vendors");
+    var cities= dbConn.collection("cities");
+    var products = dbConn.collection("products");
+
+    var product={};
+    product.pid=pid;
+
+    cities.findOne({"city":city},function(err,res){
+        if(!err){
+            if(res!=null){
+                var city_id = res._id;
+                products.findOne({_id:pid,"price.mrp.city":city_id},{"price.mrp.$":1},function(err,res){
+                    if(!err){
+                        product.myPrice=res.price.mrp[0].mrp;
+                        vendors.update({_id:vid},{$push:{"products":product}},{upsert:true},function(err,res){
+                            if(!err){
+                                cb("Product Added to Vendor Collection");
+                            }
+                            else{
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+            }
+            else{
+                console.log('price from default');
+                products.findOne({_id:pid},function(err,res){
+                    if(!err){
+                        product.myPrice=res.price.default_mrp;
+                        vendors.update({_id:vid},{$push:{"products":product}},{upsert:true},function(err,res){
+                            if(!err){
+                                cb("Product Added to Vendor Collection");
+                            }
+                            else{
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+            }
+        }
+        else{
+            console.log(err);
+        }
+    });
+};
+
+exports.removeFromStock = function(vid,pid,cb){
+    var vendors= dbConn.collection("vendors");
+    vendors.findOne({_id:vid,"products.pid":pid},function(err,res){
+        if(!err){
+            if(res==null || res==undefined){
+                cb("The product is not in stock");
+                return;
+            }
+            else{
+                //find the index at which the product exist
+                var flag=false;
+                var count=res.products.length;
+                for(var i=0;i<count;i++){
+                    if(res.products[i].pid==pid){
+                        flag=true;
+                        break;
+                    }
+                }
+                if(flag){
+                    vendors.update({_id:vid},{$pull:{"products":{"pid":pid}}},function(err,res){
+                        if(!err){
+                            cb("Products Removed From cart");
+                            return;
+                        }
+                        else{
+                            console.log(err);
+                        }
+                    });
+                }
+            }
+        }
+        else{
+            console.log(err);
+        }
+    });
+
+};

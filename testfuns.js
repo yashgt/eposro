@@ -1,6 +1,6 @@
-var epdb=require('./epdb');
+var epdb=require('./mean/modules/trulo/server/models/trulo.server.model');
 setTimeout(function(){
-	epdb.addToCart(1,3,"goa",function(str){
-		console.log(str);
+	epdb.removeFromStock(7,1,function(res){
+		console.log(res);
 	});
 },3000);
