@@ -14,17 +14,24 @@
                         <div layout-margin flex="50">
                             <div class="input-group">
                                 <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="addProd(product);"><span class="glyphicon glyphicon-plus"></span></button>
+                                    <button class="btn btn-default" type="button" ng-click="addProd(product);">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
                                 </span>
-                                <button type="button" class="btn btn-primary" disabled style="width: 100%;">{{product.count}}
+                                <button type="button" class="btn btn-primary" disabled style="width: 100%;">            {{product.count}}
                                 </button>
                                 <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="subtractProd(product);"><span class="glyphicon glyphicon-minus"></span></button>
+                                    <button class="btn btn-default" type="button" ng-click="subtractProd(product);">
+                                        <span class="glyphicon glyphicon-minus">
+                                        </span>
+                                    </button>
                                 </span>
                             </div>
                         </div>
                         <div layout-margin flex="20">
-                            <button type="button" class=" btn btn-danger btn-circle" ng-click="removeProductDirectly(product);"><span class="glyphicon glyphicon-remove"></span></button>
+                            <button type="button" class=" btn btn-danger btn-circle" ng-click="removeProductDirectly(product);">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -45,7 +52,9 @@
                 <div layout="row">
                     <div flex="30">
                         <h1>₹ {{cart.estimated_cost}}</h1>
-                        <div class="btn btn-success" ng-click="placeOrder();" ng-disabled="Obutton">Place Order</div>
+                        <button class="btn btn-success" ng-disabled="emptyCart" data-toggle="modal" data-target="#order-details">
+                            Place Order
+                        </button>
                     </div>
                     <div flex="30"></div>
                     <div flex="40">
@@ -54,11 +63,45 @@
                         </md-checkbox>
                     </div>
                 </div>
-                
-                  <md-button ng-click="openToast()">
-                    Open a Toast!
-                  </md-button>
-                
+                <div class="modal fade" id="order-details" tabindex="-1" role="dialog" aria-labelledby="order-detailsLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="order-detailsLabel">Order</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="panel panel-default" >
+                                    <div class="panel-body" ng-repeat="product in cart.products">
+                                        {{product.name}}
+                                        <span class="badge">{{product.count}}</span>
+                                    </div>
+                                </div>
+                                <h2>₹ {{cart.estimated_cost}}</h2>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="placeOrder()" data-toggle="modal" data-target="#order-sent-message">
+                                    Confirm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="order-sent-message" tabindex="-1" role="dialog" aria-labelledby="order-sent-messageLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h2>Your order is successfully placed!</h2>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

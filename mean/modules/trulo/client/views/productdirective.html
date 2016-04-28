@@ -1,24 +1,24 @@
 <md-content class="md-padding product" layout="column" flex>
     <div class="thumbnail">
         <a ui-sref="products({_id: product._id})" class="thumbnail">
-            <img ng-src="img/{{product._id}}.jpg" alt="image caption" id="product-image">
+            <img ng-src="img/{{product._id}}.jpg" alt="image caption" err-src="img/default-placeholder.jpg"  id="product-image">
         </a>
         <div layout="column" layout-xs="row" class="caption" id="product-info">
             <div flex-xs="60">
                 <a ui-sref="products({_id: product._id})">
                     <h3 id="product-name">{{product.pname}}</h3>
                 </a>
-                <p id="price">₹{{product.mrp}}</p>
+                <p id="price">₹{{product.default_mrp}}</p>
             </div>
-            <div flex-xs="40" layout-xs="column" layout="row" layout-margin>
+            <div flex-xs="40" layout="row" layout-margin>
                 <div id="add-remove-buttons">
                     <button class="btn btn-default" ng-click="add()">+</button>
-                        {{ productCount }}
+                    {{ productCount }}
                     <button class="btn btn-default" ng-click="subtract()">-</button>
                 </div>
-                <div id="add-to-cart-button">
+                <!--<div id="add-to-cart-button">
                     <button class="btn btn-success" ng-click="addToCart()">Add</button>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

@@ -38,7 +38,8 @@ var validateLocalStrategyMobile = function (mobile) {
  * User Schema
  */
 var UserSchema = new Schema({
-  firstName: {
+  _id:Number
+  ,firstName: {
     type: String,
     trim: true,
     default: '',
@@ -69,7 +70,7 @@ var UserSchema = new Schema({
   },
   cstNumber:{
     type:String,
-    unique:'CST number Already Exists'
+    trim:true
   },
   password: {
     type: String,

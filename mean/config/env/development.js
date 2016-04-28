@@ -4,7 +4,7 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
   db: {
-    uri: 'mongodb://localhost:40000/eposrodb',
+    uri: 'mongodb://localhost:40000/eposro',
     options: {
       user: '',
       pass: ''

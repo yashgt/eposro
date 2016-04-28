@@ -3,49 +3,55 @@
 /**
  * Module dependencies.
  */
- var trulo = require('../models/trulo.server.model');
+var trulo = require('../models/trulo.server.model');
 var mongoose = require('mongoose'),
-  _ = require('lodash');
+    _ = require('lodash');
 
 /**
- * Create a 
+ * Create a
  */
-exports.create = function (req, res) {
+exports.create = function(req, res) {
 
 };
 
 /**
- * Show the current 
+ * Show the current
  */
-exports.read = function (req, res) {
+exports.read = function(req, res) {
 
 };
 
 /**
- * Update a 
+ * Update a
  */
-exports.update = function (req, res) {
+exports.update = function(req, res) {
 
 };
 
 /**
- * Delete an 
+ * Delete an
  */
-exports.delete = function (req, res) {
+exports.delete = function(req, res) {
 
 };
 
 /**
- * List of 
+ * List of
  */
-exports.list = function (req, res) {
+exports.list = function(req, res) {
 
 };
 
-exports.placeOrder = function(req,res){
-	var userID = req.body.userID;
-	console.log('Inside place order server controller' +userID);
-	trulo.checkOut(userID,function (str) {
-		 res.send(str);
-	})
+exports.placeOrder = function(req, res) {
+    if (req.user != null) {
+        var userID = parseInt(req.user._id);
+        console.log('Inside place order server controller' + userID);
+        trulo.checkOut(userID, function(str) {
+            res.send(str);
+        });
+    }
+    else{
+    	res.send('null');
+    }
+
 };

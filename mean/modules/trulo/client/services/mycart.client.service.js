@@ -12,23 +12,24 @@ angular.module('trulo').factory('Mycart', [
 
             value: 20
             , count: 0
-            , fetchCart: function (userId, cb) {
+            , fetchCart: function (cb) {
                 //console.log("In mycart service,Fetching cart");
-                trulo.fetchCart(userId, function (cartResponse) {
+                trulo.fetchCart(function (cartResponse) {
                     cart = cartResponse;
                    // console.log(cart);
                     cb(cart);
                 });
             }
-            , addToCart: function (pdt) {
-                //console.log("Add:In mycart service received id=" + pdt._id);
-                trulo.addToCart(pdt._id);
+            , addToCart: function (pdt,cb) {
+                console.log("Add:In mycart service received id=" + pdt.id);
+                trulo.addToCart(pdt._id,cb);
                 if (this.addToCartCB)
                     this.addToCartCB(pdt);
+                
             }
-            , removeFromCart: function (pdt) {
+            , removeFromCart: function (pdt,cb) {
                 //console.log("Remove:In mycart service received id=" + pdt._id);
-                trulo.removeFromCart(pdt._id);
+                trulo.removeFromCart(pdt._id,cb);
                 if (this.removeFromCartCB)
                     this.removeFromCartCB(pdt);
             }
@@ -61,6 +62,19 @@ angular.module('trulo').factory('Mycart', [
             , onSubtractFromCart: function (cb) {
                 this.removeFromCartCB = cb;
             }
+            ,removeProductDirectly:function(pdt,cb){
+                console.log("Remove Product:In mycart service received id=" + pdt._id);
+                var order = this;
+                trulo.removeProductDirectly(pdt._id,function(res){
+                    if(order.removeDirectlyCB)
+                        order.removeDirectlyCB();
+                    cb(res);
+                });
+            }
+            ,onRemoveDirectly: function(cb){
+                this.removeDirectlyCB = cb;
+            }
+
         };
   }
 ]);
