@@ -1,6 +1,6 @@
-<div flex="60" layout="row" ng-controller="HeaderController">
-    <a href="#" class="navbar-brand" flex-xs="30"><strong>ePosro</strong></a>
-    <ul class="nav navbar-nav navbar-right">
+<div layout="row" ng-controller="HeaderController">
+    <a href="#" class="navbar-brand" flex="10" flex-xs="20"><strong>ePosro</strong></a>
+    <ul class="nav navbar-nav navbar-left" flex="50" flex-xs="60">
         <li class="navbar-icons" ui-sref-active="active" ng-hide="authentication.user" style="float:left">
             <a ui-sref="authentication.signin"><span class="glyphicon glyphicon-log-in"></span></a>
         </li>
@@ -23,17 +23,25 @@
                 </md-menu-content>
             </md-menu>
         </li>
-        <li class="navbar-icons" style="float:left"> <a ui-sref="cart"><span class="glyphicon glyphicon-shopping-cart">{{cartCount}}  <!--₹{{cartValue}}--></span></a></li>
-        <li class="navbar-icons" style="float:left"><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+        <li class="navbar-icons" style="float:left"> <a ui-sref="cart">
+            <span class="glyphicon glyphicon-shopping-cart">{{cartCount}}  <!--₹{{cartValue}}--></span></a>
+        </li>
+        <li class="navbar-icons" style="float:left">
+            <a href="#">
+                <span class="glyphicon glyphicon-bell"></span>
+            </a>
+        </li>
     </ul>
+    <div class="input-group search-bar" flex="40" flex-xs="20">
+        <input type="text" ng-model="searchQuery" class="form-control" placeholder="Search for Product..." />
+
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="searchProduct(searchQuery)">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </span>
+    </div>
 </div>
     <!--<input type="search" class="form-control" flex="40" style="margin-top:8px" placeholder="search for products" results>-->
-<div class="input-group" flex="40" style="margin-top:8px">
-    <input type="text" ng-model="searchQuery" class="form-control" placeholder="Search for Product..." />
-    <span class="input-group-btn">
-        <button ui-sref="search" class="btn btn-default" type="button" ng-click="searchProduct(searchQuery)">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        </button>
-    </span>
-</div>  
+  
 

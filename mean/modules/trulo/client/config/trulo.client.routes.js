@@ -14,8 +14,18 @@ angular.module('trulo')
                 })
            
             .state('search', {
-                url: '/search'
+                url: '/search?query'
                 , templateUrl: 'modules/trulo/client/views/search.client.view.html'
+                , controller: 'SearchController'
+                , resolve: {
+                    products : function($stateParams,Trulo){
+                        //console.log("In resolve query:"+$stateParams.query);
+                        var pro = Trulo.searchProduct($stateParams.query,0); 
+                        //console.log("pro = ");
+                        //console.log(pro);
+                        return pro;
+                    }
+                }
             })
 
             .state('merchant', {

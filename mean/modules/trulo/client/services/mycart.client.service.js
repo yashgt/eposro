@@ -21,7 +21,7 @@ angular.module('trulo').factory('Mycart', [
                 });
             }
             , addToCart: function (pdt,cb) {
-                console.log("Add:In mycart service received id=" + pdt.id);
+                console.log("Add:In mycart service received id=" + pdt._id);
                 trulo.addToCart(pdt._id,cb);
                 if (this.addToCartCB)
                     this.addToCartCB(pdt);

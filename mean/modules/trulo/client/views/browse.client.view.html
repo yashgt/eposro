@@ -8,7 +8,7 @@
                 </md-tab-body>
             </md-tab>-->
             <md-tab ng-repeat="cat in categories" ng-init="map[''+cat.catID] = $index" md-active="map[''+catParameter] == $index"
-            md-on-select="fetchNextPage(cat.catID,0);scrollTop();getSubCat(cat.catID);showProducts(cat.catID);"
+            md-on-select="fetchNextPage(cat.catID);scrollTop();getSubCat(cat.catID);showProducts(cat.catID);"
                     ng-click="showProducts(cat.catID)">
                 <md-tab-label>
                     {{cat.title}}
@@ -41,7 +41,7 @@
                         </ol>
                     </div>
                     
-                    <div id="products-row" infinite-scroll="fetchNextPage(nextCategory,1)" infinite-scroll-disabled="noMoreData">
+                    <div id="products-row" infinite-scroll="fetchNextPage(nextCategory)" infinite-scroll-disabled="noMoreData">
                         <!--<div ng-repeat="p in productsOfCurrentCat">
                             <center><h3 style="padding-bottom:100px">{{p.pname}}</h3></center>
                         </div>-->

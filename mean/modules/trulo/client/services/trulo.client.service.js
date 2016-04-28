@@ -1,15 +1,22 @@
 'use strict';
 angular.module('trulo').factory('Trulo', [
-  '$http'
-  , function ($http) {
+  '$http','Search'
+  , function ($http,search) {
         return {
             
-            searchProduct : function(pname, cb){
-                $http.get('/api/search?name='+pname).success(function(response){
-                    console.log("Received response for search");
+            searchProduct : function(pname, lastPage,cb){
+                console.log("In service searching for "+pname);
+                var promise = $http.get('/api/search?name='+pname+"&page="+lastPage).success(function(response){
+                    //console.log("Received response for search");
+                    //search.setSearchResult(response);
+                    console.log("In promise..");
                     console.log(response);
-                    cb(response);
+                    if( lastPage != 0)
+                        cb(response);
+                    else
+                        return response;
                 });
+                return promise;
             }
         
             ,getCategories: function (parent,cb) {
@@ -19,10 +26,12 @@ angular.module('trulo').factory('Trulo', [
                     cb(categories);
                 });
             }
-            , getProductsByCat: function (catID, lastPage, products, cb) {
+            , getProductsByCat: function (catID, lastPage, level, products, cb) {
                 //console.log("Fetching prod for catID=" + catID + ", page = "+lastPage);
                 //var productsOfCurrentCat = [];
-                $http.get('/api/products?catID=' + catID + '&lastPage=' + lastPage).success(function (response) {
+                //console.log("In service level = "+level);
+                $http.get('/api/products?catID=' + catID + '&lastPage=' + lastPage +'&level=' + level)
+                    .success(function (response) {
                     lastPage++;
                     //var productsOfCurrentCat = [];
                     if( response.length == 0){

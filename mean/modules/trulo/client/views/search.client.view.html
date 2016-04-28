@@ -1,1 +1,10 @@
-<p>Single tab with search results shown using ng-repeat and infinitescroll</p>
+<div infinite-scroll="searchProduct()" infinite-scroll-disabled="noMoreData">
+    <h1 ng-show="noResult">No search results found!</h1>
+    <md-grid-list md-cols-lg="4" md-cols-xs="1" md-cols-gt="4" md-cols-md="3" md-cols-sm="2" md-gutter="5px" md-row-height="400px" ng-show="!noResult">
+        <md-grid-tile ng-repeat="p in products">
+            <product data="p" layout-fill></product>
+        </md-grid-tile> 
+    </md-grid-list>
+    <!--<div ng-show="busy"><center>Loading more products....</center></div>-->
+    <div ng-show="noMoreData"><center>No more products folks!!</center></div>
+</div>
