@@ -2,15 +2,12 @@
 
 angular.module('trulo').factory('Order', ['Trulo',
   function (trulo) {
-    // Order service logic
-    // ...
-
-    // Public API
+   
     return {
-      placeOrder: function (uid,cb) {
-        console.log("Inside Order service"+uid);
+      placeOrder: function (cb) {
+        console.log("Inside Order service");
         var order = this;
-        trulo.placeOrder(uid,function(res){
+        trulo.placeOrder(function(res){
             if (order.placeOrderCB)
                 order.placeOrderCB();    
         });

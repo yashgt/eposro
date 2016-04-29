@@ -77,6 +77,12 @@ input[type=number]::-webkit-outer-spin-button {
 #price{
 	text-align: center;
 }
+#user-icon{
+	color:green;
+}
+.header-icon{
+	float:left;
+}
 
 /*#add-remove-buttons{
 	width: 50%;

@@ -8,7 +8,7 @@
                 </md-tab-body>
             </md-tab>-->
             <md-tab ng-repeat="cat in categories" ng-init="map[''+cat.catID] = $index" md-active="map[''+catParameter] == $index"
-            md-on-select="fetchNextPage(cat.catID,0);scrollTop();getSubCat(cat.catID);showProducts(cat.catID);"
+            md-on-select="scrollTop();getSubCat(cat.catID);showProducts(cat.catID);"
                     ng-click="showProducts(cat.catID)">
                 <md-tab-label>
                     {{cat.title}}
@@ -16,11 +16,11 @@
                 <md-tab-body>
                     
                     <div layout="row">
-                        <md-menu id="sub-cat-button" ng-hide="hideMe">
-                            <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+                        <md-menu ng-hide="hideMe">
+                            <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open subcategories menu">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </md-button>
-                            <md-menu-content width=6>
+                            <md-menu-content width=4>
                                 <md-menu-item ng-repeat="subCat in childCategories">
                                     <md-button ng-click="getSubCat(subCat.catID);showProducts(subCat.catID)">
                                         {{subCat.title}}
@@ -41,7 +41,7 @@
                         </ol>
                     </div>
                     
-                    <div id="products-row" infinite-scroll="fetchNextPage(nextCategory,1)" infinite-scroll-disabled="noMoreData">
+                    <div id="products-row" infinite-scroll="fetchNextPage(nextCategory)" infinite-scroll-disabled="noMoreData">
                         <!--<div ng-repeat="p in productsOfCurrentCat">
                             <center><h3 style="padding-bottom:100px">{{p.pname}}</h3></center>
                         </div>-->

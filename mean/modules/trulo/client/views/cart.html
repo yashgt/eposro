@@ -1,4 +1,5 @@
 <section class="row" ng-controller="TruloController">
+    <div ncy-breadcrumb></div>
     <div class="panel panel-default" style="width:95%;margin: auto;margin-top: 2%">
         <div class="panel-heading">
             <h2 class="panel-title text-center">CheckOut <span class="glyphicon glyphicon-shopping-cart"></span></h2>
@@ -52,9 +53,12 @@
                 <div layout="row">
                     <div flex="30">
                         <h1>₹ {{cart.estimated_cost}}</h1>
-                        <button class="btn btn-success" ng-disabled="emptyCart" data-toggle="modal" data-target="#order-details">
+                        <button type="button" class="btn btn-success" ng-click="open()" ng-disabled="emptyCart">
                             Place Order
                         </button>
+                        <!--<button class="btn btn-success" ng-disabled="emptyCart" data-toggle="modal" data-target="#order-details">
+                            Place Order
+                        </button>-->
                     </div>
                     <div flex="30"></div>
                     <div flex="40">
@@ -63,46 +67,26 @@
                         </md-checkbox>
                     </div>
                 </div>
-                <div class="modal fade" id="order-details" tabindex="-1" role="dialog" aria-labelledby="order-detailsLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="order-detailsLabel">Order</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="panel panel-default" >
-                                    <div class="panel-body" ng-repeat="product in cart.products">
-                                        {{product.name}}
-                                        <span class="badge">{{product.count}}</span>
-                                    </div>
-                                </div>
-                                <h2>₹ {{cart.estimated_cost}}</h2>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="placeOrder()" data-toggle="modal" data-target="#order-sent-message">
-                                    Confirm
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" id="order-sent-message" tabindex="-1" role="dialog" aria-labelledby="order-sent-messageLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <h2>Your order is successfully placed!</h2>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+    
+
+<script type="text/ng-template" id="order-confirm.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Order Summary</h3>
+    </div>
+    <div class="modal-body">
+        <div class="panel panel-default" >
+            <div class="panel-body" ng-repeat="product in cart.products">
+                {{product.name}}
+                <span class="badge">{{product.count}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button ui-sref="browse" class="btn btn-primary" type="button" ng-click="placeOrder();ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Back</button>
+    </div>
+</script>
 </section>

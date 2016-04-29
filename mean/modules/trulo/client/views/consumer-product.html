@@ -1,3 +1,4 @@
+<div ncy-breadcrumb></div>
 <div class="container product-detail">
     <div layout="column">
         <md-card layout="row">
@@ -9,8 +10,8 @@
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline">{{product.pname}}</span>
-                        <span class="md-subhead">Brand</span>
-                        <span class="md-subhead">₹ {{product.mrp}}</span><!--display price according to the city-->
+                        <span class="md-subhead">{{product.brand}}</span>
+                        <span class="md-subhead">₹ {{product.price.default_mrp}}</span>
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-content>
@@ -23,11 +24,7 @@
                         <button flex-xs="20" class="btn btn-default" ng-click="add()">+</button>
                         <input flex-xs="40" class="form-control" ng-model="productCount" style="width:60px"/>
                         <button flex-xs="20" class="btn btn-default" ng-click="subtract()">-</button>
-                    </div>
-                    <div layout-margin>
-                        <button class="btn btn-success" ng-click="addToCart()">Add</button>
-                    </div>
-                    
+                    </div>            
                 </md-card-actions>
 
             </div>

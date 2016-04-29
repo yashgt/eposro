@@ -34,17 +34,23 @@ exports.list = function (req, res) {
 exports.search = function (req, res) {
 };
 exports.getProducts = function (req, res) {
-    console.log("Inside products.server.controller to fetch products of catID="+req.query.catID);
     var catID = req.query.catID;
     var lastPage = req.query.lastPage;
-    solr.getProductsByCategory(catID, lastPage, function(productsResponse){
+    var level = req.query.level;
+    console.log(req.query);
+    console.log("Inside products.server.controller to fetch products of catID="+req.query.catID+" level = "+level);
+    
+    solr.getProductsByCategory(catID, lastPage, level, function(productsResponse){
         res.send(productsResponse);
     });
 };
 exports.searchProduct = function(req, res){
     var pname = req.query.name;
-    solr.getProductsBySearchString(pname, function(response){
-        
+    var lastPage = req.query.page;
+    console.log("On server searching for "+pname);
+    solr.getProductsBySearchString(pname, lastPage, function(response){
+        console.log("Received response in product.server.controller");
+        res.send(response);
     });
 }
 exports.getProductDetails = function(req,res){

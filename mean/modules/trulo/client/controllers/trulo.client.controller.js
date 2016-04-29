@@ -1,8 +1,8 @@
 'use strict';
 angular.module('trulo').controller('TruloController', [
-  '$scope', 'Trulo', 'Mycart','Order','$mdToast'
+  '$scope', 'Trulo', 'Mycart','Order', '$uibModal'
     
-    , function ($scope, trulo, myCart, order,$mdToast) {
+    , function ($scope, trulo, myCart, order, $uibModal) {
         /*
             $scope.categories : All the top level categories
             $scope.subCategories : All the subCategories of current tab
@@ -10,15 +10,15 @@ angular.module('trulo').controller('TruloController', [
         */
 
         $scope.map = {};
-        $scope.noMoreData = 0;
+        //$scope.noMoreData = 0;
         var products = {};
         var lastPageLoaded = {};
         $scope.busy = false;
-        $scope.nextCategory = 1; //category id of dairy tab
+        $scope.nextCategory = 1;
         $scope.cartCount = 0;
         $scope.delivery = 0;
         $scope.quantity = 0;
-        $scope.count = $scope.quantity;
+        $scope.count =  $scope.quantity;
         $scope.isCollapsed = false;
         $scope.order_mode = 1;
         var products = [];
@@ -79,13 +79,16 @@ angular.module('trulo').controller('TruloController', [
             console.log("Show products of " + catID);
 
             $scope.activateHomeTab = 0;
+            lastPageLoaded[catID] = 0;
+            products[catID] = [];
+            $scope.noMoreData = false;
             
             if (($scope.breadCrumbs != undefined) && breadExists(catID)) {
                 popBread(catID);
                 $scope.hideMe = 0;
                 $scope.getSubCat(catID);
             }
-            $scope.fetchNextPage(catID, 0);
+            $scope.fetchNextPage(catID);
             setBreadArray(catID,0);
         }
 
@@ -104,8 +107,20 @@ angular.module('trulo').controller('TruloController', [
         if ($scope.categories == undefined) {
             getCategories();
         }
+        
+        var findCategoryLevel = function(catID,level=-1){
+            //console.log("Finding level of catID = "+catID);
+            if( catID == 0){
+                //console.log("Returning level = "+level);
+                return level;
+            }
+            
+            var parentCatID = getParent(catID);
+            level = findCategoryLevel(parentCatID,++level);
+            return level;
+        }
 
-        $scope.fetchNextPage = function (catID, flag) {
+        $scope.fetchNextPage = function (catID) {
             $scope.nextCategory = catID;
             //console.log("Inside fetchNextPage");
             /*
@@ -135,14 +150,15 @@ angular.module('trulo').controller('TruloController', [
             if ($scope.busy) return;
             $scope.busy = true;
             //if (products == undefined || products['catID'])
-            trulo.getProductsByCat(catID, lastPageLoaded[catID], products
+           var catlevel = findCategoryLevel(catID);
+            trulo.getProductsByCat(catID, lastPageLoaded[catID], catlevel, products
                 , function (productsResponse, lastPageResponse, busyResponse) {
                     if( productsResponse == null){
                         console.log("No more data folks in controller");
                         $scope.noMoreData = true;
                         return;
                     }
-                    console.log("Received resp of length "+productsResponse.length);
+                    //console.log("Received resp of length "+productsResponse.length);
                     $scope.products = productsResponse;
                     lastPageLoaded[catID] = lastPageResponse;
                     $scope.productsOfCurrentCat = $scope.products[catID];
@@ -230,10 +246,7 @@ angular.module('trulo').controller('TruloController', [
         }
 
         //cart related functions
-        var openToast = function($event) {
-            $mdToast.show($mdToast.simple().textContent('Your order has been successfully placed'));
-                // Could also do $mdToast.showSimple('Hello');
-        };
+        
         $scope.placeOrder = function() {
             
             console.log($scope.cart);
@@ -259,9 +272,7 @@ angular.module('trulo').controller('TruloController', [
                     return;
                 });
             }
-            //openToast();
             
-            //order.placeOrder(3,$scope.cart,function(orderResponse){});
         }
         
         $scope.addProd = function(pdt) {
@@ -327,6 +338,24 @@ angular.module('trulo').controller('TruloController', [
             });
         }
 
+        $scope.animationsEnabled = true;
+
+        $scope.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'order-confirm.html',
+                size: size,
+                controller:'ConfirmOrderController',
+                scope: $scope
+            });
+
+
+        };
+
+        $scope.toggleAnimation = function () {
+            $scope.animationsEnabled = !$scope.animationsEnabled;
+        };
 
     }
 ]);

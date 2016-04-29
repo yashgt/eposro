@@ -423,7 +423,7 @@ module.exports = {
 var defaultEnvConfig = require('./default');
 module.exports = {
   db: {
-    uri: 'mongodb://localhost:40000/eposrodb',
+    uri: 'mongodb://localhost:40000/eposro',
     options: {
       user: '',
       pass: ''
@@ -1485,65 +1485,81 @@ var trulo = require('../models/trulo.server.model');
 var mongoose = require('mongoose'), _ = require('lodash');
 //var trulo = require('../../client/services/trulo.client.service.js');
 /**
- * Create a 
+ * Create a
  */
 exports.create = function (req, res) {
 };
 /**
- * Show the current 
+ * Show the current
  */
 exports.read = function (req, res) {
 };
 /**
- * Update a 
+ * Update a
  */
 exports.update = function (req, res) {
 };
 /**
- * Delete an 
+ * Delete an
  */
 exports.delete = function (req, res) {
 };
 /**
- * List of 
+ * List of
  */
 exports.list = function (req, res) {
 };
 exports.addToCart = function (req, res) {
-  var pdtID = parseInt(req.body.pdtID);
-  var userID = req.body.userID;
-  var city = req.body.city;
-  //set session variable with city
-  //req.session.city = city;//somehwhat like this?
-  trulo.addToCart(userID, pdtID, city, function (str) {
-    res.send(str);
-  });
+  if (req.user !== null) {
+    var pdtID = parseInt(req.body.pdtID);
+    var userID = parseInt(req.user._id);
+    var city = req.body.city;
+    //set session variable with city
+    //req.session.city = city;//somehwhat like this?
+    trulo.addToCart(userID, pdtID, city, function (str) {
+      res.send(str);
+    });
+  } else {
+    res.send('null');
+  }
 };
 exports.removeFromCart = function (req, res) {
-  var pdtID = parseInt(req.body.pdtID);
-  var userID = req.body.userID;
-  var city = req.body.city;
-  trulo.removeFromCart(userID, pdtID, function (str) {
-    res.send(str);
-  });
+  if (req.user !== null) {
+    var pdtID = parseInt(req.body.pdtID);
+    var userID = parseInt(req.user._id);
+    var city = req.body.city;
+    trulo.removeFromCart(userID, pdtID, function (str) {
+      res.send(str);
+    });
+  } else {
+    res.send('null');
+  }
 };
 exports.fetchCart = function (req, res) {
-  var userID = req.query.userID;
-  trulo.fetchCart(userID, function (cart) {
-    console.log('Sending res = ' + cart);
-    if (cart === null)
-      res.send('null');
-    else
-      res.send(cart);
-  });
+  if (req.user !== null) {
+    var userID = parseInt(req.user._id);
+    trulo.fetchCart(userID, function (cart) {
+      console.log('Sending res = ' + cart);
+      if (cart === null)
+        res.send('null');
+      else
+        res.send(cart);
+    });
+  } else {
+    res.send('null');
+  }
 };
 exports.removeProductDirectly = function (req, res) {
-  var pdtID = parseInt(req.body.pdtID);
-  var userID = req.body.userID;
-  var city = req.body.city;
-  trulo.removeProductDirectly(userID, pdtID, function (str) {
-    res.send(str);
-  });
+  if (req.user !== null) {
+    var pdtID = parseInt(req.body.pdtID);
+    var userID = parseInt(req.user._id);
+    var city = req.body.city;
+    trulo.removeProductDirectly(userID, pdtID, function (str) {
+      res.send(str);
+    });
+  } else {
+    res.send('null');
+  }
 };
 'use strict';
 /**
@@ -1588,36 +1604,40 @@ exports.list = function (req, res) {
 var trulo = require('../models/trulo.server.model');
 var mongoose = require('mongoose'), _ = require('lodash');
 /**
- * Create a 
+ * Create a
  */
 exports.create = function (req, res) {
 };
 /**
- * Show the current 
+ * Show the current
  */
 exports.read = function (req, res) {
 };
 /**
- * Update a 
+ * Update a
  */
 exports.update = function (req, res) {
 };
 /**
- * Delete an 
+ * Delete an
  */
 exports.delete = function (req, res) {
 };
 /**
- * List of 
+ * List of
  */
 exports.list = function (req, res) {
 };
 exports.placeOrder = function (req, res) {
-  var userID = req.body.userID;
-  console.log('Inside place order server controller' + userID);
-  trulo.checkOut(userID, function (str) {
-    res.send(str);
-  });
+  if (req.user !== null) {
+    var userID = parseInt(req.user._id);
+    console.log('Inside place order server controller' + userID);
+    trulo.checkOut(userID, function (str) {
+      res.send(str);
+    });
+  } else {
+    res.send('null');
+  }
 };
 'use strict';
 /**
@@ -2110,6 +2130,9 @@ exports.checkOut = function (userId, cb) {
           if (!err) {
             callback(null, last_order_id, res);
             return;
+          } else {
+            console.log(err);
+            return;
           }
         });
       }
@@ -2138,6 +2161,9 @@ exports.checkOut = function (userId, cb) {
               if (!err) {
                 //update the user collection to contain that order id
                 callback(null, order._id);
+                return;
+              } else {
+                console.log(err);
                 return;
               }
             });
@@ -2406,6 +2432,125 @@ exports.computeRFM = function (current_date, compare_date, cb) {
             console.log('RFM for user computed ');
           }
         });
+      }
+    } else {
+      console.log(err);
+    }
+  });
+};
+////user related function
+exports.getUniqueUserId = function (cb) {
+  var IDs = dbConn.collection('IDs');
+  var query = {}, sort = [];
+  var options = {
+    new: true,
+    upsert: true
+  };
+  var update = { $inc: { last_user_id: 1 } };
+  IDs.findAndModify(query, sort, update, options, function (err, doc) {
+    if (!err) {
+      //console.log(doc.value.last_user_id);
+      cb(doc.value.last_user_id);
+      return;
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.decrementUserId = function (cb) {
+  var IDs = dbConn.collection('IDs');
+  var query = {}, sort = [];
+  var options = {
+    new: true,
+    upsert: true
+  };
+  var update = { $inc: { last_user_id: -1 } };
+  IDs.findAndModify(query, sort, update, options, function (err, doc) {
+    if (!err) {
+      //console.log(doc.value.last_user_id +" Hello Nihal");
+      cb();
+      return;
+    } else {
+      console.log(err);
+    }
+  });
+};
+///////vendor function
+exports.addToInStock = function (vid, pid, city, cb) {
+  var vendors = dbConn.collection('vendors');
+  var cities = dbConn.collection('cities');
+  var products = dbConn.collection('products');
+  var product = {};
+  product.pid = pid;
+  cities.findOne({ 'city': city }, function (err, res) {
+    if (!err) {
+      if (res !== null) {
+        var city_id = res._id;
+        products.findOne({
+          _id: pid,
+          'price.mrp.city': city_id
+        }, { 'price.mrp.$': 1 }, function (err, res) {
+          if (!err) {
+            product.myPrice = res.price.mrp[0].mrp;
+            vendors.update({ _id: vid }, { $push: { 'products': product } }, { upsert: true }, function (err, res) {
+              if (!err) {
+                cb('Product Added to Vendor Collection');
+              } else {
+                console.log(err);
+              }
+            });
+          }
+        });
+      } else {
+        console.log('price from default');
+        products.findOne({ _id: pid }, function (err, res) {
+          if (!err) {
+            product.myPrice = res.price.default_mrp;
+            vendors.update({ _id: vid }, { $push: { 'products': product } }, { upsert: true }, function (err, res) {
+              if (!err) {
+                cb('Product Added to Vendor Collection');
+              } else {
+                console.log(err);
+              }
+            });
+          }
+        });
+      }
+    } else {
+      console.log(err);
+    }
+  });
+};
+exports.removeFromStock = function (vid, pid, cb) {
+  var vendors = dbConn.collection('vendors');
+  vendors.findOne({
+    _id: vid,
+    'products.pid': pid
+  }, function (err, res) {
+    if (!err) {
+      if (res === null || res === undefined) {
+        cb('The product is not in stock');
+        return;
+      } else {
+        //find the index at which the product exist
+        var flag = false;
+        var count = res.products.length;
+        for (var i = 0; i < count; i++) {
+          if (res.products[i].pid === pid) {
+            flag = true;
+            break;
+          }
+        }
+        if (flag) {
+          vendors.update({ _id: vid }, { $pull: { 'products': { 'pid': pid } } }, function (err, res) {
+            if (!err) {
+              cb('Products Removed From cart');
+              return;
+            } else {
+              console.log(err);
+            }
+          });
+        }
       }
     } else {
       console.log(err);
@@ -2794,6 +2939,7 @@ module.exports = _.extend(require('./users/users.authentication.server.controlle
  * Module dependencies.
  */
 var path = require('path'), errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')), mongoose = require('mongoose'), passport = require('passport'), User = mongoose.model('User');
+var trulo = require(path.resolve('./modules/trulo/server/models/trulo.server.model.js'));
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
   '/authentication/signin',
@@ -2810,24 +2956,28 @@ exports.signupuser = function (req, res) {
   var user = new User(req.body);
   var message = null;
   // Add missing user fields
-  user.provider = 'local';
-  user.displayName = user.firstName + ' ' + user.lastName;
-  // Then save the user
-  user.save(function (err) {
-    if (err) {
-      return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
-    } else {
-      // Remove sensitive data before login
-      user.password = undefined;
-      user.salt = undefined;
-      req.login(user, function (err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.json(user);
-        }
-      });
-    }
+  trulo.getUniqueUserId(function (id) {
+    user._id = parseInt(id);
+    user.provider = 'local';
+    user.displayName = user.firstName + ' ' + user.lastName;
+    user.save(function (err) {
+      if (err) {
+        trulo.decrementUserId(function () {
+          return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+        });
+      } else {
+        // Remove sensitive data before login
+        user.password = undefined;
+        user.salt = undefined;
+        req.login(user, function (err) {
+          if (err) {
+            res.status(400).send(err);
+          } else {
+            res.json(user);
+          }
+        });
+      }
+    });
   });
 };
 exports.signupvendor = function (req, res) {
@@ -2837,24 +2987,28 @@ exports.signupvendor = function (req, res) {
   var user = new User(req.body);
   var message = null;
   // Add missing user fields
-  user.provider = 'local';
-  user.displayName = user.firstName + ' ' + user.lastName;
-  // Then save the user
-  user.save(function (err) {
-    if (err) {
-      return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
-    } else {
-      // Remove sensitive data before login
-      user.password = undefined;
-      user.salt = undefined;
-      req.login(user, function (err) {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.json(user);
-        }
-      });
-    }
+  trulo.getUniqueUserId(function (id) {
+    user._id = parseInt(id);
+    user.provider = 'local';
+    user.displayName = user.firstName + ' ' + user.lastName;
+    user.save(function (err) {
+      if (err) {
+        trulo.decrementUserId(function () {
+          return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+        });
+      } else {
+        // Remove sensitive data before login
+        user.password = undefined;
+        user.salt = undefined;
+        req.login(user, function (err) {
+          if (err) {
+            res.status(400).send(err);
+          } else {
+            res.json(user);
+          }
+        });
+      }
+    });
   });
 };
 /**
@@ -2862,6 +3016,7 @@ exports.signupvendor = function (req, res) {
  */
 exports.signin = function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
+    console.log(info);
     if (err || !user) {
       res.status(400).send(info);
     } else {
@@ -3354,6 +3509,7 @@ var validateLocalStrategyMobile = function (mobile) {
  * User Schema
  */
 var UserSchema = new Schema({
+  _id: Number,
   firstName: {
     type: String,
     trim: true,
@@ -3397,7 +3553,7 @@ var UserSchema = new Schema({
   },
   cstNumber: {
     type: String,
-    unique: 'CST number Already Exists'
+    trim: true
   },
   password: {
     type: String,
@@ -3859,7 +4015,7 @@ angular.module('core').controller('HeaderController', [
       $scope.cartCount--;  //$scope.cartValue -= pdt.mrp;
     };
     this.fetchCart = function () {
-      myCart.fetchCart(3, function (cart) {
+      myCart.fetchCart(function (cart) {
         console.log('Fetch Cart');
         $scope.cartCount = 0;
         $scope.cartValue = 0;
@@ -4455,12 +4611,13 @@ angular.module('trulo').controller('TruloController', [
       $scope.activateHomeTab = 1;
     };
     $scope.fetchCart = function () {
-      myCart.fetchCart(3, function (cartResponse) {
+      myCart.fetchCart(function (cartResponse) {
         if (cartResponse !== null) {
           $scope.cart = cartResponse;
           $scope.emptyCart = 0;
         } else {
           $scope.emptyCart = 1;
+          console.log('Cartresponse recvd');
           $scope.cart = [];
         }  //console.log($scope.cart.products);
       });
@@ -4488,14 +4645,14 @@ angular.module('trulo').controller('TruloController', [
         return;
       } else {
         $scope.cart.order_mode = $scope.order_mode;
-        order.placeOrder(3, function (orderResponse) {
-          myCart.fetchCart(3, function (cartResponse) {
+        order.placeOrder(function (orderResponse) {
+          myCart.fetchCart(function (cartResponse) {
             if (cartResponse !== null) {
               console.log('Not Null response');
               $scope.cart = cartResponse;
               $scope.emptyCart = 0;
             } else {
-              console.log('Null response');
+              console.log('Cartresponse recvd');
               $scope.cart = [];
               $scope.emptyCart = 1;
             }
@@ -4516,11 +4673,12 @@ angular.module('trulo').controller('TruloController', [
       //console.log(product);
       myCart.addToCart(product, function (res) {
         console.log(res);
-        myCart.fetchCart(3, function (cartResponse) {
+        myCart.fetchCart(function (cartResponse) {
           if (cartResponse !== null) {
             $scope.cart = cartResponse;
             $scope.emptyCart = 0;
           } else {
+            console.log('Cartresponse recvd');
             $scope.cart = [];
             $scope.emptyCart = 1;
           }
@@ -4535,11 +4693,13 @@ angular.module('trulo').controller('TruloController', [
       product.count = pdt.count;
       myCart.removeFromCart(product, function (res) {
         console.log(res);
-        myCart.fetchCart(3, function (cartResponse) {
+        myCart.fetchCart(function (cartResponse) {
           if (cartResponse !== null) {
             $scope.cart = cartResponse;
+            console.log('Cartresponse recvd');
           } else {
             $scope.cart = [];
+            console.log('Cartresponse recvd');
           }
         });
       });
@@ -4551,10 +4711,11 @@ angular.module('trulo').controller('TruloController', [
       product.price = pdt.price;
       product.count = pdt.count;
       myCart.removeProductDirectly(product, function (res) {
-        myCart.fetchCart(3, function (cartResponse) {
+        myCart.fetchCart(function (cartResponse) {
           if (cartResponse !== null) {
             $scope.cart = cartResponse;
           } else {
+            console.log('Cartresponse recvd');
             $scope.cart = [];
           }
         });
@@ -4631,9 +4792,9 @@ angular.module('trulo').factory('Mycart', [
     return {
       value: 20,
       count: 0,
-      fetchCart: function (userId, cb) {
+      fetchCart: function (cb) {
         //console.log("In mycart service,Fetching cart");
-        trulo.fetchCart(userId, function (cartResponse) {
+        trulo.fetchCart(function (cartResponse) {
           cart = cartResponse;
           // console.log(cart);
           cb(cart);
@@ -4769,7 +4930,6 @@ angular.module('trulo').factory('Trulo', [
       addToCart: function (pdtID, cb) {
         var data = {
           'pdtID': pdtID,
-          'userID': 3,
           'city': 'goa'
         };
         console.log('add:Sending data with id=' + data.pdtID);
@@ -4782,7 +4942,6 @@ angular.module('trulo').factory('Trulo', [
       removeFromCart: function (pdtID, cb) {
         var data = {
           'pdtID': pdtID,
-          'userID': 3,
           'city': 'goa'
         };
         //console.log("Remove:Sending data with id="+data['pdtID']);
@@ -4792,9 +4951,8 @@ angular.module('trulo').factory('Trulo', [
           }
         });
       },
-      fetchCart: function (userID, cb) {
-        var data = { 'userID': userID };
-        $http.get('/api/cart?userID=3').success(function (res) {
+      fetchCart: function (cb) {
+        $http.get('/api/cart').success(function (res) {
           //console.log("Response received in trulo service as "+res);
           //console.log('In epsvc cart:' + res.products[0].count);
           if (res === 'null') {
@@ -4811,10 +4969,9 @@ angular.module('trulo').factory('Trulo', [
           cb(product);
         });
       },
-      placeOrder: function (uid, cb) {
-        var data = { 'userID': uid };
+      placeOrder: function (cb) {
         //console.log("Placing order for ="+data['userID']);
-        $http.post('/api/placeOrder', data).success(function (response) {
+        $http.post('/api/placeOrder').success(function (response) {
           //console.log('Returned in cb in place order'+response);
           cb('Successfully placed order');
         });
@@ -4822,7 +4979,6 @@ angular.module('trulo').factory('Trulo', [
       removeProductDirectly: function (pdt, cb) {
         var data = {
           'pdtID': pdt,
-          'userID': 3,
           'city': 'goa'
         };
         //console.log("Remove Product:Sending data with id="+data['pdtID']);
@@ -5128,6 +5284,7 @@ angular.module('users').controller('AuthenticationController', [
         $scope.$broadcast('show-errors-check-validity', 'userForm');
         return false;
       }
+      //console.log($scope.credentials);
       $http.post('/api/auth/signin', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;

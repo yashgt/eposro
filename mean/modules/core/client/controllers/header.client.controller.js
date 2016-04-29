@@ -52,10 +52,11 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
                 if( $scope.cartCount == undefined)
                     this.fetchCart();
                 $scope.searchProduct = function (searchQuery) {
-                    console.log("Searching product " + searchQuery);
-                    trulo.searchProduct(searchQuery, function (response) {
-                        console.log("In header controller");
-                    });
+                    console.log("Searching product "+searchQuery);
+                    if( searchQuery == null )
+                        return;
+            
+                    $state.go('search',{query:searchQuery},{reload:true});
                 }
 
                 myCart.onAddToCart(this.addToCart);
@@ -63,5 +64,5 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
                 myCart.onRemoveDirectly(this.fetchCart);
                 order.onOrderPlacement(this.fetchCart);
                 
-                }
-                ]);
+        }
+]);
