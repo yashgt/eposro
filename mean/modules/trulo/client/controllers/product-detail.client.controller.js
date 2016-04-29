@@ -8,11 +8,15 @@ angular.module('trulo').controller('ProductDetailController', ['$scope', '$state
       
       trulo.getProductById($scope._id, function(productResponse){
           $scope.product = productResponse;
+          console.log($scope.product);
           $scope.productCount = myCart.getCount($scope.product);
           $scope.quantity = $scope.productCount;
       });
       $scope.add = function(){
         $scope.productCount++;
+          myCart.addToCart($scope.product,function(res){
+              //console.log("Added to cart");
+          });
       }
       
       $scope.subtract = function () {
@@ -21,26 +25,9 @@ angular.module('trulo').controller('ProductDetailController', ['$scope', '$state
                 return;
         }
         $scope.productCount--;
+        myCart.removeFromCart($scope.product,function(res){
+            //console.log("Removed from cart");
+        });
       }
-      $scope.addToCart = function(){
-          if( $scope.quantity< $scope.productCount){
-              console.log("Add to cart");
-              for(var i=0; i<$scope.productCount-$scope.quantity; i++){
-                myCart.addToCart($scope.product,function(response){
-                    
-                });
-              }
-              $scope.quantity = $scope.productCount;
-          }
-          else if($scope.quantity> $scope.productCount){
-              console.log("Remove from cart");
-              for(var i=0; i<$scope.quantity-$scope.productCount ; i++){
-                myCart.removeFromCart($scope.product,function(response){
-                    
-                });
-              }
-              $scope.quantity = $scope.productCount;
-          }
-      }  
   }
 ]);

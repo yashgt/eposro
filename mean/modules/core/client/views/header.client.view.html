@@ -1,13 +1,13 @@
 <div layout="row" ng-controller="HeaderController">
     <a href="#" class="navbar-brand" flex="10" flex-xs="20"><strong>ePosro</strong></a>
     <ul class="nav navbar-nav navbar-left" flex="50" flex-xs="60">
-        <li class="navbar-icons" ui-sref-active="active" ng-hide="authentication.user" style="float:left">
+        <li class="navbar-icons header-icon" ui-sref-active="active" ng-hide="authentication.user">
             <a ui-sref="authentication.signin"><span class="glyphicon glyphicon-log-in"></span></a>
         </li>
-        <li class="navbar-icons" style="float:left">
+        <li class="navbar-icons header-icon">
             <md-menu ng-show="authentication.user" md-offset="0 70">
                 <md-button aria-label="menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-                    <span class="glyphicon glyphicon-user" style="color:green"></span>
+                    <span class="glyphicon glyphicon-user" id="user-icon"></span>
                 </md-button>
 
                 <md-menu-content>
@@ -23,10 +23,10 @@
                 </md-menu-content>
             </md-menu>
         </li>
-        <li class="navbar-icons" style="float:left"> <a ui-sref="cart">
+        <li class="navbar-icons header-icon"> <a ui-sref="cart">
             <span class="glyphicon glyphicon-shopping-cart">{{cartCount}}  <!--₹{{cartValue}}--></span></a>
         </li>
-        <li class="navbar-icons" style="float:left">
+        <li class="navbar-icons header-icon">
             <a href="#">
                 <span class="glyphicon glyphicon-bell"></span>
             </a>

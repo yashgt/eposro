@@ -1,7 +1,7 @@
 'use strict';
 angular.module('trulo').factory('Trulo', [
-  '$http','Search'
-  , function ($http,search) {
+  '$http'
+  , function ($http) {
         return {
             
             searchProduct : function(pname, lastPage,cb){

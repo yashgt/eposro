@@ -15,14 +15,14 @@ angular.module('trulo').controller('SearchController', ['$scope','Trulo','$state
       else
           $scope.noResult = 0;
       
-      var searchString = $stateParams.query;
+      $scope.searchString = $stateParams.query;
       var lastPage = 1;
       $scope.searchProduct = function () {
-            if( searchString == null )
+            if( $scope.searchString == null )
                 return;
           
-          console.log("Searching for "+searchString+" page = "+lastPage);
-          trulo.searchProduct(searchString, lastPage, function(response){
+          console.log("Searching for "+$scope.searchString+" page = "+lastPage);
+          trulo.searchProduct($scope.searchString, lastPage, function(response){
               lastPage++;
               if( response == null || response.length == 0){
                   console.log("no more data  = 1");
