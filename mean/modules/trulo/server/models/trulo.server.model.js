@@ -46,7 +46,7 @@ exports.saveProduct = function(product, cb) {
 function insert_product_internal(collection, product, cb) {
     collection.insert(product, function(err, result) {
         if (!err) {
-            cb(null, result);
+            cb(null, "Product Added to Database");
         } else {
             console.log(err);
         }
@@ -243,6 +243,242 @@ exports.updateProdVars = function(vars, product, cb) {
         cb(null, 0);
     }
 };
+
+exports.setProductFlag = function(pid,cb){
+    var gs1data= dbConn.collection("gs1data");
+    gs1data.update({_id:pid},{$set:{falg:true}},function(err,res){
+        if(!err){
+            cb(null,res);
+        }
+        else{
+            console.log(err);
+        }
+    });
+}
+/////////////////////importing gs1 data///////////
+
+exports.addCatToDb = function(cat,cb){
+    var category = dbConn.collection("category");
+    category.insert(cat,function(err,res){
+        if(!err){
+            cb(null,"Added to Db "+cat._id);
+        }
+        else{
+            cb(err,null);
+        }
+    });
+
+};
+
+exports.checkIfExists = function (cname,cb) {
+    var category= dbConn.collection("category");
+    category.find({"name":cname}).toArray(function(err,res){
+        if(!err){
+            if(res.length==0){
+                cb(null,false);
+            }
+            else{
+                cb(null,true);
+            }
+        }
+    });   
+};
+exports.getCatsNotAdded =function(cb){
+    var gs1cats= dbConn.collection("gs1cats");
+    gs1cats.find({$or:[{flag:{$exists:false}},{flag:false}]}).toArray(function(err,res){
+        if(!err){
+            cb(null,res);
+        }
+        else{
+            cb(err,null);
+        }
+    });
+};
+
+exports.getUniqueCatId=function(cb){
+    var IDs = dbConn.collection("IDs");
+    var query = {},
+        sort = [];
+    var options = {
+        new: true,
+        upsert: true
+    };
+    var update = {
+        $inc: {
+            last_cat_id: 1
+        }
+    };
+
+    IDs.findAndModify(query,sort,update,options,function (err,res) {
+         if(!err){
+            cb(null,res.value.last_cat_id);
+            return;
+         }
+         console.log(err);
+    });
+};
+exports.setGS1CatFlag=function(cid,cb){
+    var gs1cats=dbConn.collection("gs1cats");
+    gs1cats.update({id:cid},{$set:{flag:true}},function(err,res){
+        if(!err){
+            cb(null,"Flag value set");
+        }
+        else{
+            console.log(err);
+        }
+    });
+};
+
+exports.subcatsNotAdded=function(cb){
+    var gs1subcats= dbConn.collection("gs1subcats");
+    gs1subcats.find({$or:[{flag:{$exists:false}},{flag:false}]}).toArray(function(err,res){
+        if(!err){
+            cb(null,res);
+        }
+        else{
+            cb(err,null);
+        }
+    });
+
+};
+
+exports.setGS1SubCatFlag=function (cid,cb) {
+    var gs1subcats=dbConn.collection("gs1subcats");
+    gs1subcats.update({id:cid},{$set:{flag:true}},function(err,res){
+        if(!err){
+            cb(null,"Flag value set");
+        }
+        else{
+            console.log(err);
+        }
+    });    
+};
+
+exports.getCompaniesNotAdded =function(cb){
+    var gs1companies = dbConn.collection('gs1companies');
+    gs1companies.find({$or:[{flag:{$exists:false}},{flag:false}]}).toArray(function(err,res){
+        if(!err){
+            cb(null,res);
+        }
+        else{
+            console.log(err);
+        }
+    });
+};
+
+exports.checkIfExitsCompany = function (company,cb) {
+    var companies= dbConn.collection("companies");
+    companies.find({name:company.name,gcp:company.gcp}).toArray(function(err,res){
+        if(!err){
+            if(res.length==0){
+                cb(null,false);
+            }
+            else{
+                cb(null,true);
+            }
+        }
+        else
+        console.log(err);
+    });
+};
+
+exports.getUniqueCompanyId = function(cb){
+    var IDs= dbConn.collection("IDs");
+    var query = {},
+        sort = [];
+    var options = {
+        new: true,
+        upsert: true
+    };
+    var update = {
+        $inc: {
+            last_company_id: 1
+        }
+    };
+
+    IDs.findAndModify(query,sort,update,options,function (err,res) {
+         if(!err){
+            cb(null,res.value.last_company_id);
+            return;
+         }
+         console.log(err);
+    });
+};
+
+exports.setCompanyFlag = function(compid,cb){
+    var gs1companies = dbConn.collection('gs1companies');
+    gs1companies.update({_id:compid},{$set:{flag:true}},function(err,res){
+        if(!err){
+            cb(null,res);
+        }
+        else{
+            console.log(err);
+        }
+    });
+};
+
+exports.addCompanyToDb = function(company,cb){
+    var companies = dbConn.collection("companies");
+    companies.insert(company,function(err,res){
+        if(!err){
+            cb(null,"Company Added with id "+company._id);
+        }
+        else{
+            console.log(err);
+        }
+    })
+};
+
+exports.getCompanyId = function(gcp,cname,cb){
+    var companies = dbConn.collection("companies");
+    companies.find({$or:[{gcp:gcp},{name:cname}]}).toArray(function(err,res){
+        if(!err){
+            cb(null,res[0]._id);
+        }
+        else{
+            console.log(err);
+        }
+    });
+}; 
+
+exports.getProductsNotAdded = function(cb){
+    var gs1data = dbConn.collection("gs1data");
+    gs1data.find({$or:[{flag:{$exists:false}},{flag:false}]}).toArray(function(err,res){
+        if(!err){
+            cb(null,res);
+            return;
+        }
+        else{
+            console.log(err);
+        }
+    });
+};
+
+exports.getUniquePdtId = function(cb){
+    var IDs = dbConn.collection("IDs");
+    var query = {},
+        sort = [];
+    var options = {
+        new: true,
+        upsert: true
+    };
+    var update = {
+        $inc: {
+            last_pdt_id: 1
+        }
+    };
+
+    IDs.findAndModify(query,sort,update,options,function (err,res) {
+         if(!err){
+            cb(null,res.value.last_pdt_id);
+            return;
+         }
+         console.log(err);
+    });
+
+};
+
+
 /////functions related to cart///
 exports.addToCart = function(userId, pid, current_city, cb) {
     console.log("Inside server model");
