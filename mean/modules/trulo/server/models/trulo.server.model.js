@@ -246,7 +246,7 @@ exports.updateProdVars = function(vars, product, cb) {
 
 exports.setProductFlag = function(pid,cb){
     var gs1data= dbConn.collection("gs1data");
-    gs1data.update({_id:pid},{$set:{falg:true}},function(err,res){
+    gs1data.update({_id:pid},{$set:{flag:true}},function(err,res){
         if(!err){
             cb(null,res);
         }
@@ -443,8 +443,9 @@ exports.getCompanyId = function(gcp,cname,cb){
 
 exports.getProductsNotAdded = function(cb){
     var gs1data = dbConn.collection("gs1data");
-    gs1data.find({$or:[{flag:{$exists:false}},{flag:false}]}).toArray(function(err,res){
+    gs1data.find({flag:{$exists:false}}).toArray(function(err,res){
         if(!err){
+            console.log(res.length);
             cb(null,res);
             return;
         }
