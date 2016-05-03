@@ -51,13 +51,15 @@
                     <label class="control-label col-xs-3">Your Location</label>
                     <div class="col-xs-9">
                         <div class="map">
-                            <location address="raw_address" location="address.location"></location>
+                            <location address="address"></location>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-offset-2 col-xs-10">
-                        <button type="submit" class="btn btn-primary" ng-disabled="addForm.$invalid" ng-click="onSubmit()">Submit</button>
+                        <md-button class="md-primary md-raised" ng-click="onSubmit($event)" ng-disabled="addForm.$invalid">
+                            Sumbit
+                        </md-button>
                     </div>
                 </div>
             </form>

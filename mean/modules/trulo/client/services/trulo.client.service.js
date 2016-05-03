@@ -114,14 +114,15 @@ angular.module('trulo').factory('Trulo', [
                     }
                 });
             }
-            ,saveAddress:function (uid,cb) {
+            ,saveAddress:function (address,cb) {
+
                 var data={
-                    'userID':uid
+                    'address':address
                 };
-                //console.log("Saving address for ="+data['userID']);
-                $http.post('/api/saveAddress', data).success(function (response) {
+                //console.log("Saving address for ="+data['adddress'].location);
+                $http.post('/api/users/saveAddress', data).success(function (response) {
                     //console.log('Returned in cb in save Address'+response);
-                    cb('Successfully saved Address');
+                    cb(response);
                 });
                  
             }

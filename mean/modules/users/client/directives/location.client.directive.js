@@ -7,11 +7,10 @@ angular.module('users').directive('location', [
             templateUrl: 'modules/users/client/views/settings/location-directive.client.view.html',
             restrict: 'E',
             scope: {
-                address: '=address',
-                current_location: '=location'
+                address: '=address'
             },
             link: function postLink(scope, element, attrs) {
-                var geoFlag = false;
+                scope.geoFlag = false;
                 scope.location = {
                     latitude: 27,
                     longitude: 58
@@ -37,7 +36,7 @@ angular.module('users').directive('location', [
 
                 //methods
                 scope.onGeoLoc = function() {
-                    return geoFlag;
+                    return scope.geoFlag;
                 };
 
                 scope.onClick = function() {
@@ -48,12 +47,14 @@ angular.module('users').directive('location', [
                 //detecting users current location using geolocation api
 
                 if (navigator.geolocation) {
+
                     navigator.geolocation.getCurrentPosition(function(position) {
+                        scope.geoFlag = true;
+                        console.log(scope.geoFlag);
                         scope.location.latitude = position.coords.latitude
                         scope.location.longitude = position.coords.longitude;
-                        scope.current_location = scope.location;
+                        scope.address.location = scope.location;
 
-                        geoFlag = true;
                         //map
                         scope.map.center = scope.location;
                         scope.map.zoom = 19;
@@ -63,32 +64,42 @@ angular.module('users').directive('location', [
                         scope.marker.position = scope.location;
                         scope.marker.key = 2;
                         scope.marker.options = {
-                            draggable: false
+                            draggable: true
+                        };
+
+                        scope.marker.events = {
+                            dragend: function(marker, eventName, args) {
+                                console.log('marker dragend' + scope.address);
+                                scope.location.latitude = marker.getPosition().lat();
+                                scope.location.longitude = marker.getPosition().lng();
+                                scope.address.location = scope.location;
+                            }
                         };
 
                         scope.$apply()
                         //console.log(scope.map);
                     });
                 } else {
-                    geoFlag = false;
+                    scope.geoFlag = false;
                     console.log("Geolocation cannot be found");
                 }
 
                 /////////////////////end of geolocation////////////////////////////
 
-                scope.$watch("scope.address", function(oldVal, newVal) {
-                    console.log(scope.address + " Changed");
-                    if (geoFlag == false) {
+                scope.$watchGroup(["address.city","address.state","address.taluka"], function(newVal, oldVal) {
+                    if (scope.geoFlag == false) {
                         var geocoder = new google.maps.Geocoder();
+                        var current_address = scope.address.taluka + " " + scope.address.city + " " + scope.address.state + " India";
+                        //console.log(current_address);
                         geocoder.geocode({
-                            "address": scope.address
+                            "address": current_address
                         }, function(results, status) {
                             if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
                                 scope.location.latitude = results[0].geometry.location.lat();
                                 scope.location.longitude = results[0].geometry.location.lng();
-                                console.log(scope.location);
+                                //console.log(scope.location);
                                 scope.map.center = scope.location;
-                                scope.map.zoom = 6;
+                                scope.map.zoom = 15;
                                 scope.map.options.draggable = true;
 
                                 //marker
@@ -99,20 +110,20 @@ angular.module('users').directive('location', [
                                 };
                                 scope.marker.events = {
                                     dragend: function(marker, eventName, args) {
-                                        console.log('marker dragend' + scope.address);
+                                        //console.log('marker dragend' + scope.address);
                                         scope.location.latitude = marker.getPosition().lat();
                                         scope.location.longitude = marker.getPosition().lng();
-                                        scope.current_location = scope.location;
+                                        scope.address.location = scope.location;
                                     }
                                 };
-                                console.log(scope.marker);
+                                //console.log(scope.marker);
                                 scope.$apply()
                             } else {
                                 console.log(status);
                             }
                         });
                     }
-                });
+                }, true);
             }
         };
     }

@@ -1252,3 +1252,19 @@ exports.removeFromStock = function(vid,pid,cb){
     });
 
 };
+
+/////////////////////////////////
+exports.saveAddress = function(userID,address,cb){
+    var users = dbConn.collection("users");
+    users.update({_id:userID},{$set:{"address":address}},function(err,res){
+        if(!err){
+            cb(true);
+            return;
+        }
+        else{
+            console.log(err);
+            cb(false);
+            return;
+        }
+    });
+};

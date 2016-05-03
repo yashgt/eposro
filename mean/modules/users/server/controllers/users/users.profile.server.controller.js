@@ -12,6 +12,8 @@ var _ = require('lodash'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User');
 
+  var trulo = require(path.resolve('./modules/trulo/server/models/trulo.server.model.js'));
+
 /**
  * Update user details
  */
@@ -100,4 +102,17 @@ exports.changeProfilePicture = function (req, res) {
  */
 exports.me = function (req, res) {
   res.json(req.user || null);
+};
+
+exports.saveAddress = function(req,res){
+  if(req.user!=null){
+    var userID =parseInt(req.user._id);
+    var address = req.body.address;
+    trulo.saveAddress(userID,address,function(str){
+      res.send(str);
+    });
+  }
+  else{
+    cb(false);
+  }
 };

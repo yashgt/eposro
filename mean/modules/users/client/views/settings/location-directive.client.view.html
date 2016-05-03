@@ -1,5 +1,5 @@
 <ui-gmap-google-map center='map.center' zoom='map.zoom' options='map.options' ng-if="onGeoLoc()">
-    <ui-gmap-marker idKey='marker.key' coords='marker.position' options='marker.options' click="onClick()">
+    <ui-gmap-marker idKey='marker.key' coords='marker.position' options='marker.options' events="marker.events" click="onClick()">
         <ui-gmap-window options="windowOptions">
             <div>
                 {{windowOptions.title}}
