@@ -7,6 +7,11 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
+    $scope.address={};
+    $scope.address.city="";
+    $scope.address.taluka="";
+    $scope.address.state="";
+    $scope.address.location=[];
 
     // If user is signed in then redirect back home
     if ($scope.authentication.user) {
@@ -21,7 +26,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
         return false;
       }
-
+      $scope.credentials.vendor=false;
       $http.post('/api/auth/signupuser', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
@@ -42,7 +47,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
         return false;
       }
-
       $http.post('/api/auth/signupvendor', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;

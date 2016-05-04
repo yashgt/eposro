@@ -79,6 +79,8 @@ var UserSchema = new Schema({
   salt: {
     type: String
   },
+  address:Schema.Types.Mixed,
+  vendor: Boolean,
   profileImageURL: {
     type: String,
     default: 'modules/users/client/img/profile/default.png'
