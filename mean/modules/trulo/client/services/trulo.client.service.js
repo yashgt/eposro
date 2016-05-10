@@ -3,8 +3,20 @@ angular.module('trulo').factory('Trulo', [
   '$http'
   , function ($http) {
         return {
-            
-            searchProduct : function(pname, lastPage,cb){
+          
+            getFacets : function(catID, level, cb){
+                console.log("In service getting facets");
+                $http.get('/api/facets?catID='+catID+'&level='+level).success(function(response){
+                    cb(response);
+                });
+            }
+            , getBrands : function(catID, level, cb){
+                //console.log("In service getting brands");
+                $http.get('/api/brands?catID='+catID+'&level='+level).success(function(response){
+                    cb(response);
+                });
+            }
+            ,searchProduct : function(pname, lastPage,cb){
                 console.log("In service searching for "+pname);
                 var promise = $http.get('/api/search?name='+pname+"&page="+lastPage).success(function(response){
                     //console.log("Received response for search");
@@ -26,11 +38,9 @@ angular.module('trulo').factory('Trulo', [
                     cb(categories);
                 });
             }
-            , getProductsByCat: function (catID, lastPage, level, products, cb) {
-                //console.log("Fetching prod for catID=" + catID + ", page = "+lastPage);
-                //var productsOfCurrentCat = [];
-                //console.log("In service level = "+level);
-                $http.get('/api/products?catID=' + catID + '&lastPage=' + lastPage +'&level=' + level)
+            , getProductsByCat: function (catID, lastPage, level, products, brand, cb) {
+                
+                $http.get('/api/products?catID=' + catID + '&lastPage=' + lastPage +'&level=' + level+"&brand="+brand)
                     .success(function (response) {
                     lastPage++;
                     //var productsOfCurrentCat = [];

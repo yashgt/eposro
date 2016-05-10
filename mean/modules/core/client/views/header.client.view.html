@@ -1,47 +1,75 @@
-<div layout="row" ng-controller="HeaderController">
-    <a href="#" class="navbar-brand" flex="10" flex-xs="20"><strong>ePosro</strong></a>
-    <ul class="nav navbar-nav navbar-left" flex="50" flex-xs="60">
-        <li class="navbar-icons header-icon" ui-sref-active="active" ng-hide="authentication.user">
-            <a ui-sref="authentication.signin"><span class="glyphicon glyphicon-log-in"></span></a>
-        </li>
-        <li class="navbar-icons header-icon">
-            <md-menu ng-show="authentication.user" md-offset="0 70">
-                <md-button aria-label="menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-                    <span class="glyphicon glyphicon-user" id="user-icon"></span>
-                </md-button>
+<div ng-controller="HeaderController" layout="column" flex="100">
+    <div layout="row" flex="100">
+        
+        <a href="#" class="navbar-brand" flex="20" flex-xs="35"><strong>ePosro</strong></a>
+        <ul class="nav navbar-nav navbar-left" flex="50" flex-xs="60">
+            <li class="navbar-icons header-icon" ui-sref-active="active" ng-hide="authentication.user">
+                <a ui-sref="authentication.signin"><span class="glyphicon glyphicon-log-in"></span></a>
+            </li>
+            <li class="navbar-icons header-icon">
+                <md-menu ng-show="authentication.user" md-offset="0 70">
+                    <md-button aria-label="menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                        <span class="glyphicon glyphicon-user" id="user-icon"></span>
+                    </md-button>
 
-                <md-menu-content>
-                    <md-menu-item>
-                        <md-button ui-sref="settings" ui-sref-active="active">Edit Profile</md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button ui-sref="orders" ui-sref-active="active">My Orders</md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button ng-href="/api/auth/signout" target="_self">Signout</md-button>
-                    </md-menu-item>
-                </md-menu-content>
-            </md-menu>
-        </li>
-        <li class="navbar-icons header-icon"> <a ui-sref="cart">
-            <span class="glyphicon glyphicon-shopping-cart">{{cartCount}}  <!--₹{{cartValue}}--></span></a>
-        </li>
-        <li class="navbar-icons header-icon">
-            <a href="#">
-                <span class="glyphicon glyphicon-bell"></span>
-            </a>
-        </li>
-    </ul>
-    <div class="input-group search-bar" flex="40" flex-xs="20">
-        <input type="text" ng-model="searchQuery" class="form-control" placeholder="Search for Product..." />
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button ui-sref="settings" ui-sref-active="active">Edit Profile</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ui-sref="orders" ui-sref-active="active">My Orders</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-href="/api/auth/signout" target="_self">Signout</md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </li>
+            <li class="navbar-icons header-icon"> 
+                <a ui-sref="cart">
+                <span class="glyphicon glyphicon-shopping-cart">{{cartCount}}</span></a>
+            </li>
+            <li class="navbar-icons header-icon">
+                <a href="#">
+                    <span class="glyphicon glyphicon-bell"></span>
+                </a>
+            </li>
+        </ul>
+        <div style="padding-top:20px;float:right" flex="30" flex-xs="5" hide-gt-xs>
+            <p ng-click="isCollapsed = !isCollapsed">
+                <span class="glyphicon glyphicon-search">
+                </span>
+            </p>
+        </div>
+        <div class="input-group search-bar" flex="30" hide-xs>
+            <input type="text" ng-model="searchQuery" class="form-control" placeholder="Search for Product..." />
 
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button" ng-click="searchProduct(searchQuery)">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-            </button>
-        </span>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="searchProduct(searchQuery)">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div uib-collapse="isCollapsed" hide-gt-xs>
+        <div class="input-group search-bar">
+            <input type="text" ng-model="searchQuery" class="form-control" placeholder="Search for Product..." />
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="searchProduct(searchQuery)">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+            </span>
+        </div>
     </div>
 </div>
-    <!--<input type="search" class="form-control" flex="40" style="margin-top:8px" placeholder="search for products" results>-->
   
+<!--
+<div class="input-group search-bar" flex="40" flex-xs="20">
+            <input type="text" ng-model="searchQuery" class="form-control" placeholder="Search for Product..." />
 
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="searchProduct(searchQuery)">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+            </span>
+</div>-->

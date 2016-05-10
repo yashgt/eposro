@@ -63,6 +63,8 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
                 myCart.onSubtractFromCart(this.removeFromCart);
                 myCart.onRemoveDirectly(this.fetchCart);
                 order.onOrderPlacement(this.fetchCart);
+                //for collapse search button
+                $scope.isCollapsed = true;
                 
         }
 ]);

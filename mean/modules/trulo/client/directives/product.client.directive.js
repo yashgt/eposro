@@ -9,6 +9,8 @@ angular.module('trulo').directive('product', ['Mycart',
                 product: '=data'
             }
             ,controller: function ($scope) {
+                
+                
                 $scope.productCount = myCart.getCount($scope.product);
                 $scope.quantity = $scope.productCount;
                 //console.log("Pro count = "+$scope.productCount);

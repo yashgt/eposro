@@ -99,3 +99,7 @@ input[type=number]::-webkit-outer-spin-button {
 	width:40%px;
 	height:80%px;
 }
+.facets-div{
+	text-align:center;
+	margin-top:10px;
+}

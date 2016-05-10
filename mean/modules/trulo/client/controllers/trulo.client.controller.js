@@ -1,8 +1,8 @@
 'use strict';
 angular.module('trulo').controller('TruloController', [
-  '$scope', 'Trulo', 'Mycart','Order', '$uibModal'
+  '$scope', 'Trulo', 'Mycart','Order', '$uibModal','$mdSidenav'
     
-    , function ($scope, trulo, myCart, order, $uibModal) {
+    , function ($scope, trulo, myCart, order, $uibModal,$mdSidenav) {
         /*
             $scope.categories : All the top level categories
             $scope.subCategories : All the subCategories of current tab
@@ -21,6 +21,9 @@ angular.module('trulo').controller('TruloController', [
         $scope.count =  $scope.quantity;
         $scope.isCollapsed = false;
         $scope.order_mode = 1;
+        $scope.currentBrand = null;
+        $scope.currentCategory = null;
+        $scope.selectedBrands = '*';
         var products = [];
         
         var getIndexOfTitle = function (x, array) {
@@ -74,25 +77,112 @@ angular.module('trulo').controller('TruloController', [
             else
                 return 1;
         }
-        $scope.showProducts = function (catID) {
-            //make a SOLR query to fetch products of this catID
-            console.log("Show products of " + catID);
+        
+        var findCategoryLevel = function(catID,level=-1){
+            //console.log("Finding level of catID = "+catID);
+            if( catID == 0){
+                //console.log("Returning level = "+level);
+                return level;
+            }
+            
+            var parentCatID = getParent(catID);
+            level = findCategoryLevel(parentCatID,++level);
+            return level;
+        }
+        var getBrands = function(catID){
+            console.log("Getting brands for "+catID);
+            var catlevel = findCategoryLevel(catID);
+            trulo.getBrands(catID,catlevel,function(res){
+                $scope.brands = res;
+            });
+        }
+        var getFacets = function(catID){
+            var catlevel = findCategoryLevel(catID);
+            trulo.getFacets(catID,catlevel,function(res){
+                $scope.facets = res;
+            });
+        }
+        
+        $scope.brandFilterEvent = function(brandFilterFlag,brand){
+            if( brandFilterFlag == true)
+                showProducts($scope.currentCategory,brand);
+            else{
+                //unchecking a checkbox is as good as deleting this brand chip
+                
+            } 
+                
+        }
+        $scope.deleteChip = function(brand){
+            var brandIndex = $scope.selectedBrands.indexOf(brand);
+            
+            if( brandIndex != -1){
+                $scope.selectedBrands.splice(brandIndex,1);
+                $scope.removeBrandFilter();
+            }
+        }
+        $scope.removeBrandFilter = function(){
+            
+            //remove the products of the removed chip
+            $scope.activateHomeTab = 0;
+            lastPageLoaded[$scope.currentCategory] = 0;
+            products[$scope.currentCategory] = [];
+            $scope.noMoreData = false;
+            console.log($scope.selectedBrands);
+            if($scope.selectedBrands.length == 0)
+                $scope.selectedBrands = '*';
+            $scope.fetchNextPage($scope.currentCategory,$scope.selectedBrands);
+            
+          
+            //uncheck the removed brand from the filter list
+            
+            //$scope.removedChip = chip;
+            
+            //when brand unchecked from filter list remove the products of that brand
+        }
+        $scope.filterByBrand = function(catID,brand){
+            console.log("Show products of " + catID+" and brand="+brand);
+            lastPageLoaded[catID] = 0;
+            products[catID] = [];
+            $scope.noMoreData = false;
+            
+        }
+        $scope.showProducts = function (catID,brand='*') {
+            
+            //console.log("Brand = "+brand);
+            $scope.currentCategory = catID;//used to pass to this function during filtering based on brands
+            $scope.currentBrand = brand;
+            if( brand != '*'){
+                if( $scope.selectedBrands == '*')
+                    $scope.selectedBrands = [];
+                $scope.selectedBrands.push(brand);
+            }//console.log("Show products of " + catID);
 
             $scope.activateHomeTab = 0;
             lastPageLoaded[catID] = 0;
             products[catID] = [];
             $scope.noMoreData = false;
             
+            if( brand == '*')
+                getBrands(catID);
+            if( findCategoryLevel(catID) == 1 ){
+                console.log("Getting facet attr");
+                getFacets(catID);
+            }
+            
             if (($scope.breadCrumbs != undefined) && breadExists(catID)) {
                 popBread(catID);
                 $scope.hideMe = 0;
                 $scope.getSubCat(catID);
             }
-            $scope.fetchNextPage(catID);
+            if( brand == '*')
+                $scope.fetchNextPage(catID,brand);
+            else
+                $scope.fetchNextPage(catID,$scope.selectedBrands);
             setBreadArray(catID,0);
         }
 
         var getCategories = function () {
+            
             //console.log('Fetching categories in controller');
             trulo.getCategories(0, function (catsResponse) {
                 $scope.categories = catsResponse;
@@ -107,22 +197,9 @@ angular.module('trulo').controller('TruloController', [
         if ($scope.categories == undefined) {
             getCategories();
         }
-        
-        var findCategoryLevel = function(catID,level=-1){
-            //console.log("Finding level of catID = "+catID);
-            if( catID == 0){
-                //console.log("Returning level = "+level);
-                return level;
-            }
-            
-            var parentCatID = getParent(catID);
-            level = findCategoryLevel(parentCatID,++level);
-            return level;
-        }
 
-        $scope.fetchNextPage = function (catID) {
+        $scope.fetchNextPage = function (catID,brand='*') {
             $scope.nextCategory = catID;
-            //console.log("Inside fetchNextPage");
             /*
                 var products = {
                     '101' : [
@@ -147,11 +224,12 @@ angular.module('trulo').controller('TruloController', [
                     ]
 		      }
             */
+            
             if ($scope.busy) return;
             $scope.busy = true;
-            //if (products == undefined || products['catID'])
-           var catlevel = findCategoryLevel(catID);
-            trulo.getProductsByCat(catID, lastPageLoaded[catID], catlevel, products
+            
+            var catlevel = findCategoryLevel(catID);
+            trulo.getProductsByCat(catID, lastPageLoaded[catID], catlevel, products, brand
                 , function (productsResponse, lastPageResponse, busyResponse) {
                     if( productsResponse == null){
                         console.log("No more data folks in controller");
@@ -357,5 +435,17 @@ angular.module('trulo').controller('TruloController', [
             $scope.animationsEnabled = !$scope.animationsEnabled;
         };
 
+        //open the sidenav
+        $scope.openLeftMenu = function() {
+            
+            $mdSidenav('left').toggle();
+            
+        };
+        $scope.close = function () {
+            $mdSidenav('left').close();
+        }; 
+        
+        //For accordion
+        $scope.oneAtATime = true;
     }
 ]);

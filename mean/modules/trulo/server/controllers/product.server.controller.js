@@ -37,10 +37,18 @@ exports.getProducts = function (req, res) {
     var catID = req.query.catID;
     var lastPage = req.query.lastPage;
     var level = req.query.level;
-    console.log(req.query);
-    console.log("Inside products.server.controller to fetch products of catID="+req.query.catID+" level = "+level);
+    var brand = req.query.brand;
+    if( brand != '*')
+       brand = brand.split(',');
     
-    solr.getProductsByCategory(catID, lastPage, level, function(productsResponse){
+    console.log(req.query);
+    console.log("On server Brand arrays is..");
+    console.log(brand);
+    console.log(typeof(brand))
+    //console.log("Inside products.server.controller to fetch products of catID="+req.query.catID+" level = "+level+" brand="+brand);
+    
+    solr.getProductsByCategory(catID, lastPage, level, brand, function(productsResponse){
+        //console.log("Image "+productsResponse[0].pname);
         res.send(productsResponse);
     });
 };

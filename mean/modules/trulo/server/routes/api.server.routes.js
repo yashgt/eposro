@@ -6,7 +6,10 @@ module.exports = function (app) {
   var product = require('../controllers/product.server.controller');
   var cart = require('../controllers/cart.server.controller');
   var order= require('../controllers/order.server.controller'); 
-  
+  var facets = require('../controllers/facets.server.controller');
+    
+  app.get('/api/facets',facets.getFacets)
+  app.get('/api/brands',facets.getBrands);
   app.get('/api/categories', category.list);
   app.get('/api/products', product.getProducts);
   app.post('/api/addToCart', cart.addToCart);

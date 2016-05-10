@@ -36,13 +36,13 @@ angular.module('trulo')
                 }
             })
 
-            .state('merchant', {
+            /*.state('merchant', {
                 url: '/merchant'
-                , templateUrl: 'modules/trulo/client/views/browse.client.view.html'
+                , templateUrl: 'modules/trulo/client/views/myshop.client.view.html'
                 , ncyBreadcrumb: {
                     label: 'Merchant' // angular-breadcrumb's configuration
                 }
-            })
+            })*/
 
             .state('products', {
                 url: '/product/:_id'

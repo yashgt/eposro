@@ -1,60 +1,91 @@
-<div class="container-fluid">       
-            
-    <md-content class="md-padding">
-        <md-tabs md-border-bottom md-autoselect md-dynamic-height md-swipe-content md-selected="0">
-            <!--<md-tab label="Home" md-active="activateHomeTab">
+<div layout="row" flex>
+    <div flex="25" flex-xs="10">
+        <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')">
+            <md-toolbar class="md-theme-indigo" style="padding-top:80px">
+                    <h1 class="md-toolbar-tools">Filters</h1>
+                    <md-button ng-click="close()" class="md-primary" hide-gt-md>
+                        Close
+                    </md-button>
+            </md-toolbar>
+            <uib-accordion close-others="oneAtATime">
+                <uib-accordion-group is-open="status.open" md-sidenav-focus>
+                    <uib-accordion-heading md-sidenav-focus>
+                        Brands
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}">
+                        </i>
+                    </uib-accordion-heading>
+                    <p ng-repeat="brand in brands" ng-if="$even"> 
+                        <md-checkbox md-no-ink="true" ng-model="brandFilterFlag" ng-change="brandFilterFlag?showProducts(currentCategory,brand.title):deleteChip(brand.title)" aria-label="{{brand.title}}">
+                            {{brand.title}}<span class="badge">{{brand.count}}</span>
+                        </md-checkbox>
+                    </p>
+                </uib-accordion-group>
+            </uib-accordion>
+        </md-sidenav>
+        <md-content>
+
+            <h4 aria-label="Left Align" ng-click="openLeftMenu()" hide-gt-md>
+                <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+            </h4>
+
+        </md-content>
+    </div>
+    <md-tabs md-border-bottom md-autoselect md-dynamic-height md-swipe-content md-selected="0" flex="75" flex-xs="90">
+        <!--<md-tab label="Home" md-active="activateHomeTab">
                 <md-tab-body>
                     <p>Display all the recommnedations</p>
                 </md-tab-body>
             </md-tab>-->
-            <md-tab ng-repeat="cat in categories" ng-init="map[''+cat.catID] = $index" md-active="map[''+catParameter] == $index"
-            md-on-select="scrollTop();getSubCat(cat.catID);showProducts(cat.catID);"
-                    ng-click="showProducts(cat.catID)">
-                <md-tab-label>
-                    {{cat.title}}
-                </md-tab-label>
-                <md-tab-body>
-                    
-                    <div layout="row">
-                        <md-menu ng-hide="hideMe">
-                            <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open subcategories menu">
-                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-                            </md-button>
-                            <md-menu-content width=4>
-                                <md-menu-item ng-repeat="subCat in childCategories">
-                                    <md-button ng-click="getSubCat(subCat.catID);showProducts(subCat.catID)">
-                                        {{subCat.title}}
-                                    </md-button>
-                                </md-menu-item>
-                            </md-menu-content>
-                        </md-menu>
-                        
-                        <ol class="breadcrumb" ng-show="breadCrumbs != undefined">
-                            <li>
-                                <a  class="btn" href="" ng-click="showHomeTab()">Home</a>
-                            </li>
-                            <li ng-repeat="bread in breadCrumbs" class="active">
-                                <a href="" ng-class="{'btn disabled':$last}" ng-click="showProducts(bread.catID)">
+        <md-tab ng-repeat="cat in categories" ng-init="map[''+cat.catID] = $index" md-active="map[''+catParameter] == $index" md-on-select="scrollTop();getSubCat(cat.catID);showProducts(cat.catID);" ng-click="showProducts(cat.catID)">
+            <md-tab-label>
+                {{cat.title}}
+            </md-tab-label>
+            <md-tab-body>
+
+                <div layout="row" flex>
+                    <md-menu ng-hide="hideMe" flex="20">
+                        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open subcategories menu">
+                            <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                        </md-button>
+                        <md-menu-content width=4>
+                            <md-menu-item ng-repeat="subCat in childCategories">
+                                <md-button ng-click="getSubCat(subCat.catID);showProducts(subCat.catID)">
+                                    {{subCat.title}}
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+
+                    <ol class="breadcrumb" ng-show="breadCrumbs != undefined" flex="80">
+                        <li>
+                            <a class="btn" href="" ng-click="showHomeTab()">Home</a>
+                        </li>
+                        <li ng-repeat="bread in breadCrumbs" class="active">
+                            <a href="" ng-class="{'btn disabled':$last}" ng-click="showProducts(bread.catID)">
                                     {{bread.title}}
-                                </a>
-                            </li>
-                        </ol>
-                    </div>
-                    
-                    <div id="products-row" infinite-scroll="fetchNextPage(nextCategory)" infinite-scroll-disabled="noMoreData">
-                        <!--<div ng-repeat="p in productsOfCurrentCat">
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+                <md-chips ng-model="selectedBrands" md-on-remove="removeBrandFilter()" ng-show="selectedBrands != '*'">
+                </md-chips>
+                <div id="products-row" infinite-scroll="fetchNextPage(nextCategory,selectedBrands)" infinite-scroll-disabled="noMoreData">
+                    <!--<div ng-repeat="p in productsOfCurrentCat">
                             <center><h3 style="padding-bottom:100px">{{p.pname}}</h3></center>
                         </div>-->
-                        <md-grid-list md-cols-lg="4" md-cols-xs="1" md-cols-gt="4" md-cols-md="3" md-cols-sm="2" md-gutter="5px" md-row-height="400px">
-                            <md-grid-tile ng-repeat="p in productsOfCurrentCat">
-                                    <product data="p" id="product-item" layout-fill></product>
-                            </md-grid-tile> 
-                        </md-grid-list>
-                        <div ng-show="busy"><center>Loading more products....</center></div>
-                        <div ng-show="noMoreData"><center>No more products folks!!</center></div>
+                    <md-grid-list md-cols-lg="4" md-cols-xs="1" md-cols-gt="4" md-cols-md="3" md-cols-sm="2" md-gutter="5px" md-row-height="400px">
+                        <md-grid-tile ng-repeat="p in productsOfCurrentCat">
+                            <product data="p" id="product-item" layout-fill></product>
+                        </md-grid-tile>
+                    </md-grid-list>
+                    <div ng-show="busy">
+                        <center>Loading more products....</center>
                     </div>
-                </md-tab-body>
-            </md-tab>
-        </md-tabs>
-    </md-content>    
+                    <div ng-show="noMoreData">
+                        <center>No more products folks!!</center>
+                    </div>
+                </div>
+            </md-tab-body>
+        </md-tab>
+    </md-tabs>
 </div>
