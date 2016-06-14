@@ -67,9 +67,7 @@ angular.module('trulo').factory('Trulo', [
                 };
                 console.log("add:Sending data with id="+data['pdtID']);
                 $http.post('/api/addToCart', data).success(function (response){
-                    if(response!=null){
-                        cb(response);
-                    }
+                    cb(response);
                 });
             }
             , removeFromCart: function (pdtID,cb) {
@@ -103,9 +101,12 @@ angular.module('trulo').factory('Trulo', [
                     cb(product);
                 });
             }
-            ,placeOrder:function (cb) {
+            ,placeOrder:function (params,cb) {
                 //console.log("Placing order for ="+data['userID']);
-                $http.post('/api/placeOrder').success(function (response) {
+                var data={
+                    params:params
+                };
+                $http.post('/api/placeOrder',data).success(function (response) {
                     //console.log('Returned in cb in place order'+response);
                     cb('Successfully placed order');
                 });

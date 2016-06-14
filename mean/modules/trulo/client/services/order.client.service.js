@@ -4,10 +4,10 @@ angular.module('trulo').factory('Order', ['Trulo',
   function (trulo) {
    
     return {
-      placeOrder: function (cb) {
+      placeOrder: function (params,cb) {
         console.log("Inside Order service");
         var order = this;
-        trulo.placeOrder(function(res){
+        trulo.placeOrder(params,function(res){
             if (order.placeOrderCB)
                 order.placeOrderCB();    
         });

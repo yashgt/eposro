@@ -34,6 +34,7 @@ exports.signupuser = function(req, res) {
         user._id = parseInt(id);
         user.provider = 'local';
         user.displayName = user.firstName + ' ' + user.lastName;
+        user.vendor=false;
         user.save(function(err) {
             if (err) {
                 trulo.decrementUserId(function() {
@@ -72,6 +73,7 @@ exports.signupvendor = function(req, res) {
         user._id = parseInt(id);
         user.provider = 'local';
         user.displayName = user.firstName + ' ' + user.lastName;
+        user.vendor=true;
         user.save(function(err) {
             if (err) {
                 trulo.decrementUserId(function() {

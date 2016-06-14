@@ -38,7 +38,7 @@ exports.addToCart = function(req, res) {
             res.send(str);
         });
     } else {
-        res.send('null');
+        res.send(false);
     }
 };
 exports.removeFromCart = function(req, res) {

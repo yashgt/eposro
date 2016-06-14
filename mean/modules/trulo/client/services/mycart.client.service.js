@@ -22,9 +22,14 @@ angular.module('trulo').factory('Mycart', [
             }
             , addToCart: function (pdt,cb) {
                 console.log("Add:In mycart service received id=" + pdt._id);
-                trulo.addToCart(pdt._id,cb);
-                if (this.addToCartCB)
-                    this.addToCartCB(pdt);
+                var cartRef=this;
+                trulo.addToCart(pdt._id,function(res){
+                    if(res!=false){
+                        if (cartRef.addToCartCB)
+                            cartRef.addToCartCB(pdt);
+                    }
+                    cb(res);
+                });
                 
             }
             , removeFromCart: function (pdt,cb) {

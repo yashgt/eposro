@@ -13,9 +13,9 @@
             </div>
             <div flex-xs="40" layout="row" layout-margin>
                 <div id="add-remove-buttons">
-                    <button class="btn btn-default" ng-click="add()">+</button>
+                    <button class="btn btn-default" ng-click="add($event)">+</button>
                     {{ productCount }}
-                    <button class="btn btn-default" ng-click="subtract()">-</button>
+                    <button class="btn btn-default" ng-click="subtract($event)">-</button>
                 </div>
             </div>
         </div>

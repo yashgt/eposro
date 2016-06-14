@@ -43,15 +43,17 @@ exports.list = function(req, res) {
 };
 
 exports.placeOrder = function(req, res) {
+    console.log('hello i am plafe');
     if (req.user != null) {
         var userID = parseInt(req.user._id);
+        var params= req.body.params;
         console.log('Inside place order server controller' + userID);
-        trulo.checkOut(userID, function(str) {
+        trulo.checkOut(userID,params, function(str) {
             res.send(str);
         });
     }
     else{
-    	res.send('null');
+        res.send('null');
     }
 
 };

@@ -698,7 +698,7 @@ exports.removeFromCart = function(userId, pid, cb) {
         }
     });
 };
-exports.checkOut = function(userId, cb) {
+exports.checkOut = function(userId, params, cb) {
     //read the last order id used from IDs collection
     var IDs = dbConn.collection('IDs');
     var orders = dbConn.collection('orders');
@@ -746,11 +746,24 @@ exports.checkOut = function(userId, cb) {
                 order.items = user.cart.products;
                 order.estimated_cost = user.cart.estimated_cost;
                 order.processing_status = 0;
-                if (user.cart.order_mode !== undefined) {
-                    order.order_mode = user.cart.order_mode;
-                } else {
-                    order.order_mode = user.default_delivery_preference;
+                order.order_mode = params.order_mode;
+                if (order.order_mode == 0) {
+                    order.max_walk_distance = params.max_walk_distance;
                 }
+                var current_date = new Date();
+                //get month, year and day and concatenate
+                var day = '' + current_date.getDate();
+                var month = '' + (current_date.getMonth() + 1);
+                var year = current_date.getFullYear();
+                if (day.length < 2) {
+                    day = "0" + day;
+                }
+                if (month.length < 2) {
+                    month = "0" + month;
+                }
+                current_date = year + "-" + month + "-" + day;
+                order.order_date= current_date;
+
                 //write this to order collection
                 orders.insert(order, function(err, res) {
                     if (!err) {
@@ -1252,6 +1265,23 @@ exports.removeFromStock = function(vid,pid,cb){
     });
 
 };
+exports.getInStockProducts = function (vid,cb) {
+    var vendors= dbConn.collection("vendors");
+    vendors.findOne({_id:vid},{"products.pid":1},function(err,res){
+        if(!err){
+            var products=[];
+            if(res==undefined){
+                cb(products);
+            }
+            else{
+                for(var i=0;i<res["products"].length;i++){
+                products.push(res["products"][i].pid);
+                }           
+                cb(products.sort(function(a, b){return a-b}));
+            }
+        }
+    }); 
+}
 
 /////////////////////////////////
 exports.saveAddress = function(userID,address,cb){
@@ -1268,3 +1298,4 @@ exports.saveAddress = function(userID,address,cb){
         }
     });
 };
+////////////////////////////////////
