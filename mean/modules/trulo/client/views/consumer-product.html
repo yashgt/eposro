@@ -3,8 +3,9 @@
     <div layout="column">
         <md-card layout="row">
             <div flex="50">
-                <img ng-src="img/{{product._id}}.jpg"  id="product-detail-image" alt="image caption">
-                <!-- load the above image according to the product. For the time being static image loaded -->
+                
+                <img ng-src="img/{{product.img.front}}"  err-src="img/default-placeholder.jpg"id="product-detail-image" alt="image caption">
+                
             </div>
             <div layout="column" flex="50">
                 <md-card-title>
