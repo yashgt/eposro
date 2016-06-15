@@ -1298,4 +1298,28 @@ exports.saveAddress = function(userID,address,cb){
         }
     });
 };
-////////////////////////////////////
+/////////////////////////////////////////
+exports.getClusterRecommendations=function(cb){
+    var recommendations = dbConn.collection("recommendations");
+    recommendations.findOne({},{_id:0,cluster0:1},function(err,res){
+        if(!err){
+            cb(res.cluster0);
+        }
+        else{
+            console.log(err);
+        }
+    });    
+}
+
+/////////////////////////////////////////
+exports.getUserRecommendations = function (cb) {
+    var recommendations = dbConn.collection("recommendations");
+    recommendations.findOne({},{_id:0,user:1},function(err,res){
+        if(!err){
+            cb(res.user);
+        }
+        else{
+            console.log(err);
+        }
+    });   
+}

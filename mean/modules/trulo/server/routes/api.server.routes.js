@@ -7,6 +7,7 @@ module.exports = function (app) {
   var cart = require('../controllers/cart.server.controller');
   var order= require('../controllers/order.server.controller'); 
   var facets = require('../controllers/facets.server.controller');
+  var api=require('../controllers/api.server.controller'); 
     
   app.get('/api/facets',facets.getFacets)
   app.get('/api/brands',facets.getBrands);
@@ -19,4 +20,5 @@ module.exports = function (app) {
   app.post('/api/placeOrder',order.placeOrder);
   app.get('/api/product-detail',product.getProductDetails);
   app.get('/api/search',product.searchProduct);
+  app.get('/api/getRecommendations',api.getRecommendations);
 };

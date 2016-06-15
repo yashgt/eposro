@@ -43,7 +43,6 @@ exports.list = function(req, res) {
 };
 
 exports.placeOrder = function(req, res) {
-    console.log('hello i am plafe');
     if (req.user != null) {
         var userID = parseInt(req.user._id);
         var params= req.body.params;

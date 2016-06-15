@@ -125,6 +125,11 @@ angular.module('trulo').factory('Trulo', [
                     }
                 });
             }
+            ,getRecommendations: function(cb){
+               $http.get('/api/getRecommendations').success(function(recommendations){
+                    cb(recommendations);
+                });
+            }
             ,saveAddress:function (address,cb) {
 
                 var data={
