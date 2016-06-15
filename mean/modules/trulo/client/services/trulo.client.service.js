@@ -126,6 +126,7 @@ angular.module('trulo').factory('Trulo', [
                 });
             }
             ,getRecommendations: function(cb){
+                console.log("Inside service gettng reco");
                $http.get('/api/getRecommendations').success(function(recommendations){
                     cb(recommendations);
                 });

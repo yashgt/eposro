@@ -10,15 +10,15 @@ var doSearch = function (client, query, cb) {
       console.log(err);
     else {
         var product = [];
+        
         for(var i = 0; i < obj.response.docs.length; i++ ){
             product.push({
                 pname : obj.response.docs[i].pname,
                 _id : obj.response.docs[i]._id,
                 frontImg : obj.response.docs[i]["img.front"],
                 default_mrp : obj.response.docs[i].default_mrp
-            }) 
+            });
         }
-        //console.log(product)
         cb(product);
     }
   });
@@ -99,3 +99,16 @@ exports.getFacets = function(catID, level, cb){
     var query = client.createQuery().q({ 'cats.1': catID }).q({'cats.1':catID}).fl('facets*');
     doSearch(client, query, cb);
 }
+exports.getProductsById = function(idArray,cb){
+    var s;
+    var queryPart;
+    for( var i = 0; i < idArray.length; i++){
+        queryPart = "_id:"+idArray[i].toString();
+        if( s == null )
+            s = queryPart;
+        else
+            s = s + " OR " + queryPart; 
+    }
+    var query = client.createQuery().q(s);
+    doSearch(client, query, cb);
+};

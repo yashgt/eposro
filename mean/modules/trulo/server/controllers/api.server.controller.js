@@ -4,6 +4,8 @@
  * Module dependencies.
  */
 var trulo = require('../models/trulo.server.model');
+var solr = require('../models/solr.server.model');
+
 var mongoose = require('mongoose'),
     _ = require('lodash');
 
@@ -41,18 +43,25 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
 
 };
-
 exports.getRecommendations = function(req, res) {
+    
     if (req.user != null) {
         var userID = parseInt(req.user._id);
         console.log('Inside Get Recommendations' + userID);
         trulo.getClusterRecommendations(function(res) {
-            res.send(res);
+            solr.getProductsById(idResponse,function(productsResponse){
+                res.send(productsResponse);
+            });
         });
-    } else {
+    } 
+    else {
         console.log('Inside Get Recommendations without logged in');
-        trulo.getUserRecommendations(function(res) {
-            res.send(res);
+        
+        trulo.getUserRecommendations(function(idResponse) {
+            solr.getProductsById(idResponse,function(productsResponse){
+                res.send(productsResponse);
+            });
+            
         });
 
     }

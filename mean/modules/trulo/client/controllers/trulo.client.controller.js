@@ -27,6 +27,12 @@ angular.module('trulo').controller('TruloController', [
         $scope.selectedBrands = '*';
         var products = [];
 
+        //fetch recommendation products using the following function
+        trulo.getRecommendations(function(response){
+            console.log("Calling recc from trulo.contr");
+            $scope.recommendations = response;            
+        });
+        
         var getIndexOfTitle = function(x, array) {
             for (var i = 0; i < array.length; i++) {
                 if (x == array[i].title)
