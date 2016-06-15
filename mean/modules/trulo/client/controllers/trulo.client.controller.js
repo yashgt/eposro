@@ -110,14 +110,17 @@ angular.module('trulo').controller('TruloController', [
             });
         }
 
-        $scope.brandFilterEvent = function(brandFilterFlag, brand) {
-            if (brandFilterFlag == true)
-                showProducts($scope.currentCategory, brand);
-            else {
-                //unchecking a checkbox is as good as deleting this brand chip
-
+        $scope.brandFilterEvent = function(brand){
+            if( $scope.selectedBrands.indexOf(brand) == -1){
+                console.log("Adding brand to array");
+                $scope.showProducts($scope.currentCategory,brand);
             }
-
+                
+            else{
+                //unchecking a checkbox is as good as deleting this brand chip
+                $scope.deleteChip(brand);
+            } 
+                
         }
         $scope.deleteChip = function(brand) {
             var brandIndex = $scope.selectedBrands.indexOf(brand);
