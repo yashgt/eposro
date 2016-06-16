@@ -62,7 +62,7 @@ exports.getHomeDelVen = function(loc,items,cb){
    		{ 
    			near:{type:"Point",coordinates:loc}, 
    		  	distanceField:"distance", 
-   		  	maxDistance:3000,
+   		  	maxDistance:5000,
    		  	query:{delivery_mode:1}, 
    		  	spherical:true
    		}
@@ -91,3 +91,20 @@ exports.getHomeDelVen = function(loc,items,cb){
 
 
 };
+
+exports.setSelectedVendors = function(oid,vendors,cb){
+  var orders= dbConn.collection("orders");
+  var fvend=[];
+  for(var i=0;i<vendors.length;i++){
+    fvend.push(vendors[i]._id);
+  }
+  console.log(fvend);
+  orders.update({_id:oid},{$set:{selected_vendors:fvend,processing_status:1}},function(err,res){
+    if(!err){
+      cb(null,res);
+    }
+    else{
+      console.log(err);
+    }
+  })
+}

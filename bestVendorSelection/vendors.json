@@ -1,194 +1,472 @@
 {
-    _id: 1
-    ,name:"Ajay Kumar"
-    ,id:{
-        email:"ajay@gmail.com",
-        pwd:"12311"
-    }
+    _id: 10
+    ,name:"Ajay Naik"
     ,address:
         {
-            house_num:"314",
-            street:"Main street",
-            city:"Margao",
-            taluka:"Salcet",
-            district:"South Goa",
-            state:"Goa",
-            pin:403432,
             location:{
                 type:"Point",
-                coordinates :[73.980560,15.286535]
-            }       
+                coordinates :[73.989275,15.412676]
+            }   
+
         }
-    ,products : [
-        { pid: 1, myPrice: 20.00 }
-       ,{ pid: 2,  myPrice: 25.00 } 
-       ,{ pid: 3,  myPrice: 23.00} 
-       ,{ pid: 4, myPrice: 20.00 }
-       ,{ pid: 6,  myPrice: 15.00 } 
-       ,{ pid: 7,  myPrice: 22.00}
-       ,{ pid: 8, myPrice: 30.00 }
-       ,{ pid: 9,  myPrice: 40.00 } 
-       ,{ pid: 10,  myPrice: 30.00}
-       ,{ pid: 11,  myPrice: 40.00}
-       ,{ pid: 13,  myPrice: 25.00}
-            
-       ]
-    ,serving_radius: 500
+  ,products : [ 
+  { pid: 1, myPrice: 110 },
+  { pid: 3, myPrice: 135 },
+  { pid: 4, myPrice: 185 },
+  { pid: 5, myPrice: 103 },
+  { pid: 31, myPrice: 120 },
+  { pid: 32, myPrice: 235 },
+  { pid: 33, myPrice: 125 },
+  { pid: 34, myPrice: 135 },
+  { pid: 101, myPrice: 95 },
+  { pid: 102, myPrice: 38 },
+  { pid: 103, myPrice: 120 },
+  { pid: 105, myPrice: 85 },
+  { pid: 132, myPrice: 50 },
+  { pid: 133, myPrice: 50 },
+  { pid: 134, myPrice: 30 },
+  { pid: 135, myPrice: 27 },
+  { pid: 136, myPrice: 10 },
+  { pid: 137, myPrice: 20 },
+  { pid: 138, myPrice: 20 },
+  { pid: 139, myPrice: 20 },
+  { pid: 140, myPrice: 20 },
+  { pid: 141, myPrice: 140 },
+  { pid: 143, myPrice: 15 },
+  { pid: 144, myPrice: 20 },
+  { pid: 145, myPrice: 20 },
+  { pid: 146, myPrice: 10 },
+  { pid: 147, myPrice: 10 },
+  { pid: 148, myPrice: 10 },
+  { pid: 149, myPrice: 10 },
+  { pid: 150, myPrice: 10 },
+  { pid: 96, myPrice: 180 },
+  { pid: 97, myPrice: 150 },
+  { pid: 98, myPrice: 180 },
+  { pid: 99, myPrice: 214 },
+  { pid: 100, myPrice: 199 },
+  { pid: 110, myPrice: 120 },
+  { pid: 111, myPrice: 75 },
+  { pid: 112, myPrice: 100 },
+  { pid: 113, myPrice: 120 },
+  { pid: 498, myPrice: 130 },
+  { pid: 499, myPrice: 100 },
+  { pid: 597, myPrice: 55 },
+  { pid: 598, myPrice: 105 },
+  { pid: 599, myPrice: 200 },
+  { pid: 905, myPrice: 210 },
+  { pid: 13, myPrice: 45 },
+  { pid: 24, myPrice: 43 },
+  { pid: 25, myPrice: 149 },
+  { pid: 26, myPrice: 91 },
+  { pid: 27, myPrice: 280 },
+  { pid: 28, myPrice: 40 },
+  { pid: 29, myPrice: 10 },
+  { pid: 30, myPrice: 47 },
+  { pid: 62, myPrice: 320 },
+  { pid: 63, myPrice: 90 } ]
+
+    ,serving_radius: 2000
     ,delivery_mode: 1
     ,min_order_home_delivery:200
 }
 {
-    _id: 2
-    ,name:"Vinay Mehta"
-    ,id:{
-        email:"vinay@gmail.com",
-        pwd:"12311"
-    }
+    _id: 11
+    ,name:"Sohan Pathak"
     ,address:
         {
-            house_num:"31/A",
-            street:"Main street",
-            city:"Margao",
-            taluka:"Salcet",
-            district:"South Goa",
-            state:"Goa",
-            pin:403432,
             location:{
                 type:"Point",
-                coordinates :[73.980570,15.286200]
-                }       
+                coordinates :[73.9814997,15.4215022]
+            }   
+
         }
-    ,products : [
-        { pid: 1, myPrice: 20.00 }
-       ,{ pid: 2,  myPrice: 25.00 } 
-       ,{ pid: 3,  myPrice: 23.00} 
-       ,{ pid: 4, myPrice: 20.00 }
-       ,{ pid: 6,  myPrice: 15.00 } 
-       ,{ pid: 7,  myPrice: 22.00}
-       ,{ pid: 8, myPrice: 30.00 }
-       ,{ pid: 9,  myPrice: 40.00 } 
-       ,{ pid: 10,  myPrice: 30.00}
-       ,{ pid: 11,  myPrice: 40.00}
-       ,{ pid: 13,  myPrice: 25.00}
-            
-       ]
-    ,serving_radius: 500
+    ,products : [ 
+  { pid: 1, myPrice: 110 },
+  { pid: 3, myPrice: 135 },
+  { pid: 4, myPrice: 185 },
+  { pid: 5, myPrice: 103 },
+  { pid: 31, myPrice: 120 },
+  { pid: 32, myPrice: 235 },
+  { pid: 33, myPrice: 125 },
+  { pid: 34, myPrice: 135 },
+  { pid: 101, myPrice: 95 },
+  { pid: 102, myPrice: 38 },
+  { pid: 103, myPrice: 120 },
+  { pid: 105, myPrice: 85 },
+  { pid: 132, myPrice: 50 },
+  { pid: 133, myPrice: 50 },
+  { pid: 134, myPrice: 30 },
+  { pid: 67, myPrice: 99 },
+  { pid: 68, myPrice: 99 },
+  { pid: 69, myPrice: 120 },
+  { pid: 70, myPrice: 120 },
+  { pid: 93, myPrice: 35 },
+  { pid: 94, myPrice: 80 },
+  { pid: 95, myPrice: 37 },
+  { pid: 96, myPrice: 180 },
+  { pid: 97, myPrice: 150 },
+  { pid: 98, myPrice: 180 },
+  { pid: 99, myPrice: 214 },
+  { pid: 100, myPrice: 199 },
+  { pid: 106, myPrice: 30 },
+  { pid: 107, myPrice: 110 },
+  { pid: 108, myPrice: 165 },
+  { pid: 13, myPrice: 45 },
+  { pid: 24, myPrice: 43 },
+  { pid: 25, myPrice: 149 },
+  { pid: 26, myPrice: 91 },
+  { pid: 27, myPrice: 280 },
+  { pid: 28, myPrice: 40 },
+  { pid: 29, myPrice: 10 },
+  { pid: 30, myPrice: 47 },
+  { pid: 62, myPrice: 320 },
+  { pid: 63, myPrice: 90 },
+  { pid: 64, myPrice: 70 },
+  { pid: 65, myPrice: 35 },
+  { pid: 66, myPrice: 18 },
+  { pid: 88, myPrice: 225 },
+  { pid: 91, myPrice: 260 } ]
+
+  
+    ,serving_radius: 1500
+    ,delivery_mode: 0
+}
+
+{
+    _id: 12
+    ,name:"Krishna Kumar"
+    ,address:
+        {
+            location:{
+                type:"Point",
+                coordinates :[73.98098122,15.42274062]
+            }   
+
+        }
+    ,products : [ 
+  { pid: 1, myPrice: 110 },
+  { pid: 3, myPrice: 135 },
+  { pid: 4, myPrice: 185 },
+  { pid: 5, myPrice: 103 },
+  { pid: 31, myPrice: 120 },
+  { pid: 32, myPrice: 235 },
+  { pid: 33, myPrice: 125 },
+  { pid: 34, myPrice: 135 },
+  { pid: 101, myPrice: 95 },
+  { pid: 102, myPrice: 38 },
+  { pid: 103, myPrice: 120 },
+  { pid: 105, myPrice: 85 },
+  { pid: 132, myPrice: 50 },
+  { pid: 133, myPrice: 50 },
+  { pid: 134, myPrice: 30 },
+  { pid: 135, myPrice: 27 },
+  { pid: 136, myPrice: 10 },
+  { pid: 137, myPrice: 20 },
+  { pid: 138, myPrice: 20 },
+  { pid: 139, myPrice: 20 },
+  { pid: 67, myPrice: 99 },
+  { pid: 68, myPrice: 99 },
+  { pid: 69, myPrice: 120 },
+  { pid: 70, myPrice: 120 },
+  { pid: 93, myPrice: 35 },
+  { pid: 94, myPrice: 80 },
+  { pid: 95, myPrice: 37 },
+  { pid: 96, myPrice: 180 },
+  { pid: 97, myPrice: 150 },
+  { pid: 98, myPrice: 180 },
+  { pid: 99, myPrice: 214 },
+  { pid: 100, myPrice: 199 },
+  { pid: 106, myPrice: 30 },
+  { pid: 107, myPrice: 110 },
+  { pid: 108, myPrice: 165 },
+  { pid: 13, myPrice: 45 },
+  { pid: 24, myPrice: 43 },
+  { pid: 25, myPrice: 149 },
+  { pid: 26, myPrice: 91 },
+  { pid: 27, myPrice: 280 },
+  { pid: 28, myPrice: 40 },
+  { pid: 29, myPrice: 10 },
+  { pid: 30, myPrice: 47 },
+  { pid: 62, myPrice: 320 },
+  { pid: 63, myPrice: 90 },
+  { pid: 64, myPrice: 70 },
+  { pid: 65, myPrice: 35 },
+  { pid: 66, myPrice: 18 },
+  { pid: 88, myPrice: 225 },
+  { pid: 91, myPrice: 260 } ]
+  
+    ,serving_radius: 1600
     ,delivery_mode: 1
     ,min_order_home_delivery:200
 }
+
 {
-    _id: 3
-    ,name:"Babu Naik"
-    ,id:{
-        email:"babu@gmail.com",
-        pwd:"12311"
-    }
+    _id: 13
+    ,name:"Dayakar Desai"
     ,address:
         {
-            house_num:"14",
-            street:"West street",
-            city:"Panjim",
-            taluka:"Tiswadi",
-            district:"North Goa Goa",
-            state:"Goa",
-            pin:403432,
             location:{
                 type:"Point",
-                coordinates :[73.975430,15.272225]
-                }       
+                coordinates :[73.98347031,15.42399206]
+            }   
+
         }
-    ,products : [
-        { pid: 1, myPrice: 20.00 }
-       ,{ pid: 2,  myPrice: 25.00 } 
-       ,{ pid: 3,  myPrice: 23.00} 
-       ,{ pid: 4, myPrice: 20.00 }
-       ,{ pid: 6,  myPrice: 15.00 } 
-       ,{ pid: 7,  myPrice: 22.00}
-       ,{ pid: 8, myPrice: 30.00 }
-       ,{ pid: 9,  myPrice: 40.00 } 
-       ,{ pid: 10,  myPrice: 30.00}
-       ,{ pid: 11,  myPrice: 40.00}
-       ,{ pid: 13,  myPrice: 25.00}
-            
-       ]
-    ,serving_radius: 700
-    ,delivery_mode: 0
-}
-{
-    _id: 4
-    ,name:"Ram Dessai"
-    ,id:{
-        email:"Ram@gmail.com",
-        pwd:"12311"
-    }
-    ,address:
-        {
-            house_num:"1/B",
-            street:"West street",
-            city:"Panjim",
-            taluka:"Tiswadi",
-            district:"North Goa Goa",
-            state:"Goa",
-            pin:403432,
-            location:{
-                type:"Point",
-                coordinates :[73.975450,15.272215]
-                }       
-        }
-    ,products : [
-        { pid: 1, myPrice: 20.00 }
-       ,{ pid: 2,  myPrice: 25.00 } 
-       ,{ pid: 3,  myPrice: 23.00} 
-       ,{ pid: 4, myPrice: 20.00 }
-       ,{ pid: 6,  myPrice: 15.00 } 
-       ,{ pid: 7,  myPrice: 22.00}
-       ,{ pid: 8, myPrice: 30.00 }
-       ,{ pid: 9,  myPrice: 40.00 } 
-       ,{ pid: 10,  myPrice: 30.00}
-       ,{ pid: 11,  myPrice: 40.00}
-       ,{ pid: 13,  myPrice: 25.00}
-            
-       ]
-    ,serving_radius: 600
-    ,delivery_mode: 0
-}
-{
-    _id: 5
-    ,name:"Rajesh Shet"
-    ,id:{
-        email:"rajesh@gmail.com",
-        pwd:"12311"
-    }
-    ,address:
-        {
-            house_num:"3/A",
-            street:"South street",
-            city:"Margao",
-            taluka:"Salcet",
-            district:"South Goa",
-            state:"Goa",
-            pin:403432,
-            location:{
-                type:"Point",
-                coordinates :[73.980530,15.286535]
-                }       
-        }
-    ,products : [
-        { pid: 1, myPrice: 20.00 }
-       ,{ pid: 2,  myPrice: 25.00 } 
-       ,{ pid: 3,  myPrice: 23.00} 
-       ,{ pid: 4, myPrice: 20.00 }
-       ,{ pid: 6,  myPrice: 15.00 } 
-       ,{ pid: 7,  myPrice: 22.00}
-       ,{ pid: 8, myPrice: 30.00 }
-       ,{ pid: 9,  myPrice: 40.00 } 
-       ,{ pid: 10,  myPrice: 30.00}
-       ,{ pid: 11,  myPrice: 40.00}
-       ,{ pid: 13,  myPrice: 25.00}
-            
-       ]
-    ,serving_radius: 800
-    ,delivery_mode: 0
+  ,products : [ 
+  { pid: 1, myPrice: 110 },
+  { pid: 3, myPrice: 135 },
+  { pid: 4, myPrice: 185 },
+  { pid: 5, myPrice: 103 },
+  { pid: 31, myPrice: 120 },
+  { pid: 32, myPrice: 235 },
+  { pid: 33, myPrice: 125 },
+  { pid: 34, myPrice: 135 },
+  { pid: 101, myPrice: 95 },
+  { pid: 102, myPrice: 38 },
+  { pid: 103, myPrice: 120 },
+  { pid: 105, myPrice: 85 },
+  { pid: 132, myPrice: 50 },
+  { pid: 133, myPrice: 50 },
+  { pid: 134, myPrice: 30 },
+  { pid: 135, myPrice: 27 },
+  { pid: 136, myPrice: 10 },
+  { pid: 137, myPrice: 20 },
+  { pid: 138, myPrice: 20 },
+  { pid: 139, myPrice: 20 },
+  { pid: 140, myPrice: 20 },
+  { pid: 141, myPrice: 140 },
+  { pid: 143, myPrice: 15 },
+  { pid: 144, myPrice: 20 },
+  { pid: 145, myPrice: 20 },
+  { pid: 146, myPrice: 10 },
+  { pid: 147, myPrice: 10 },
+  { pid: 148, myPrice: 10 },
+  { pid: 149, myPrice: 10 },
+  { pid: 150, myPrice: 10 },
+  { pid: 96, myPrice: 180 },
+  { pid: 97, myPrice: 150 },
+  { pid: 98, myPrice: 180 },
+  { pid: 99, myPrice: 214 },
+  { pid: 100, myPrice: 199 },
+  { pid: 110, myPrice: 120 },
+  { pid: 111, myPrice: 75 },
+  { pid: 112, myPrice: 100 },
+  { pid: 113, myPrice: 120 },
+  { pid: 498, myPrice: 130 },
+  { pid: 499, myPrice: 100 },
+  { pid: 597, myPrice: 55 },
+  { pid: 598, myPrice: 105 },
+  { pid: 599, myPrice: 200 },
+  { pid: 905, myPrice: 210 },
+  { pid: 13, myPrice: 45 },
+  { pid: 24, myPrice: 43 },
+  { pid: 25, myPrice: 149 },
+  { pid: 26, myPrice: 91 },
+  { pid: 27, myPrice: 280 },
+  { pid: 28, myPrice: 40 },
+  { pid: 29, myPrice: 10 },
+  { pid: 30, myPrice: 47 },
+  { pid: 62, myPrice: 320 },
+  { pid: 63, myPrice: 90 } ]
+
+    ,serving_radius: 2000
+    ,delivery_mode: 1
+    ,min_order_home_delivery:200
 }
 
+{
+    _id: 14
+    ,name:"Aman Pai"
+    ,address:
+        {
+            location:{
+                type:"Point",
+                coordinates :[73.98006927,15.42067211]
+            }   
 
+        }
+  ,products : [ 
+  { pid: 1, myPrice: 110 },
+  { pid: 3, myPrice: 135 },
+  { pid: 4, myPrice: 185 },
+  { pid: 5, myPrice: 103 },
+  { pid: 31, myPrice: 120 },
+  { pid: 32, myPrice: 235 },
+  { pid: 33, myPrice: 125 },
+  { pid: 34, myPrice: 135 },
+  { pid: 101, myPrice: 95 },
+  { pid: 102, myPrice: 38 },
+  { pid: 103, myPrice: 120 },
+  { pid: 105, myPrice: 85 },
+  { pid: 132, myPrice: 50 },
+  { pid: 133, myPrice: 50 },
+  { pid: 134, myPrice: 30 },
+  { pid: 135, myPrice: 27 },
+  { pid: 136, myPrice: 10 },
+  { pid: 137, myPrice: 20 },
+  { pid: 138, myPrice: 20 },
+  { pid: 139, myPrice: 20 },
+  { pid: 140, myPrice: 20 },
+  { pid: 141, myPrice: 140 },
+  { pid: 143, myPrice: 15 },
+  { pid: 144, myPrice: 20 },
+  { pid: 145, myPrice: 20 },
+  { pid: 146, myPrice: 10 },
+  { pid: 147, myPrice: 10 },
+  { pid: 148, myPrice: 10 },
+  { pid: 149, myPrice: 10 },
+  { pid: 150, myPrice: 10 },
+  { pid: 96, myPrice: 180 },
+  { pid: 97, myPrice: 150 },
+  { pid: 98, myPrice: 180 },
+  { pid: 99, myPrice: 214 },
+  { pid: 100, myPrice: 199 },
+  { pid: 110, myPrice: 120 },
+  { pid: 111, myPrice: 75 },
+  { pid: 112, myPrice: 100 },
+  { pid: 113, myPrice: 120 },
+  { pid: 498, myPrice: 130 },
+  { pid: 499, myPrice: 100 },
+  { pid: 597, myPrice: 55 },
+  { pid: 598, myPrice: 105 },
+  { pid: 599, myPrice: 200 },
+  { pid: 905, myPrice: 210 },
+  { pid: 13, myPrice: 45 },
+  { pid: 24, myPrice: 43 },
+  { pid: 25, myPrice: 149 },
+  { pid: 26, myPrice: 91 },
+  { pid: 27, myPrice: 280 },
+  { pid: 28, myPrice: 40 },
+  { pid: 29, myPrice: 10 },
+  { pid: 30, myPrice: 47 },
+  { pid: 62, myPrice: 320 },
+  { pid: 63, myPrice: 90 } ]
+
+    ,serving_radius: 2000
+    ,delivery_mode: 0
+}
+{
+    _id: 15
+    ,name:"Sachin Chitkule"
+    ,address:
+        {
+            location:{
+                type:"Point",
+                coordinates :[73.98268711,15.42025324]
+            }   
+
+        }
+    ,products : [ 
+  { pid: 1, myPrice: 110 },
+  { pid: 3, myPrice: 135 },
+  { pid: 4, myPrice: 185 },
+  { pid: 5, myPrice: 103 },
+  { pid: 31, myPrice: 120 },
+  { pid: 32, myPrice: 235 },
+  { pid: 33, myPrice: 125 },
+  { pid: 34, myPrice: 135 },
+  { pid: 101, myPrice: 95 },
+  { pid: 102, myPrice: 38 },
+  { pid: 103, myPrice: 120 },
+  { pid: 105, myPrice: 85 },
+  { pid: 132, myPrice: 50 },
+  { pid: 133, myPrice: 50 },
+  { pid: 134, myPrice: 30 },
+  { pid: 67, myPrice: 99 },
+  { pid: 68, myPrice: 99 },
+  { pid: 69, myPrice: 120 },
+  { pid: 70, myPrice: 120 },
+  { pid: 93, myPrice: 35 },
+  { pid: 94, myPrice: 80 },
+  { pid: 95, myPrice: 37 },
+  { pid: 96, myPrice: 180 },
+  { pid: 97, myPrice: 150 },
+  { pid: 98, myPrice: 180 },
+  { pid: 99, myPrice: 214 },
+  { pid: 100, myPrice: 199 },
+  { pid: 106, myPrice: 30 },
+  { pid: 107, myPrice: 110 },
+  { pid: 108, myPrice: 165 },
+  { pid: 13, myPrice: 45 },
+  { pid: 24, myPrice: 43 },
+  { pid: 25, myPrice: 149 },
+  { pid: 26, myPrice: 91 },
+  { pid: 27, myPrice: 280 },
+  { pid: 28, myPrice: 40 },
+  { pid: 29, myPrice: 10 },
+  { pid: 30, myPrice: 47 },
+  { pid: 62, myPrice: 320 },
+  { pid: 63, myPrice: 90 },
+  { pid: 64, myPrice: 70 },
+  { pid: 65, myPrice: 35 },
+  { pid: 66, myPrice: 18 },
+  { pid: 88, myPrice: 225 },
+  { pid: 91, myPrice: 260 } ]
+
+  
+    ,serving_radius: 1000
+    ,delivery_mode: 0
+}
+{
+    _id: 16
+    ,name:"Prem Grocers"
+    ,address:
+        {
+            location:{
+                type:"Point",
+                coordinates :[73.98268711,15.42025324]
+            }   
+
+        }
+    ,products : [ 
+  { pid: 1, myPrice: 110 },
+  { pid: 3, myPrice: 135 },
+  { pid: 4, myPrice: 185 },
+  { pid: 5, myPrice: 103 },
+  { pid: 31, myPrice: 120 },
+  { pid: 32, myPrice: 235 },
+  { pid: 33, myPrice: 125 },
+  { pid: 34, myPrice: 135 },
+  { pid: 101, myPrice: 95 },
+  { pid: 102, myPrice: 38 },
+  { pid: 103, myPrice: 120 },
+  { pid: 105, myPrice: 85 },
+  { pid: 132, myPrice: 50 },
+  { pid: 133, myPrice: 50 },
+  { pid: 134, myPrice: 30 },
+  { pid: 67, myPrice: 99 },
+  { pid: 68, myPrice: 99 },
+  { pid: 69, myPrice: 120 },
+  { pid: 70, myPrice: 120 },
+  { pid: 93, myPrice: 35 },
+  { pid: 94, myPrice: 80 },
+  { pid: 95, myPrice: 37 },
+  { pid: 96, myPrice: 180 },
+  { pid: 97, myPrice: 150 },
+  { pid: 98, myPrice: 180 },
+  { pid: 99, myPrice: 214 },
+  { pid: 100, myPrice: 199 },
+  { pid: 106, myPrice: 30 },
+  { pid: 107, myPrice: 110 },
+  { pid: 108, myPrice: 165 },
+  { pid: 13, myPrice: 45 },
+  { pid: 24, myPrice: 43 },
+  { pid: 25, myPrice: 149 },
+  { pid: 26, myPrice: 91 },
+  { pid: 27, myPrice: 280 },
+  { pid: 28, myPrice: 40 },
+  { pid: 29, myPrice: 10 },
+  { pid: 30, myPrice: 47 },
+  { pid: 62, myPrice: 320 },
+  { pid: 63, myPrice: 90 },
+  { pid: 64, myPrice: 70 },
+  { pid: 65, myPrice: 35 },
+  { pid: 66, myPrice: 18 },
+  { pid: 88, myPrice: 225 },
+  { pid: 91, myPrice: 260 } ]
+
+  
+    ,serving_radius: 1700
+    ,delivery_mode: 1
+    ,min_order_home_delivery:300
+}
