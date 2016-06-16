@@ -15,7 +15,10 @@
                         </i>
                     </uib-accordion-heading>
                     <p ng-repeat="brand in brands" ng-if="$even">
-                        <md-checkbox md-no-ink="true" ng-model="brandFilterFlag" ng-change="brandFilterFlag?showProducts(currentCategory,brand.title):deleteChip(brand.title)" aria-label="{{brand.title}}">
+                        <!--<md-checkbox md-no-ink="true" ng-model="brandFilterFlag" ng-change="brandFilterFlag?showProducts(currentCategory,brand.title):deleteChip(brand.title)" aria-label="{{brand.title}}">
+                            {{brand.title}}<span class="badge">{{brand.count}}</span>
+                        </md-checkbox>-->
+                        <md-checkbox md-no-ink="true" ng-click="brandFilterEvent(brand.title)" ng-checked="selectedBrands.indexOf(brand.title) > -1">
                             {{brand.title}}<span class="badge">{{brand.count}}</span>
                         </md-checkbox>
                     </p>
