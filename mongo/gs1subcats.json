@@ -1,0 +1,105 @@
+{"_id":{"$oid":"57243dc5a22be40ed12b8e9b"},"category":"Beverages","flag":true,"id":"36","subcategory":"Milk and Dairy Products"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8e9c"},"category":"Beverages","flag":true,"id":"105","subcategory":"Alcoholic Beverages"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8e9d"},"category":"Beverages","flag":true,"id":"17","subcategory":"Alcoholic Drinks"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8e9e"},"category":"Beverages","flag":true,"id":"11","subcategory":"Energy/Health Drinks"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8e9f"},"category":"Beverages","flag":true,"id":"12","subcategory":"Tea/Coffee"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ea0"},"category":"Beverages","flag":true,"id":"13","subcategory":"Soft Drink"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ea1"},"category":"Beverages","flag":true,"id":"14","subcategory":"Fruit Drink and Juices"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ea2"},"category":"Beverages","flag":true,"id":"15","subcategory":"Organic Beverages"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ea3"},"category":"Beverages","flag":true,"id":"16","subcategory":"Mineral Water"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ea4"},"category":"Electrical Supplies","flag":true,"id":"102","subcategory":"Electrical Lighting"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ea5"},"category":"Electrical Supplies","flag":true,"id":"103","subcategory":"Electrical Cables/Wires"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ea6"},"category":"Electrical Supplies","flag":true,"id":"104","subcategory":"General Electrical Hardware"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ea7"},"category":"Electronics","flag":true,"id":"63","subcategory":"Mobile phones and Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ea8"},"category":"Electronics","flag":true,"id":"64","subcategory":"Tablets and Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ea9"},"category":"Electronics","flag":true,"id":"65","subcategory":"Laptop and Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eaa"},"category":"Electronics","flag":true,"id":"66","subcategory":"Computer and Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eab"},"category":"Food","flag":true,"id":"56","subcategory":"Frozen Fruits/Vegetables"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eac"},"category":"Food","flag":true,"id":"57","subcategory":"Pet Food"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ead"},"category":"Food","flag":true,"id":"59","subcategory":"Jam and Spreads"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eae"},"category":"Food","flag":true,"id":"60","subcategory":"Breakfast Cereals"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eaf"},"category":"Food","flag":true,"id":"1","subcategory":"Grocery/Staples"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eb0"},"category":"Food","flag":true,"id":"2","subcategory":"Dairy Products"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eb1"},"category":"Food","flag":true,"id":"3","subcategory":"Bread/Bakery Products"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eb2"},"category":"Food","flag":true,"id":"101","subcategory":"Dessert Sauces/Extracts/Toppings"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eb3"},"category":"Food","flag":true,"id":"4","subcategory":"Biscuits"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eb4"},"category":"Food","flag":true,"id":"5","subcategory":"Prepared/Preserved Foods"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eb5"},"category":"Food","flag":true,"id":"6","subcategory":"Confectionery/Chocolates"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eb6"},"category":"Food","flag":true,"id":"38","subcategory":"Health Supplements"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eb7"},"category":"Food","flag":true,"id":"7","subcategory":"Sweets/Snacks"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eb8"},"category":"Food","flag":true,"id":"8","subcategory":"Seasonings/Preservatives"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eb9"},"category":"Food","flag":true,"id":"106","subcategory":"Dry Fruits"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eba"},"category":"Food","flag":true,"id":"9","subcategory":"Canned Food"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ebb"},"category":"Food","flag":true,"id":"10","subcategory":"Baby Food"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ebc"},"category":"Footwear","flag":true,"id":"87","subcategory":"Casual Shoes"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ebd"},"category":"Footwear","flag":true,"id":"88","subcategory":"Sports Shoes"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ebe"},"category":"Footwear","flag":true,"id":"89","subcategory":"Formal Shoes"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ebf"},"category":"Footwear","flag":true,"id":"90","subcategory":"Heels"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ec0"},"category":"Footwear","flag":true,"id":"91","subcategory":"Slippers \u0026 Floaters"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ec1"},"category":"Footwear","flag":true,"id":"92","subcategory":"Socks"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ec2"},"category":"Health Care","flag":true,"id":"93","subcategory":"Medical Devices \u0026 Equipments"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ec3"},"category":"Health Care","flag":true,"id":"94","subcategory":"Pharmaceutical Drugs"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ec4"},"category":"Health Care","flag":true,"id":"95","subcategory":"Veterinary Healthcare"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ec5"},"category":"Home \u0026 Kitchen Appliances","flag":true,"id":"67","subcategory":"Air Conditioners"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ec6"},"category":"Home \u0026 Kitchen Appliances","flag":true,"id":"68","subcategory":"Refrigerators"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ec7"},"category":"Home \u0026 Kitchen Appliances","flag":true,"id":"69","subcategory":"Washing Machines"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ec8"},"category":"Home \u0026 Kitchen Appliances","flag":true,"id":"70","subcategory":"Televisions"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ec9"},"category":"Household","flag":true,"id":"86","subcategory":"Decoratives"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eca"},"category":"Household","flag":true,"id":"26","subcategory":"Kitchen Appliances/Tools/Ware"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ecb"},"category":"Household","flag":true,"id":"58","subcategory":"Other Household Items"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ecc"},"category":"Household","flag":true,"id":"27","subcategory":"Cleaning Accessories/Detergents"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ecd"},"category":"Household","flag":true,"id":"28","subcategory":"Repellents/Fresheners"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ece"},"category":"Household","flag":true,"id":"29","subcategory":"Pooja Needs"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ecf"},"category":"Household","flag":true,"id":"30","subcategory":"Gardening Needs"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ed0"},"category":"Household","flag":true,"id":"31","subcategory":"Electrical Applicances"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ed1"},"category":"Household","flag":true,"id":"32","subcategory":"Car Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ed2"},"category":"Household","flag":true,"id":"33","subcategory":"Shoe Care"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ed3"},"category":"Household","flag":true,"id":"34","subcategory":"Furniture/Furnishings"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ed4"},"category":"Household","flag":true,"id":"35","subcategory":"Cleaning/Hygiene Products"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ed5"},"category":"Household","flag":true,"id":"39","subcategory":"Household"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ed6"},"category":"Household","flag":true,"id":"40","subcategory":"Laundry Detergents"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ed7"},"category":"Household","flag":true,"id":"41","subcategory":"Toilet Cleaning Products/Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ed8"},"category":"Household","flag":true,"id":"42","subcategory":"Surface Cleaning Products/Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ed9"},"category":"Household","flag":true,"id":"43","subcategory":"Dish Care/Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eda"},"category":"Household","flag":true,"id":"44","subcategory":"Kitchen Appliances/Ware"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8edb"},"category":"Kids Clothing","flag":true,"id":"82","subcategory":"Top Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8edc"},"category":"Kids Clothing","flag":true,"id":"83","subcategory":"Bottom Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8edd"},"category":"Kids Clothing","flag":true,"id":"84","subcategory":"Ethnic Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ede"},"category":"Kids Clothing","flag":true,"id":"85","subcategory":"Inner Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8edf"},"category":"Men's Clothing","flag":true,"id":"71","subcategory":"Topwear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ee0"},"category":"Men's Clothing","flag":true,"id":"72","subcategory":"Bottom Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ee1"},"category":"Men's Clothing","flag":true,"id":"73","subcategory":"Sports Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ee2"},"category":"Men's Clothing","flag":true,"id":"74","subcategory":"Inner Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ee3"},"category":"Men's Clothing","flag":true,"id":"75","subcategory":"Ethnic Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ee4"},"category":"Personal Accessories","flag":true,"id":"55","subcategory":"Personal Carriers"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ee5"},"category":"Personal Care","flag":true,"id":"18","subcategory":"Cosmetics/Fragrances"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ee6"},"category":"Personal Care","flag":true,"id":"19","subcategory":"Oral Care"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ee7"},"category":"Personal Care","flag":true,"id":"20","subcategory":"Skin Care"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ee8"},"category":"Personal Care","flag":true,"id":"21","subcategory":"Hair Care"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ee9"},"category":"Personal Care","flag":true,"id":"22","subcategory":"Personal Hygiene"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eea"},"category":"Personal Care","flag":true,"id":"23","subcategory":"Baby Care"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eeb"},"category":"Personal Care","flag":true,"id":"24","subcategory":"Shaving Needs"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eec"},"category":"Personal Care","flag":true,"id":"25","subcategory":"Health Care"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eed"},"category":"Personal Care","flag":true,"id":"62","subcategory":"Sexual Wellness"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eee"},"category":"Personal Care","flag":true,"id":"37","subcategory":"General Personal Hygiene"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eef"},"category":"Pet Care","flag":true,"id":"99","subcategory":"Pet Nutritional Supplements"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ef0"},"category":"Pet Care","flag":true,"id":"100","subcategory":"Pet Welfare/Hygiene"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ef1"},"category":"Pet Care","flag":true,"id":"98","subcategory":"Pet Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ef2"},"category":"Sports Equipment","flag":true,"id":"96","subcategory":"Cycle Sports Equipment"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ef3"},"category":"Sports Equipment","flag":true,"id":"97","subcategory":"Spare Parts \u0026 Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ef4"},"category":"Stationery","flag":true,"id":"53","subcategory":"General Stationery"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ef5"},"category":"Stationery","flag":true,"id":"54","subcategory":"Office Stationery"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ef6"},"category":"Toys/Games","flag":true,"id":"49","subcategory":"Soft Toys"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ef7"},"category":"Toys/Games","flag":true,"id":"50","subcategory":"Outdoor Games/Accessories"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ef8"},"category":"Toys/Games","flag":true,"id":"51","subcategory":"Toy Vehicals"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8ef9"},"category":"Toys/Games","flag":true,"id":"52","subcategory":"Educational Games/Toys"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8efa"},"category":"Toys/Games","flag":true,"id":"45","subcategory":"Board Games"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8efb"},"category":"Toys/Games","flag":true,"id":"47","subcategory":"Table Games"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8efc"},"category":"Toys/Games","flag":true,"id":"46","subcategory":"Puzzle Games"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8efd"},"category":"Toys/Games","flag":true,"id":"48","subcategory":"Musical Toys"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8efe"},"category":"Women's Clothing","flag":true,"id":"76","subcategory":"Ethnic Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8eff"},"category":"Women's Clothing","flag":true,"id":"77","subcategory":"Bottom Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8f00"},"category":"Women's Clothing","flag":true,"id":"78","subcategory":"Top Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8f01"},"category":"Women's Clothing","flag":true,"id":"79","subcategory":"Inner Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8f02"},"category":"Women's Clothing","flag":true,"id":"80","subcategory":"Sports Wear"}
+{"_id":{"$oid":"57243dc5a22be40ed12b8f03"},"category":"Women's Clothing","flag":true,"id":"81","subcategory":"Sleep Wear"}

@@ -1,71 +1,113 @@
-{"_id":1.0,"name":"Dairy","parent_id":0.0}
-{"_id":2,"name":"Beverages","parent_id":0.0}
-{"_id":3,"name":"Hygine","parent_id":0}
-{"_id":4,"name":"Baby Care","parent_id":0}
-{"_id":5,"name":"Bakery","parent_id":0}
-{"_id":6,"name":"Eatables","parent_id":0}
-{"_id":7,"name":"Home Utilities","parent_id":0}
-{"_id":8,"name":"Grocery And Staples","parent_id":0}
-
-
-{"_id":31,"name":"Milk","parent_id":1}
-{"_id":32,"name":"Ice Cream","parent_id":1}
-{"_id":33,"name":"Butter","parent_id":1}
-{"_id":34,"name":"Cheese","parent_id":1}
-{"_id":35,"name":"Cream","parent_id":1}
-{"_id":36,"name":"Curd","parent_id":1}
-{"_id":37,"name":"Paneer","parent_id":1}
-{"_id":38,"name":"Yogurt","parent_id":1}
-
-
-{"_id":51,"name":"Tea","parent_id":2}
-{"_id":52,"name":"Coffee","parent_id":2}
-{"_id":53,"name":"Cold Drinks","parent_id":2}
-{"_id":54,"name":"Juice","parent_id":2}
-{"_id":55,"name":"Squashes and Powders","parent_id":2}
-
-
-{"_id":71,"name":"Soaps","parent_id":3}
-{"_id":72,"name":"Toothbrush","parent_id":3}
-{"_id":73,"name":"Tootpaste","parent_id":3}
-{"_id":74,"name":"Tongue Cleaner","parent_id":3}
-{"_id":75,"name":"Floss","parent_id":3}
-{"_id":76,"name":"Shampoo","parent_id":3}
-{"_id":77,"name":"Conditioner","parent_id":3}
-{"_id":78,"name":"Face Wash","parent_id":3}
-{"_id":79,"name":"Hand Wash","parent_id":3}
-
-
-{"_id":101,"name":"Baby Food","parent_id":4}
-{"_id":102,"name":"Diapers","parent_id":4}
-
-
-{"_id":111,"name":"Bread","parent_id":5}
-{"_id":112,"name":"Cakes","parent_id":5}
-
-
-{"_id":121,"name":"Chips","parent_id":6}
-{"_id":122,"name":"Chocolates","parent_id":6}
-{"_id":123,"name":"Jams","parent_id":6}
-
-{"_id":131,"name":"Cow Milk","parent_id":31}
-{"_id":132,"name":"Buffalo Milk","parent_id":31}
-{"_id":133,"name":"Flavoured Milk","parent_id":31}
-
-{"_id":141,"name":"Cone","parent_id":32}
-{"_id":142,"name":"Cup","parent_id":32}
-{"_id":143,"name":"Party Pack","parent_id":32}
-{"_id":144,"name":"Ice candy","parent_id":32}
-{"_id":145,"name":"Chocobar","parent_id":32}
-{"_id":146,"name":"Casata","parent_id":32}
-
-{"_id":147,"name":"Cheddar","parent_id":34}
-{"_id":148,"name":"Roquefort","parent_id":34}
-{"_id":149,"name":"Mozzarella","parent_id":34}
-
-
-
-
-
-
-
+{"_id":1,"name":"Electronics","parent_id":0}
+{"_id":2,"name":"Food","parent_id":0}
+{"_id":3,"name":"Footwear","parent_id":0}
+{"_id":4,"name":"Health Care","parent_id":0}
+{"_id":5,"name":"Home \u0026 Kitchen Appliances","parent_id":0}
+{"_id":6,"name":"Household","parent_id":0}
+{"_id":7,"name":"Kids Clothing","parent_id":0}
+{"_id":8,"name":"Men's Clothing","parent_id":0}
+{"_id":9,"name":"Men's Footwear","parent_id":0}
+{"_id":10,"name":"Personal Accessories","parent_id":0}
+{"_id":11,"name":"Personal Care","parent_id":0}
+{"_id":12,"name":"Pet Care","parent_id":0}
+{"_id":13,"name":"Sports Equipment","parent_id":0}
+{"_id":14,"name":"Stationery","parent_id":0}
+{"_id":15,"name":"Toys/Games","parent_id":0}
+{"_id":16,"name":"Women's Clothing","parent_id":0}
+{"_id":17,"name":"Beverages","parent_id":0}
+{"_id":22,"name":"Electrical Supplies","parent_id":0}
+{"_id":35,"name":"Milk and Dairy Products","parent_id":17}
+{"_id":36,"name":"Alcoholic Beverages","parent_id":17}
+{"_id":37,"name":"Alcoholic Drinks","parent_id":17}
+{"_id":38,"name":"Energy/Health Drinks","parent_id":17}
+{"_id":39,"name":"Tea/Coffee","parent_id":17}
+{"_id":40,"name":"Soft Drink","parent_id":17}
+{"_id":41,"name":"Fruit Drink and Juices","parent_id":17}
+{"_id":42,"name":"Organic Beverages","parent_id":17}
+{"_id":43,"name":"Mineral Water","parent_id":17}
+{"_id":44,"name":"Electrical Lighting","parent_id":22}
+{"_id":45,"name":"Electrical Cables/Wires","parent_id":22}
+{"_id":46,"name":"General Electrical Hardware","parent_id":22}
+{"_id":47,"name":"Mobile phones and Accessories","parent_id":1}
+{"_id":48,"name":"Tablets and Accessories","parent_id":1}
+{"_id":49,"name":"Laptop and Accessories","parent_id":1}
+{"_id":50,"name":"Computer and Accessories","parent_id":1}
+{"_id":51,"name":"Frozen Fruits/Vegetables","parent_id":2}
+{"_id":52,"name":"Pet Food","parent_id":2}
+{"_id":53,"name":"Jam and Spreads","parent_id":2}
+{"_id":54,"name":"Breakfast Cereals","parent_id":2}
+{"_id":55,"name":"Grocery/Staples","parent_id":2}
+{"_id":56,"name":"Dairy Products","parent_id":2}
+{"_id":57,"name":"Bread/Bakery Products","parent_id":2}
+{"_id":58,"name":"Dessert Sauces/Extracts/Toppings","parent_id":2}
+{"_id":59,"name":"Biscuits","parent_id":2}
+{"_id":60,"name":"Prepared/Preserved Foods","parent_id":2}
+{"_id":61,"name":"Confectionery/Chocolates","parent_id":2}
+{"_id":62,"name":"Health Supplements","parent_id":2}
+{"_id":63,"name":"Sweets/Snacks","parent_id":2}
+{"_id":64,"name":"Seasonings/Preservatives","parent_id":2}
+{"_id":65,"name":"Dry Fruits","parent_id":2}
+{"_id":66,"name":"Canned Food","parent_id":2}
+{"_id":67,"name":"Baby Food","parent_id":2}
+{"_id":68,"name":"Casual Shoes","parent_id":3}
+{"_id":69,"name":"Sports Shoes","parent_id":3}
+{"_id":70,"name":"Formal Shoes","parent_id":3}
+{"_id":71,"name":"Heels","parent_id":3}
+{"_id":72,"name":"Slippers \u0026 Floaters","parent_id":3}
+{"_id":73,"name":"Socks","parent_id":3}
+{"_id":74,"name":"Medical Devices \u0026 Equipments","parent_id":4}
+{"_id":75,"name":"Pharmaceutical Drugs","parent_id":4}
+{"_id":76,"name":"Veterinary Healthcare","parent_id":4}
+{"_id":77,"name":"Air Conditioners","parent_id":5}
+{"_id":78,"name":"Refrigerators","parent_id":5}
+{"_id":79,"name":"Washing Machines","parent_id":5}
+{"_id":80,"name":"Televisions","parent_id":5}
+{"_id":81,"name":"Decoratives","parent_id":6}
+{"_id":82,"name":"Kitchen Appliances/Tools/Ware","parent_id":6}
+{"_id":83,"name":"Other Household Items","parent_id":6}
+{"_id":84,"name":"Cleaning Accessories/Detergents","parent_id":6}
+{"_id":85,"name":"Repellents/Fresheners","parent_id":6}
+{"_id":86,"name":"Pooja Needs","parent_id":6}
+{"_id":87,"name":"Gardening Needs","parent_id":6}
+{"_id":88,"name":"Electrical Applicances","parent_id":6}
+{"_id":89,"name":"Car Accessories","parent_id":6}
+{"_id":90,"name":"Shoe Care","parent_id":6}
+{"_id":91,"name":"Furniture/Furnishings","parent_id":6}
+{"_id":92,"name":"Cleaning/Hygiene Products","parent_id":6}
+{"_id":93,"name":"Laundry Detergents","parent_id":6}
+{"_id":94,"name":"Toilet Cleaning Products/Accessories","parent_id":6}
+{"_id":95,"name":"Surface Cleaning Products/Accessories","parent_id":6}
+{"_id":96,"name":"Dish Care/Accessories","parent_id":6}
+{"_id":97,"name":"Kitchen Appliances/Ware","parent_id":6}
+{"_id":98,"name":"Top Wear","parent_id":7}
+{"_id":99,"name":"Bottom Wear","parent_id":7}
+{"_id":100,"name":"Ethnic Wear","parent_id":7}
+{"_id":101,"name":"Inner Wear","parent_id":7}
+{"_id":102,"name":"Topwear","parent_id":8}
+{"_id":103,"name":"Sports Wear","parent_id":8}
+{"_id":104,"name":"Personal Carriers","parent_id":10}
+{"_id":105,"name":"Cosmetics/Fragrances","parent_id":11}
+{"_id":106,"name":"Oral Care","parent_id":11}
+{"_id":107,"name":"Skin Care","parent_id":11}
+{"_id":108,"name":"Hair Care","parent_id":11}
+{"_id":109,"name":"Personal Hygiene","parent_id":11}
+{"_id":110,"name":"Baby Care","parent_id":11}
+{"_id":111,"name":"Shaving Needs","parent_id":11}
+{"_id":112,"name":"Sexual Wellness","parent_id":11}
+{"_id":113,"name":"General Personal Hygiene","parent_id":11}
+{"_id":114,"name":"Pet Nutritional Supplements","parent_id":12}
+{"_id":115,"name":"Pet Welfare/Hygiene","parent_id":12}
+{"_id":116,"name":"Pet Accessories","parent_id":12}
+{"_id":117,"name":"Cycle Sports Equipment","parent_id":13}
+{"_id":118,"name":"Spare Parts \u0026 Accessories","parent_id":13}
+{"_id":119,"name":"General Stationery","parent_id":14}
+{"_id":120,"name":"Office Stationery","parent_id":14}
+{"_id":121,"name":"Soft Toys","parent_id":15}
+{"_id":122,"name":"Outdoor Games/Accessories","parent_id":15}
+{"_id":123,"name":"Toy Vehicals","parent_id":15}
+{"_id":124,"name":"Educational Games/Toys","parent_id":15}
+{"_id":125,"name":"Board Games","parent_id":15}
+{"_id":126,"name":"Table Games","parent_id":15}
+{"_id":127,"name":"Puzzle Games","parent_id":15}
+{"_id":128,"name":"Musical Toys","parent_id":15}
+{"_id":129,"name":"Sleep Wear","parent_id":16}

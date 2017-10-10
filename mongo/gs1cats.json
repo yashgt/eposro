@@ -1,0 +1,18 @@
+{"_id":{"$oid":"5725dc4e14668276cde7eeea"},"category":"Beverages","id":"2"}
+{"_id":{"$oid":"5725dc4e14668276cde7eeeb"},"category":"Electrical Supplies","id":"19"}
+{"_id":{"$oid":"5725dc4e14668276cde7eeec"},"category":"Electronics","id":"6"}
+{"_id":{"$oid":"5725dc4e14668276cde7eeed"},"category":"Food","id":"1"}
+{"_id":{"$oid":"5725dc4e14668276cde7eeee"},"category":"Footwear","id":"15"}
+{"_id":{"$oid":"5725dc4e14668276cde7eeef"},"category":"Health Care","id":"16"}
+{"_id":{"$oid":"5725dc4e14668276cde7eef0"},"category":"Home \u0026 Kitchen Appliances","id":"10"}
+{"_id":{"$oid":"5725dc4e14668276cde7eef1"},"category":"Household","id":"4"}
+{"_id":{"$oid":"5725dc4e14668276cde7eef2"},"category":"Kids Clothing","id":"13"}
+{"_id":{"$oid":"5725dc4e14668276cde7eef3"},"category":"Men's Clothing","id":"11"}
+{"_id":{"$oid":"5725dc4e14668276cde7eef4"},"category":"Men's Footwear","id":"14"}
+{"_id":{"$oid":"5725dc4e14668276cde7eef5"},"category":"Personal Accessories","id":"9"}
+{"_id":{"$oid":"5725dc4e14668276cde7eef6"},"category":"Personal Care","id":"3"}
+{"_id":{"$oid":"5725dc4e14668276cde7eef7"},"category":"Pet Care","id":"18"}
+{"_id":{"$oid":"5725dc4e14668276cde7eef8"},"category":"Sports Equipment","id":"17"}
+{"_id":{"$oid":"5725dc4e14668276cde7eef9"},"category":"Stationery","id":"8"}
+{"_id":{"$oid":"5725dc4e14668276cde7eefa"},"category":"Toys/Games","id":"7"}
+{"_id":{"$oid":"5725dc4e14668276cde7eefb"},"category":"Women's Clothing","id":"12"}

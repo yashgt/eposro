@@ -1,7 +1,4 @@
-{"_id":1.0
-,"city":"pune"
-,cats:[{cat_id:1, v:1}, {cat_id:2, v:1}]
-}
+{"_id":1.0,"cats":[{"cat_id":1,"v":1},{"cat_id":2,"v":1}],"city":"pune"}
 {"_id":2.0,"city":"mumbai"}
 {"_id":3.0,"city":"nagpur"}
 {"_id":4.0,"city":"goa"}
